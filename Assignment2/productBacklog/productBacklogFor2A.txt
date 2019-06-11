@@ -2,61 +2,61 @@ Product Backlog
 	
 Col 1: User Stories  															Col 2: Time Estimate (hrs or days) to complete the user story (idk...)
 
-. As a user, I can be notified that i've enteried a invalid command so that i can fix my mistake.(input verifier)				* 2 hrs
+. As a user, I can be notified that i've enteried a invalid command so that i can fix my mistake.						* 2 hrs
 
-. As a user, I can be notified that i've enteried a invalid parameter so that i can fix my mistake.(command verifier)				* 2 hrs
+. As a user, I can be notified that i've enteried a invalid parameter so that i can fix my mistake.						* 2 hrs
 
-. As a user, I can view shell feedback so that I can understand my interactions with the shell. (output)					* 1 hrs
+. As a user, I can view shell feedback so that I can understand my interactions with the shell. 						* 1 hrs
 
-. As a user, I can input characters into the shell so that I can interact with the shell. (input)						* 2 days
+. As a user, I can input characters into the shell so that I can interact with the shell. 							* 2 days
 
-. As a user, I can exit the shell by calling exit command so that exiting the shell is simple. (exit)						* 1 hrs
+. As a user, I can exit the shell by calling exit command so that exiting the shell is simple. 							* 1 hrs
 
 . As a user, I can create a new directory relative to the current working directory by 								* 2 days
-calling mkdir command with no path, so that i can create new directory without specifying a full path. (mkdir)
+calling mkdir command with no path, so that i can create new directory without specifying a full path. 
 
 . As a user, I can create a new directory by calling mkdir command with a full path specified, 							* 1 hrs 
-so that i can create directory in any existing location.(mkdir)
+so that i can create directory in any existing location.	
 
 . As a user, I can change my current working directory by writing a relative path, so that I can 						* 1 hrs
-move to other directories.(cd)
+move to other directories.	
 
 . As a user, I can change my current working directory by writing out a full path, so that I can move 						* 1 day
-to other directories regardless of my current working directories.(cd)
+to other directories regardless of my current working directories.	
 
 . As a user, I can print out the contents of current working directory so that I know what 							* 1 day
-files/folders are under current working directory.(ls)
+files/folders are under current working directory.
 
 . As a user, I can print out the contents of any directory so that I know what files/folders 							* 1 day
-are under any working directories.(ls)
+are under any working directories.
 
 . As a user, I can print out the complete path of my current working directory so that I know 							* 1 hrs
-where my current working directory is in the directory tree. (pwd)
+where my current working directory is in the directory tree. 
 
-. As a user, I can save the current working directory so that I can have easy access to the directory. (pushd)					* 2 day
+. As a user, I can save the current working directory so that I can have easy access to the directory. 						* 2 day
 
-. As a user, I can move into the saved directories and remove them. (popd)									* 5 hrs
+. As a user, I can move into the saved directories and remove them.										* 5 hrs
 
 . As a user, I can print out the history of all my inputs regardless if it's invalid or not, so that I can recall				* 1 hrs
- what I have done.(history)
+ what I have done.
 
 . As a user, I can print out the contents of mutiple files at once and be able to differentiate them, so that I know 				* 2 days
-what is under each file. (cat)
+what is under each file. 
 
-. As a user, I can print any string onto the shell so that I can output whatever I type. (echo with just string 				* 1 day
-and no dir address)
+. As a user, I can print any string onto the shell so that I can output whatever I type.  							* 1 day
+
 
 . As a user, I can create a new text file containing any string I input, so that I can have the ability to 					* 1 day
-store my string inputs. (echo with> and without existing txt file)
+store my string inputs.
 
 . As a user, I can erase the contents of text files, so that I can write something else in the txt file. 					* 1 day
-(echo with > with empty string and existing txt file)
+
 
 . As a user, I can overwrite the contents of any text file with any string I input, so that I have the 						* 1 day
-ability to overwrite the txt file. (echo with > and existing txt file and Full String)
+ability to overwrite the txt file.
 
 . As a user, I can write at the end of any existing txt file, so that I can be able to edit text file without 					* 1 day
-deleteing everything before. (echo with >>)
+deleteing everything before. 
 
 . As a user, I can print the documentation of all commands by calling the man command so that I can 						* 3 hrs
 understand how to properly interact with the shell	
