@@ -1,0 +1,11 @@
+Class Name: Pushd
+Parent Class: ManipulationCommand
+Subclasses: None
+
+Responsibilities:
+* Pushes the current working directory to DirectoryStack
+* Changes working directory to the specified directory
+Collaborators:
+* Inherited from Parent Class
+* DirectoryStack
+* Cd

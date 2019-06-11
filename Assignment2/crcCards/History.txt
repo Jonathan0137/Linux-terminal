@@ -1,0 +1,10 @@
+Class Name: History
+Parent Class: PrintCommand
+Subclasses: None
+
+Responsibilities:
+* Retrieves information from InputHistory
+* Prints recent commands to Output
+Collaborators:
+* Inherited from Parent Class
+* InputHistory

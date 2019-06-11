@@ -1,0 +1,8 @@
+Class Name: ManipulationCommand
+Parent Class: Command
+Subclasses: Mkdir, Cd, Pushd, Popd, EchoToFile
+
+Responsibilities:
+* Manipulates directories and files
+Collaborators:
+* WorkingDirectory
