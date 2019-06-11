@@ -2,21 +2,23 @@ Product Backlog
 	
 Col 1: User Stories  				Col 2: Time Estimate (hrs/days) to complete the user story
 
-. As a user, I can access/turn on the shell
+. As a user, I can view shell feedback so that I can understand my interactions with the shell
 
-. As a user, I can input characters into the shell
+. As a user, I can input characters into the shell so that I can interact with the shell 
 
-. As a user, I can exit the shell
+. As a user, I can exit the shell by calling exit command so that exiting the shell is simple
 
-. As a user, I can create a new directory by (WRITING ONLY NEW DIRECTORY NAME)
+. As a user, I can create a new directory relative to the current working directory by calling mkdir command without specifying a full path
 
-. As a user, I can create a new directory by writing a full path 
+. As a user, I can create a new directory by calling mkdir command with a full path specified 
 
-. As a user, I can change my current working directory
+. As a user, I can change my current working directory by writing out a full path
+
+. As a user, I can change my current working directory by writing a relative path
 
 . As a user, I can print out the contents of a directory
 
-. As a user, I can print out the complete path of working directory
+. As a user, I can print out the complete path of my current working directory
 
 . As a user, I can save the current working directory to a directory stack
 
@@ -34,4 +36,4 @@ Col 1: User Stories  				Col 2: Time Estimate (hrs/days) to complete the user st
 
 . As a user, I can overwrite the contents of any text file with any string I input
 
-. As a user, I can print the documentation of all commands	
+. As a user, I can print the documentation of all commands by calling the man command so that I can understand how to properly interact with the shell	
