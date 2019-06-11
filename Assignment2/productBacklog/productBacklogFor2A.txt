@@ -1,3 +1,37 @@
 Product Backlog
 	
-Col 1: User Stories  				Col 2: Time Estimate (hrs/days) to complete the user story	
+Col 1: User Stories  				Col 2: Time Estimate (hrs/days) to complete the user story
+
+. As a user, I can access/turn on the shell
+
+. As a user, I can input characters into the shell
+
+. As a user, I can exit the shell
+
+. As a user, I can create a new directory by (WRITING ONLY NEW DIRECTORY NAME)
+
+. As a user, I can create a new directory by writing a full path 
+
+. As a user, I can change my current working directory
+
+. As a user, I can print out the contents of a directory
+
+. As a user, I can print out the complete path of working directory
+
+. As a user, I can save the current working directory to a directory stack
+
+. As a user, I can extract directories from the directory stack
+
+. As a user, I can print out the history of all my inputs
+
+. As a user, I can print out the contents of files
+
+. As a user, I can print any string onto the shell
+
+. As a user, I can create a new text file containing any string I input
+
+. As a user, I can erase the contents of text files
+
+. As a user, I can overwrite the contents of any text file with any string I input
+
+. As a user, I can print the documentation of all commands	
