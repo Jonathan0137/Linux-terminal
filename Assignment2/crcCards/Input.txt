@@ -1,0 +1,8 @@
+Class name: Input
+ClassnameParent class: Object 
+ClassnameSubclasses (if any):
+
+Responsibilities:
+Accept user inputs
+
+Collaborators:
