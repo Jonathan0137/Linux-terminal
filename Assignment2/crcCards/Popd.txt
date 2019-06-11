@@ -1,0 +1,13 @@
+Class Name: Popd
+Parent Class: ManipulationCommand
+Subclasses: None
+
+Responsibilities:
+* Removes the first directory entry in the DirectoryStack
+* Changes working directory to the specified directory
+* Outputs an error message if there is no directory in DirectoryStack
+Collaborators:
+* Inherited from Parent Class
+* DirectoryStack
+* Cd
+* Output

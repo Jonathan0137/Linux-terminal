@@ -1,0 +1,15 @@
+Class Name: Shell
+Parent Class: None
+Subclasses: None
+
+Responsibilities:
+* Runs the command shell
+* Executes user commands
+Collaborators:
+* Input
+* Output
+* InputVerifier
+* Command
+* InputHistory
+* DirectoryStack
+* WorkingDirectory

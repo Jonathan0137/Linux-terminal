@@ -1,0 +1,8 @@
+Class Name: PrintCommand
+Parent Class: Command
+Subclasses: Ls, Pwd, History, Cat, EchoToOutput, Man
+
+Responsibilities:
+* Prints information to Output 
+Collaborators:
+* Output

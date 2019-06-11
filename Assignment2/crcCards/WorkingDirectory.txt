@@ -1,0 +1,8 @@
+Class Name: WorkingDirectory
+Parent Class: None
+Subclasses: None
+
+Responsabilities:
+* Stores information about current working directory
+Collaborators:
+* None

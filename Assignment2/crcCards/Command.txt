@@ -1,0 +1,8 @@
+Class Name: Command
+Parent Class: None
+Subclasses: PrintCommand, ManipulationCommand, Exit
+
+Responsibilities:
+* Executes the command
+Collaborators:
+* None

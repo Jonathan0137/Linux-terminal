@@ -1,8 +1,9 @@
-Class name: Input
-ClassnameParent class: Object 
-ClassnameSubclasses (if any):
+Class Name: Input
+Parent Class: None
+Subclasses: None
 
 Responsibilities:
-Accept user inputs
-
+* Accepts user input
+* Sends input information to InputHistory
 Collaborators:
+* InputHistory

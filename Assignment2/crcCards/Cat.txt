@@ -1,0 +1,8 @@
+Class Name: Cat
+Parent Class: PrintCommand
+Subclasses: None
+
+Responsibilities:
+* Prints file contents to Output
+Collaborators:
+* Inherited from Parent Class

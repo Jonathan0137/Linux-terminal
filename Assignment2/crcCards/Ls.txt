@@ -1,0 +1,8 @@
+Class Name: Ls
+Parent Class: PrintCommand
+Subclasses: None
+
+Responsibilities:
+* Prints files and directories in the specified directory to Output
+Collaborators:
+* Inherited from Parent Class

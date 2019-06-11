@@ -1,0 +1,8 @@
+Class Name: Verifier
+Parent Class: None
+Subclasses: InputVerifier, CommandVerifier
+
+Responsibilities:
+* Verifies that information is valid
+Collaborators:
+* None

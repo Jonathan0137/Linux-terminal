@@ -1,0 +1,8 @@
+Class Name: InputHistory
+Parent Class: None
+Subclasses: None
+
+Responsibilities:
+* stores history about user inputs
+Collaborators:
+* None
