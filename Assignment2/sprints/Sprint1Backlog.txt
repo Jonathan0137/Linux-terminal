@@ -2,8 +2,10 @@
 June 13 to June 19
 
 User Stories from Product Backlog that we will address in this sprint:
-a)
-b)
+a) As a user, I can input characters into the shell so that I can interact with the shell.
+b) As a user, I can exit the shell by calling exit command so that exiting the shell is simple.
+c) As a user, I can print out the history of all my inputs regardless if it's invalid or not, so that I can recall what I have done.
+d)
 
 Specific tasks to be accomplished:
 a-1.
