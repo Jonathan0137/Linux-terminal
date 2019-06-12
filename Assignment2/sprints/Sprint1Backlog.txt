@@ -9,7 +9,7 @@ d) As a user, I can print any string onto the shell so that I can output whateve
 e) As a user, I can save the current working directory so that I can have easy access to the directory.
 f) As a user, I can change my current working directory by writing a relative path, so that I can move to other directories.	
 g) As a user, I can be notified that i've enteried a invalid command so that i can fix my mistake.
-h) This is not addressed in user stories but 
+h) This is not addressed in user stories, because this is the part where user will not know.
 i) As a user, I can create a new directory by calling mkdir command with a full path specified, so that I can create directory in any existing location.	
 j) As a user, I can print out the complete path of my current working directory so that I know where my current working directory is in the directory tree. 
 
