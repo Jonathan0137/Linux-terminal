@@ -6,9 +6,9 @@ Col 1: User Stories  																										Col 2: Time Estimate (hrs or days
 
 2. As a user, I can exit the shell by calling exit command so that exiting the shell is simple. 							* 1 hrs
 
-3. As a user, I can be notified that i've enteried a invalid command so that i can fix my mistake.							* 2 hrs
+3. As a user, I can be notified that i've entered a invalid command so that i can fix my mistake.							* 2 hrs
 
-4. As a user, I can be notified that i've enteried a invalid parameter so that i can fix my mistake.						* 2 hrs
+4. As a user, I can be notified that i've entered a invalid parameter so that i can fix my mistake.						* 2 hrs
 
 5. As a user, I can view shell feedback so that I can understand my interactions with the shell. 							* 1 hrs
 
@@ -40,7 +40,7 @@ where my current working directory is in the directory tree.
 15. As a user, I can print out the history of all my inputs regardless if it's invalid or not, so that I can recall			* 1 hrs
  what I have done.
 
-16. As a user, I can print out the contents of mutiple files at once and be able to differentiate them, so that I know 		* 2 days
+16. As a user, I can print out the contents of multiple files at once and be able to differentiate them, so that I know 		* 2 days
 what is under each file. 
 
 17. As a user, I can print any string onto the shell so that I can output whatever I type.  								* 1 day
