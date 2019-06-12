@@ -8,11 +8,15 @@ c) As a user, I can print out the history of all my inputs regardless if it's in
 d)
 
 Specific tasks to be accomplished:
-a-1.
-a-2.
-b-1.
-b-2.
-b-3.
+a-1. (Shell) Create class Shell
+a-2. (Shell) In main method, create an algorithm that continuously asks for and interprets user inputs by converting input to string
+b-1. (Exit) Create class Exit 
+b-2. (Exit) Create a method that breaks out of the loop in Shell main method once it is called by user
+c-1. (History) Create class History
+c-2. (InputHistory) Create class InputHistory
+c-3. (InputHistory) Create an ordered list that stores all user inputs regardless of validity
+c-4. (History) Create a method that accesses InputHistory's user input list and prints the whole history
+c-5. (History) Create a method that can print a specific number of most recent user inputs
 
 These tasks are assignment as follows:
 
@@ -20,7 +24,7 @@ User: Gary Xie
 Tasks:
 
 User: Tom Daudelin
-Tasks:
+Tasks: a-1, a-2, b-1, b-2, c-1, c-2, c-3, c-4, c-5
 
 User: Chongmin Bai
 Tasks:
