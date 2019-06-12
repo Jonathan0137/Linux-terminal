@@ -10,6 +10,8 @@ e) As a user, I can save the current working directory so that I can have easy a
 f) As a user, I can change my current working directory by writing a relative path, so that I can move to other directories.	
 g) As a user, I can be notified that i've enteried a invalid command so that i can fix my mistake.
 h) This is not addressed in user stories but 
+i) As a user, I can create a new directory by calling mkdir command with a full path specified, so that I can create directory in any existing location.	
+j) As a user, I can print out the complete path of my current working directory so that I know where my current working directory is in the directory tree. 
 
 Specific tasks to be accomplished:
 a-1. (Shell) Create class Shell
@@ -38,6 +40,13 @@ h-1. (commands) create a parent class called command that will excute all the co
 h-2. (print commands) create a child class called print commands that has other child class that only prints.
 h-3. (manipulate commands) create a child class called manipulate commands that has other child class that will manipulate folders and files.
 h-4. (documentation) create documentations and store them in command class
+i-1. (mkdir) create class mkdir
+i-2. (mkdir) write code for mkdir class so user can create a new directory at a specified location
+i-3. (mkdir) write code for mkdir so user can create a new directory without specifying a location
+j-1. (pwd) create class pwd
+j-2. (pwd) write code to print the path of the working directory
+j-3. (WorkingDirectory) create class WorkingDirectory
+j-4. (WorkingDirectory) write code so user can store information about the current working directory
 
 These tasks are assignment as follows:
 
@@ -51,4 +60,4 @@ User: Chongmin Bai
 Tasks: g-1, g-2, g-3, h-1, h-2, h-3, h-4
 
 User: Adil Shah
-Tasks:
+Tasks: i-1, i-2, i-3, j-1, j-2, j-3, j-4
