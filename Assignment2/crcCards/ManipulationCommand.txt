@@ -3,6 +3,7 @@ Parent Class: Command
 Subclasses: Mkdir, Cd, Pushd, Popd, EchoToFile
 
 Responsibilities:
-* Manipulates directories and files
+* Manipulates directories and files in the FileSystem
 Collaborators:
 * WorkingDirectory
+* FileSystem

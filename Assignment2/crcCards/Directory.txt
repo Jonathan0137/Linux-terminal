@@ -1,0 +1,8 @@
+Class Name: Directory
+Parent Class: None
+Subclasses: None
+
+Responsibilities:
+* Stores information about a directory and the subdirectories and files inside of it
+Collaborators:
+* None
