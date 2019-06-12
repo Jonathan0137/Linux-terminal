@@ -1,0 +1,27 @@
+// Sprint 1 Backlog
+June 13 to June 19
+
+User Stories from Product Backlog that we will address in this sprint:
+a)
+b)
+
+Specific tasks to be accomplished:
+a-1.
+a-2.
+b-1.
+b-2.
+b-3.
+
+These tasks are assignment as follows:
+
+User: Gary Xie
+Tasks:
+
+User: Tom Daudelin
+Tasks:
+
+User: Chongmin Bai
+Tasks:
+
+User: Adil Shah
+Tasks:

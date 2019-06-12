@@ -1,6 +1,6 @@
 Product Backlog
 	
-Col 1: User Stories  															Col 2: Time Estimate (hrs or days) to complete the user story (idk...)
+Col 1: User Stories  															Col 2: Time Estimate (hrs or days) to complete the user story
 
 . As a user, I can be notified that i've enteried a invalid command so that i can fix my mistake.						* 2 hrs
 
