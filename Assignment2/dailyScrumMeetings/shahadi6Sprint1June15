@@ -1,0 +1,10 @@
+What did I work on in the last three days?
+		- discussed ideas abut crc cards with team members
+		- brainstormed implementation of mkdir and pwd
+
+What do I plan to work in the next three days?
+    - start implementing code for mkdir, pwd and WorkingDirectory
+
+Am I blocked on anything?
+    - Need FileSystem, to be completed (or at least prototyped) before I can continue working on mkdir and pwd
+		
