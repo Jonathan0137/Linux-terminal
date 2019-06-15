@@ -1,0 +1,11 @@
+What did I work on in the last three days?
+    - created verifer files
+    - brainstormed design ideas with team for all CRC cards
+
+What do I plan to work in the next three days?
+    - start implementing code for verifer and Jshell
+
+Am I blocked on anything?
+    - Need FileSystem, to be completed (or at least prototyped) before I can continue working
+
+
