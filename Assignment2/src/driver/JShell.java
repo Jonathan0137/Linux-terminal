@@ -29,10 +29,28 @@
 // *********************************************************
 package driver;
 
-public class JShell {
+import java.util.Scanner;
 
-  public static void main(String[] args) {
-    // TODO Auto-generated method stub
+public class JShell {
+	private Directory directoryTree;
+	private DirectoryStack directoryHistory;
+	private InputHistory userInputHistory;
+	private Exit exitStatus; 
+	
+	public JShell() {
+		directoryTree = new Directory();
+		directoryHistory = new DirectoryStack();
+		userInputHistory = new InputHistory();
+		exitStatus = new Exit();
+	}
+
+	public static void main(String[] args) {
+		JShell newJShell = new JShell();
+		while (!newJShell.exitStatus.exitCheck) {
+			Scanner input = new Scanner(System.in);
+			String userInput = input.nextLine();
+			input.close();
+		}
 
   }
 
