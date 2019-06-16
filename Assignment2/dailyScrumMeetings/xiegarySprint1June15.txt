@@ -1,0 +1,12 @@
+What did I work on in the last three days?
+	- Designed CRC cards by collaborating with team members
+    - Created starter files for // Java Classes (EchoToOutput, FileSystem, File, Directory, DirectoryStack, Pushd, and Cd)
+	- I wasn't able to accomplish much more these 3 days due to Midterms, but I will work more in the next 3 days
+
+What do I plan to work in the next three days?
+    - I plan on working on my tasks listed in the Sprint Backlog (i.e. implementing functionality for Echo, FileSystem, File, Directory, DirectoryStrack, Pushd, and Cd)
+
+Am I blocked on anything?
+    - Need parent classes PrintCommand and ManipulationCommand for my child classes EchoToOutput, Pushd, and Cd
+
+
