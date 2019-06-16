@@ -50,6 +50,8 @@ public class JShell {
 			Scanner input = new Scanner(System.in);
 			String userInput = input.nextLine();
 			input.close();
+			System.out.println(userInput);
+			newJShell.exitStatus.exitShell();
 		}
 
   }
