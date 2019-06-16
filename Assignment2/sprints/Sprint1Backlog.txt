@@ -23,8 +23,8 @@ c-2. (InputHistory) Create class InputHistory
 c-3. (InputHistory) Create an ordered list that stores all user inputs regardless of validity
 c-4. (History) Create a method that accesses InputHistory's user input list and prints the whole history
 c-5. (History) Create a method that can print a specific number of most recent user inputs
-d-1. (Echo) Create class Echo
-d-2. (Echo) Write base code for the Echo class to print input to shell
+d-1. (EchoToFile) Create class EchoToFile
+d-2. (EchoToFile) Write base code for the EchoToFile class to print input to shell
 e-1. Create classes FileSystem, File, Directory, DirectoryStack, and Pushd
 e-2. (FileSystem) Write code for the FileSystem class so that it can organize directories and files into a hierarchy
 e-3. (File) Write base code for the File class so that it can store information about a file's contents
