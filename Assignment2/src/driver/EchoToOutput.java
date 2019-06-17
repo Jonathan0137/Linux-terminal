@@ -1,5 +1,5 @@
 package driver;
 
-public class EchoToOutput extends PrintCommand {
+public class EchoToOutput extends printCommand {
   // Required Parent Class: PrintCommand
 }
