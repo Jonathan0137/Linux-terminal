@@ -21,7 +21,8 @@ public class Directory {
   
   // Method to add a subdirectory to the list of subdirectories
   public void addSubdirectory(Directory subDirectory) {
-    if (listOfSubdirectories.contains(subDirectory) ) { // Maybe use subDirectory.getName() if that's what is differentiating them
+    // Add helper function to scan list for names
+    if (listOfSubdirectories.contains(subDirectory) ) { // Maybe use subDirectory.getName() if that's what is differentiating them, and also check listOfFiles since files and directories cannot have same name
       // Not sure if Directory class is responsible for printing this error?
       System.out.println("Error: Directory '" + subDirectory.getName() + "' already exists.");
       return;

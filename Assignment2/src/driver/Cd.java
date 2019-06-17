@@ -5,21 +5,23 @@ public class Cd extends ManipulationCommand {
   
   public Directory execute(String input, Directory workingDir, FileSystem fs) {
     // Implementation design:
-    // 1. Treat input as a relative path, attempt to Cd (i.e. update workingDir)
-    // 2. If fails, convert input into absolute path using workingDir.getFullPathName() and try again
-    // 3. Otherwise, send an appropriate error, saying that the path does not exist.
+    // 1. Determine if input is a relative path or an absolute path
+    // 2. If relative, convert to absolute path
+    // 3. Find the directory in the File System. If nonexistent, output a descriptive error
     
-    // Interpret input as a relative path
-    String fullPathName = workingDir.getFullPathName() + input;
-    Directory newWorkingDirectory = fs.getDirectory(fullPathName);
+    Directory newWorkingDirectory;
     
-    if (newWorkingDirectory != null) {
-      return newWorkingDirectory;
+    // Make sure Verifier ensures that input is nonempty
+    
+    // Input is an absolute path
+    if (input.charAt(0) == '/') {
+      newWorkingDirectory = fs.getDirectory(input);
     }
-    
-    // Interpret input as an absolute path
-    fullPathName = input;
-    newWorkingDirectory = fs.getDirectory(fullPathName);
+    // Input is a relative path
+    else {
+      String fullPathName = getFullPathName(input, workingDir);
+      newWorkingDirectory = fs.getDirectory(fullPathName);
+    }
     
     if (newWorkingDirectory != null) {
       return newWorkingDirectory;
@@ -27,8 +29,81 @@ public class Cd extends ManipulationCommand {
     
     // Print an appropriate error message to user and does not change working directory
     System.out.println("Specified path not found.");
-    return workingDir;
-    
+    return workingDir; 
   }
   
+  // Maybe create a new Class for this method, if many commands all need to use this
+  private static String getFullPathName(String input, Directory workingDir) {
+      // Helper function for when input is a relative path name;
+      // Converts relative path name to absolute path name
+      String[] pathList = input.split("/");
+      
+      String fullPathName = workingDir.getFullPathName();
+      
+      for (int i=0; i<pathList.length; i++) {
+        if (pathList[i].equals(".") || pathList[i].equals("")) {
+          continue;
+        }
+        else if (pathList[i].equals("..")) {
+          fullPathName = moveToParentDirectory(fullPathName);
+        }
+        else {
+          fullPathName = fullPathName + pathList[i] + "/";
+        }
+      }
+      
+      return fullPathName;
+  }
+    
+  private static String moveToParentDirectory(String pathName) {
+    // Moves the pathName to the path name of the parent directory
+    
+    if (pathName.equals("/")) {
+      return pathName;
+    }
+    
+    String newPathName = pathName;
+    
+    if (newPathName.charAt(newPathName.length() - 1) == '/') {
+      newPathName = newPathName.substring(0, newPathName.length() - 1);
+    }
+    
+    for (int i = newPathName.length() - 1; i>=0; i--) {
+      if (newPathName.charAt(i) == '/') {
+        break;
+      }      
+      newPathName = newPathName.substring(0, i);
+    } 
+    return newPathName;
+  }
+  
+  // FOR TESTING PURPOSES ONLY
+  public static void main(String[] args) {
+    FileSystem fs = new FileSystem();
+    Directory root = fs.getRootDirectory();
+    
+  Directory subDir = new Directory("hello");
+  root.addSubdirectory(subDir);
+  Directory subSubdir = new Directory("world1");
+  subDir.addSubdirectory(subSubdir);
+  subSubdir = new Directory("world2");
+  subDir.addSubdirectory(subSubdir);
+  
+  if (fs.getDirectory("/hello/world2") != null) {
+    System.out.println("Successfully found");
+  }
+  else {
+    System.out.println("Directory not found");
+  }
+  
+  Cd command = new Cd();
+  Directory newWorkingDir = command.execute("hello/world1/../world2/././././..", root, fs);
+  System.out.println(newWorkingDir.getFullPathName());
+    
+
+    
+    
+    
+    
+  }
 }
