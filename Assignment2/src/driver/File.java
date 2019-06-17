@@ -1,6 +1,8 @@
 package driver;
 
 public class File {
+  //TODO: Complete JavaDocs and add comments
+  
   private String fullPathName;
   private String name;
   private String contents; // Text contents of the file
