@@ -1,9 +1,9 @@
 // **********************************************************
 // Assignment2:
-// Student1:
-// UTORID user_name:
-// UT Student #:
-// Author:
+// Student1: Chongmin Bai
+// UTORID user_name: baichon1
+// UT Student #: 1004986599
+// Author: Jonathan Bai
 //
 // Student2:
 // UTORID user_name:
@@ -29,9 +29,8 @@
 // *********************************************************
 package driver;
 
-import java.util.Scanner;
-
-public class JShell {
+public class JShell 
+{
 	private Directory directoryTree;
 	private DirectoryStack directoryHistory;
 	private InputHistory userInputHistory;
