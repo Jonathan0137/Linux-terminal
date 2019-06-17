@@ -99,7 +99,7 @@ public class Directory {
   
   public void setParentDirectory(Directory parentDirectory) {
     this.parentDirectory = parentDirectory;
-    // Update the full path name using the Parent Directory
+    // Update the directory's full path name using its parent directory
     this.fullPathName = parentDirectory.getFullPathName() + name + "/";
   }
   
