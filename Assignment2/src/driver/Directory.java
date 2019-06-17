@@ -3,23 +3,16 @@ package driver;
 import java.util.ArrayList;
 
 public class Directory {
+  private String fullPathName; // Need to implement this
   private String name;
   private Directory parentDirectory; // This is necessary to access parent directory using commands such as Cd, right?
   private ArrayList<Directory> listOfSubdirectories;
   private ArrayList<File> listOfFiles;
   
-  public Directory() {
-    // Constructor used for creating a head directory
-    this.name = "";
-    this.parentDirectory = null; // Has no parent directory
-    listOfSubdirectories = new ArrayList<Directory>();
-    listOfFiles = new ArrayList<File>();
-  }
-  
-  // Constructor for creating directories that are not the head of the File System
-  public Directory(String name, Directory parentDirectory) {
+  public Directory(String name) {
     this.name = name;
-    this.parentDirectory = parentDirectory;
+    this.fullPathName = name + "/";
+    this.parentDirectory = null;
     listOfSubdirectories = new ArrayList<Directory>();
     listOfFiles = new ArrayList<File>();
   }
@@ -28,10 +21,10 @@ public class Directory {
   public void addSubdirectory(Directory subDirectory) {
     if (listOfSubdirectories.contains(subDirectory) ) { // Maybe use subDirectory.getName() if that's what is differentiating them
       // Not sure if Directory class is responsible for printing this error?
-      System.out.println("Error: Directory '" + subDirectory.name + "' already exists.") // May need to change subDirectory.name to subDirectory.getName()
+      System.out.println("Error: Directory '" + subDirectory.name + "' already exists."); // May need to change subDirectory.name to subDirectory.getName()
       return;
     }
-    
+    subDirectory.setParentDirectory(this);
     listOfSubdirectories.add(subDirectory);
   }
   
@@ -74,7 +67,7 @@ public class Directory {
   
   public Directory findDirectory(String directoryName) {
     for (int i=0; i<listOfSubdirectories.size(); i++) {
-      if (directoryName == listOfSubdirectories.get(i).getName()) {
+      if (directoryName.equals(listOfSubdirectories.get(i).getName())) {
         return listOfSubdirectories.get(i);
       }
     }
@@ -84,8 +77,8 @@ public class Directory {
   
   public File findFile(String fileName) {
     for (int i=0; i<listOfFiles.size(); i++) {
-      if (directoryName == listOfFiles.get(i).getName()) {
-        return listOfSubdirectories.get(i);
+      if (fileName.equals(listOfFiles.get(i).getName())) {
+        return listOfFiles.get(i);
       }
     }
     // Do I need to print an error message saying DIRECTORY NOT FOUND?
@@ -100,24 +93,25 @@ public class Directory {
     return name;
   }
   
-  public void setParentDirectory() {
-    
+  public String getFullPathName() {
+    return fullPathName;
+  }
+  
+  public void setParentDirectory(Directory parentDirectory) {
+    this.parentDirectory = parentDirectory;
+    // Update the full path name using the Parent Directory
+    this.fullPathName = parentDirectory.getFullPathName() + name + "/";
   }
   
   public Directory getParentDirectory() {
-    
+    return parentDirectory;
   }
   
   public ArrayList<Directory> getListOfSubdirectories() {
-    
+    return listOfSubdirectories;
   }
   
-  public ArrayList<Files> getListOfFiles() {
-    
-  }
-  
-  
-  
-  
-  // Do I need functions for finding files/directories (does that conflict with responsibilities for Commands?), or is Cd just calling this method
+  public ArrayList<File> getListOfFiles() {
+    return listOfFiles;
+  }  
 }

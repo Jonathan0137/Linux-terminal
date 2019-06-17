@@ -1,7 +1,8 @@
 package driver;
 
 public class File {
-  private String name; // Name of file
+  private String fullPathName;
+  private String name;
   private String contents; // Text contents of the file
   private Directory parentDirectory; // Is this necessary? To know which directory this file is in?
   
@@ -17,6 +18,11 @@ public class File {
   
   // TODO:
   // Method to get/set name
+  
+  public String getName() {
+    
+  }
+  
   // Method to get/set contents
   // Method to get/set parentDirectory
   
