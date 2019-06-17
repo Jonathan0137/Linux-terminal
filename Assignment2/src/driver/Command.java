@@ -1,13 +1,10 @@
 package driver;
 
-public class Command 
+public abstract class Command 
 {
   //user enteres invalid commands?
- 
-  public void execute(String path)
-  {
-  }
+  public abstract void execute(String path);
   
+  //add a class where you find the path of files and dir
   
- 
 }

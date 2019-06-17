@@ -33,9 +33,6 @@ public class Verifier
       System.out.println("This path does not exist.");
       return false;
     }
-    if(checkUserCommand(path)==true && checkUserPath(command)==true)
-    {
-      return true;
-    }
+    return true;
   }
 }
