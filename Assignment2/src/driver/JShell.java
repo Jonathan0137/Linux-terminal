@@ -45,12 +45,19 @@ public class JShell
 
 	public static void main(String[] args) {
 		JShell newJShell = new JShell();
-		while (!newJShell.exitStatus.exitCheck) {
+		while (!newJShell.exitStatus.exitCheck) 
+		{
 			Scanner input = new Scanner(System.in);
 			String userInput = input.nextLine();
 			input.close();
 			System.out.println(userInput);
 			newJShell.exitStatus.exitShell();
+			//Jbai//
+			Verifier correct = new Verifier();
+			if(correct.checkUserInput(userInput)==false)
+			{
+			  //loop again.
+			}
 		}
 
   }
