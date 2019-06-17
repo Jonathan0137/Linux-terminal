@@ -5,5 +5,4 @@ Subclasses: None
 Responsibilities:
 * Stores information about directories and files in the file system
 Collaborators:
-* File
 * Directory
