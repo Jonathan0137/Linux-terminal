@@ -2,7 +2,7 @@ Class Name: WorkingDirectory
 Parent Class: None
 Subclasses: None
 
-Responsabilities:
+Responsibilities:
 * Stores information about current working directory
 Collaborators:
-* None
+* Directory
