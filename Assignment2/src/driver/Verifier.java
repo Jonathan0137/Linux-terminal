@@ -14,10 +14,10 @@ public class Verifier
   }
   private boolean checkUserPath(String path)
   {
-    
+    return true;
   }
   
-  public boolean checkUserInput(String userInput) throws Exception
+  public boolean checkUserInput(String userInput)
   {
     userInput = userInput.replaceAll(" +", " ");
     String[] input = userInput.split(" ");
@@ -25,12 +25,12 @@ public class Verifier
     String path = input[1];
     if(checkUserCommand(path)==false)
     {
-      throw new Exception("This Command does not exist.");
-     // return false;
+      System.out.println("This Command does not exist.");
+      return false;
     }
     if(checkUserPath(command)==false)
     {
-      throw new Exception("This path does not exist.");
+      System.out.println("This path does not exist.");
       return false;
     }
     if(checkUserCommand(path)==true && checkUserPath(command)==true)
