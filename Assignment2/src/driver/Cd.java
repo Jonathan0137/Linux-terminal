@@ -3,7 +3,7 @@ package driver;
 public class Cd extends ManipulationCommand {
   // Required Parent Class: ManipulationCommand
   
-  public static Directory executeCommand(String input, Directory workingDir, FileSystem fs) {
+  public Directory execute(String input, Directory workingDir, FileSystem fs) {
     // Implementation design:
     // 1. Treat input as a relative path, attempt to Cd (i.e. update workingDir)
     // 2. If fails, convert input into absolute path using workingDir.getFullPathName() and try again
