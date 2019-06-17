@@ -23,7 +23,7 @@ public class Directory {
   public void addSubdirectory(Directory subDirectory) {
     if (listOfSubdirectories.contains(subDirectory) ) { // Maybe use subDirectory.getName() if that's what is differentiating them
       // Not sure if Directory class is responsible for printing this error?
-      System.out.println("Error: Directory '" + subDirectory.name + "' already exists."); // May need to change subDirectory.name to subDirectory.getName()
+      System.out.println("Error: Directory '" + subDirectory.getName() + "' already exists.");
       return;
     }
     subDirectory.setParentDirectory(this);
@@ -34,7 +34,7 @@ public class Directory {
  public void removeSubdirectory(Directory subDirectory) {
    if (!listOfSubdirectories.contains(subDirectory) ) {
      // Not sure if Directory class is responsible for printing this error?
-     System.out.println("Error: Cannot remove '" + subDirectory.name + "': No such directory exists.") // May need to change subDirectory.name to subDirectory.getName()
+     System.out.println("Error: Cannot remove '" + subDirectory.getName() + "': No such directory exists."); 
      return;
    }
    
@@ -44,7 +44,7 @@ public class Directory {
   //Method to add a file to the list of files
   public void addFile(File file) {
     if (listOfFiles.contains(file) ) {
-      System.out.println("Error: File '" + file.name + "' already exists."); // May need to change file.name to file.getName()
+      System.out.println("Error: File '" + file.getName() + "' already exists.");
       return;
     }
     
@@ -54,7 +54,7 @@ public class Directory {
   public void removeFile(File file) {
     if (!listOfFiles.contains(file) ) {
       // Not sure if Directory class is responsible for printing this error?
-      System.out.println("Error: Cannot remove '" + file.name + "': No such file exists."); // May need to change subDirectory.name to subDirectory.getName()
+      System.out.println("Error: Cannot remove '" + file.getName() + "': No such file exists.");
       return;
     }
     
