@@ -13,4 +13,6 @@ public class File {
     this.name = name;
     this.contents = contents;
   }
+  
+  // Do I need functions for set/get name, set/get/append contents?
 }
