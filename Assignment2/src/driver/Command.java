@@ -4,14 +4,20 @@ public class Command
 {
   //user enteres invalid commands?
  
-  public void UserCommands(String userInput) 
+  public boolean UserCommands(String userInput) 
   {
-    
-    String[] input = userInput.split(" ");
-    String command = input[0];
-    String path = input[1];
-    
-    //call
+    //check user enters valid command
+    Verifier correct = new Verifier();
+    if(correct.checkUserInput(userInput)==true)// if user enters valid command
+    {
+      //excute the userCommands
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+
   }
  
 }
