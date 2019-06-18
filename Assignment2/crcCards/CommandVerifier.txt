@@ -1,9 +1,0 @@
-Class Name: CommandVerifier
-Parent Class: Verifier
-Subclasses: None
-
-Responsibilities:
-* Verifies that the requested command is executable with the given parameters
-**************************** Else, prints an error message to user? (Is this a responsibility?) *****************
-Collaborators:
-* None

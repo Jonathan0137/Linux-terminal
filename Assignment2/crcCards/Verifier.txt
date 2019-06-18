@@ -1,6 +1,6 @@
 Class Name: Verifier
 Parent Class: None
-Subclasses: InputVerifier, CommandVerifier
+Subclasses: None
 
 Responsibilities:
 * Verifies that information is valid
