@@ -1,0 +1,30 @@
+// Sprint 2 Backlog
+June 20 to June 26
+
+User Stories from Product Backlog that we will address in this sprint:
+a) As a user, I can print out the contents of current working directory so that I know what files/folders are under current working directory.
+b) As a user, I can print out the contents of any directory so that I know what files/folders are under any working directories.
+c) As a user, I can print the documentation of all commands by calling the man command so that I can understand how to properly interact with the shell	
+d) As a user, I can print out the contents of multiple files at once and be able to differentiate them, so that I know what is under each file. 
+e) As a user, I can create a new text file containing any string I input, so that I can have the ability to store my string inputs.
+f) As a user, I can erase the contents of text files, so that I can write something else in the txt file. 
+g) As a user, I can overwrite the contents of any text file with any string I input, so that I have the ability to overwrite the txt file.
+h) As a user, I can write at the end of any existing txt file, so that I can be able to edit text file without deleteing everything before. 
+i) As a user, I can move into the saved directories and remove them.	
+
+Specific tasks to be accomplished:
+
+
+These tasks are assignment as follows:
+
+User: Gary Xie
+Tasks: i
+
+User: Tom Daudelin
+Tasks: e, f, g, h
+
+User: Chongmin Bai
+Tasks: a, b, c 
+
+User: Adil Shah
+Tasks: d
