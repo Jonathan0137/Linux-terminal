@@ -29,24 +29,29 @@
 // *********************************************************
 package driver;
 
+import java.util.Scanner;
+
 public class JShell 
 {
-	private Directory directoryTree;
+	private FileSystem directoryTree;
 	private DirectoryStack directoryHistory;
 	private InputHistory userInputHistory;
 	private Exit exitStatus; 
+	private Directory currentDirectory;
+	private Command executer;
 	
 	public JShell() {
-		directoryTree = new Directory();
+		directoryTree = new FileSystem();
 		directoryHistory = new DirectoryStack();
 		userInputHistory = new InputHistory();
 		exitStatus = new Exit();
+		currentDirectory = new Directory(
+				directoryTree.getRootDirectory().getFullPathName());
 	}
 
 	public static void main(String[] args) {
 		JShell newJShell = new JShell();
-		while (!newJShell.exitStatus.exitCheck) 
-		{
+		while (!newJShell.exitStatus.exitCheck()) {
 			Scanner input = new Scanner(System.in);
 			String userInput = input.nextLine();
 			input.close();
