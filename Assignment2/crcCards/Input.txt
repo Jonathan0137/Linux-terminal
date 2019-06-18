@@ -1,9 +1,0 @@
-Class Name: Input
-Parent Class: None
-Subclasses: None
-
-Responsibilities:
-* Accepts user input
-* Sends input information to InputHistory
-Collaborators:
-* InputHistory
