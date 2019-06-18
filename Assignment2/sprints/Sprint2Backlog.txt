@@ -13,7 +13,14 @@ h) As a user, I can write at the end of any existing txt file, so that I can be 
 i) As a user, I can move into the saved directories and remove them.	
 
 Specific tasks to be accomplished:
-
+a-1 (Ls) Create class called Ls.
+a-2 (Ls) if no path or file names given, print contents under current working directory.
+a-3 (Ls) if files names given and exist, then print file name.
+a-4 (Ls) if files names given and doesn't exist, then print error msg 
+b-1 (Ls) if path given and exist then print content under that path
+b-2 (Ls) if path given not exist then print error msg
+c-1 (Man) create class called Man
+c-2 (Man) if command given correct, print the docementation for that command
 
 These tasks are assignment as follows:
 
@@ -24,7 +31,7 @@ User: Tom Daudelin
 Tasks: e, f, g, h
 
 User: Chongmin Bai
-Tasks: a, b, c 
+Tasks: a-1, a-2, a-3, a-4, b-1, b-2, c-1, c-2. 
 
 User: Adil Shah
 Tasks: d
