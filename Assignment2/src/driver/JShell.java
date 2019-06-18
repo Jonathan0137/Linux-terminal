@@ -61,11 +61,30 @@ public class JShell
 			String userInput = input.nextLine();
 			newJShell.userInputHistory.addToHistory(userInput);
 			Verifier correct = new Verifier();
-			if(correct.checkUserInput(userInput)==true) {
-			  executer.execute(newJShell,userInput); //Used to actually call the method
+			Command toBeExecuted = (userInput); //THE VERIFIER RETURNS A COMMAND
+			if (toBeExecuted != null) {
+				if(correct.checkUserInput(userInput)==true) {
+					  executer.execute(newJShell,userInput); //Used to actually call the method
+					}
 			}
+			
 		}
 		input.close();
-  }
-
+	}
+	
+	public FileSystem getDirectoryTree() {
+		return this.directoryTree;
+	}
+	
+	public DirectoryStack getDirectoryStack() {
+		return this.directoryHistory;
+	}
+	
+	public InputHistory getInputHistory() {
+		return this.userInputHistory;
+	}
+	
+	public Directory getCurrentDirectory() {
+		return this.currentDirectory;
+	}
 }
