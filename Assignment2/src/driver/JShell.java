@@ -38,7 +38,7 @@ public class JShell
 	private InputHistory userInputHistory;
 	private Exit exitStatus; 
 	private Directory currentDirectory;
-	private Command executer;
+	private static Command executer; //Don't know if we actually need this one
 	
 	public JShell() {
 		directoryTree = new FileSystem();
@@ -48,23 +48,24 @@ public class JShell
 		currentDirectory = new Directory(
 				directoryTree.getRootDirectory().getFullPathName());
 	}
-
+	
+	/**
+	 * main method creates object JShell and continuously accepts and executes 
+	 * user inputs until user inputs "exit"
+	 * @param args unused
+	 */
 	public static void main(String[] args) {
 		JShell newJShell = new JShell();
+		Scanner input = new Scanner(System.in);
 		while (!newJShell.exitStatus.exitCheck()) {
-			Scanner input = new Scanner(System.in);
 			String userInput = input.nextLine();
-			input.close();
-			System.out.println(userInput);
-			newJShell.exitStatus.exitShell();
-			//Jbai//
+			newJShell.userInputHistory.addToHistory(userInput);
 			Verifier correct = new Verifier();
-			if(correct.checkUserInput(userInput)==false)
-			{
-			  //loop again.
+			if(correct.checkUserInput(userInput)==true) {
+			  executer.execute(newJShell,userInput); //Used to actually call the method
 			}
 		}
-
+		input.close();
   }
 
 }
