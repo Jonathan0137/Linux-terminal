@@ -4,12 +4,12 @@ Subclasses: None
 
 Responsibilities:
 * Runs the command shell
+* Keeps track of exit status
 * Executes user commands
 Collaborators:
-* Input
-* Output
-* InputVerifier
-* Command
+* FileSystem
+* Directory
 * InputHistory
 * DirectoryStack
-* WorkingDirectory
+* Exit
+* Command
