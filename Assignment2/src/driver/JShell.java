@@ -53,6 +53,7 @@ public class JShell
 	 * @param args Unused
 	 */
 	public static void main(String[] args) {
+	  //System.out.println("eqwew");
 		JShell newJShell = new JShell();
 		Scanner input = new Scanner(System.in);
 		while (!newJShell.exitStatus.exitCheck()) {

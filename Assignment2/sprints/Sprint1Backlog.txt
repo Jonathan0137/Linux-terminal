@@ -33,10 +33,10 @@ e-5. (DirectoryStack) Write base code for the DirectoryStack Class so that it ca
 e-6. (Pushd) Write code for the Pushd class so that it can add a directory to the DirectoryStack
 f-1. (Cd) Create class Cd
 f-2. (Cd) Write code for Cd class so that the user can change their working directory
-g-1. (verifer) create parent class called verifer
-g-2. (input verifer) create child class called input verifer, that verifes the command is exists.
-g-3. (command verifer) create child class called command verifer, that verifes the command is executable.
-h-1. (commands) create a parent class called command that will excute all the commands that youse types.
+g-1. (verifier) create parent class called verifier
+g-2. (input verifier) create child class called input verifier, that verifier the command is exists.
+g-3. (command verifier) create child class called command verifier, that verifier the command is executable.
+h-1. (commands) create a parent class called command that will execute all the commands that you types.
 h-2. (print commands) create a child class called print commands that has other child class that only prints.
 h-3. (manipulate commands) create a child class called manipulate commands that has other child class that will manipulate folders and files.
 h-4. (documentation) create documentations and store them in command class

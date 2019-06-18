@@ -16,7 +16,8 @@ public class FileSystem {
     this.root = root;
   }
   
-  public Directory getDirectory(String fullPathName) {
+  public Directory getDirectory(String fullPathName) //find direc
+  {
     Directory traversalDirectory = root;
     String[] nameList = fullPathName.split("/");
     
