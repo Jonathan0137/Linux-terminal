@@ -10,10 +10,10 @@
 // UT Student #: 1004847151 
 // Author: Adil Shah
 //
-// Student3:
-// UTORID user_name:
-// UT Student #:
-// Author:
+// Student3: Tom Daudelin
+// UTORID user_name: daudeli3
+// UT Student #: 1005041367
+// Author: Tom Daudelin
 //
 // Student4: Gary Xie
 // UTORID user_name: xiegary
@@ -44,8 +44,7 @@ public class JShell
 		directoryHistory = new DirectoryStack();
 		userInputHistory = new InputHistory();
 		exitStatus = new Exit();
-		currentDirectory = new Directory(
-				directoryTree.getRootDirectory().getFullPathName());
+		currentDirectory = directoryTree.getRootDirectory();
 	}
 	
 	/**
@@ -57,16 +56,16 @@ public class JShell
 		JShell newJShell = new JShell();
 		Scanner input = new Scanner(System.in);
 		while (!newJShell.exitStatus.exitCheck()) {
+			System.out.println(newJShell.currentDirectory.getFullPathName());
 			String userInput = input.nextLine();
 			newJShell.userInputHistory.addToHistory(userInput);
 			Verifier correct = new Verifier();
 			Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
 			if (toBeExecuted != null) {
 				if(correct.checkUserInput(userInput)==true) {
-					  toBeExecuted.execute(newJShell,userInput);
+					toBeExecuted.execute(newJShell,userInput);
 					}
 			}
-			
 		}
 		input.close();
 	}
