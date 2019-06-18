@@ -16,9 +16,9 @@ public class Verifier
   {
     return true;
   }
-  public Command checkUserInputCommand(String userInput)
+  public static Command checkUserInputCommand(String userInput)
   {
-    //userInput = userInput.replaceAll("  +", " ");
+    userInput = userInput.replaceAll("  ", " ");
     String[] input = userInput.split(" ");
     String command = input[0];
 //    if(checkUserCommand(command)==true)
@@ -57,12 +57,16 @@ public class Verifier
         break;
       case "man":
         return new Man();
+        break;
       default:
         return null;
         
     }
 //    }
-//    else
+//    elseelse
+    {
+      
+    }
 //    {
 //      return null;
 //    }
@@ -70,22 +74,18 @@ public class Verifier
   }
   public boolean checkUserInput(String userInput)
   {
-    //userInput = userInput.replaceAll("  +", " ");
+    //userInput = userInput.replaceAll("  ", " ");
     String[] input = userInput.split(" ");
-    
-    String command = input[0];
-    String path = input[1];
-    
-    if(checkUserCommand(command)==false)
+    if(input.length>1)
     {
-      System.out.println("This Command does not exist.");
-      return false;
+      String path = input[1];
+      
+      if(checkUserPath(path)==false)
+      {
+        System.out.println("This path does not exist.");
+        return false;
+      }
+      return true;
     }
-    if(checkUserPath(path)==false)
-    {
-      System.out.println("This path does not exist.");
-      return false;
-    }
-    return true;
   }
 }
