@@ -1,5 +1,4 @@
 
-public class Mkdir extends ManipulationCommand{
-	//reqiures parent ManipulationCommand class
-
+public class Mkdir extends Command{
+	
 }
