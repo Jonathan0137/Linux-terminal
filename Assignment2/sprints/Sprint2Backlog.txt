@@ -25,6 +25,12 @@ d-1 (cat) Create class called cat
 d-2 (cat) write code for displaying the content if only 1 file is inputted by the user
 d-3 (cat) write code for displaying the content if multiple files are inputted by the user
 d-4 (cat) check if the file(s) inputted by the user exist
+e-1 (EchoToFile) Create EchoToFile class
+e-2 (EchoToFile) Create method that verifies that all parameters in command are valid
+e-3 (EchoToFile) Create method that can write users inputs into a new file
+f-1 (EchoToFile) Create method that can erase the contents of files
+g-1 (EchoToFile) Create method that can overwrite files 
+h-1 (EchoToFile) Create method that can append a string to the end of a file
 
 These tasks are assignment as follows:
 
@@ -32,7 +38,7 @@ User: Gary Xie
 Tasks: i
 
 User: Tom Daudelin
-Tasks: e, f, g, h
+Tasks: e-1, e-2, e-3, f-1, g-1, h-1
 
 User: Chongmin Bai
 Tasks: a-1, a-2, a-3, a-4, b-1, b-2, c-1, c-2. 
