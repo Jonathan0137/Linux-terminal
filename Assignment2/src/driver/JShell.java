@@ -5,10 +5,10 @@
 // UT Student #: 1004986599
 // Author: Jonathan Bai
 //
-// Student2:
-// UTORID user_name:
-// UT Student #:
-// Author:
+// Student2: Adil Shah
+// UTORID user_name: shahadi6
+// UT Student #: 1004847151 
+// Author: Adil Shah
 //
 // Student3:
 // UTORID user_name:
