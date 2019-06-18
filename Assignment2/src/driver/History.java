@@ -1,5 +1,7 @@
 package driver;
 
+import java.util.ArrayList;
+
 public class History extends Command {
 	
 	public void execute(JShell shell, String input) {
@@ -14,9 +16,11 @@ public class History extends Command {
 			}
 		}
 		else {
-			if (History.historyCheck(splitInput[1])) {
-				for (int i=0; i<shell.getInputHistory().getInputList().size() 
-						&& i<Integer.parseInt(splitInput[1]); i++) {
+			if (History.historyCheck(splitInput[1],
+					shell.getInputHistory().getInputList())) {
+				for (int i=shell.getInputHistory().getInputList().size()-1; 
+						i>-1 && i>=shell.getInputHistory().getInputList().size()
+						-Integer.parseInt(splitInput[1]); i--) {
 					System.out.print(i+1);
 					System.out.print(". ");
 					System.out.println(shell.
@@ -26,9 +30,13 @@ public class History extends Command {
 		}
 	}
 	
-	public static boolean historyCheck(String argument) {
+	public static boolean historyCheck(String argument,
+			ArrayList<String> list) {
 		try {
-			Integer.parseInt(argument);
+			int cap = Integer.parseInt(argument);
+			if (cap>list.size()) {
+				return false;
+			}
 			return true;
 		}
 		catch(Exception e) {
