@@ -15,10 +15,10 @@
 // UT Student #:
 // Author:
 //
-// Student4:
-// UTORID user_name:
-// UT Student #:
-// Author:
+// Student4: Gary Xie
+// UTORID user_name: xiegary
+// UT Student #: 1004721401
+// Author: Gary Xie
 //
 //
 // Honor Code: I pledge that this program represents my own

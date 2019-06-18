@@ -3,7 +3,7 @@ Parent Class: Command
 Subclasses: None
 
 Responsibilities:
-* Prints working directory path to Output
+* Prints working directory path to user
 Collaborators:
 * Inherited from Parent Class
 * Directory
