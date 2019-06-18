@@ -2,7 +2,7 @@ package driver;
 
 public abstract class Command 
 {
-  protected String Doc;
+  protected String doc;
   //user enteres invalid commands?
   public abstract void execute(JShell shell, String path);
   
