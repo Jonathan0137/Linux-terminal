@@ -12,17 +12,17 @@ public class Verifier
 //  {
 //    return Arrays.asList(CommandStringArray).contains(command); 
 //  }
-  private boolean checkUserPath(String path)
-  {
-    return true;
-  }
+//  private boolean checkUserPath(String path)
+//  {
+//    return true;
+//  }
   public static Command checkUserInputCommand(String userInput)
   {
-    userInput = userInput.replaceAll("  ", " ");
-    String[] input = userInput.split(" ");
+    if(userInput == "")
+      return null;
+    //userInput = userInput.replaceAll("  ", " ");
+    String[] input = userInput.split(" ", 2);
     String command = input[0];
-//    if(checkUserCommand(command)==true)
-//    {
     switch(command)
     {
       case "ls":
@@ -53,39 +53,111 @@ public class Verifier
         return new Cat();
         break;
       case "echo":
-        return new Echo();
+        if(userInput.contains(">"))
+        {
+          return new EchoToFile();
+        }
+        else
+        {
+          return new EchoToOutput();
+        }
         break;
       case "man":
         return new Man();
         break;
       default:
+        System.out.println("Command not found, please try again");
         return null;
         
     }
-//    }
-//    elseelse
-    {
-      
-    }
-//    {
-//      return null;
-//    }
-    
   }
-  public boolean checkUserInput(String userInput)
+  public boolean checkUserInput(String userInput)   //looking at the second part check the num of args
   {
-    //userInput = userInput.replaceAll("  ", " ");
-    String[] input = userInput.split(" ");
-    if(input.length>1)
+    
+    String[] input = userInput.split(" ", 10);
+    int numOfArg = input.length;
+    String command=input[0];
+    if(command == "exit" && numOfArg > 1)
     {
-      String path = input[1];
-      
-      if(checkUserPath(path)==false)
-      {
-        System.out.println("This path does not exist.");
-        return false;
-      }
+      System.out.println("bash exit: too many arguments");
+      return false;
+    }
+    else if(command == "mkdir" && numOfArg == 1)
+    {
+      System.out.println("bash mkdir: missing directory");
+      return false;
+    }
+    else if(command == "cd" && numOfArg > 2)
+    {
+      System.out.println("bash cd: too many arguments");
+      return false;
+    }
+//    else if(command == "cd" && numOfArg == 1)
+//    {
+//      System.out.println("bash cd: not enought arguments");
+//      return false;
+//    }
+    // ls can have anynumer
+    else if(command == "pwd" && numOfArg > 1)
+    {
+      System.out.println("bash pwd: too many arguments");
+      return false;
+    }
+    else if(command == "pushd" && numOfArg > 2)
+    {
+      System.out.println("bash pushd: too many arguments");
+      return false;
+    } 
+    else if(command == "pushd" && numOfArg == 1)
+    {
+      System.out.println("bash: pushd: no other directory");
+      return false;
+    } 
+    else if(command == "history" && numOfArg > 2)
+    {
+      System.out.println("bash: history: too many arguments");
+      return false;
+    } 
+    else if(command == "cat" && numOfArg == 1)
+    {
+      System.out.println("bash: cat: not enought arguments");
+      return false;
+    }
+    else if(command == "man" && numOfArg == 1)
+    {
+      System.out.println("What manual page do you want?");
+      return false;
+    } 
+    else if(command == "man" && numOfArg > 2)
+    {
+      System.out.println("bash: man: too many arguments");
+      return false;
+    }   
+    else
+    {
       return true;
     }
-  }
+  
+ }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 }
