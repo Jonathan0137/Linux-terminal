@@ -3,7 +3,18 @@ package driver;
 import java.util.ArrayList;
 
 public class History extends Command {
+	private String manual;
 	
+	public History() { //TO COMPLETE
+		manual = "";
+	}
+	
+	/**
+	 * Executes the users input by printing out users total history or
+	 * optionally prints the last nth user inputs where n is an integer
+	 * @param shell An instance of the JShell class
+	 * @param input The users input
+	 */
 	public void execute(JShell shell, String input) {
 		String[] splitInput = input.split(" ");
 		if (splitInput.length == 1) {
@@ -30,6 +41,13 @@ public class History extends Command {
 		}
 	}
 	
+	/**
+	 * Verifies that a users optional parameter is valid for the history 
+	 * command
+	 * @param argument User inputs optional parameter
+	 * @param list The list of all user inputs
+	 * @return boolean True if argument valid, False otherwise
+	 */
 	public static boolean historyCheck(String argument,
 			ArrayList<String> list) {
 		try {
