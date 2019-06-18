@@ -27,51 +27,37 @@ public class Verifier
     {
       case "cd":
         return new Cd();
-        //break;
       case "mkdir":
         return new Mkdir();
-        //break;
       case "pwd":
         return new Pwd();
-        //break;
       case "pushd":
         return new Pushd();
-        //break;
       case "history":
         return new History();
-        //break;
+      case "ls":
+        return new Ls();
+      case "exit":
+        return new Exit();
+      case "popd":
+        return new Popd();
+      case "cat":
+        return new Cat();
+      case "echo":
+        if(userInput.contains(">"))
+        {
+          return new EchoToFile();
+        }
+        else
+        {
+          return new EchoToOutput();
+        }
+      case "man":
+        return new Man();
       default:
         System.out.println("Command not found, please try again");
         return null;
     }
-//      case "ls":
-//      return new Ls();
-//      break;
-//      case "exit":
-//      return new Exit();
-//      break;
-//      case "popd":
-//      return new Popd();
-//      break;
-//      case "cat":
-//        return new Cat();
-//        break;
-//      case "echo":
-//        if(userInput.contains(">"))
-//        {
-//          return new EchoToFile();
-//        }
-//        else
-//        {
-//          return new EchoToOutput();
-//        }
-//        break;
-//      case "man":
-//        return new Man();
-//        break;
-      
-        
-    
   }
   public boolean checkUserInput(String userInput)   //looking at the second part check the num of args
   {
