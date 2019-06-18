@@ -1,5 +1,5 @@
 Class Name: Popd
-Parent Class: ManipulationCommand
+Parent Class: Command
 Subclasses: None
 
 Responsibilities:
@@ -10,4 +10,3 @@ Collaborators:
 * Inherited from Parent Class
 * DirectoryStack
 * Cd
-* Output

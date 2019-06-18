@@ -1,8 +1,9 @@
 Class Name: Pwd
-Parent Class: PrintCommand
+Parent Class: Command
 Subclasses: None
 
 Responsibilities:
 * Prints working directory path to Output
 Collaborators:
 * Inherited from Parent Class
+* Directory

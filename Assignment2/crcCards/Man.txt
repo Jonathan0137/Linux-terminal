@@ -1,9 +1,9 @@
 Class Name: Man
-Parent Class: PrintCommand
+Parent Class: Command
 Subclasses: None
 
 Responsibilities:
-* Prints documentation for the given command
+* Prints documentation for the given command to user
 Collaborators:
 * Inherited from Parent Class
 * Command

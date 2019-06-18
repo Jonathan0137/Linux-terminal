@@ -5,4 +5,4 @@ Subclasses: None
 Responsibilities:
 * Quits the program
 Collaborators:
-* Shell
+* Inherited from Parent Class

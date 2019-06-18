@@ -1,9 +1,9 @@
 Class Name: Mkdir
-Parent Class: ManipulationCommand
+Parent Class: Command
 Subclasses: None
 
 Responsibilities:
 * Makes a directory at the specified location and with the specified name
 Collaborators:
 * Inherited from Parent Class
-* Output
+* Directory
