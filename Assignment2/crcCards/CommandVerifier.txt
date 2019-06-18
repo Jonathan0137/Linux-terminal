@@ -4,6 +4,6 @@ Subclasses: None
 
 Responsibilities:
 * Verifies that the requested command is executable with the given parameters
-**************************** Else, prints an error message to Output? (Is this a responsibility?) *****************
+**************************** Else, prints an error message to user? (Is this a responsibility?) *****************
 Collaborators:
 * None

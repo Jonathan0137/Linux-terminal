@@ -1,6 +1,6 @@
 package driver;
 
-public class EchoToOutput extends printCommand {
+public class EchoToOutput extends Command {
   // Required Parent Class: PrintCommand
   
   // Should be @Override after PrintCommand is implemented

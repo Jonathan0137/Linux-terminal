@@ -1,13 +1,19 @@
 package driver;
 
-public class Cd extends ManipulationCommand {
+public class Cd extends Command {
   // Required Parent Class: ManipulationCommand
   
-  public Directory execute(String input, Directory workingDir, FileSystem fs) {
+  public Boolean execute(String input, Directory workingDir, FileSystem fs) {
+    // Should return true or false based on whether or not workingDir was changed
+    // Change parameters to have 1 JShell parameter, which I can use to call workingDir and fs
+    // NOTE: my code currently assumes that 'input' doesn't contain "cd" as part of the string, only what comes after
+    
     // Implementation design:
     // 1. Determine if input is a relative path or an absolute path
     // 2. If relative, convert to absolute path
     // 3. Find the directory in the File System. If nonexistent, output a descriptive error
+    
+    Directory
     
     Directory newWorkingDirectory;
     
@@ -19,7 +25,7 @@ public class Cd extends ManipulationCommand {
     }
     // Input is a relative path
     else {
-      String fullPathName = getFullPathName(input, workingDir);
+      String fullPathName = getAbsolutePath(input, workingDir);
       newWorkingDirectory = fs.getDirectory(fullPathName);
     }
     
@@ -33,7 +39,7 @@ public class Cd extends ManipulationCommand {
   }
   
   // Maybe create a new Class for this method, if many commands all need to use this
-  private static String getFullPathName(String input, Directory workingDir) {
+  private static String getAbsolutePath(String input, Directory workingDir) {
       // Helper function for when input is a relative path name;
       // Converts relative path name to absolute path name
       String[] pathList = input.split("/");

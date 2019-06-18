@@ -5,7 +5,6 @@ Subclasses: None
 Responsibilities:
 * Verifies that input is a valid command
 * If the input is a valid command, then call the appropriate CommandVerifier
-**************************** Else, prints an error message to Output? (Is this a responsibility?) *****************
+**************************** Else, prints an error message to user? (Is this a responsibility?) *****************
 Collaborators:
 * CommandVerifier
-* Output
