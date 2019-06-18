@@ -1,6 +1,6 @@
 Class Name: Command
 Parent Class: None
-Subclasses: PrintCommand, ManipulationCommand, Exit
+Subclasses: Exit, Mkdir, Cd, Pushd, Popd, EchoToFile, Cat, Ls, Pwd, History, Cat, EchoToOutput, Man
 
 Responsibilities:
 * Executes the command
