@@ -21,6 +21,10 @@ b-1 (Ls) if path given and exist then print content under that path
 b-2 (Ls) if path given not exist then print error msg
 c-1 (Man) create class called Man
 c-2 (Man) if command given correct, print the docementation for that command
+d-1 (cat) Create class called cat
+d-2 (cat) write code for displaying the content if only 1 file is inputted by the user
+d-3 (cat) write code for displaying the content if multiple files are inputted by the user
+d-4 (cat) check if the file(s) inputted by the user exist
 
 These tasks are assignment as follows:
 
@@ -34,4 +38,4 @@ User: Chongmin Bai
 Tasks: a-1, a-2, a-3, a-4, b-1, b-2, c-1, c-2. 
 
 User: Adil Shah
-Tasks: d
+Tasks: d-1, d-2, d-3, d-4
