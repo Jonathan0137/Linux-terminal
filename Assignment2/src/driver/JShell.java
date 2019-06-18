@@ -38,7 +38,6 @@ public class JShell
 	private InputHistory userInputHistory;
 	private Exit exitStatus; 
 	private Directory currentDirectory;
-	private static Command executer; //Don't know if we actually need this one
 	
 	public JShell() {
 		directoryTree = new FileSystem();
@@ -50,9 +49,9 @@ public class JShell
 	}
 	
 	/**
-	 * main method creates object JShell and continuously accepts and executes 
+	 * Main method creates object JShell and continuously accepts and executes 
 	 * user inputs until user inputs "exit"
-	 * @param args unused
+	 * @param args Unused
 	 */
 	public static void main(String[] args) {
 		JShell newJShell = new JShell();
@@ -61,10 +60,10 @@ public class JShell
 			String userInput = input.nextLine();
 			newJShell.userInputHistory.addToHistory(userInput);
 			Verifier correct = new Verifier();
-			Command toBeExecuted = (userInput); //THE VERIFIER RETURNS A COMMAND
+			Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
 			if (toBeExecuted != null) {
 				if(correct.checkUserInput(userInput)==true) {
-					  executer.execute(newJShell,userInput); //Used to actually call the method
+					  toBeExecuted.execute(newJShell,userInput);
 					}
 			}
 			
@@ -72,19 +71,43 @@ public class JShell
 		input.close();
 	}
 	
+	/**
+	 * Accesses and returns a JShell object's directory tree
+	 * @return this.directoryTree The FileSystem instance variable in JShell
+	 */
 	public FileSystem getDirectoryTree() {
 		return this.directoryTree;
 	}
 	
+	/**
+	 * Accesses and returns a JShell object's directory stack
+	 * @return this.directoryHistory DirectoryStack instance variable in JShell
+	 */
 	public DirectoryStack getDirectoryStack() {
 		return this.directoryHistory;
 	}
 	
+	/**
+	 * Accesses and returns a JShell object's input history
+	 * @return this.userInputHistory InputHistory instance variable in JShell
+	 */
 	public InputHistory getInputHistory() {
 		return this.userInputHistory;
 	}
 	
+	/**
+	 * Accesses and returns a JShell object's current directory
+	 * @return this.currentDirectory The Directory instance variable in JShell
+	 */
 	public Directory getCurrentDirectory() {
 		return this.currentDirectory;
+	}
+	
+	/**
+	 * Sets the JShell object's current directory to newCurrent
+	 * @param newCurrent The new current directory of the JShell
+	 */
+	public void setCurrentDirectory(Directory newCurrent) {
+		this.currentDirectory = newCurrent;
 	}
 }
