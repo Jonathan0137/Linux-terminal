@@ -6,3 +6,4 @@ Responsibilities:
 * Stores information about directories and files in the file system
 Collaborators:
 * Directory
+* File

@@ -1,5 +1,5 @@
 Class Name: EchoToFile
-Parent Class: ManipulationCommand
+Parent Class: Command
 Subclasses: None
 
 Responsibilities:
@@ -7,3 +7,4 @@ Responsibilities:
 * Overwrites file with the given string, or appends it to the end of a file
 Collaborators:
 * Inherited from Parent Class
+* File

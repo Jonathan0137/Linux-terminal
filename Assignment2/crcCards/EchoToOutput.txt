@@ -1,8 +1,8 @@
 Class Name: EchoToOutput
-Parent Class: PrintCommand
+Parent Class: Command
 Subclasses: None
 
 Responsibilities:
-* Prints input to Output
+* Prints input to user
 Collaborators:
 * Inherited from Parent Class

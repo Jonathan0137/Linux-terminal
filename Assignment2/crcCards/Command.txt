@@ -4,5 +4,6 @@ Subclasses: Exit, Mkdir, Cd, Pushd, Popd, EchoToFile, Cat, Ls, Pwd, History, Cat
 
 Responsibilities:
 * Executes the command
+* Outputs an error message to user if the command execution has an error
 Collaborators:
-* None
+* JShell

@@ -1,5 +1,5 @@
 Class Name: Pushd
-Parent Class: ManipulationCommand
+Parent Class: Command
 Subclasses: None
 
 Responsibilities:

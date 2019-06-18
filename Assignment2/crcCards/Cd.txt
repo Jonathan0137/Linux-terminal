@@ -1,10 +1,10 @@
 Class Name: Cd
-Parent Class: ManipulationCommand
+Parent Class: Command
 Subclasses: None
 
 Responsibilities:
 * Changes current working directory
-* Outputs an error if the specified directory doesn't exist
 Collaborators:
 * Inherited from Parent Class
-* Output
+* FileSystem
+* Directory
