@@ -56,7 +56,7 @@ public class JShell
 		JShell newJShell = new JShell();
 		Scanner input = new Scanner(System.in);
 		while (!newJShell.exitStatus.exitCheck()) {
-			System.out.println(newJShell.currentDirectory.getFullPathName());
+			System.out.print(newJShell.currentDirectory.getFullPathName()+"# ");
 			String userInput = input.nextLine();
 			newJShell.userInputHistory.addToHistory(userInput);
 			Verifier correct = new Verifier();
