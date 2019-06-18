@@ -1,4 +1,4 @@
 
-public class Pwd extends PrintCommand{
-	//requires parent PrintCommand class
+public class Pwd extends Command{
+	
 }
