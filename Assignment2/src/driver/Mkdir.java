@@ -1,39 +1,54 @@
 package driver;
 
-import java.nio.file.FileSystem;
 import java.util.ArrayList;
 
 public class Mkdir extends Command{
 	//currentDirectory = JShell.getCurrentDirectory();
 	//NOTE: code assumes "mkdir" isn't part of the string
-	public void execute(String newDirectories) 
+	public void execute(String newDirectories, FileSystem fs) 
 	{
-		//split newDirectory into array of individual names of each new directory, and get length of the array
-		String[] arguements = newDirectories.split(" ");
-		int numArguements = arguements.length;
-		
-		for (int i = 0; i < numArguements; i++) 
-		{
-			// For each argument:
-			// 1. Convert to absolute path (if necessary) and move to parent directory (use Cd method)
-			// 2. Use FileSystem.getDirectory(abs_path) to go to the parent directory
-			// 3. Try to add the directory to the directory
+		if (!mkdirError(newDirectories)) {
+			//split newDirectory into array of individual names of each new directory, and get length of the array
+			String[] arguements = newDirectories.split(" ");
+			int numArguements = arguements.length;
 			
-			//add each directory name into the list of the subdirectories of currentDirectories
-			Directory newDirectory = new Directory(arguements[i]);
-			String abs_path;
-			if (getAbsolutePath(newDirectory.getFullPathName(), newDirectory) == arguements[i])
+			for (int i = 0; i < numArguements; i++) 
 			{
-				abs_path = arguements[i];
+				// For each argument:
+				// 1. Convert to absolute path (if necessary) and move to parent directory (use Cd method)
+				// 2. Use FileSystem.getDirectory(abs_path) to go to the parent directory
+				// 3. Try to add the directory to the directory
+				
+				//add each directory name into the list of the subdirectories of currentDirectories
+				Directory newDirectory = new Directory(arguements[i]);
+				String abs_path;
+				if (getAbsolutePath(newDirectory.getFullPathName(), newDirectory) == arguements[i])
+				{
+					abs_path = arguements[i];
+				}
+				else
+				{
+					abs_path = getAbsolutePath(newDirectory.getFullPathName(), newDirectory);
+				}
+				Directory parentDirectory = fs.getDirectory(abs_path);// or should newDirectory.getParentDirectory();?
+				parentDirectory.addSubdirectory(newDirectory);
+				ArrayList<Directory> subdirectoriesList = parentDirectory.getListOfSubdirectories();
+				subdirectoriesList.add(newDirectory);	
 			}
-			else
-			{
-				abs_path = getAbsolutePath(newDirectory.getFullPathName(), newDirectory);
-			}
-			Directory parentDirectory = FileSystem.getDirectory(abs_path);// or should newDirectory.getParentDirectory();?
-			parentDirectory.addSubdirectory(newDirectory);
-			ArrayList<Directory> subdirectoriesList = parentDirectory.getListOfSubdirectories();
-			subdirectoriesList.add(newDirectory);	
+		}
+		else 
+		{
+			System.out.println("That is not a valid arguement");
+		}
+	}
+	private static boolean mkdirError(String newDirectories) {
+		if (newDirectories == "") 
+		{
+			return false;
+		}
+		else 
+		{
+			return true;
 		}
 	}
 	
@@ -80,16 +95,17 @@ public class Mkdir extends Command{
 		return newPathName;
 	}
 
-	@Override
-	public void execute(JShell shell, String path) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	protected String getDoc() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void execute(JShell shell, String path) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
