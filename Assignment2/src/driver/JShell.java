@@ -36,14 +36,14 @@ public class JShell
 	private FileSystem directoryTree;
 	private DirectoryStack directoryHistory;
 	private InputHistory userInputHistory;
-	private Exit exitStatus; 
+	private boolean exitStatus;
 	private Directory currentDirectory;
 	
 	public JShell() {
 		directoryTree = new FileSystem();
 		directoryHistory = new DirectoryStack();
 		userInputHistory = new InputHistory();
-		exitStatus = new Exit();
+		exitStatus = false;
 		currentDirectory = directoryTree.getRootDirectory();
 	}
 	
@@ -53,10 +53,9 @@ public class JShell
 	 * @param args Unused
 	 */
 	public static void main(String[] args) {
-	  //System.out.println("eqwew");
 		JShell newJShell = new JShell();
 		Scanner input = new Scanner(System.in);
-		while (!newJShell.exitStatus.exitCheck()) {
+		while (!newJShell.exitStatus) {
 			System.out.print(newJShell.currentDirectory.getFullPathName()+"# ");
 			String userInput = input.nextLine();
 			newJShell.userInputHistory.addToHistory(userInput);
@@ -109,5 +108,12 @@ public class JShell
 	 */
 	public void setCurrentDirectory(Directory newCurrent) {
 		this.currentDirectory = newCurrent;
+	}
+	
+	/**
+	 * Sets the JShell's exit status to true in order to terminate JShell
+	 */
+	public void exitShell() {
+		this.exitStatus = true;
 	}
 }
