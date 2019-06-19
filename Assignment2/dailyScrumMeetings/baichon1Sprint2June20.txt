@@ -1,0 +1,15 @@
+What did I work on in the last three days?
+    - Finished Verifiers. Changed our ideas and combined PrintVerifier and ManipulateVerifier into Verifiers.
+    - Did part of Command, still not done it.
+    - Updated Some CRC Cards
+    - As a group, brainStormed ideas for each class.
+
+What do I plan to work in the next three days?
+    - Finish up Command Class
+    - Implement Ls Class
+    - Implement Man Class
+
+Am I blocked on anything?
+    - Need time to study for other course, as for code, none of now.
+
+
