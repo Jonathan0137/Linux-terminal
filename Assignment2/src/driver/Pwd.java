@@ -1,10 +1,12 @@
+package driver;
+
 
 public class Pwd extends Command{
-	currentDirectory = JShell.getCurrentDirectory();
 	
-	public execute()
+	public void execute(JShell shell, String path)
 	{
-		String absPath = getAbsolutePath(currentDirectory.fullPathName, currentDirectory);
+		Directory currentDirectory = shell.getCurrentDirectory();
+		String absPath = getAbsolutePath(currentDirectory.getFullPathName(), currentDirectory);
 		System.out.println(absPath);
 	}
 	
@@ -27,5 +29,35 @@ public class Pwd extends Command{
 		}
 		  
 		return fullPathName;
+	}
+	
+	private static String moveToParentDirectory(String pathName) {
+		// Moves the pathName to the path name of the parent directory
+				    
+		if (pathName.equals("/")) {
+			return pathName;
+		}
+				    
+		String newPathName = pathName;
+				    
+		if (newPathName.charAt(newPathName.length() - 1) == '/') {
+			newPathName = newPathName.substring(0, newPathName.length() - 1);
+		}
+				    
+		for (int i = newPathName.length() - 1; i>=0; i--) {
+			if (newPathName.charAt(i) == '/') {
+					break;
+			}      
+			newPathName = newPathName.substring(0, i);
+		} 
+		return newPathName;
+	}
+
+	
+
+	@Override
+	protected String getDoc() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
