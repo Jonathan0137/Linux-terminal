@@ -1,12 +1,15 @@
+package driver;
+
 import java.nio.file.FileSystem;
+import java.util.ArrayList;
 
 public class Mkdir extends Command{
 	//currentDirectory = JShell.getCurrentDirectory();
 	//NOTE: code assumes "mkdir" isn't part of the string
-	public execute(String newDirectories) 
+	public void execute(String newDirectories) 
 	{
 		//split newDirectory into array of individual names of each new directory, and get length of the array
-		String[] directoryNames = newDirectories.split(" ");
+		String[] arguements = newDirectories.split(" ");
 		int numArguements = arguements.length;
 		
 		for (int i = 0; i < numArguements; i++) 
@@ -17,20 +20,21 @@ public class Mkdir extends Command{
 			// 3. Try to add the directory to the directory
 			
 			//add each directory name into the list of the subdirectories of currentDirectories
-			String abs_path = "";
 			Directory newDirectory = new Directory(arguements[i]);
-			if (getAbsolutePath(newDirectory.fullPathName, newDirectory) == arguements[i])
+			String abs_path;
+			if (getAbsolutePath(newDirectory.getFullPathName(), newDirectory) == arguements[i])
 			{
 				abs_path = arguements[i];
 			}
 			else
 			{
-				abs_path = getAbsolutePath(newDirectory.fullPathName, newDirectory);
+				abs_path = getAbsolutePath(newDirectory.getFullPathName(), newDirectory);
 			}
-			Directory parentDirectory = FileSystem.getDirectory(abs_path);// or should parentDirectory = newDirectory.getParentDirectory?
+			Directory parentDirectory = FileSystem.getDirectory(abs_path);// or should newDirectory.getParentDirectory();?
 			parentDirectory.addSubdirectory(newDirectory);
-			parentDirectory.listOfSubdirectories.add(newDirectory);	
-		}			
+			ArrayList<Directory> subdirectoriesList = parentDirectory.getListOfSubdirectories();
+			subdirectoriesList.add(newDirectory);	
+		}
 	}
 	
 	private static String getAbsolutePath(String input, Directory workingDir) {
@@ -74,6 +78,18 @@ public class Mkdir extends Command{
 			newPathName = newPathName.substring(0, i);
 		} 
 		return newPathName;
+	}
+
+	@Override
+	public void execute(JShell shell, String path) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected String getDoc() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
