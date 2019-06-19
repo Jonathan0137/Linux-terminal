@@ -3,10 +3,10 @@ package driver;
 import java.util.ArrayList;
 
 public class History extends Command {
-	private String manual;
 	
-	public History() { //TO COMPLETE
-		manual = "";
+	public History() { 
+		doc = "Displays user inputs, or given an extra integer parameter n,"
+				+ " will display the last n inputs";
 	}
 	
 	/**
@@ -29,9 +29,9 @@ public class History extends Command {
 		else {
 			if (History.historyCheck(splitInput[1],
 					shell.getInputHistory().getInputList())) {
-				for (int i=shell.getInputHistory().getInputList().size()-1; 
-						i>-1 && i>=shell.getInputHistory().getInputList().size()
-						-Integer.parseInt(splitInput[1]); i--) {
+				for (int i=shell.getInputHistory().getInputList().size()
+						-Integer.parseInt(splitInput[1]); i<
+						shell.getInputHistory().getInputList().size(); i++) {
 					System.out.print(i+1);
 					System.out.print(". ");
 					System.out.println(shell.
@@ -64,4 +64,7 @@ public class History extends Command {
 		}
 	}
 	
+	public String getDoc() {
+		return this.doc;
+	}
 }
