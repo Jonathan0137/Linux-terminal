@@ -1,24 +1,25 @@
 package driver;
 
-public class Exit {
-	private boolean status;
-	
+public class Exit extends Command {
+	/**
+	 * The constructor
+	 */
 	public Exit() {
-		status = false;
+		doc = "Terminates JShell and deletes all directories and files";
 	}
 	
 	/**
-	 * Sets exit status to true in order to notify JShell to exit
+	 * Terminates the JShell
 	 */
-	public void exitShell() {
-		this.status = true;
+	public void execute(JShell shell, String input) {
+		shell.exitShell();
 	}
 	
 	/**
-	 * Return the value of instance variable status 
-	 * @return this.status the status of JShell's exit condition
+	 * Returns the documentation associated with the exit command
+	 * @return this.doc the documentation of the exit command
 	 */
-	public boolean exitCheck() {
-		return this.status;
+	public String getDoc() {
+		return this.doc;
 	}
 }
