@@ -1,0 +1,11 @@
+What did I work on in the last three days?
+		- completed mkdir and pwd
+		-fixed bugs in mkdir and pwd
+
+What do I plan to work in the next three days?
+    	- brainstorm implementation of cat
+    	- begin writing code for cat
+    	- test mkdir and pwd 
+
+Am I blocked on anything?
+		- N/A
