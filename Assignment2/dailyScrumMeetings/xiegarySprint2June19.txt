@@ -1,0 +1,13 @@
+What did I work on in the last three days?
+	- I finished the majority of the code for all of the classes I was tasked with for last sprint:
+      - I worked on code for the following classes: Cd, Directory, DirectoryStack, Pushd, EchoToOutput, File, and FileSystem
+	- I discussed how to improve the CRC cards design with the rest of my team
+What do I plan to work in the next three days?
+	- I plan on finishing up and fixing bugs for the code for the classes I worked on last sprint
+	- I plan on working on the code for the Popd class
+	- I plan on writing JavaDocs for all the classes I have worked on
+	- I plan on writing a getDoc() method for each class I have worked on so that Man can access the class' documenetation
+Am I blocked on anything?
+	- Nothing at the moment
+
+
