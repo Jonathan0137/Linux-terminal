@@ -1,0 +1,8 @@
+What did I work on in the last three days?
+	-I have on and completed all the tasks allocated to me for sprint 1 (i.e JShell.java, Exit.java, InputHistory.java and History.java)
+
+What do I plan to work in the next three days?
+	-I plan on working on all the tasks allocated to me for sprint 2
+
+Am I blocked on anything?
+	-Nothing
