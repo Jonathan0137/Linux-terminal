@@ -55,7 +55,13 @@ public class EchoToFile extends Command {
 					.concat(path.split(" ")[2])); //ASK IF I NEED TO ADD A NEW LINE OR A SPACE OR SUM
 		}
 		
-		
+		else if (EchoToFile.echoToFileCheck(shell, path) == 6) {
+			shell.getCurrentDirectory().findFile(path.split(" ")
+					[path.split(" ").length-1])
+			.setContents(shell.getCurrentDirectory().findFile(path.split(" ")
+					[path.split(" ").length-1]).getContents().
+					concat(path.split(" ")[2]));
+		}
 	}
 
 	@Override
@@ -134,7 +140,7 @@ public class EchoToFile extends Command {
 								.findFile(outfileSplit[4]) != null) {
 							return 5;
 						}
-						else return 6; //i.e file dne
+						else return 2; //i.e file dne
 					}
 					else { //i.e path does not exist What do i do
 						System.out.println("echo: input path does not exist");
@@ -144,11 +150,11 @@ public class EchoToFile extends Command {
 				
 				else if (shell.getCurrentDirectory().findFile(input.
 						split(" ")[4]) != null) {
-					return 7; //i.e file exists
+					return 6; //i.e file exists
 				}
 				
 				else {
-					return 8; //i.e file dne
+					return 4; //i.e file dne
 				}
 			}
 		}
