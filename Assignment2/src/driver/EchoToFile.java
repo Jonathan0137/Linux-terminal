@@ -16,8 +16,8 @@ public class EchoToFile extends Command {
 	@Override
 	public void execute(JShell shell, String path) {
 		//String[] inputSplit = path.split(" ");
-		
-		if (EchoToFile.echoToFileCheck(shell, path) == 1) {
+		int inputCase = EchoToFile.echoToFileCheck(shell, path); 
+		if (inputCase == 1) {
 			String[] outfileSplit = path.split(" ")[4].split("/");
 			String realPath = "/";
 			for (int i=0; i<outfileSplit.length-2; i++) {
@@ -28,7 +28,7 @@ public class EchoToFile extends Command {
 			txtFile.setContents(path.split(" ")[2]);
 		}
 		
-		else if (EchoToFile.echoToFileCheck(shell, path) == 2) {
+		else if (inputCase == 2) {
 			String[] outfileSplit = path.split(" ")[4].split("/");
 			String realPath = "/";
 			for (int i=0; i<outfileSplit.length-2; i++) {
@@ -42,19 +42,19 @@ public class EchoToFile extends Command {
 			destination.addFile(txtFile);
 		}
 		
-		else if (EchoToFile.echoToFileCheck(shell, path) == 3) {
+		else if (inputCase == 3) {
 			shell.getCurrentDirectory().findFile(path.split(" ")
 					[path.split(" ").length-1]).setContents(path.split(" ")[2]);
 		}
 		
-		else if (EchoToFile.echoToFileCheck(shell, path) == 4) {
+		else if (inputCase == 4) {
 			File txtFile = new File(path.split(" ")[path.split(" ").length-1], 
 					path.split(" ")[2]);
 			shell.getCurrentDirectory().addFile(txtFile);
 			//ASK IF I NEED TO CHANGE FILE's FULL PATH N TINGZ USING METHODS IN FILE.JAVA
 		}
 		
-		else if (EchoToFile.echoToFileCheck(shell, path) == 5) {
+		else if (inputCase == 5) {
 			String[] outfileSplit = path.split(" ")[4].split("/");
 			String realPath = "/";
 			for (int i=0; i<outfileSplit.length-2; i++) {
@@ -66,7 +66,7 @@ public class EchoToFile extends Command {
 					.concat(path.split(" ")[2])); //ASK IF I NEED TO ADD A NEW LINE OR A SPACE OR SUM
 		}
 		
-		else if (EchoToFile.echoToFileCheck(shell, path) == 6) {
+		else if (inputCase == 6) {
 			shell.getCurrentDirectory().findFile(path.split(" ")
 					[path.split(" ").length-1])
 			.setContents(shell.getCurrentDirectory().findFile(path.split(" ")
