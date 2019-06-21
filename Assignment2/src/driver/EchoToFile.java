@@ -1,6 +1,6 @@
 package driver;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 public class EchoToFile extends Command {
 	
@@ -108,11 +108,11 @@ public class EchoToFile extends Command {
 			}
 			
 			String[] extractString = input.split("\"");
-			String[] echoInput = extractString[1].split(" ");
-			String[] optionalInput = extractString[3].split(" ");
-			ArrayList<String> inputIntoSections = null;
-			inputIntoSections.add(echoInput[1]);
-			inputIntoSections.add(extractString[2]);
+			String[] echoInput = extractString[0].split(" ");
+			String[] optionalInput = extractString[2].split(" ");
+			/*ArrayList<String> inputIntoSections = null;
+			inputIntoSections.add(echoInput[0]);
+			inputIntoSections.add(extractString[2]);*/
 			
 			if (echoInput.length != 1) {
 				System.out.println("echo: wrong order of arguments");
@@ -125,9 +125,9 @@ public class EchoToFile extends Command {
 				return -1;
 			}
 			
-			else if (optionalInput[1] == ">") {
-				if (optionalInput[2].split("/").length > 1) {
-					String[] outfileFullPath = optionalInput[2].split("/");
+			else if (optionalInput[0] == ">") {
+				if (optionalInput[1].split("/").length > 1) {
+					String[] outfileFullPath = optionalInput[1].split("/");
 					String path = "/";
 					for (int i=0; i<outfileFullPath.length-2; i++) {
 						path = path.concat(outfileFullPath[i] + "/");
@@ -157,9 +157,9 @@ public class EchoToFile extends Command {
 			}
 			
 			//NOW FOR ">>"
-			else if (optionalInput[1] == ">>") {
-				if (optionalInput[2].split("/").length > 1) {
-					String[] outfileFullPath = optionalInput[2].split("/");
+			else if (optionalInput[0] == ">>") {
+				if (optionalInput[1].split("/").length > 1) {
+					String[] outfileFullPath = optionalInput[1].split("/");
 					String path = "/";
 					for (int i=0; i<outfileFullPath.length-2; i++) {
 						path = path.concat(outfileFullPath[i] + "/");
