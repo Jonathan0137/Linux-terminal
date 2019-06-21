@@ -17,7 +17,7 @@ public class EchoToFile extends Command {
 	 */
 	@Override
 	public void execute(JShell shell, String path) {
-		//String[] inputSplit = path.split(" ");
+		
 		int inputCase = EchoToFile.echoToFileCheck(shell, path); 
 		if (inputCase == 1) {
 			String[] outfileSplit = path.split(" ")[4].split("/");
@@ -110,28 +110,29 @@ public class EchoToFile extends Command {
 			String[] extractString = input.split("\"");
 			String[] echoInput = extractString[0].split(" ");
 			String[] optionalInput = extractString[2].split(" ");
-			/*ArrayList<String> inputIntoSections = null;
-			inputIntoSections.add(echoInput[0]);
-			inputIntoSections.add(extractString[2]);*/
 			
 			if (echoInput.length != 1) {
 				System.out.println("echo: wrong order of arguments");
 				return -1;
 			}
 			
-			else if (optionalInput.length != 2) {
+			if (optionalInput.length != 3) {
 				System.out.println("echo: wrong number of "
 						+ "arguments for outfile");
 				return -1;
 			}
 			
-			else if (optionalInput[0] == ">") {
-				if (optionalInput[1].split("/").length > 1) {
-					String[] outfileFullPath = optionalInput[1].split("/");
+			if (optionalInput[1].equals(">")) { 
+				if (optionalInput[2].split("/").length > 1) {
+					String[] outfileFullPath = optionalInput[2].split("/");
 					String path = "/";
-					for (int i=0; i<outfileFullPath.length-2; i++) {
-						path = path.concat(outfileFullPath[i] + "/");
+					for (int i=0; i<outfileFullPath.length-1; i++) {
+						if (!outfileFullPath[i].equals("")) {
+							path = path.concat(outfileFullPath[i]);
+							path = path.concat("/");
+						}
 					}
+					System.out.println(path);
 					if (shell.getDirectoryTree().getDirectory(path) != null) {
 						if (shell.getDirectoryTree().getDirectory(path)
 								.findFile(outfileFullPath[outfileFullPath
@@ -157,12 +158,14 @@ public class EchoToFile extends Command {
 			}
 			
 			//NOW FOR ">>"
-			else if (optionalInput[0] == ">>") {
-				if (optionalInput[1].split("/").length > 1) {
-					String[] outfileFullPath = optionalInput[1].split("/");
+			if (optionalInput[1].equals(">>")) {
+				if (optionalInput[2].split("/").length > 1) {
+					String[] outfileFullPath = optionalInput[2].split("/");
 					String path = "/";
-					for (int i=0; i<outfileFullPath.length-2; i++) {
-						path = path.concat(outfileFullPath[i] + "/");
+					for (int i=0; i<outfileFullPath.length-1; i++) {
+						if (!outfileFullPath[i].equals("")) {
+							path = path.concat(outfileFullPath[i] + "/");
+						}
 					}
 					if (shell.getDirectoryTree().getDirectory(path) != null) {
 						if (shell.getDirectoryTree().getDirectory(path)
@@ -188,6 +191,7 @@ public class EchoToFile extends Command {
 				}
 			}
 		}
+		System.out.println("must have been a mistake somewhere, prolly indexing");
 		return -1;
 	}
 
