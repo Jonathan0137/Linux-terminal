@@ -1,5 +1,7 @@
 package driver;
 
+import java.util.ArrayList;
+
 public class EchoToFile extends Command {
 	
 	/**
@@ -93,13 +95,22 @@ public class EchoToFile extends Command {
 	 * @return int That tells execute() what option is used in Echo call
 	 */
 	public static int echoToFileCheck(JShell shell, String input) {
+		/*String[] extractString = input.split("\"");
+		String[] echoInput = extractString[1].split(" ");
+		String[] optionalInput = extractString[3].split(" ");
+		ArrayList<String> inputIntoSections = null;
+		inputIntoSections.add(echoInput[1]);
+		inputIntoSections.add(extractString[2]);
+		inputIntoSections.*/
+		/*for (int i=0; i<echoInput.length-1; i++) {
+			
+		}*/
+		
+		
+		
+		
 		if (input.split(" ").length < 4) {
 			System.out.println("echo: missing outfile or string arguments");
-			return -1;
-		}
-		
-		else if (input.split(" ").length > 4) {
-			System.out.println("echo: too many arguments");
 			return -1;
 		}
 		
@@ -109,26 +120,35 @@ public class EchoToFile extends Command {
 				return -1;
 			}
 			
-			else if (input.split(" ")[2].indexOf('\"', 0) != 0 && 
-					input.split(" ")[2].indexOf('\"', 
-							input.split(" ").length -1) != 
-							input.split(" ").length -1) {
-						System.out.println
-						("echo: order of arguments is invalid");
-						return -1;
+			String[] extractString = input.split("\"");
+			String[] echoInput = extractString[1].split(" ");
+			String[] optionalInput = extractString[3].split(" ");
+			ArrayList<String> inputIntoSections = null;
+			inputIntoSections.add(echoInput[1]);
+			inputIntoSections.add(extractString[2]);
+			
+			if (echoInput.length != 1) {
+				System.out.println("echo: wrong order of arguments");
+				return -1;
 			}
 			
-			else if (input.split(" ")[3] == ">") {
-				if (input.split(" ")[4].split("/").length > 2) {
-					String[] outfileSplit = input.split(" ")[4].split("/");
+			else if (optionalInput.length != 2) {
+				System.out.println("echo: wrong number of "
+						+ "arguments for outfile");
+				return -1;
+			}
+			
+			else if (optionalInput[1] == ">") {
+				if (optionalInput[2].split("/").length>1) {
+					String[] outfileFullPath = optionalInput[2].split("/");
 					String path = "/";
-					for (int i=0; i<outfileSplit.length-2; i++) {
-						path = path.concat(outfileSplit[i] + "/");
+					for (int i=0; i<outfileFullPath.length-2; i++) {
+						path = path.concat(outfileFullPath[i] + "/");
 					}
 					if (shell.getDirectoryTree().getDirectory(path) != null) {
 						if (shell.getDirectoryTree().getDirectory(path)
-								.findFile(outfileSplit[outfileSplit.length-1]) 
-								!= null) {
+								.findFile(outfileFullPath[outfileFullPath
+								                          .length-1]) != null) {
 							return 1;
 						}
 						else return 2; //i.e file dne
@@ -139,8 +159,8 @@ public class EchoToFile extends Command {
 					}
 				}
 				
-				else if (shell.getCurrentDirectory().findFile(input.
-						split(" ")[4]) != null) {
+				else if (shell.getCurrentDirectory().findFile(optionalInput[2])
+						!= null) {
 					return 3; //i.e file exists
 				}
 				
