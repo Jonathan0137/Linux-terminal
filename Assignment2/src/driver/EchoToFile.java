@@ -95,20 +95,7 @@ public class EchoToFile extends Command {
 	 * @return int That tells execute() what option is used in Echo call
 	 */
 	public static int echoToFileCheck(JShell shell, String input) {
-		/*String[] extractString = input.split("\"");
-		String[] echoInput = extractString[1].split(" ");
-		String[] optionalInput = extractString[3].split(" ");
-		ArrayList<String> inputIntoSections = null;
-		inputIntoSections.add(echoInput[1]);
-		inputIntoSections.add(extractString[2]);
-		inputIntoSections.*/
-		/*for (int i=0; i<echoInput.length-1; i++) {
-			
-		}*/
-		
-		
-		
-		
+
 		if (input.split(" ").length < 4) {
 			System.out.println("echo: missing outfile or string arguments");
 			return -1;
@@ -139,7 +126,7 @@ public class EchoToFile extends Command {
 			}
 			
 			else if (optionalInput[1] == ">") {
-				if (optionalInput[2].split("/").length>1) {
+				if (optionalInput[2].split("/").length > 1) {
 					String[] outfileFullPath = optionalInput[2].split("/");
 					String path = "/";
 					for (int i=0; i<outfileFullPath.length-2; i++) {
@@ -170,16 +157,17 @@ public class EchoToFile extends Command {
 			}
 			
 			//NOW FOR ">>"
-			else if (input.split(" ")[3] == ">>") {
-				if (input.split(" ")[4].split("/").length > 2) {
-					String[] outfileSplit = input.split(" ")[4].split("/");
+			else if (optionalInput[1] == ">>") {
+				if (optionalInput[2].split("/").length > 1) {
+					String[] outfileFullPath = optionalInput[2].split("/");
 					String path = "/";
-					for (int i=0; i<outfileSplit.length-2; i++) {
-						path = path.concat(outfileSplit[i] + "/");
+					for (int i=0; i<outfileFullPath.length-2; i++) {
+						path = path.concat(outfileFullPath[i] + "/");
 					}
 					if (shell.getDirectoryTree().getDirectory(path) != null) {
 						if (shell.getDirectoryTree().getDirectory(path)
-								.findFile(outfileSplit[4]) != null) {
+								.findFile(outfileFullPath[outfileFullPath
+								                          .length-1]) != null) {
 							return 5;
 						}
 						else return 2; //i.e file dne
@@ -190,8 +178,8 @@ public class EchoToFile extends Command {
 					}
 				}
 				
-				else if (shell.getCurrentDirectory().findFile(input.
-						split(" ")[4]) != null) {
+				else if (shell.getCurrentDirectory().findFile(optionalInput[2])
+						!= null) {
 					return 6; //i.e file exists
 				}
 				
