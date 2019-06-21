@@ -19,61 +19,56 @@ public class EchoToFile extends Command {
 	public void execute(JShell shell, String path) {
 		
 		int inputCase = EchoToFile.echoToFileCheck(shell, path); 
-		if (inputCase == 1) {
-			String[] outfileSplit = path.split(" ")[4].split("/");
-			String realPath = "/";
-			for (int i=0; i<outfileSplit.length-2; i++) {
-				realPath = realPath.concat(outfileSplit[i] + "/");
+		if (inputCase != -1) {
+			String[] extractString = path.split("\"");
+			String[] optionalInput = extractString[2].split(" ");
+			String[] outfileFullPath = optionalInput[2].split("/");
+			String fullPath = "/";
+			for (int i=0; i<outfileFullPath.length-1; i++) {
+				if (!outfileFullPath[i].equals("")) {
+					fullPath = path.concat(outfileFullPath[i]);
+					fullPath = path.concat("/");
+				}
 			}
-			File txtFile = shell.getDirectoryTree().getDirectory(realPath)
-					.findFile(outfileSplit[outfileSplit.length-1]);
-			txtFile.setContents(path.split(" ")[2]);
-		}
-		
-		else if (inputCase == 2) {
-			String[] outfileSplit = path.split(" ")[4].split("/");
-			String realPath = "/";
-			for (int i=0; i<outfileSplit.length-2; i++) {
-				realPath = realPath.concat(outfileSplit[i] + "/");
+			if (inputCase == 1) {
+				File txtFile = shell.getDirectoryTree().getDirectory(fullPath)
+						.findFile(outfileFullPath[outfileFullPath.length-1]);
+				txtFile.setContents(extractString[1]);
 			}
-			Directory destination = shell.getDirectoryTree()
-					.getDirectory(realPath);
-			File txtFile = new File(outfileSplit[outfileSplit.length-1], path.
-					split(" ")[2]); //create txtfile
-			//ASK IF I NEED TO CHANGE FILE's FULL PATH N TINGZ USING METHODS IN FILE.JAVA
-			destination.addFile(txtFile);
-		}
-		
-		else if (inputCase == 3) {
-			shell.getCurrentDirectory().findFile(path.split(" ")
-					[path.split(" ").length-1]).setContents(path.split(" ")[2]);
-		}
-		
-		else if (inputCase == 4) {
-			File txtFile = new File(path.split(" ")[path.split(" ").length-1], 
-					path.split(" ")[2]);
-			shell.getCurrentDirectory().addFile(txtFile);
-			//ASK IF I NEED TO CHANGE FILE's FULL PATH N TINGZ USING METHODS IN FILE.JAVA
-		}
-		
-		else if (inputCase == 5) {
-			String[] outfileSplit = path.split(" ")[4].split("/");
-			String realPath = "/";
-			for (int i=0; i<outfileSplit.length-2; i++) {
-				realPath = realPath.concat(outfileSplit[i] + "/");
+			
+			else if (inputCase == 2) {
+				Directory destination = shell.getDirectoryTree()
+						.getDirectory(fullPath);
+				File txtFile = new File(outfileFullPath
+						[outfileFullPath.length-1], extractString[1]);
+				//ASK IF I NEED TO CHANGE FILE's FULL PATH N TINGZ USING METHODS IN FILE.JAVA
+				destination.addFile(txtFile);
 			}
-			File txtFile = shell.getDirectoryTree().getDirectory(realPath)
-					.findFile(outfileSplit[outfileSplit.length-1]);
-			txtFile.setContents(txtFile.getContents()
-					.concat(path.split(" ")[2])); //ASK IF I NEED TO ADD A NEW LINE OR A SPACE OR SUM
-		}
-		
-		else if (inputCase == 6) {
-			shell.getCurrentDirectory().findFile(path.split(" ")
-					[path.split(" ").length-1])
-			.setContents(shell.getCurrentDirectory().findFile(path.split(" ")
-					[path.split(" ").length-1]).getContents().
-					concat(path.split(" ")[2]));
+			
+			else if (inputCase == 3) {
+				shell.getCurrentDirectory()
+				.findFile(optionalInput[2]).setContents(extractString[1]);
+			}
+			
+			else if (inputCase == 4) {
+				File txtFile = new File(optionalInput[2], extractString[1]);
+				shell.getCurrentDirectory().addFile(txtFile);
+				//ASK IF I NEED TO CHANGE FILE's FULL PATH N TINGZ USING METHODS IN FILE.JAVA
+			}
+			
+			else if (inputCase == 5) {
+				File txtFile = shell.getDirectoryTree().getDirectory(fullPath)
+						.findFile(outfileFullPath[outfileFullPath.length-1]);
+				txtFile.setContents(txtFile.getContents()
+						.concat(extractString[1])); //ASK IF I NEED TO ADD A NEW LINE OR A SPACE OR SUM
+			}
+			
+			else if (inputCase == 6) {
+				shell.getCurrentDirectory().findFile(optionalInput[2])
+				.setContents(shell.getCurrentDirectory()
+						.findFile(optionalInput[2])
+						.getContents().concat(extractString[1]));
+			}
 		}
 	}
 
@@ -132,7 +127,6 @@ public class EchoToFile extends Command {
 							path = path.concat("/");
 						}
 					}
-					System.out.println(path);
 					if (shell.getDirectoryTree().getDirectory(path) != null) {
 						if (shell.getDirectoryTree().getDirectory(path)
 								.findFile(outfileFullPath[outfileFullPath
@@ -191,7 +185,6 @@ public class EchoToFile extends Command {
 				}
 			}
 		}
-		System.out.println("must have been a mistake somewhere, prolly indexing");
 		return -1;
 	}
 
