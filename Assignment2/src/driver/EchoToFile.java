@@ -1,7 +1,18 @@
 package driver;
 
 public class EchoToFile extends Command {
-
+	
+	/**
+	 * The constructor
+	 */
+	public EchoToFile() {
+		doc = "Allows user to print onto shell, overwrite, add onto and create"
+				+ " new text files using an inputed string";
+	}
+	
+	/**
+	 * Creates or modifies text files that will contain the user input string
+	 */
 	@Override
 	public void execute(JShell shell, String path) {
 		//String[] inputSplit = path.split(" ");
@@ -64,12 +75,23 @@ public class EchoToFile extends Command {
 		}
 	}
 
-	@Override
+	/**
+	 * Returns the Echo command documentation
+	 * @return this.doc The documentation for the Echo
+	 */
 	protected String getDoc() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.doc;
 	}
 	
+	/**
+	 * Verifies that command call is valid, determines which valid case is 
+	 * related to the user input and returns an integer representation of that
+	 * case
+	 * @param shell An instance of the JShell 
+	 * @param input A string representation of a user input
+	 * @return int That tells execute() what option is used in Echo call
+	 */
 	public static int echoToFileCheck(JShell shell, String input) {
 		if (input.split(" ").length < 4) {
 			System.out.println("echo: missing outfile or string arguments");
