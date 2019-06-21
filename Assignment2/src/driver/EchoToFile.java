@@ -118,7 +118,7 @@ public class EchoToFile extends Command {
 			}
 			
 			if (optionalInput[1].equals(">")) { 
-				if (optionalInput[2].split("/").length > 1) {
+				if (optionalInput[2].split("/").length > 2) {
 					String[] outfileFullPath = optionalInput[2].split("/");
 					String path = "/";
 					for (int i=0; i<outfileFullPath.length-1; i++) {
@@ -153,7 +153,7 @@ public class EchoToFile extends Command {
 			
 			//NOW FOR ">>"
 			if (optionalInput[1].equals(">>")) {
-				if (optionalInput[2].split("/").length > 1) {
+				if (optionalInput[2].split("/").length > 2) {
 					String[] outfileFullPath = optionalInput[2].split("/");
 					String path = "/";
 					for (int i=0; i<outfileFullPath.length-1; i++) {
