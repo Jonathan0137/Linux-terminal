@@ -128,9 +128,10 @@ public class EchoToFile extends Command {
 						}
 					}
 					if (shell.getDirectoryTree().getDirectory(path) != null) {
-						if (shell.getDirectoryTree().getDirectory(path)
-								.findFile(outfileFullPath[outfileFullPath
-								                          .length-1]) != null) {
+						if (EchoToFile.findFileByName(shell.getDirectoryTree()
+								.getDirectory(path), 
+								outfileFullPath[outfileFullPath
+								                .length-1]) != null) {
 							return 1;
 						}
 						else return 2; //i.e file dne
@@ -141,8 +142,8 @@ public class EchoToFile extends Command {
 					}
 				}
 				
-				else if (shell.getCurrentDirectory().findFile(optionalInput[2])
-						!= null) {
+				else if (EchoToFile.findFileByName(shell.getCurrentDirectory(), 
+						optionalInput[2]) != null) {
 					return 3; //i.e file exists
 				}
 				
@@ -162,9 +163,10 @@ public class EchoToFile extends Command {
 						}
 					}
 					if (shell.getDirectoryTree().getDirectory(path) != null) {
-						if (shell.getDirectoryTree().getDirectory(path)
-								.findFile(outfileFullPath[outfileFullPath
-								                          .length-1]) != null) {
+						if (EchoToFile.findFileByName(shell.getDirectoryTree()
+								.getDirectory(path), 
+								outfileFullPath[outfileFullPath
+								                .length-1]) != null) {
 							return 5;
 						}
 						else return 2; //i.e file dne
@@ -175,8 +177,8 @@ public class EchoToFile extends Command {
 					}
 				}
 				
-				else if (shell.getCurrentDirectory().findFile(optionalInput[2])
-						!= null) {
+				else if (EchoToFile.findFileByName(shell.getCurrentDirectory(), 
+						optionalInput[2]) != null) {
 					return 6; //i.e file exists
 				}
 				
