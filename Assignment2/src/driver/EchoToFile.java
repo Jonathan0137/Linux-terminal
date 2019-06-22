@@ -31,8 +31,9 @@ public class EchoToFile extends Command {
 				}
 			}
 			if (inputCase == 1) {
-				File txtFile = shell.getDirectoryTree().getDirectory(fullPath)
-						.findFile(outfileFullPath[outfileFullPath.length-1]);
+				File txtFile = EchoToFile.findFileByName
+						(shell.getDirectoryTree().getDirectory(fullPath), 
+								outfileFullPath[outfileFullPath.length-1]);
 				txtFile.setContents(extractString[1]);
 			}
 			
@@ -42,32 +43,34 @@ public class EchoToFile extends Command {
 				File txtFile = new File(outfileFullPath
 						[outfileFullPath.length-1], extractString[1]);
 				//ASK IF I NEED TO CHANGE FILE's FULL PATH N TINGZ USING METHODS IN FILE.JAVA
-				destination.addFile(txtFile);
+				EchoToFile.addFile(destination, txtFile);
 			}
 			
 			else if (inputCase == 3) {
-				shell.getCurrentDirectory()
-				.findFile(optionalInput[2]).setContents(extractString[1]);
+				EchoToFile.findFileByName(shell.getCurrentDirectory(), 
+						optionalInput[2]).setContents(extractString[1]);
 			}
 			
 			else if (inputCase == 4) {
 				File txtFile = new File(optionalInput[2], extractString[1]);
-				shell.getCurrentDirectory().addFile(txtFile);
+				EchoToFile.addFile(shell.getCurrentDirectory(), txtFile);
 				//ASK IF I NEED TO CHANGE FILE's FULL PATH N TINGZ USING METHODS IN FILE.JAVA
 			}
 			
 			else if (inputCase == 5) {
-				File txtFile = shell.getDirectoryTree().getDirectory(fullPath)
-						.findFile(outfileFullPath[outfileFullPath.length-1]);
+				File txtFile = EchoToFile.findFileByName
+						(shell.getDirectoryTree().getDirectory(fullPath), 
+								outfileFullPath[outfileFullPath.length-1]);
 				txtFile.setContents(txtFile.getContents()
 						.concat(extractString[1])); //ASK IF I NEED TO ADD A NEW LINE OR A SPACE OR SUM
 			}
 			
 			else if (inputCase == 6) {
-				shell.getCurrentDirectory().findFile(optionalInput[2])
-				.setContents(shell.getCurrentDirectory()
-						.findFile(optionalInput[2])
-						.getContents().concat(extractString[1]));
+				EchoToFile.findFileByName(shell.getCurrentDirectory(), 
+						optionalInput[2]).setContents(EchoToFile.
+								findFileByName(shell.getCurrentDirectory(), 
+						optionalInput[2]).getContents()
+								.concat(extractString[1]));
 			}
 		}
 	}
