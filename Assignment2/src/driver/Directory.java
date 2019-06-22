@@ -7,9 +7,9 @@ public class Directory {
   
   // TODO: Transfer the add files to mkdir and same thing for files (for echotofile)
   
-  private String absolutePath; // Need to implement this
+  private String absolutePath;
   private String name;
-  private Directory parentDirectory; // This is necessary to access parent directory using commands such as Cd, right?
+  private Directory parentDirectory;
   private ArrayList<Directory> listOfSubdirectories;
   private ArrayList<File> listOfFiles;
   
@@ -73,15 +73,6 @@ public class Directory {
 //  // Methods to get and set name and parentDirectory
 //  // Methods to get listOfSubdirectories and listOfFiles
 //  
-//  public Directory findDirectory(String directoryName) {
-//    for (int i=0; i<listOfSubdirectories.size(); i++) {
-//      if (directoryName.equals(listOfSubdirectories.get(i).getName())) {
-//        return listOfSubdirectories.get(i);
-//      }
-//    }
-//    // Do I need to print an error message saying DIRECTORY NOT FOUND?
-//    return null;
-//  }
 //  
 //  public File findFile(String fileName) {
 //    for (int i=0; i<listOfFiles.size(); i++) {
@@ -89,9 +80,17 @@ public class Directory {
 //        return listOfFiles.get(i);
 //      }
 //    }
-//    // Do I need to print an error message saying DIRECTORY NOT FOUND?
 //    return null;
 //  }
+  
+  public Directory findDirectory(String directoryName) {
+    for (int i=0; i<listOfSubdirectories.size(); i++) {
+      if (directoryName.equals(listOfSubdirectories.get(i).getName())) {
+        return listOfSubdirectories.get(i);
+      }
+    }
+    return null;
+  }
   
   public void setName(String name) {
     this.name = name;
@@ -122,4 +121,5 @@ public class Directory {
   public ArrayList<File> getListOfFiles() {
     return listOfFiles;
   }  
+  
 }

@@ -3,6 +3,7 @@ package driver;
 public class Pushd extends Command {
   // TODO: Add Javadocs
   
+  @Override
   public String getDoc() {
     String documentation = "pushd: pushd DIR\n"
                          + "\tSaves the current directory by adding it to the end of the\n"
@@ -11,6 +12,7 @@ public class Pushd extends Command {
     return documentation;
   }
   
+  @Override
   public void execute(JShell shell, String input) {
         
     Cd changeDir = new Cd();
@@ -23,6 +25,9 @@ public class Pushd extends Command {
     // Only pushes the currentDir to stack if the input successfully changed the working directory
     if (currentDir != shell.getCurrentDirectory()) {
       directoryStack.getStack().add(currentDir);
+    }
+    else {
+      System.out.println("Pushd command was unsuccessful due to invalid path.");
     }
   }
 }
