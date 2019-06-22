@@ -188,9 +188,13 @@ public class EchoToFile extends Command {
 		return -1;
 	}
 
-	
-	public static void addFile(JShell shell, Directory target, File newFile) {
-		
+	/**
+	 * Adds a new file into a specified directory
+	 * @param target The target directory in which we want to add a new file
+	 * @param newFile The new file that is to be added into the target directory
+	 */
+	public static void addFile(Directory target, File newFile) {
+		target.getListOfFiles().add(newFile);
 	}
 	
 	/**
