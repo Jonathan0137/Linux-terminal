@@ -3,16 +3,17 @@ package driver;
 import java.util.ArrayList;
 
 public class Mkdir extends Command{
-	//currentDirectory = JShell.getCurrentDirectory();
 	//NOTE: code assumes "mkdir" isn't part of the string
-	public void execute(String newDirectories, FileSystem fs) 
+	Directory currentDirectory;
+	public void execute(JShell shell, String newDirectories, FileSystem fs) 
 	{
+		currentDirectory = shell.getCurrentDirectory();
 		if (!mkdirError(newDirectories)) {
 			//split newDirectory into array of individual names of each new directory, and get length of the array
-			String[] arguements = newDirectories.split(" ");
-			int numArguements = arguements.length;
+			String[] arguments = newDirectories.split(" ");
+			int numArguments = arguments.length;
 			
-			for (int i = 0; i < numArguements; i++) 
+			for (int i = 0; i < numArguments; i++) 
 			{
 				// For each argument:
 				// 1. Convert to absolute path (if necessary) and move to parent directory (use Cd method)
@@ -20,18 +21,18 @@ public class Mkdir extends Command{
 				// 3. Try to add the directory to the directory
 				
 				//add each directory name into the list of the subdirectories of currentDirectories
-				Directory newDirectory = new Directory(arguements[i]);
+				Directory newDirectory = new Directory(arguments[i]);
 				String abs_path;
-				if (getAbsolutePath(newDirectory.getFullPathName(), newDirectory) == arguements[i])
+				if (getAbsolutePath(newDirectory.getFullPathName(), newDirectory) == arguments[i])
 				{
-					abs_path = arguements[i];
+					abs_path = arguments[i];
 				}
 				else
 				{
 					abs_path = getAbsolutePath(newDirectory.getFullPathName(), newDirectory);
 				}
 				Directory parentDirectory = fs.getDirectory(abs_path);// or should newDirectory.getParentDirectory();?
-				parentDirectory.addSubdirectory(newDirectory);
+				addSubdirectory(newDirectory);
 				ArrayList<Directory> subdirectoriesList = parentDirectory.getListOfSubdirectories();
 				subdirectoriesList.add(newDirectory);	
 			}
@@ -93,6 +94,17 @@ public class Mkdir extends Command{
 			newPathName = newPathName.substring(0, i);
 		} 
 		return newPathName;
+	}
+	private void addSubdirectory(Directory subDirectory) {
+	//Add helper function to scan list for names
+		ArrayList<Directory> listOfSubdirectories = currentDirectory.getListOfSubdirectories();
+		if (listOfSubdirectories.contains(subDirectory)/*listOfSubdirectories.contains(subDirectory) */) { // Maybe use subDirectory.getName() if that's what is differentiating them, and also check listOfFiles since files and directories cannot have same name
+	      // Not sure if Directory class is responsible for printing this error?
+	      System.out.println("Error: Directory '" + subDirectory.getName() + "' already exists.");
+	      return;
+	    }
+	    subDirectory.setParentDirectory(currentDirectory);
+	    listOfSubdirectories.add(subDirectory);
 	}
 
 
