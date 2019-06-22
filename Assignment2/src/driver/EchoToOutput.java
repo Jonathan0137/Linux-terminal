@@ -1,10 +1,16 @@
 package driver;
 
 public class EchoToOutput extends Command {
-  // Required Parent Class: PrintCommand
   
-  // Should be @Override after PrintCommand is implemented
-  public void execute(String input) {
+  @Override
+  public String getDoc() {
+    // Has the same documentation as EchoToFile
+    EchoToFile etf = new EchoToFile();
+    return etf.getDoc();
+  }
+  
+  @Override 
+  public void execute(JShell shell, String input) {
     System.out.println(input);
   }
 }
