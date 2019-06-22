@@ -2,7 +2,21 @@ package driver;
 
 public class Man extends Command
 {
-  String doc = "";
+  @Override
+  public String getDoc() {
+    String documentation = "cd: cd DIR\n";
+//                         + "\tChange the shell's current directory to DIR.\n"
+//                         + "\tDIR must be a valid absolute or relative path name.\n\n"
+//                         + "\tIf DIR begins with a slash (/), then it is interpreted\n"
+//                         + "\tas an absolute path, starting from the root directory.\n"
+//                         + "\tOtherwise, it is interpreted as a relative path to the\n"
+//                         + "\tcurrent directory.\n\n"
+//                         + "\tThe root of the file system is a single slash (/).\n\n"
+//                         + "\t'..' represents the parent directory.\n"
+//                         + "\t'.' represents the current directory.\n";
+    return documentation;
+  }
+  
   public void execute(JShell shell ,String commandName)
   {
     String[] input = commandName.split(" ", 2);
@@ -53,8 +67,5 @@ public class Man extends Command
         System.out.println(man.getDoc());
     }
   }
-  public String getDoc()
-  {
-    return this.doc;
-  }
+
 }
