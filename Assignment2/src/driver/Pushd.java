@@ -17,8 +17,8 @@ public class Pushd extends Command {
   }
   
   /**
-   * Saves the current directory by adding it to the end of the JShell's directory stack.
-   * Then, changes the current directory to the directory specified by the user input.
+   * Saves the current working directory by adding it to the end of the JShell's directory stack.
+   * Then, changes the working directory to the directory specified by the user input.
    * 
    * @param shell   an instance of the JShell that is interacting with the user
    * @param input   a relative or absolute path name given by the user
