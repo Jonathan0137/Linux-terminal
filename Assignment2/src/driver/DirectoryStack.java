@@ -12,9 +12,4 @@ public class DirectoryStack {
   public LinkedList<Directory> getStack() {
     return directoryStack;
   }
-
-  // Need methods for:
-  // 1. Add to queue
-  // 2. remove from queue
-  // In Pushd and Popd respectively
 }

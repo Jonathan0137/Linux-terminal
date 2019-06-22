@@ -3,9 +3,11 @@ package driver;
 public class Cd extends Command {
   // TODO: Add Javadocs
 
+  @Override
   public String getDoc() {
-    String documentation = "cd :cd DIR\n"
-                         + "\tChange the shell's current directory to DIR.\n\n"
+    String documentation = "cd: cd DIR\n"
+                         + "\tChange the shell's current directory to DIR.\n"
+                         + "\tDIR must be a valid absolute or relative path name.\n\n"
                          + "\tIf DIR begins with a slash (/), then it is interpreted\n"
                          + "\tas an absolute path, starting from the root directory.\n"
                          + "\tOtherwise, it is interpreted as a relative path to the\n"
@@ -16,16 +18,9 @@ public class Cd extends Command {
     return documentation;
   }
   
+  @Override
   public void execute(JShell shell, String input) {
-    // Should return true or false based on whether or not workingDir was changed
-    // Change parameters to have 1 JShell parameter, which I can use to call workingDir and fs
     // NOTE: my code currently assumes that 'input' doesn't contain "cd" as part of the string, only what comes after
-    
-    // Implementation design:
-    // 1. Determine if input is a relative path or an absolute path
-    // 2. If relative, convert to absolute path
-    // 3. Find the directory in the File System. If nonexistent, output a descriptive error
-
     
     Directory workingDirectory = shell.getCurrentDirectory();
     FileSystem fs = shell.getDirectoryTree();
