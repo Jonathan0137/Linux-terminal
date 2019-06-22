@@ -1,17 +1,27 @@
 package driver;
 
-import java.util.LinkedList;
-
 public class Pushd extends Command {
-
-  public void execute(String input, JShell shell) {
+  // TODO: Add Javadocs
+  
+  public String getDoc() {
+    String documentation = "pushd: pushd DIR\n"
+                         + "\tSaves the current directory by adding it to the end of the\n"
+                         + "\tdirectory stack. Then, it changes the current directory to DIR.\n\n"
+                         + "\tDIR must be a valid absolute or relative path name.";
+    return documentation;
+  }
+  
+  public void execute(JShell shell, String input) {
         
     Cd changeDir = new Cd();
     Directory currentDir = shell.getCurrentDirectory();
     DirectoryStack directoryStack = shell.getDirectoryStack();
     
-    // Only pushes the currentDir to stack if the input was valid
-    if (changeDir.execute(input, shell)) {
+    // Change the working directory using Cd
+    changeDir.execute(shell, input);
+    
+    // Only pushes the currentDir to stack if the input successfully changed the working directory
+    if (currentDir != shell.getCurrentDirectory()) {
       directoryStack.getStack().add(currentDir);
     }
   }
