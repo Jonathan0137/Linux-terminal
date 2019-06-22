@@ -17,11 +17,12 @@ public class Pushd extends Command {
   }
   
   /**
-   * Saves the current working directory by adding it to the end of the JShell's directory stack.
-   * Then, changes the working directory to the directory specified by the user input.
+   * Saves the current working directory by adding it to the end of the JShell's directory stack
+   * and changes the working directory to the directory specified by the user input,
+   * if this specified directory exists.
    * 
    * @param shell   an instance of the JShell that is interacting with the user
-   * @param input   a relative or absolute path name given by the user
+   * @param input   a relative or absolute path name
    */
   @Override
   public void execute(JShell shell, String input) {

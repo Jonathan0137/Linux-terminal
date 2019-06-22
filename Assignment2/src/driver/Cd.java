@@ -1,8 +1,13 @@
 package driver;
 
 public class Cd extends Command {
-  // TODO: Add Javadocs
-
+  // TODO: Add Javadocs 
+  /**
+   * Returns a String containing the documentation 
+   * for the functionalities of the 'cd' command.
+   * 
+   * @return the documentation of the 'cd' command
+   */
   @Override
   public String getDoc() {
     String documentation = "cd: cd DIR\n"
@@ -18,6 +23,13 @@ public class Cd extends Command {
     return documentation;
   }
   
+  /**
+   * Changes the working directory to the directory specified 
+   * by the user's input, if it exists.
+   * 
+   * @param shell   an instance of the JShell that is interacting with the user
+   * @param input   a relative or absolute path name
+   */
   @Override
   public void execute(JShell shell, String input) {
     // NOTE: my code currently assumes that 'input' doesn't contain "cd" as part of the string, only what comes after
@@ -50,9 +62,15 @@ public class Cd extends Command {
     }
   }
   
+  /**
+   * Returns a String that is the absolute path version of the input, which
+   * could be an absolute or a relative path to the workingDir.
+   * 
+   * @param input       a relative or absolute path name
+   * @param workingDir  the current working directory
+   * @return            the absolute path version of the given input path name
+   */
   private static String getAbsolutePath(String input, Directory workingDir) {
-      // Helper function for when input is a relative path name;
-      // Converts relative path name to absolute path name
       String[] pathList = input.split("/");
       
       String fullPathName = workingDir.getFullPathName();
@@ -71,9 +89,16 @@ public class Cd extends Command {
       
       return fullPathName;
   }
-    
+  
+  /**
+   * Returns a string that is the given pathName with the last directory removed.
+   * In other words, returns the path name of the parent directory specified by pathName.
+   * If the pathName is the root directory's path, then returns pathName.
+   * 
+   * @param pathName a relative or absolute path name
+   * @return         the parent directory's path name
+   */
   private static String moveToParentDirectory(String pathName) {
-    // Moves the pathName to the path name of the parent directory
     
     if (pathName.equals("/")) {
       return pathName;
