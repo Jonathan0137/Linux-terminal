@@ -1,0 +1,12 @@
+What did I work on in the last three days?
+	- I created the Popd class and finished the execute() method
+	- I finished the getDoc() method for Popd, EchoToOutput, Cd, and Pushd
+	- I made some minor fixes to Cd, Pushd, and Directory
+	- I wrote Javadocs for Pushd, Popd, Cd, and EchoToOutput
+What do I plan to work in the next three days?
+    - I plan on finishing Javadocs for the rest of the classes I worked on
+	- I plan on cleaning up unnecessary comments and adding more useful comments to improve readability
+Am I blocked on anything?
+    - Nope, I am currently not blocked on anything
+
+
