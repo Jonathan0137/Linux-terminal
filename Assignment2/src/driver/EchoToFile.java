@@ -1,6 +1,6 @@
 package driver;
 
-//import java.util.ArrayList;
+import java.util.ArrayList;
 
 public class EchoToFile extends Command {
 	
@@ -188,4 +188,25 @@ public class EchoToFile extends Command {
 		return -1;
 	}
 
+	
+	public static void addFile(JShell shell, Directory target, File newFile) {
+		
+	}
+	
+	/**
+	 * Finds a file by name in a specific directory
+	 * @param location The target directory
+	 * @param fileName The name of the sought out file
+	 * @return fileList.get(i) The file with same name as fileName
+	 */
+	public static File findFileByName(Directory location, String fileName) {
+		ArrayList<File> fileList = location.getListOfFiles();
+		for (int i=0; i<fileList.size()-1;i++) {
+			if (fileList.get(i).getName().equals(fileName)) {
+				return fileList.get(i);
+			}
+		}
+		return null;
+	}
+	
 }
