@@ -80,11 +80,11 @@ public class Verifier
       System.out.println("bash cd: too many arguments");
       return false;
     }
-//    else if(command == "cd" && numOfArg == 1)
-//    {
-//      System.out.println("bash cd: not enought arguments");
-//      return false;
-//    }
+    else if(command == "cd" && numOfArg == 1)
+    {
+      System.out.println("bash cd: not enought arguments");
+      return false;
+    }
     // ls can have anynumer
     else if(command == "pwd" && numOfArg > 1)
     {
