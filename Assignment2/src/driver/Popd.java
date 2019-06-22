@@ -1,8 +1,12 @@
 package driver;
 
 public class Popd extends Command {
-  //TODO: Add Javadocs
- 
+  /**
+   * Returns a String containing the documentation 
+   * for the functionalities of the 'popd' command.
+   * 
+   * @return the documentation of the 'popd' command
+   */
  @Override
  public String getDoc() {
    String documentation = "popd: popd\n"
@@ -11,14 +15,19 @@ public class Popd extends Command {
                         + "\tReturns an error message if directory stack is empty.";
    return documentation;
  }
- 
+
+ /**   
+  * Removes the top directory from the JShell's directory stack
+  * and changes the working directory to it.
+  * 
+  * If the directory stack is empty, outputs an error message to the user.
+  * 
+  * @param shell an instance of the JShell that is interacting with the user
+  * @param input (unused, only here to override Command execute())
+  */
  @Override
  public void execute(JShell shell, String input) {
-   // Implementation design:
-   // 1. Access the DirectoryStack
-   // 2. If DirectoryStack is empty, then output an error message and return
-   // 3. Else, remove the first entry in it, and Cd into it
-   
+
    Cd changeDir = new Cd();
    DirectoryStack directoryStack = shell.getDirectoryStack();
    
