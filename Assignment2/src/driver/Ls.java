@@ -6,20 +6,21 @@ public class Ls extends Command
 {
   @Override
   public String getDoc() {
-    String documentation = "cd: cd DIR\n";
-//                         + "\tChange the shell's current directory to DIR.\n"
-//                         + "\tDIR must be a valid absolute or relative path name.\n\n"
-//                         + "\tIf DIR begins with a slash (/), then it is interpreted\n"
-//                         + "\tas an absolute path, starting from the root directory.\n"
-//                         + "\tOtherwise, it is interpreted as a relative path to the\n"
-//                         + "\tcurrent directory.\n\n"
-//                         + "\tThe root of the file system is a single slash (/).\n\n"
-//                         + "\t'..' represents the parent directory.\n"
-//                         + "\t'.' represents the current directory.\n";
+    String documentation = 
+        "ls [PATH ...]"
+        + "\n\tIf no paths are given, print the contents (file or directory) of the current"
+        + "\n\tdirectory, with a new line following each of the content (file or directory)."
+        + "\n\tOtherwise, for each path p, the order listed:"
+        + "\n\t\tIf p specifies a file, print p"
+        + "\n\t\tIf p specifies a directory, print p, a colon, then the contents of that"
+        + "\n\t\t\tdirectory, then an extra new line."
+        + "\n\t\tIf p does not exist, print a suitable message.";
+
     return documentation;
   }
   public void execute(JShell shell, String input) 
   {
+    input = input.replaceAll(" +", " ");
     String[] userInput = input.split(" ", 2);
     int numOfArg = userInput.length;
     Directory workingDir = shell.getCurrentDirectory();
