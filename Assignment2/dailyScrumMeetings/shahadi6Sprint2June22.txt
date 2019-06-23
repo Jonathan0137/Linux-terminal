@@ -1,0 +1,10 @@
+What did I work on in the last three days?
+		- creted class cat
+		-fixed errors in mkdir
+
+What do I plan to work in the next three days?
+    	- complete code for cat
+    	- test mkdir and pwd 
+
+Am I blocked on anything?
+		- N/A
