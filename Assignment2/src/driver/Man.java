@@ -4,16 +4,13 @@ public class Man extends Command
 {
   @Override
   public String getDoc() {
-    String documentation = "cd: cd DIR\n";
-//                         + "\tChange the shell's current directory to DIR.\n"
-//                         + "\tDIR must be a valid absolute or relative path name.\n\n"
-//                         + "\tIf DIR begins with a slash (/), then it is interpreted\n"
-//                         + "\tas an absolute path, starting from the root directory.\n"
-//                         + "\tOtherwise, it is interpreted as a relative path to the\n"
-//                         + "\tcurrent directory.\n\n"
-//                         + "\tThe root of the file system is a single slash (/).\n\n"
-//                         + "\t'..' represents the parent directory.\n"
-//                         + "\t'.' represents the current directory.\n";
+    String documentation = "\t\tMan: man CMD\n"
+                         + "\tPrint Print documentation for CMD.\n"
+                         + "\tCMD means commands that we use.\n"
+                         + "\tExample: man cat \n"
+                         + "\tList of all commands\n\n"
+                         + "\texit  mkdir   cd      ls    pwd\n"
+                         + "\tpushd popd    history cat   echo man \n";
     return documentation;
   }
   
@@ -30,27 +27,35 @@ public class Man extends Command
       case "mkdir":
         Mkdir mkdir = new Mkdir();
         System.out.println(mkdir.getDoc());
+        break;
       case "pwd":
         Pwd pwd = new Pwd();
         System.out.println(pwd.getDoc());
+        break;
       case "pushd":
         Pushd pushd = new Pushd();
         System.out.println(pushd.getDoc());
+        break;
       case "history":
         History history = new History();
         System.out.println(history.getDoc());
+        break;
       case "ls":
         Ls ls = new Ls();
         System.out.println(ls.getDoc());
+        break;
       case "exit":
         Exit exit = new Exit();
         System.out.println(exit.getDoc());
+        break;
       case "popd":
         Popd popd = new Popd();
         System.out.println(popd.getDoc());
-      case "cat":
-        Cat cat = new Cat();
-        System.out.println(cat.getDoc());
+        break;
+//      case "cat":
+//        Cat cat = new Cat();
+//        System.out.println(cat.getDoc());
+        //break;
       case "echo":
         if(commandName.contains(">"))
         {
@@ -62,9 +67,14 @@ public class Man extends Command
           EchoToOutput echo2 = new EchoToOutput();
           System.out.println(echo2.getDoc());
         }
+        break;
       case "man":
         Man man = new Man();
         System.out.println(man.getDoc());
+        break;
+      default:
+        System.out.println("No such CMD exist, check man man for more information");
+        break;
     }
   }
 

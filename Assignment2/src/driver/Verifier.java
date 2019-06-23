@@ -20,7 +20,7 @@ public class Verifier
   {
     if(userInput == "")
       return null;
-    //userInput = userInput.replaceAll("  ", " ");
+    userInput = userInput.replaceAll(" +", " ");
     String[] input = userInput.split(" ", 2);
     String command = input[0];
     switch(command)
@@ -41,8 +41,8 @@ public class Verifier
         return new Exit();
       case "popd":
         return new Popd();
-      case "cat":
-        return new Cat();
+//      case "cat":
+//        return new Cat();
       case "echo":
         if(userInput.contains(">"))
         {
@@ -61,8 +61,8 @@ public class Verifier
   }
   public boolean checkUserInput(String userInput)   //looking at the second part check the num of args
   {
-    
-    String[] input = userInput.split(" ", 10);
+    userInput = userInput.replaceAll(" +", " ");
+    String[] input = userInput.split(" ", 2);
     int numOfArg = input.length;
     String command=input[0];
     if(command == "exit" && numOfArg > 1)
