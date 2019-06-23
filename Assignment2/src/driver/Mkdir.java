@@ -5,7 +5,8 @@ import java.util.ArrayList;
 public class Mkdir extends Command{
 	//NOTE: code assumes "mkdir" isn't part of the string
 	Directory currentDirectory;
-	public void execute(JShell shell, String newDirectories, FileSystem fs) 
+	FileSystem fs;
+	public void execute(JShell shell, String newDirectories) 
 	{
 		currentDirectory = shell.getCurrentDirectory();
 		if (!mkdirError(newDirectories)) {
@@ -114,11 +115,6 @@ public class Mkdir extends Command{
 		return null;
 	}
 
-	@Override
-	public void execute(JShell shell, String path) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	
 }
