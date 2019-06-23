@@ -1,0 +1,8 @@
+What did I work on in the last three days?
+	-I Created the EchoToFile class, the echoToFileCheck() method. I have completed all the methods and functions of this class and have begun lightly testing my code
+
+What do I plan to work in the next three days?
+	-I plan on rigorously testing my code, meeting up with the team or post piazza questions to cement my understanding of my command
+
+Am I blocked on anything?
+	-I do not know exactly how some of FileSystem and Directory classes methods work and as such cannot fully debug my code as I use these methods 
