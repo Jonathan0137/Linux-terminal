@@ -1,0 +1,12 @@
+What did I work on in the last three days?
+    - Finished Ls and Man class.
+    - Had a rough reading week, pretty much spend all the time studying for other course's midterm, but finished my task for this week.
+
+What do I plan to work in the next three days?
+    - Test and Debug my code.
+    - add javadoc for my code.
+
+Am I blocked on anything?
+    - Need time to study for other course, as for code, none of now.
+
+
