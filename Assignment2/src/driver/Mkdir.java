@@ -3,13 +3,14 @@ package driver;
 import java.util.ArrayList;
 
 public class Mkdir extends Command{
-	//NOTE: code assumes "mkdir" isn't part of the string
+	//NOTE: code assumes "mkdir" isn't part of the string newDirectories
 	Directory currentDirectory;
-	FileSystem fs;
+	
+	@Override
 	public void execute(JShell shell, String newDirectories) 
 	{
 		currentDirectory = shell.getCurrentDirectory();
-		if (!mkdirError(newDirectories)) {
+		FileSystem fs = shell.getDirectoryTree();
 			//split newDirectory into array of individual names of each new directory, and get length of the array
 			String[] arguments = newDirectories.split(" ");
 			int numArguments = arguments.length;
@@ -19,12 +20,25 @@ public class Mkdir extends Command{
 				// For each argument:
 				// 1. Convert to absolute path (if necessary) and move to parent directory (use Cd method)
 				// 2. Use FileSystem.getDirectory(abs_path) to go to the parent directory
-				// 3. Try to add the directory to the directory
+				// 3. Try to add the directory to the parent directory
 				
 				//add each directory name into the list of the subdirectories of currentDirectories
-				Directory newDirectory = new Directory(arguments[i]);
 				String abs_path;
-				if (getAbsolutePath(newDirectory.getFullPathName(), newDirectory) == arguments[i])
+				Directory newDirectory;
+				if (arguments[i].indexOf("/") > 0) 
+				{
+					abs_path = arguments[i];
+					String path[] = arguments[i].split("/");
+					newDirectory = new Directory(path[path.length - 1]);
+				}
+				else 
+				{
+					newDirectory = new Directory(arguments[i]);
+					addSubdirectory(currentDirectory, newDirectory);
+					currentDirectory.getListOfSubdirectories().add(newDirectory);
+				}
+				
+				/*if (getAbsolutePath(newDirectory.getFullPathName(), newDirectory) == arguments[i])
 				{
 					abs_path = arguments[i];
 				}
@@ -32,28 +46,12 @@ public class Mkdir extends Command{
 				{
 					abs_path = getAbsolutePath(newDirectory.getFullPathName(), newDirectory);
 				}
-				Directory parentDirectory = fs.getDirectory(abs_path);// or should newDirectory.getParentDirectory();?
+				Directory parentDirectory = fs.getDirectory(abs_path);
 				addSubdirectory(newDirectory);
 				ArrayList<Directory> subdirectoriesList = parentDirectory.getListOfSubdirectories();
-				subdirectoriesList.add(newDirectory);	
+				subdirectoriesList.add(newDirectory);	*/
 			}
-		}
-		else 
-		{
-			System.out.println("That is not a valid arguement");
-		}
 	}
-	private static boolean mkdirError(String newDirectories) {
-		if (newDirectories == "") 
-		{
-			return false;
-		}
-		else 
-		{
-			return true;
-		}
-	}
-	
 	private static String getAbsolutePath(String input, Directory workingDir) {
 		// Helper function for when input is a relative path name;
 		// Converts relative path name to absolute path name
@@ -96,16 +94,24 @@ public class Mkdir extends Command{
 		} 
 		return newPathName;
 	}
-	private void addSubdirectory(Directory subDirectory) {
-	//Add helper function to scan list for names
-		ArrayList<Directory> listOfSubdirectories = currentDirectory.getListOfSubdirectories();
-		if (listOfSubdirectories.contains(subDirectory)/*listOfSubdirectories.contains(subDirectory) */) { // Maybe use subDirectory.getName() if that's what is differentiating them, and also check listOfFiles since files and directories cannot have same name
-	      // Not sure if Directory class is responsible for printing this error?
-	      System.out.println("Error: Directory '" + subDirectory.getName() + "' already exists.");
-	      return;
-	    }
-	    subDirectory.setParentDirectory(currentDirectory);
-	    listOfSubdirectories.add(subDirectory);
+	public void addSubdirectory(Directory parentDirectory, Directory subDirectory) {
+		ArrayList<Directory> listOfSubdirectories = parentDirectory.getListOfSubdirectories();
+		if (containsName(listOfSubdirectories, subDirectory)) {
+			System.out.println("The name '" + subDirectory.getName() + "' already exists in this directory.");
+			return;
+		}
+		subDirectory.setParentDirectory(parentDirectory);
+		listOfSubdirectories.add(subDirectory);
+	}
+	 
+	private static boolean containsName(ArrayList<Directory> listOfDirectories, Directory subDirectory) {   
+		String subDirName = subDirectory.getName();
+		for (int i=0; i<listOfDirectories.size(); i++) {
+			if (listOfDirectories.get(i).getName().equals(subDirName)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 
