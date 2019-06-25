@@ -15,7 +15,7 @@ public class Mkdir extends Command{
 			String[] arguments = newDirectories.split(" ");
 			int numArguments = arguments.length;
 			
-			for (int i = 0; i < numArguments; i++) 
+			for (int i = 1; i < numArguments; i++) 
 			{
 				// For each argument:
 				// 1. Convert to absolute path (if necessary) and move to parent directory (use Cd method)
@@ -35,7 +35,6 @@ public class Mkdir extends Command{
 				{
 					newDirectory = new Directory(arguments[i]);
 					addSubdirectory(currentDirectory, newDirectory);
-					currentDirectory.getListOfSubdirectories().add(newDirectory);
 				}
 				
 				/*if (getAbsolutePath(newDirectory.getFullPathName(), newDirectory) == arguments[i])
