@@ -1,8 +1,6 @@
 package driver;
 
-public class File {
-  //TODO: Complete JavaDocs and add comments
-  
+public class File { 
   // Absolute path name of the File
   private String absolutePath;
   // Name of the File
