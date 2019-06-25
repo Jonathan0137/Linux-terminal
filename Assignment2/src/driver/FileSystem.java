@@ -1,28 +1,28 @@
 package driver;
 
 public class FileSystem {
-  // TODO: Complete JavaDocs and add comments
-  
-  
   // Tracks information about the entire file system via the root Directory
   private Directory root;
   
+  /**
+   * Constructor for create a new FileSystem.
+   */
   public FileSystem() {
     root = new Directory("");
   }
   
-  // Not sure if there will ever be this case: it is unsafe since if root is changed, then we lose FileSystem
-  public FileSystem(Directory root) {
-    this.root = root;
-  }
-  
-  public Directory getDirectory(String fullPathName) //find direc
-  {
+  /**
+   * Returns the directory in the file system with the given absolute path name
+   * if it exists, otherwise returns null.
+   * 
+   * @param fullPathName    the absolute path name of a directory in the file system
+   * @return the directory with the given absolute path name
+   */
+  public Directory getDirectory(String fullPathName) {
     Directory traversalDirectory = root;
     String[] nameList = fullPathName.split("/");
     
     for (int i=0; i<nameList.length; i++) {
-      // Bug with String.split that includes an empty string if you start path name with "/"
       if (nameList[i].equals("")) {
         continue;
       }
@@ -34,6 +34,11 @@ public class FileSystem {
     return traversalDirectory;
   }
 
+  /**
+   * Returns the root directory of the FileSystem.
+   * 
+   * @return the FileSystem's root directory
+   */
   public Directory getRootDirectory() {
     return root;
   }
