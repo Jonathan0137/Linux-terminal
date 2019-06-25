@@ -22,6 +22,14 @@ public class EchoToOutput extends Command {
    */
   @Override 
   public void execute(JShell shell, String input) {
+    String[] inputSplit = input.split(" ", 2);
+    if (inputSplit.length < 2) {
+      System.out.println();
+      return;
+    }
+    // Ignore the 'echo' part of the input
+    input = inputSplit[1];
+    
     System.out.println(input);
   }
 }

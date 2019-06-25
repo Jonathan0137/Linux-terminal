@@ -33,6 +33,7 @@ public class Cd extends Command {
   public void execute(JShell shell, String input) {
     String[] inputSplit = input.split(" ", 2);
     if (inputSplit.length < 2) {
+      System.out.println("Cd is missing an argument: requires a relative or absolute path.");
       return;
     }
     // Ignore the 'cd' part of the input
