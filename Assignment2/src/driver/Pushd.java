@@ -26,7 +26,16 @@ public class Pushd extends Command {
    */
   @Override
   public void execute(JShell shell, String input) {
-        
+    
+    String[] inputSplit = input.split(" ", 2);
+    if (inputSplit.length < 2) {
+      System.out.println("Pushd is missing an argument: requires a relative or absolute path.");
+      return;
+    }
+    // Ignore the 'pushd' part of the input
+    input = inputSplit[1];    
+    
+    
     Cd changeDir = new Cd();
     Directory currentDir = shell.getCurrentDirectory();
     DirectoryStack directoryStack = shell.getDirectoryStack();
