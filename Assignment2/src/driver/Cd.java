@@ -31,7 +31,12 @@ public class Cd extends Command {
    */
   @Override
   public void execute(JShell shell, String input) {
-    // NOTE: my code currently assumes that 'input' doesn't contain "cd" as part of the string, only what comes after
+    String[] inputSplit = input.split(" ", 2);
+    if (inputSplit.length < 2) {
+      return;
+    }
+    // Ignore the 'cd' part of the input
+    input = inputSplit[1];
     
     Directory workingDirectory = shell.getCurrentDirectory();
     FileSystem fs = shell.getDirectoryTree();
