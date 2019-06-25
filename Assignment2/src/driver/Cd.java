@@ -1,7 +1,6 @@
 package driver;
 
 public class Cd extends Command {
-  // TODO: Add Javadocs 
   /**
    * Returns a String containing the documentation 
    * for the functionalities of the 'cd' command.
@@ -70,7 +69,8 @@ public class Cd extends Command {
    * @param workingDir  the current working directory
    * @return            the absolute path version of the given input path name
    */
-  private static String getAbsolutePath(String input, Directory workingDir) {
+  // Change this to public for now so other classes can access, transfer this method to Command
+  public static String getAbsolutePath(String input, Directory workingDir) {
       String[] pathList = input.split("/");
       
       String fullPathName = workingDir.getFullPathName();
