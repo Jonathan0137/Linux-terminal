@@ -108,10 +108,10 @@ public class Mkdir extends Command{
 		String subDirName = subDirectory.getName();
 		for (int i=0; i<listOfDirectories.size(); i++) {
 			if (listOfDirectories.get(i).getName().equals(subDirName)) {
-				return false;
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 
 
