@@ -1,0 +1,8 @@
+What did I work on in the last three days?
+	-I have tested and worked on debugging EchoToFile class (90% done)
+
+What do I plan to work in the next three days?
+	-I plan on testing all my code from sprints 1 and 2, fixing any issues in JShell, Exit, History, EchoToFile and fixing validation errors in history command functionality 
+
+Am I blocked on anything?
+	-I am currently not blocked on anything
