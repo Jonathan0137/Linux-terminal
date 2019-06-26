@@ -16,9 +16,7 @@ public class Man extends Command
   
   public void execute(JShell shell ,String commandName)
   {
-    String[] input = commandName.split(" ", 2);
-    String docClass = input[1];
-    switch(docClass)
+    switch(commandName)
     {
       case "cd":
         Cd cd = new Cd();
@@ -57,16 +55,8 @@ public class Man extends Command
 //        System.out.println(cat.getDoc());
         //break;
       case "echo":
-        if(commandName.contains(">"))
-        {
-          EchoToFile echo1 = new EchoToFile();
-          System.out.println(echo1.getDoc());
-        }
-        else
-        {
           EchoToOutput echo2 = new EchoToOutput();
           System.out.println(echo2.getDoc());
-        }
         break;
       case "man":
         Man man = new Man();
