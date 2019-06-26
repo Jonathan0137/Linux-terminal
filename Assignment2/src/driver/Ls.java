@@ -40,7 +40,6 @@ public class Ls extends Command
     {
       if(userInput[1].isEmpty()==true)
       {
-      
         for(File file  : workingDir.getListOfFiles())
         {
           System.out.println(file.getName());
@@ -72,12 +71,10 @@ public class Ls extends Command
         }
         else if(Ls.findFile(userInput[1], workingDir)!=null)
         {
-         //userinput[1] is a File, then print userInput[1]
           System.out.println(userInput[1]);
         }
         else
         {
-          //userinput[1] is invalid.
           System.out.println("No such file or directory");
         }
       }
