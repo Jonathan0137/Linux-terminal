@@ -3,13 +3,19 @@ package driver;
 import java.util.ArrayList;
 
 public class Mkdir extends Command{
-	//NOTE: code assumes "mkdir" isn't part of the string newDirectories
-	Directory currentDirectory;
+	//NOTE: code assumes "mkdir" is part of the string newDirectories
 	
+	/**
+	  * Creates a new directory in either the current directory if a path is not given,
+	  * or creates the directory in the path if it is given
+	  * 
+	  * @param shell   an instance of the JShell that is interacting with the user
+	  * @param newDirectories   a list of absolute path names or directory names
+	  */
 	@Override
 	public void execute(JShell shell, String newDirectories) 
 	{
-		currentDirectory = shell.getCurrentDirectory();
+		Directory currentDirectory = shell.getCurrentDirectory();
 		FileSystem fs = shell.getDirectoryTree();
 			//split newDirectory into array of individual names of each new directory, and get length of the array
 			String[] arguments = newDirectories.split(" ");
@@ -17,82 +23,31 @@ public class Mkdir extends Command{
 			
 			for (int i = 1; i < numArguments; i++) 
 			{
-				// For each argument:
-				// 1. Convert to absolute path (if necessary) and move to parent directory (use Cd method)
-				// 2. Use FileSystem.getDirectory(abs_path) to go to the parent directory
-				// 3. Try to add the directory to the parent directory
-				
-				//add each directory name into the list of the subdirectories of currentDirectories
-				String abs_path;
 				Directory newDirectory;
-				if (arguments[i].indexOf("/") > 0) 
+				if (arguments[i].indexOf("/") >= 0) 
 				{
-					abs_path = arguments[i];
-					String path[] = arguments[i].split("/");
-					newDirectory = new Directory(path[path.length - 1]);
+					String splitArguments[] = arguments[i].split("/");
+					String pathNewDir = splitArguments[splitArguments.length - 1];
+					newDirectory = new Directory(pathNewDir);
+					String pathParentDir = arguments[i].replace("/" + pathNewDir, "");
+					
+					Directory parentDirectory = fs.getDirectory(pathParentDir);
+					addSubdirectory(parentDirectory, newDirectory);
 				}
 				else 
 				{
 					newDirectory = new Directory(arguments[i]);
 					addSubdirectory(currentDirectory, newDirectory);
 				}
-				
-				/*if (getAbsolutePath(newDirectory.getFullPathName(), newDirectory) == arguments[i])
-				{
-					abs_path = arguments[i];
-				}
-				else
-				{
-					abs_path = getAbsolutePath(newDirectory.getFullPathName(), newDirectory);
-				}
-				Directory parentDirectory = fs.getDirectory(abs_path);
-				addSubdirectory(newDirectory);
-				ArrayList<Directory> subdirectoriesList = parentDirectory.getListOfSubdirectories();
-				subdirectoriesList.add(newDirectory);	*/
 			}
-	}
-	private static String getAbsolutePath(String input, Directory workingDir) {
-		// Helper function for when input is a relative path name;
-		// Converts relative path name to absolute path name
-		String[] pathList = input.split("/");  
-		String fullPathName = workingDir.getFullPathName();
-		  
-		for (int i=0; i<pathList.length; i++) {
-			if (pathList[i].equals(".") || pathList[i].equals("")) {
-				continue;
-			}
-			else if (pathList[i].equals("..")) {
-				fullPathName = moveToParentDirectory(fullPathName);
-			}
-			else {
-				fullPathName = fullPathName + pathList[i] + "/";
-			}
-		}
-		  
-		return fullPathName;
 	}
 	
-	private static String moveToParentDirectory(String pathName) {
-		// Moves the pathName to the path name of the parent directory
-				    
-		if (pathName.equals("/")) {
-			return pathName;
-		}
-				    
-		String newPathName = pathName;
-				    
-		if (newPathName.charAt(newPathName.length() - 1) == '/') {
-			newPathName = newPathName.substring(0, newPathName.length() - 1);
-		}
-				    
-		for (int i = newPathName.length() - 1; i>=0; i--) {
-			if (newPathName.charAt(i) == '/') {
-					break;
-			}      
-			newPathName = newPathName.substring(0, i);
-		} 
-		return newPathName;
-	}
+	/**
+	  * Adds the subDirectory into the parent directory
+	  * 
+	  * @param parentDirectory   the directory the user is adding into
+	  * @param subDirectory   the directory that is being added by the user
+	  */
 	public void addSubdirectory(Directory parentDirectory, Directory subDirectory) {
 		ArrayList<Directory> listOfSubdirectories = parentDirectory.getListOfSubdirectories();
 		if (containsName(listOfSubdirectories, subDirectory)) {
@@ -103,6 +58,13 @@ public class Mkdir extends Command{
 		listOfSubdirectories.add(subDirectory);
 	}
 	 
+	
+	/**
+	  * Checks if the directory the user is attempting to create is already in the parent Directory
+	  * 
+	  * @param listOfDirectories   the list of subdirectories that already exist in the parent
+	  * @param subDirectory   the directory that the user is attempting to add
+	  */
 	private static boolean containsName(ArrayList<Directory> listOfDirectories, Directory subDirectory) {   
 		String subDirName = subDirectory.getName();
 		for (int i=0; i<listOfDirectories.size(); i++) {
@@ -113,11 +75,22 @@ public class Mkdir extends Command{
 		return false;
 	}
 
-
+	/**
+	  * Returns a String containing the documentation 
+	  * for the functionalities of the 'mkdir' command.
+	  * 
+	  * @return the documentation of the 'mkdir' command
+	  */
 	@Override
 	protected String getDoc() {
-		// TODO Auto-generated method stub
-		return null;
+		String documentation = "mkdir: mkdir DIR...\n"
+   			 				 + "\tCreate new directories\n"
+   			 				 + "\tDIR must be a valid absolute path name or the name of the new directory.\n\n"
+   			 				 + "\tIf DIR begins with a slash (/), then it is interpreted\n"
+   			 				 + "\tas an absolute path, starting from the root directory.\n"
+   			 				 + "\tOtherwise, it is interpreted as a relative path to the\n"
+   			 				 + "\tcurrent directory.\n\n";
+		return documentation; 
 	}
 
 	
