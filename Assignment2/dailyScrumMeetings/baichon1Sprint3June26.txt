@@ -7,5 +7,5 @@ What do I plan to work in the next three days?
     - Disscus with teammate about the input that exctute will receive and will make changes to my code base on the result of the meeting.
 
 Am I blocked on anything?
-    - Couldn't test our code without Mkdir. Waiting for Mkdir to work.
+    - None
 
