@@ -2,15 +2,18 @@
 June 27 to July 4
 
 User Stories from Product Backlog that we will address in this sprint:
-a)
+- This week, the tasks are not really based on user stories (since we are pretty much finished all of our user stories)
 
 Specific tasks to be accomplished:
-a-1.
+a-1. Writing tests to ensure the program is behaving as expected, and considering edge cases
+a-2. Debugging potential bugs to ensure the pronblem is functioning properly
+a-3. Moving methods from FileSystem and Directory to Command to better follow SRP
+
 
 These tasks are assignment as follows:
 
 User: Gary Xie
-Tasks:
+Tasks: a-1, a-2, a-3
 
 User: Tom Daudelin
 Tasks:
