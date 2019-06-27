@@ -10,7 +10,12 @@ a-2. Debugging potential bugs to ensure the pronblem is functioning properly
 a-3. Moving methods from FileSystem and Directory to Command to better follow SRP
 b-1. Debugging my code to make sure that there is no error in the system.
 b-2. Adding Java docs to my code.
-
+c-1. Complete echo command
+c-2. Test echo command
+c-3. Fix history command
+c-4. Test history command
+c-5. Test and fix any potential bugs related to JShell
+c-6. Test and fix any potential bugs related to exit command
 
 
 These tasks are assignment as follows:
@@ -19,7 +24,7 @@ User: Gary Xie
 Tasks: a-1, a-2, a-3
 
 User: Tom Daudelin
-Tasks:
+Tasks: c-1, c-2, c-3, c-4, c-5, c-6
 
 User: Chongmin Bai
 Tasks: b-1, b-2
