@@ -16,6 +16,9 @@ c-3. Fix history command
 c-4. Test history command
 c-5. Test and fix any potential bugs related to JShell
 c-6. Test and fix any potential bugs related to exit command
+d-1. Test and fix potential bugs in pwd
+d-2. Test and fix potential bugs in mkdir
+d-3. Test and fix potential bugs in cat
 
 
 These tasks are assignment as follows:
@@ -30,6 +33,6 @@ User: Chongmin Bai
 Tasks: b-1, b-2
 
 User: Adil Shah
-Tasks:
+Tasks: d-1, d-2, d-3
 
 // NOTE: Done all user stories, all that's left is testing/debugging/refactoring code, how do we write these as tasks? Since tasks are supposed to be based off user stories.
