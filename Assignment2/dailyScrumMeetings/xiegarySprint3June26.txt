@@ -1,0 +1,12 @@
+What did I work on in the last three days?
+	- I finished Javadocs/comments for File, FileSystem, Directory, and DirectoryStack
+	- I helped my teammates debug issues with their code
+	- I made some minor changes for how Cd, Pushd, and EchoToOutput read the user input
+What do I plan to work in the next three days?
+    - Writing tests to ensure that classes are functioning properly, and considering edge cases
+	- Refactoring code and moving some methods to different classes to improve design
+	- Debugging the code
+Am I blocked on anything?
+    - Nothing at the moment
+
+
