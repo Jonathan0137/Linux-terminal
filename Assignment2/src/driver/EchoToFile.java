@@ -33,6 +33,14 @@ public class EchoToFile extends Command {
 					fullPath = path.concat("/");
 				}
 			}
+			if (path.charAt(0) == '/') {
+				path = Cd.getAbsolutePath(path, 
+						shell.getDirectoryTree().getRootDirectory());
+			}
+			if (path.charAt(0) != '/') {	
+			path = Cd.getAbsolutePath(path, 
+					shell.getCurrentDirectory());
+			}
 			if (inputCase == 1) {
 				File txtFile = EchoToFile.findFileByName
 						(Command.findDirectory(shell.getDirectoryTree(), fullPath),
