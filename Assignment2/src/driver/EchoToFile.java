@@ -145,11 +145,11 @@ public class EchoToFile extends Command {
 						}
 					}
 					if (path.charAt(0) == '/') {
-						path = Cd.getAbsolutePath(path, 
+						path = Command.getAbsolutePath(path, 
 								shell.getDirectoryTree().getRootDirectory());
 					}
 					if (path.charAt(0) != '/') {	
-					path = Cd.getAbsolutePath(path, 
+					path = Command.getAbsolutePath(path, 
 							shell.getCurrentDirectory());
 					}
 					if (Command.findDirectory(shell.getDirectoryTree(), path) != null) {
@@ -190,11 +190,11 @@ public class EchoToFile extends Command {
 						}
 					}
 					if (path.charAt(0) == '/') {
-						path = Cd.getAbsolutePath(path, 
+						path = Command.getAbsolutePath(path, 
 								shell.getDirectoryTree().getRootDirectory());
 					}
 					if (path.charAt(0) != '/') {	
-					path = Cd.getAbsolutePath(path, 
+					path = Command.getAbsolutePath(path, 
 							shell.getCurrentDirectory());
 					}
 					if (Command.findDirectory(shell.getDirectoryTree(), path) != null) {
