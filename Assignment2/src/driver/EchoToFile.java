@@ -35,14 +35,13 @@ public class EchoToFile extends Command {
 			}
 			if (inputCase == 1) {
 				File txtFile = EchoToFile.findFileByName
-						(shell.getDirectoryTree().getDirectory(fullPath), 
+						(Command.findDirectory(shell.getDirectoryTree(), fullPath),
 								outfileFullPath[outfileFullPath.length-1]);
 				txtFile.setContents(extractString[1]);
 			}
 			
 			else if (inputCase == 2) {
-				Directory destination = shell.getDirectoryTree()
-						.getDirectory(fullPath);
+				Directory destination = Command.findDirectory(shell.getDirectoryTree(), fullPath);
 				File txtFile = new File(outfileFullPath
 						[outfileFullPath.length-1], extractString[1]);
 				EchoToFile.addFile(destination, txtFile);
@@ -61,7 +60,7 @@ public class EchoToFile extends Command {
 			
 			else if (inputCase == 5) {
 				File txtFile = EchoToFile.findFileByName
-						(shell.getDirectoryTree().getDirectory(fullPath), 
+						(Command.findDirectory(shell.getDirectoryTree(), fullPath), 
 								outfileFullPath[outfileFullPath.length-1]);
 				txtFile.setContents(txtFile.getContents()
 						.concat("\n" + extractString[1])); 
@@ -145,11 +144,10 @@ public class EchoToFile extends Command {
 					path = Cd.getAbsolutePath(path, 
 							shell.getCurrentDirectory());
 					}
-					if (shell.getDirectoryTree().getDirectory(path) != null) {
-						if (EchoToFile.findFileByName(shell.getDirectoryTree()
-								.getDirectory(path), 
-								outfileFullPath[outfileFullPath
-								                .length-1]) != null) {
+					if (Command.findDirectory(shell.getDirectoryTree(), path) != null) {
+						if (EchoToFile.findFileByName(
+						    Command.findDirectory(shell.getDirectoryTree(), path), 
+								outfileFullPath[outfileFullPath.length-1]) != null) {
 							return 1;
 						}
 						else return 2; //i.e file dne
@@ -191,11 +189,10 @@ public class EchoToFile extends Command {
 					path = Cd.getAbsolutePath(path, 
 							shell.getCurrentDirectory());
 					}
-					if (shell.getDirectoryTree().getDirectory(path) != null) {
-						if (EchoToFile.findFileByName(shell.getDirectoryTree()
-								.getDirectory(path), 
-								outfileFullPath[outfileFullPath
-								                .length-1]) != null) {
+					if (Command.findDirectory(shell.getDirectoryTree(), path) != null) {
+						if (EchoToFile.findFileByName(
+						    Command.findDirectory(shell.getDirectoryTree(), path), 
+								outfileFullPath[outfileFullPath.length-1]) != null) {
 							return 5;
 						}
 						else return 2; //i.e file dne

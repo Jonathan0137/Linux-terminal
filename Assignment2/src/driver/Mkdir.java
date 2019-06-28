@@ -31,7 +31,7 @@ public class Mkdir extends Command{
 					newDirectory = new Directory(pathNewDir);
 					String pathParentDir = arguments[i].replace("/" + pathNewDir, "");
 					
-					Directory parentDirectory = fs.getDirectory(pathParentDir);
+					Directory parentDirectory = Command.findDirectory(fs, pathParentDir);
 					addSubdirectory(parentDirectory, newDirectory);
 				}
 				else 
