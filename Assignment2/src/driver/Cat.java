@@ -10,6 +10,7 @@ public class Cat extends Command {
 	  * @param shell   an instance of the JShell that is interacting with the user
 	  * @param fileNames   a list of the file names
 	  */
+	@Override
 	public void execute(JShell shell, String fileNames) 
 	{
 		String[] arguments = fileNames.split(" ");
@@ -51,7 +52,12 @@ public class Cat extends Command {
 		return null;
 	}	
 		
-	
+	/**
+	  * Returns a String containing the documentation 
+	  * for the functionalities of the 'cat' command.
+	  * 
+	  * @return the documentation of the 'cat' command
+	  */
 	@Override
 	protected String getDoc() {
 		String documentation = "cat: cat FILE1 [FILE2...]\n"

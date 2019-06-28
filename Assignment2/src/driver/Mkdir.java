@@ -17,11 +17,13 @@ public class Mkdir extends Command{
 	{
 		Directory currentDirectory = shell.getCurrentDirectory();
 		FileSystem fs = shell.getDirectoryTree();
-			//split newDirectory into array of individual names of each new directory, and get length of the array
-			String[] arguments = newDirectories.split(" ");
-			int numArguments = arguments.length;
+		//split newDirectory into array of individual names of each new directory, and get length of the array
+		String[] arguments = newDirectories.split(" ");
+		int numArguments = arguments.length;
 			
-			for (int i = 1; i < numArguments; i++) 
+		for (int i = 1; i < numArguments; i++) 
+		{
+			if (directoryCheck(arguments[i])) 
 			{
 				Directory newDirectory;
 				if (arguments[i].indexOf("/") >= 0) 
@@ -30,7 +32,7 @@ public class Mkdir extends Command{
 					String pathNewDir = splitArguments[splitArguments.length - 1];
 					newDirectory = new Directory(pathNewDir);
 					String pathParentDir = arguments[i].replace("/" + pathNewDir, "");
-					
+						
 					Directory parentDirectory = Command.findDirectory(fs, pathParentDir);
 					addSubdirectory(parentDirectory, newDirectory);
 				}
@@ -40,6 +42,11 @@ public class Mkdir extends Command{
 					addSubdirectory(currentDirectory, newDirectory);
 				}
 			}
+			else 
+			{
+				System.out.println(arguments[i] + " is not a valid directory name");
+			}
+		}
 	}
 	
 	/**
@@ -73,6 +80,74 @@ public class Mkdir extends Command{
 			}
 		}
 		return false;
+	}
+	
+	/**
+	 * Returns true if the directory a user is attempting to create has a valid name
+	 * and returns false if it contains invalid characters
+	 * 
+	 * @param directoryName		The name of the directory the user is attempting to create
+	 * @return 		boolean that is true if directory name is valid
+	 */
+	public static boolean directoryCheck(String directoryName) {
+		if (directoryName.contains("/")) {
+			return false;
+		}
+		if (directoryName.contains(".")) {
+			return false;
+		}
+		if (directoryName.contains("@")) {
+			return false;
+		}
+		if (directoryName.contains("!")) {
+			return false;
+		}
+		if (directoryName.contains("#")) {
+			return false;
+		}
+		if (directoryName.contains("$")) {
+			return false;
+		}
+		if (directoryName.contains("%")) {
+			return false;
+		}
+		if (directoryName.contains("^")) {
+			return false;
+		}
+		if (directoryName.contains("&")) {
+			return false;
+		}
+		if (directoryName.contains("*")) {
+			return false;
+		}
+		if (directoryName.contains("(")) {
+			return false;
+		}
+		if (directoryName.contains(")")) {
+			return false;
+		}
+		if (directoryName.contains("{")) {
+			return false;
+		}
+		if (directoryName.contains("}")) {
+			return false;
+		}
+		if (directoryName.contains("~")) {
+			return false;
+		}
+		if (directoryName.contains("|")) {
+			return false;
+		}
+		if (directoryName.contains("<")) {
+			return false;
+		}
+		if (directoryName.contains(">")) {
+			return false;
+		}
+		if (directoryName.contains("?")) {
+			return false;
+		}
+		return true;
 	}
 
 	/**
