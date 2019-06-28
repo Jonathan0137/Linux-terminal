@@ -92,7 +92,7 @@ public class EchoToFile extends Command {
 	 * case
 	 * @param shell An instance of the JShell 
 	 * @param input A string representation of a user input
-	 * @return int That tells execute() what option is used in Echo call
+	 * @return Integer That tells execute() what option is used in Echo call
 	 */
 	public static int echoToFileCheck(JShell shell, String input) {
 
@@ -124,7 +124,8 @@ public class EchoToFile extends Command {
 			}
 			
 			if (optionalInput[1].equals(">")) { 
-				if (optionalInput[2].split("/").length > 2) {
+				if (optionalInput[2].split("/").length > 2 || 
+						optionalInput[2].startsWith("/")) {
 					String[] outfileFullPath = optionalInput[2].split("/");
 					String path = "";
 					if (optionalInput[2].charAt(0) == '/') {
@@ -170,7 +171,8 @@ public class EchoToFile extends Command {
 			
 			//NOW FOR ">>"
 			if (optionalInput[1].equals(">>")) {
-				if (optionalInput[2].split("/").length > 2) {
+				if (optionalInput[2].split("/").length > 2 || 
+						optionalInput[2].startsWith("/")) {
 					String[] outfileFullPath = optionalInput[2].split("/");
 					String path = "";
 					if (optionalInput[2].charAt(0) == '/') {
