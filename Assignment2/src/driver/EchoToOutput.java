@@ -30,6 +30,12 @@ public class EchoToOutput extends Command {
     // Ignore the 'echo' part of the input
     input = inputSplit[1];
     
+    // Don't output the double quotes
+    input = input.replaceAll("\"", "");
+    
+    // TODO: Reject the string and print an error message if there is a double quote in the middle
+    // of the string
+    
     System.out.println(input);
   }
 }
