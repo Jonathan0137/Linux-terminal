@@ -36,8 +36,8 @@ public class Popd extends Command {
      System.out.println("Popd unsuccessful: directory stack is empty.");
    }
    else {
-     // Remove the first entry in the directory stack
-     Directory newWorkingDirectory = directoryStack.getStack().poll();
+     // Remove the last entry in the directory stack
+     Directory newWorkingDirectory = directoryStack.getStack().pollLast();
      // Change the working directory using Cd
      changeDir.execute(shell, newWorkingDirectory.getFullPathName());
    }
