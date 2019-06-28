@@ -23,7 +23,10 @@ public class EchoToFile extends Command {
 			String[] extractString = path.split("\"");
 			String[] optionalInput = extractString[2].split(" ");
 			String[] outfileFullPath = optionalInput[2].split("/");
-			String fullPath = "/";
+			String fullPath = "";
+			if (optionalInput[2].charAt(0) == '/') {
+				fullPath = fullPath.concat("/");
+			}
 			for (int i=0; i<outfileFullPath.length-1; i++) {
 				if (!outfileFullPath[i].equals("")) {
 					fullPath = path.concat(outfileFullPath[i]);
@@ -42,7 +45,6 @@ public class EchoToFile extends Command {
 						.getDirectory(fullPath);
 				File txtFile = new File(outfileFullPath
 						[outfileFullPath.length-1], extractString[1]);
-				//ASK IF I NEED TO CHANGE FILE's FULL PATH N TINGZ USING METHODS IN FILE.JAVA
 				EchoToFile.addFile(destination, txtFile);
 			}
 			
@@ -54,7 +56,7 @@ public class EchoToFile extends Command {
 			else if (inputCase == 4) {
 				File txtFile = new File(optionalInput[2], extractString[1]);
 				EchoToFile.addFile(shell.getCurrentDirectory(), txtFile);
-				//ASK IF I NEED TO CHANGE FILE's FULL PATH N TINGZ USING METHODS IN FILE.JAVA
+				 
 			}
 			
 			else if (inputCase == 5) {
@@ -62,7 +64,7 @@ public class EchoToFile extends Command {
 						(shell.getDirectoryTree().getDirectory(fullPath), 
 								outfileFullPath[outfileFullPath.length-1]);
 				txtFile.setContents(txtFile.getContents()
-						.concat(extractString[1])); //ASK IF I NEED TO ADD A NEW LINE OR A SPACE OR SUM
+						.concat("\n" + extractString[1])); 
 			}
 			
 			else if (inputCase == 6) {
@@ -70,7 +72,7 @@ public class EchoToFile extends Command {
 						optionalInput[2]).setContents(EchoToFile.
 								findFileByName(shell.getCurrentDirectory(), 
 						optionalInput[2]).getContents()
-								.concat(extractString[1]));
+								.concat("\n" + extractString[1]));
 			}
 		}
 	}
@@ -95,7 +97,8 @@ public class EchoToFile extends Command {
 	public static int echoToFileCheck(JShell shell, String input) {
 
 		if (input.split(" ").length < 4) {
-			System.out.println("echo: missing outfile or string arguments");
+			System.out.println("echo: missing outfile or string arguments"
+					+ " or lack of spaces between arguments");
 			return -1;
 		}
 		
@@ -123,12 +126,23 @@ public class EchoToFile extends Command {
 			if (optionalInput[1].equals(">")) { 
 				if (optionalInput[2].split("/").length > 2) {
 					String[] outfileFullPath = optionalInput[2].split("/");
-					String path = "/";
+					String path = "";
+					if (optionalInput[2].charAt(0) == '/') {
+						path = path.concat("/");
+					}
 					for (int i=0; i<outfileFullPath.length-1; i++) {
 						if (!outfileFullPath[i].equals("")) {
 							path = path.concat(outfileFullPath[i]);
 							path = path.concat("/");
 						}
+					}
+					if (path.charAt(0) == '/') {
+						path = Cd.getAbsolutePath(path, 
+								shell.getDirectoryTree().getRootDirectory());
+					}
+					if (path.charAt(0) != '/') {	
+					path = Cd.getAbsolutePath(path, 
+							shell.getCurrentDirectory());
 					}
 					if (shell.getDirectoryTree().getDirectory(path) != null) {
 						if (EchoToFile.findFileByName(shell.getDirectoryTree()
@@ -139,12 +153,11 @@ public class EchoToFile extends Command {
 						}
 						else return 2; //i.e file dne
 					}
-					else { //i.e path does not exist What do i do
+					else { 
 						System.out.println("echo: input path does not exist");
 						return -1;
 					}
 				}
-				
 				else if (EchoToFile.findFileByName(shell.getCurrentDirectory(), 
 						optionalInput[2]) != null) {
 					return 3; //i.e file exists
@@ -159,11 +172,22 @@ public class EchoToFile extends Command {
 			if (optionalInput[1].equals(">>")) {
 				if (optionalInput[2].split("/").length > 2) {
 					String[] outfileFullPath = optionalInput[2].split("/");
-					String path = "/";
+					String path = "";
+					if (optionalInput[2].charAt(0) == '/') {
+						path = path.concat("/");
+					}
 					for (int i=0; i<outfileFullPath.length-1; i++) {
 						if (!outfileFullPath[i].equals("")) {
 							path = path.concat(outfileFullPath[i] + "/");
 						}
+					}
+					if (path.charAt(0) == '/') {
+						path = Cd.getAbsolutePath(path, 
+								shell.getDirectoryTree().getRootDirectory());
+					}
+					if (path.charAt(0) != '/') {	
+					path = Cd.getAbsolutePath(path, 
+							shell.getCurrentDirectory());
 					}
 					if (shell.getDirectoryTree().getDirectory(path) != null) {
 						if (EchoToFile.findFileByName(shell.getDirectoryTree()
@@ -174,7 +198,7 @@ public class EchoToFile extends Command {
 						}
 						else return 2; //i.e file dne
 					}
-					else { //i.e path does not exist What do i do
+					else { 
 						System.out.println("echo: input path does not exist");
 						return -1;
 					}
@@ -199,7 +223,11 @@ public class EchoToFile extends Command {
 	 * @param newFile The new file that is to be added into the target directory
 	 */
 	public static void addFile(Directory target, File newFile) {
-		target.getListOfFiles().add(newFile);
+		if (EchoToFile.fileCheck(newFile.getName())) { //REMEBER TO CHECK THAT FILE NAME IS VALID AND THEN DO IT FOR >> CASE
+			target.getListOfFiles().add(newFile);
+			newFile.setParentDirectory(target);
+		}
+		System.out.println("echo: invalid file name");
 	}
 	
 	/**
@@ -210,7 +238,7 @@ public class EchoToFile extends Command {
 	 */
 	public static File findFileByName(Directory location, String fileName) {
 		ArrayList<File> fileList = location.getListOfFiles();
-		for (int i=0; i<fileList.size()-1;i++) {
+		for (int i=0; i<fileList.size();i++) {
 			if (fileList.get(i).getName().equals(fileName)) {
 				return fileList.get(i);
 			}
@@ -218,4 +246,71 @@ public class EchoToFile extends Command {
 		return null;
 	}
 	
+	/**
+	 * Returns true if the file a user is attempting to create has a valid name
+	 * and returns false if the file a user is attempting to create contains
+	 * invalid characters
+	 * @param fileName A file name a user is attempting to create
+	 * @return boolean that is true if file name is valid
+	 */
+	public static boolean fileCheck(String fileName) {
+		if (fileName.contains("/")) {
+			return false;
+		}
+		if (fileName.contains(".")) {
+			return false;
+		}
+		if (fileName.contains("@")) {
+			return false;
+		}
+		if (fileName.contains("!")) {
+			return false;
+		}
+		if (fileName.contains("#")) {
+			return false;
+		}
+		if (fileName.contains("$")) {
+			return false;
+		}
+		if (fileName.contains("%")) {
+			return false;
+		}
+		if (fileName.contains("^")) {
+			return false;
+		}
+		if (fileName.contains("&")) {
+			return false;
+		}
+		if (fileName.contains("*")) {
+			return false;
+		}
+		if (fileName.contains("(")) {
+			return false;
+		}
+		if (fileName.contains(")")) {
+			return false;
+		}
+		if (fileName.contains("{")) {
+			return false;
+		}
+		if (fileName.contains("}")) {
+			return false;
+		}
+		if (fileName.contains("~")) {
+			return false;
+		}
+		if (fileName.contains("|")) {
+			return false;
+		}
+		if (fileName.contains("<")) {
+			return false;
+		}
+		if (fileName.contains(">")) {
+			return false;
+		}
+		if (fileName.contains("?")) {
+			return false;
+		}
+		return true;
+	}
 }
