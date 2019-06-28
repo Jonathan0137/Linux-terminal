@@ -29,13 +29,20 @@ public class History extends Command {
 		else {
 			if (History.historyCheck(splitInput[1],
 					shell.getInputHistory().getInputList())) {
-				for (int i=shell.getInputHistory().getInputList().size()
-						-Integer.parseInt(splitInput[1]); i<
-						shell.getInputHistory().getInputList().size(); i++) {
-					System.out.print(i+1);
-					System.out.print(". ");
-					System.out.println(shell.
-							getInputHistory().getInputList().get(i));
+				try {
+					for (int i=shell.getInputHistory().getInputList().size()
+							-Integer.parseInt(splitInput[1]); i<
+							shell.getInputHistory()
+							.getInputList().size(); i++) {
+						String inputAtI = shell.getInputHistory()
+								.getInputList().get(i);
+						System.out.print(i+1);
+						System.out.print(". ");
+						System.out.println(inputAtI);
+					}
+				}
+				catch (Exception e) {
+					this.execute(shell, "history");
 				}
 			}
 		}
@@ -53,7 +60,7 @@ public class History extends Command {
 		try {
 			int cap = Integer.parseInt(argument);
 			if (cap>list.size()) {
-				return false;
+				return true;
 			}
 			return true;
 		}
