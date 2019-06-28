@@ -227,7 +227,9 @@ public class EchoToFile extends Command {
 			target.getListOfFiles().add(newFile);
 			newFile.setParentDirectory(target);
 		}
-		System.out.println("echo: invalid file name");
+		else {
+			System.out.println("echo: invalid file name");	
+		}
 	}
 	
 	/**
