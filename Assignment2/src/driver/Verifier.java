@@ -41,8 +41,8 @@ public class Verifier
         return new Exit();
       case "popd":
         return new Popd();
-//      case "cat":
-//        return new Cat();
+      case "cat":
+        return new Cat();
       case "echo":
         if(userInput.contains(">"))
         {
@@ -62,61 +62,63 @@ public class Verifier
   public boolean checkUserInput(String userInput)   //looking at the second part check the num of args
   {
     userInput = userInput.replaceAll(" +", " ");
-    String[] input = userInput.split(" ", 2);
+    String[] input = userInput.split(" ", 100);
     int numOfArg = input.length;
+
     String command=input[0];
-    if(command == "exit" && numOfArg > 1)
+
+    if(command.equals("exit") && numOfArg > 1)
     {
       System.out.println("bash exit: too many arguments");
       return false;
     }
-    else if(command == "mkdir" && numOfArg == 1)
+    else if(command.equals("mkdir") && numOfArg == 1)
     {
       System.out.println("bash mkdir: missing directory");
       return false;
     }
-    else if(command == "cd" && numOfArg > 2)
+    else if(command.equals("cd") && numOfArg > 2)
     {
       System.out.println("bash cd: too many arguments");
       return false;
     }
-    else if(command == "cd" && numOfArg == 1)
+    else if(command.equals("cd") && numOfArg == 1)
     {
       System.out.println("bash cd: not enought arguments");
       return false;
     }
     // ls can have anynumer
-    else if(command == "pwd" && numOfArg > 1)
+    else if(command.equals("pwd") && numOfArg > 1)
     {
       System.out.println("bash pwd: too many arguments");
       return false;
     }
-    else if(command == "pushd" && numOfArg > 2)
+    else if(command.equals("pushd") && numOfArg > 2)
     {
       System.out.println("bash pushd: too many arguments");
       return false;
     } 
-    else if(command == "pushd" && numOfArg == 1)
+    else if(command.equals("pushd") && numOfArg == 1)
     {
       System.out.println("bash: pushd: no other directory");
       return false;
     } 
-    else if(command == "history" && numOfArg > 2)
-    {
+    else if(command.equals("history") && numOfArg > 2)
+    { 
       System.out.println("bash: history: too many arguments");
       return false;
     } 
-    else if(command == "cat" && numOfArg == 1)
+    else if(command.equals("cat") && numOfArg == 1)
     {
       System.out.println("bash: cat: not enought arguments");
       return false;
     }
-    else if(command == "man" && numOfArg == 1)
+    else if(command.equals("man") && numOfArg == 1)
     {
       System.out.println("What manual page do you want?");
       return false;
     } 
-    else if(command == "man" && numOfArg > 2)
+    else if(command.equals("man") && numOfArg > 2)
     {
       System.out.println("bash: man: too many arguments");
       return false;
