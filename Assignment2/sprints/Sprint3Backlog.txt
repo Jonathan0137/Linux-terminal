@@ -6,7 +6,7 @@ User Stories from Product Backlog that we will address in this sprint:
 
 Specific tasks to be accomplished:
 a-1. Writing tests to ensure the program is behaving as expected, and considering edge cases
-a-2. Debugging potential bugs to ensure the pronblem is functioning properly
+a-2. Debugging potential bugs to ensure the problem is functioning properly
 a-3. Moving methods from FileSystem and Directory to Command to better follow SRP
 b-1. Debugging my code to make sure that there is no error in the system.
 b-2. Adding Java docs to my code.
