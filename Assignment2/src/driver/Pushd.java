@@ -27,18 +27,37 @@ public class Pushd extends Command {
   @Override
   public void execute(JShell shell, String input) {
     
+    Directory currentDir = shell.getCurrentDirectory();
+    DirectoryStack directoryStack = shell.getDirectoryStack();
+    
     String[] inputSplit = input.split(" ", 2);
     if (inputSplit.length < 2) {
       System.out.println("Pushd is missing an argument: requires a relative or absolute path.");
       return;
-    }
-    // Ignore the 'pushd' part of the input
-    input = inputSplit[1];    
+    }    
     
+    String path = inputSplit[1];
+
+    Directory workingDir;
+    
+    if (path.charAt(0) == '/') {
+      workingDir = shell.getDirectoryTree().getRootDirectory();
+    }
+    else {
+      workingDir = shell.getCurrentDirectory();
+    }
+    
+    String absolutePath = Command.getAbsolutePath(path, workingDir);
+    
+    // Adds the current directory to the stack, in the case that the given 
+    // new working directory path is the same as the current working directory.
+    if (Command.findDirectory(shell.getDirectoryTree(), absolutePath) == currentDir) {
+      directoryStack.getStack().add(currentDir);
+      return;
+    }
     
     Cd changeDir = new Cd();
-    Directory currentDir = shell.getCurrentDirectory();
-    DirectoryStack directoryStack = shell.getDirectoryStack();
+    
     
     // Change the working directory using Cd
     changeDir.execute(shell, input);
