@@ -39,7 +39,7 @@ public class Popd extends Command {
      // Remove the last entry in the directory stack
      Directory newWorkingDirectory = directoryStack.getStack().pollLast();
      // Change the working directory using Cd
-     changeDir.execute(shell, newWorkingDirectory.getFullPathName());
+     changeDir.execute(shell, "cd " + newWorkingDirectory.getFullPathName());
    }
  }
 }
