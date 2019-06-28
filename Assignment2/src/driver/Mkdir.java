@@ -57,7 +57,9 @@ public class Mkdir extends Command{
 	  */
 	public void addSubdirectory(Directory parentDirectory, Directory subDirectory) {
 		ArrayList<Directory> listOfSubdirectories = parentDirectory.getListOfSubdirectories();
-		if (containsName(listOfSubdirectories, subDirectory)) {
+		ArrayList<File> listOfFiles = parentDirectory.getListOfFiles();
+		if (containsDirectory(listOfSubdirectories, subDirectory)||
+		    containsFile(listOfFiles, subDirectory)) {
 			System.out.println("The name '" + subDirectory.getName() + "' already exists in this directory.");
 			return;
 		}
@@ -67,12 +69,13 @@ public class Mkdir extends Command{
 	 
 	
 	/**
-	  * Checks if the directory the user is attempting to create is already in the parent Directory
+	  * Checks if the name of the directory the user is attempting to create is already a directory
+	  * name in the parent Directory.
 	  * 
 	  * @param listOfDirectories   the list of subdirectories that already exist in the parent
 	  * @param subDirectory   the directory that the user is attempting to add
 	  */
-	private static boolean containsName(ArrayList<Directory> listOfDirectories, Directory subDirectory) {   
+	private static boolean containsDirectory(ArrayList<Directory> listOfDirectories, Directory subDirectory) {   
 		String subDirName = subDirectory.getName();
 		for (int i=0; i<listOfDirectories.size(); i++) {
 			if (listOfDirectories.get(i).getName().equals(subDirName)) {
@@ -81,6 +84,23 @@ public class Mkdir extends Command{
 		}
 		return false;
 	}
+	
+	/**
+     * Checks if the name of the  directory the user is attempting to create is 
+     * already a file name in the parent Directory.
+     * 
+     * @param listOfFiles   the list of files that already exist in the parent
+     * @param subDirectory   the directory that the user is attempting to add
+     */
+   private static boolean containsFile(ArrayList<File> listOfFiles, Directory subDirectory) {   
+       String subDirName = subDirectory.getName();
+       for (int i=0; i<listOfFiles.size(); i++) {
+           if (listOfFiles.get(i).getName().equals(subDirName)) {
+               return true;
+           }
+       }
+       return false;
+   }
 	
 	/**
 	 * Returns true if the directory a user is attempting to create has a valid name
