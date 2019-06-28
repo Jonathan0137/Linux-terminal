@@ -230,7 +230,7 @@ public class EchoToFile extends Command {
 	 * @param newFile The new file that is to be added into the target directory
 	 */
 	public static void addFile(Directory target, File newFile) {
-		if (EchoToFile.fileCheck(newFile.getName())) { //REMEBER TO CHECK THAT FILE NAME IS VALID AND THEN DO IT FOR >> CASE
+		if (EchoToFile.fileCheck(newFile.getName(), target)) { //REMEBER TO CHECK THAT FILE NAME IS VALID AND THEN DO IT FOR >> CASE
 			target.getListOfFiles().add(newFile);
 			newFile.setParentDirectory(target);
 		}
@@ -258,11 +258,18 @@ public class EchoToFile extends Command {
 	/**
 	 * Returns true if the file a user is attempting to create has a valid name
 	 * and returns false if the file a user is attempting to create contains
-	 * invalid characters
+	 * invalid characters or is an invalid name
 	 * @param fileName A file name a user is attempting to create
 	 * @return boolean that is true if file name is valid
 	 */
-	public static boolean fileCheck(String fileName) {
+	public static boolean fileCheck(String fileName, Directory target) {
+		ArrayList<Directory> subDirectories = target.getListOfSubdirectories();
+		//potentially need to do target.getName.equals(fileName) to check if file has same name as current directory
+		for (int i=0; i<subDirectories.size(); i++) {
+			if (subDirectories.get(i).getName().equals(fileName)) {
+				return false;
+			}
+		}
 		if (fileName.contains("/")) {
 			return false;
 		}
