@@ -30,7 +30,7 @@ public class Cat extends Command {
 			}
 			else 
 			{
-				System.out.println("The file " + arguments[i] + " does not exist in " + currentDirectory.getFullPathName());
+				System.out.println("The file '" + arguments[i] + "' does not exist in " + currentDirectory.getFullPathName());
 			}
 		}
 	}
@@ -38,14 +38,17 @@ public class Cat extends Command {
 	
 	/**
 	 * Finds a file by name in a specific directory
-	 * @param location The target directory
+	 * @param directory The target directory
 	 * @param fileName The name of the sought out file
 	 * @return fileList.get(i) The file with same name as fileName
 	 */
-	public static File findFileByName(Directory location, String fileName) {
-		ArrayList<File> fileList = location.getListOfFiles();
-		for (int i=0; i<fileList.size();i++) {
-			if (fileList.get(i).getName().equals(fileName)) {
+	public static File findFileByName(Directory directory, String fileName) 
+	{
+		ArrayList<File> fileList = directory.getListOfFiles();
+		for (int i = 0; i < fileList.size(); i++) 
+		{
+			if (fileList.get(i).getName().equals(fileName)) 
+			{
 				return fileList.get(i);
 			}
 		}
