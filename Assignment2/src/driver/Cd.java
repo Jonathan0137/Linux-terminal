@@ -49,11 +49,11 @@ public class Cd extends Command {
     // Input is an absolute path
     if (input.charAt(0) == '/') {
       // Even though it is an absolute path, there may still be a need to convert '..' and '.'
-      absolutePathName = getAbsolutePath(input, root);
+      absolutePathName = Command.getAbsolutePath(input, root);
     }
     // Input is a relative path
     else {
-      absolutePathName = getAbsolutePath(input, workingDirectory);    
+      absolutePathName = Command.getAbsolutePath(input, workingDirectory);    
     }
     
     newWorkingDirectory = Command.findDirectory(fs, absolutePathName);
@@ -65,64 +65,6 @@ public class Cd extends Command {
     // Print an appropriate error message to user and does not change working directory
     System.out.println("Specified path not found."); 
     }
-  }
-  
-  /**
-   * Returns a String that is the absolute path version of the input, which
-   * could be an absolute or a relative path to the workingDir.
-   * 
-   * @param input       a relative or absolute path name
-   * @param workingDir  the current working directory
-   * @return            the absolute path version of the given input path name
-   */
-  // Change this to public for now so other classes can access, transfer this method to Command
-  public static String getAbsolutePath(String input, Directory workingDir) {
-      String[] pathList = input.split("/");
-      
-      String fullPathName = workingDir.getFullPathName();
-      
-      for (int i=0; i<pathList.length; i++) {
-        if (pathList[i].equals(".") || pathList[i].equals("")) {
-          continue;
-        }
-        else if (pathList[i].equals("..")) {
-          fullPathName = moveToParentDirectory(fullPathName);
-        }
-        else {
-          fullPathName = fullPathName + pathList[i] + "/";
-        }
-      }
-      
-      return fullPathName;
-  }
-  
-  /**
-   * Returns a string that is the given pathName with the last directory removed.
-   * In other words, returns the path name of the parent directory specified by pathName.
-   * If the pathName is the root directory's path, then returns pathName.
-   * 
-   * @param pathName a relative or absolute path name
-   * @return         the parent directory's path name
-   */
-  private static String moveToParentDirectory(String pathName) {
-    
-    if (pathName.equals("/")) {
-      return pathName;
-    }
-    
-    String newPathName = pathName;
-    
-    if (newPathName.charAt(newPathName.length() - 1) == '/') {
-      newPathName = newPathName.substring(0, newPathName.length() - 1);
-    }
-    
-    for (int i = newPathName.length() - 1; i>=0; i--) {
-      if (newPathName.charAt(i) == '/') {
-        break;
-      }      
-      newPathName = newPathName.substring(0, i);
-    } 
-    return newPathName;
   }
   
   // FOR TESTING PURPOSES ONLY

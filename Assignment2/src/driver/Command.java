@@ -20,7 +20,7 @@ public abstract class Command
    * @param absolutePathName    the absolute path name of a directory in the file system
    * @return                    the directory with the given absolute path name
    */
-  public static Directory findDirectory(FileSystem fs, String absolutePathName) {
+  protected static Directory findDirectory(FileSystem fs, String absolutePathName) {
     Directory traversalDirectory = fs.getRootDirectory();
     String[] nameList = absolutePathName.split("/");
     
@@ -51,5 +51,62 @@ public abstract class Command
       }
     }
     return null;
+  }
+  
+  /**
+   * Returns a String that is the absolute path version of the input, which
+   * could be an absolute or a relative path to the workingDir.
+   * 
+   * @param input       a relative or absolute path name
+   * @param workingDir  the current working directory
+   * @return            the absolute path version of the given input path name
+   */
+  protected static String getAbsolutePath(String input, Directory workingDir) {
+      String[] pathList = input.split("/");
+      
+      String fullPathName = workingDir.getFullPathName();
+      
+      for (int i=0; i<pathList.length; i++) {
+        if (pathList[i].equals(".") || pathList[i].equals("")) {
+          continue;
+        }
+        else if (pathList[i].equals("..")) {
+          fullPathName = moveToParentDirectory(fullPathName);
+        }
+        else {
+          fullPathName = fullPathName + pathList[i] + "/";
+        }
+      }
+      
+      return fullPathName;
+  }
+  
+  /**
+   * Returns a string that is the given pathName with the last directory removed.
+   * In other words, returns the path name of the parent directory specified by pathName.
+   * If the pathName is the root directory's path, then returns pathName.
+   * 
+   * @param pathName a relative or absolute path name
+   * @return         the parent directory's path name
+   */
+  private static String moveToParentDirectory(String pathName) {
+    
+    if (pathName.equals("/")) {
+      return pathName;
+    }
+    
+    String newPathName = pathName;
+    
+    if (newPathName.charAt(newPathName.length() - 1) == '/') {
+      newPathName = newPathName.substring(0, newPathName.length() - 1);
+    }
+    
+    for (int i = newPathName.length() - 1; i>=0; i--) {
+      if (newPathName.charAt(i) == '/') {
+        break;
+      }      
+      newPathName = newPathName.substring(0, i);
+    } 
+    return newPathName;
   }
 }
