@@ -26,23 +26,7 @@ public class Directory {
     listOfSubdirectories = new ArrayList<Directory>();
     listOfFiles = new ArrayList<File>();
   }
-  
-  /**
-   * Returns the subdirectory with the given name if it exists, otherwise returns null.
-   * 
-   * @param directoryName the name of the wanted subdirectory
-   * @return the subdirectory with the name of directoryName
-   */
-  // TODO: Move this to Command later
-  public Directory findDirectory(String directoryName) {
-    for (int i=0; i<listOfSubdirectories.size(); i++) {
-      if (directoryName.equals(listOfSubdirectories.get(i).getName())) {
-        return listOfSubdirectories.get(i);
-      }
-    }
-    return null;
-  }
-  
+    
   public void setName(String name) {
     this.name = name;
   }

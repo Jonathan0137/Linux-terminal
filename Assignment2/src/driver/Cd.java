@@ -56,7 +56,7 @@ public class Cd extends Command {
       absolutePathName = getAbsolutePath(input, workingDirectory);    
     }
     
-    newWorkingDirectory = fs.getDirectory(absolutePathName);
+    newWorkingDirectory = Command.findDirectory(fs, absolutePathName);
     
     if (newWorkingDirectory != null) {
       shell.setCurrentDirectory(newWorkingDirectory);

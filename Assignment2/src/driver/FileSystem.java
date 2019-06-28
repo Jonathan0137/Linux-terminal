@@ -10,29 +10,6 @@ public class FileSystem {
   public FileSystem() {
     root = new Directory("");
   }
-  
-  /**
-   * Returns the directory in the file system with the given absolute path name
-   * if it exists, otherwise returns null.
-   * 
-   * @param fullPathName    the absolute path name of a directory in the file system
-   * @return the directory with the given absolute path name
-   */
-  public Directory getDirectory(String fullPathName) {
-    Directory traversalDirectory = root;
-    String[] nameList = fullPathName.split("/");
-    
-    for (int i=0; i<nameList.length; i++) {
-      if (nameList[i].equals("")) {
-        continue;
-      }
-      traversalDirectory = traversalDirectory.findDirectory(nameList[i]);
-      if (traversalDirectory == null) {
-        return null;
-      }
-    }
-    return traversalDirectory;
-  }
 
   /**
    * Returns the root directory of the FileSystem.
