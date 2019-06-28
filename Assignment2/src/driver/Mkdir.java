@@ -110,9 +110,6 @@ public class Mkdir extends Command{
 	 * @return 		boolean that is true if directory name is valid
 	 */
 	public static boolean directoryCheck(String directoryName) {
-		if (directoryName.contains("/")) {
-			return false;
-		}
 		if (directoryName.contains(".")) {
 			return false;
 		}
