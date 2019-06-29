@@ -17,7 +17,6 @@ public class EchoToFile extends Command {
 	 */
 	@Override
 	public void execute(JShell shell, String path) {
-		
 		int inputCase = EchoToFile.echoToFileCheck(shell, path); 
 		if (inputCase != -1) {
 			String[] extractString = path.split("\"");
@@ -47,14 +46,12 @@ public class EchoToFile extends Command {
 								outfileFullPath[outfileFullPath.length-1]);
 				txtFile.setContents(extractString[1]);
 			}
-			
 			else if (inputCase == 2) {
 				Directory destination = Command.findDirectory(shell.getDirectoryTree(), fullPath);
 				File txtFile = new File(outfileFullPath
 						[outfileFullPath.length-1], extractString[1]);
 				EchoToFile.addFile(destination, txtFile);
 			}
-			
 			else if (inputCase == 3) {
 				EchoToFile.findFileByName(shell.getCurrentDirectory(), 
 						optionalInput[2]).setContents(extractString[1]);
@@ -65,7 +62,6 @@ public class EchoToFile extends Command {
 				EchoToFile.addFile(shell.getCurrentDirectory(), txtFile);
 				 
 			}
-			
 			else if (inputCase == 5) {
 				File txtFile = EchoToFile.findFileByName
 						(Command.findDirectory(shell.getDirectoryTree(), fullPath), 
@@ -73,7 +69,6 @@ public class EchoToFile extends Command {
 				txtFile.setContents(txtFile.getContents()
 						.concat("\n" + extractString[1])); 
 			}
-			
 			else if (inputCase == 6) {
 				EchoToFile.findFileByName(shell.getCurrentDirectory(), 
 						optionalInput[2]).setContents(EchoToFile.
@@ -99,7 +94,7 @@ public class EchoToFile extends Command {
 	 * case
 	 * @param shell An instance of the JShell 
 	 * @param input A string representation of a user input
-	 * @return Integer That tells execute() what option is used in Echo call
+	 * @return The input case for which execute must account for
 	 */
 	public static int echoToFileCheck(JShell shell, String input) {
 
@@ -260,7 +255,7 @@ public class EchoToFile extends Command {
 	 * and returns false if the file a user is attempting to create contains
 	 * invalid characters or is an invalid name
 	 * @param fileName A file name a user is attempting to create
-	 * @return boolean that is true if file name is valid
+	 * @return True if file passes all conditions to be created
 	 */
 	public static boolean fileCheck(String fileName, Directory target) {
 		ArrayList<Directory> subDirectories = target.getListOfSubdirectories();
@@ -270,62 +265,11 @@ public class EchoToFile extends Command {
 				return false;
 			}
 		}
-		if (fileName.contains("/")) {
-			return false;
-		}
-		if (fileName.contains(".")) {
-			return false;
-		}
-		if (fileName.contains("@")) {
-			return false;
-		}
-		if (fileName.contains("!")) {
-			return false;
-		}
-		if (fileName.contains("#")) {
-			return false;
-		}
-		if (fileName.contains("$")) {
-			return false;
-		}
-		if (fileName.contains("%")) {
-			return false;
-		}
-		if (fileName.contains("^")) {
-			return false;
-		}
-		if (fileName.contains("&")) {
-			return false;
-		}
-		if (fileName.contains("*")) {
-			return false;
-		}
-		if (fileName.contains("(")) {
-			return false;
-		}
-		if (fileName.contains(")")) {
-			return false;
-		}
-		if (fileName.contains("{")) {
-			return false;
-		}
-		if (fileName.contains("}")) {
-			return false;
-		}
-		if (fileName.contains("~")) {
-			return false;
-		}
-		if (fileName.contains("|")) {
-			return false;
-		}
-		if (fileName.contains("<")) {
-			return false;
-		}
-		if (fileName.contains(">")) {
-			return false;
-		}
-		if (fileName.contains("?")) {
-			return false;
+		String badChars = "/.@!#$%^&*() {}|<>?~";
+		for (int i=0; i<badChars.length();i++) {
+			if (fileName.contains(Character.toString(badChars.charAt(i)))) {
+				return false;
+			}
 		}
 		return true;
 	}
