@@ -1,0 +1,10 @@
+What did I work on in the last three days?
+		- added checker in mkdir
+		- fixed bugs in mkdir
+
+What do I plan to work in the next three days?
+    	- test/debug code for cat, mkdir, pwd
+    	- fix any bugs in cat, mkdir, pwd
+
+Am I blocked on anything?
+		- N/A
