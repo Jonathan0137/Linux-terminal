@@ -20,10 +20,8 @@ public class History extends Command {
 		if (splitInput.length == 1) {
 			for (int i=0; 
 					i<shell.getInputHistory().getInputList().size(); i++) {
-				System.out.print(i+1);
-				System.out.print(". ");
-				System.out.println(shell.
-						getInputHistory().getInputList().get(i));
+				System.out.print(i+1 + ". " + shell.getInputHistory()
+				.getInputList().get(i) + "\n");
 			}
 		}
 		else {
@@ -36,9 +34,7 @@ public class History extends Command {
 							.getInputList().size(); i++) {
 						String inputAtI = shell.getInputHistory()
 								.getInputList().get(i);
-						System.out.print(i+1);
-						System.out.print(". ");
-						System.out.println(inputAtI);
+						System.out.print(i+1 + ". " + inputAtI + "\n");
 					}
 				}
 				catch (Exception e) {
@@ -53,7 +49,7 @@ public class History extends Command {
 	 * command
 	 * @param argument User inputs optional parameter
 	 * @param list The list of all user inputs
-	 * @return boolean True if argument valid, False otherwise
+	 * @return True if argument valid, False otherwise
 	 */
 	public static boolean historyCheck(String argument,
 			ArrayList<String> list) {
