@@ -17,7 +17,7 @@ public class Exit extends Command {
 	
 	/**
 	 * Returns the documentation associated with the exit command
-	 * @return this.doc the documentation of the exit command
+	 * @return the documentation of the exit command
 	 */
 	public String getDoc() {
 		return this.doc;
