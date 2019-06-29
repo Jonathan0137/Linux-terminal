@@ -2,6 +2,12 @@ package driver;
 
 public class Man extends Command
 {
+  /**
+   * Returns a String containing the documentation 
+   * for the functionalities of the 'man' command.
+   * 
+   * @return the documentation of the 'man' command
+   */
   @Override
   public String getDoc() {
     String documentation = "\t\tMan: man CMD\n"
@@ -13,9 +19,17 @@ public class Man extends Command
                          + "\tpushd popd    history cat   echo man \n";
     return documentation;
   }
-  
-  public void execute(JShell shell ,String commandName)
+  /**
+   * Print documentation of selected commands
+   * 
+   * @param shell   an instance of the JShell that is interacting with the user
+   * @param input   a relative or absolute path name
+   */
+  @Override
+  public void execute(JShell shell ,String input)
   {
+    String[] userInput = input.split(" ", 2);
+    String commandName = userInput[1];
     switch(commandName)
     {
       case "cd":
@@ -50,10 +64,10 @@ public class Man extends Command
         Popd popd = new Popd();
         System.out.println(popd.getDoc());
         break;
-//      case "cat":
-//        Cat cat = new Cat();
-//        System.out.println(cat.getDoc());
-        //break;
+      case "cat":
+        Cat cat = new Cat();
+        System.out.println(cat.getDoc());
+        break;
       case "echo":
           EchoToOutput echo2 = new EchoToOutput();
           System.out.println(echo2.getDoc());

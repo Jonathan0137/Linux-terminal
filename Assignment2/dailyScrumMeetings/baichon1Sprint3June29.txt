@@ -1,0 +1,10 @@
+What did I work on in the last three days?
+    - added Javadoc for my code
+    - tested and debugged our code
+
+What do I plan to work in the next three days?
+    - thinking on maybe putting excpetion on the code rather than using if statments
+
+Am I blocked on anything?
+    - Need to learn how to use the try catch method
+
