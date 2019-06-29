@@ -4,18 +4,14 @@ package driver;
 
 public class Verifier 
 {
-  //Verifers user input
-//  private String[] CommandStringArray = {"ls", "cd", "mkdir", "exit", "pwd", 
-//      "pushd", "popd", "history", "cat", "echo", "man"};
-//  
-//  private boolean checkUserCommand(String command)
-//  {
-//    return Arrays.asList(CommandStringArray).contains(command); 
-//  }
-//  private boolean checkUserPath(String path)
-//  {
-//    return true;
-//  }
+  /**
+   * Check if user's command exist or not, if exist then return a 
+   * instance of that command, if not, return null.
+   * 
+   * @param userInput   a string that contains what user has typed
+   * @return            a instance of command of user's selected commands
+   */
+  
   public static Command checkUserInputCommand(String userInput)
   {
     if(userInput == "")
@@ -45,13 +41,9 @@ public class Verifier
         return new Cat();
       case "echo":
         if(userInput.contains(">"))
-        {
           return new EchoToFile();
-        }
         else
-        {
           return new EchoToOutput();
-        }
       case "man":
         return new Man();
       default:
@@ -59,12 +51,18 @@ public class Verifier
         return null;
     }
   }
-  public boolean checkUserInput(String userInput)   //looking at the second part check the num of args
+  /**
+   * Check if user input has the correct number of arguments.
+   * if not return false, else return true.
+   * 
+   * @param userInput   a string that contains what user has typed
+   * @return            true if user enters correct, else false
+   */
+  public boolean checkUserInput(String userInput)   
   {
     userInput = userInput.replaceAll(" +", " ");
     String[] input = userInput.split(" ", 100);
     int numOfArg = input.length;
-
     String command=input[0];
 
     if(command.equals("exit") && numOfArg > 1)
@@ -128,26 +126,6 @@ public class Verifier
       return true;
     }
   
-}
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+  }
+ 
 }

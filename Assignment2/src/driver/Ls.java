@@ -4,6 +4,12 @@ import java.util.ArrayList;
 
 public class Ls extends Command
 {
+  /**
+   * Returns a String containing the documentation 
+   * for the functionalities of the 'ls' command.
+   * 
+   * @return the documentation of the 'ls' command
+   */
   @Override
   public String getDoc() {
     String documentation = 
@@ -18,6 +24,13 @@ public class Ls extends Command
 
     return documentation;
   }
+  /**
+   * print all the folders and files under current working folder
+   * 
+   * @param shell   an instance of the JShell that is interacting with the user
+   * @param input   a relative or absolute path name
+   */
+  @Override
   public void execute(JShell shell, String input) 
   {
     input = input.replaceAll(" +", " ");
@@ -53,9 +66,6 @@ public class Ls extends Command
       {
         if(Ls.findDirectory(userInput[1], workingDir)!=null)
         {
-          //userinput[1] is a folder, then print p, a colon, then the contents of that
-          //directory, then an extra new line.
-          //************************************************Ask abbas for format*****************/
           System.out.println(userInput[1] + " : ");
           Directory nextDir = Ls.findDirectory(userInput[1], workingDir);
           
@@ -80,6 +90,15 @@ public class Ls extends Command
       }
     }
   }
+  /**
+   * A helper function that takes in the file name and find that file in current 
+   * working folder and return it.
+   * 
+   * @param fileName            The name of the file that you want to find
+   * @param currentWorkingDir   A directory class variable that represents the current folder
+   * @return                    A instance of File that is under the current directory, 
+   *                            if not found then return null
+   */
   private static File findFile(String fileName, Directory currentWorkingDir) 
   {
     ArrayList<File> listOfFiles = currentWorkingDir.getListOfFiles();
@@ -93,7 +112,15 @@ public class Ls extends Command
     }
     return null;
   }
-  
+  /**
+   * A helper function that takes in the directory name and find that directory in current 
+   * working folder and return it.
+   * 
+   * @param directoryName            The name of the directory that you want to find
+   * @param currentWorkingDir        A directory class variable that represents the current folder
+   * @return                         A instance of Directory that is under the current directory, 
+   *                                 if not found then return null
+   */
   private static Directory findDirectory(String directoryName, Directory currentWorkingDir) 
   {
     

@@ -8,8 +8,20 @@ public abstract class Command
 {
 
   protected String doc;
+  /**
+   * An Abstract class that will be used for children classes to implement
+   * 
+   * @param shell            an instance of the JShell that is interacting with the user
+   * @param input            User input.
+   */
   public abstract void execute(JShell shell, String input);
   
+  /**
+   * An Abstract class that will be used for children classes to implement
+   * to print each command's docementation.
+   * 
+   * @return the documentation of each command.
+   */
   protected abstract String getDoc();
   
   /**
