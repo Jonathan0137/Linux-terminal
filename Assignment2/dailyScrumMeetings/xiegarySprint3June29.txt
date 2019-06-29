@@ -1,0 +1,10 @@
+What did I work on in the last three days?
+	- I tested the program to fix bugs and find edge cases in the program logic
+	- I refactored code and moved methods to different classes to better follow the responsibilities of each class
+	- I discussed with my teammates how to improve the design of our program, with the suggestions from our demonstration to the TA
+What do I plan to work in the next three days?
+    - Refactoring code to improve the design of the program, based on suggestions for improvement from the TA
+Am I blocked on anything?
+    - Nothing at the moment
+
+
