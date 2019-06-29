@@ -1,0 +1,8 @@
+What did I work on in the last three days?
+	-I have fixed history command, I have fixed functionality of echoToFile and have also begun reducing the size of some methods in that class
+
+What do I plan to work in the next three days?
+	-I plan on testing all my code from sprints 1 and 2 and reducing the size of my code in methods situated in EchoToFile and I plan on implementing some of the feedback from the TA during our demo
+
+Am I blocked on anything?
+	-I am currently wondering if we have enough time for any major overhauls (i.e what is the extent of what we will/can implement based on TA feedback from the demo)
