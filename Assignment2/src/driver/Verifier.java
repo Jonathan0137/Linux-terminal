@@ -123,7 +123,7 @@ public class Verifier
     }   
     else if(command.equals("echo"))
     {
-      if(numOfArg==1 || numOfArg == 3)
+      if(numOfArg==1 || numOfArg == 3 || numOfArg > 4)
       {
         System.out.println("bash: echo: invalid entry");
         return false;
