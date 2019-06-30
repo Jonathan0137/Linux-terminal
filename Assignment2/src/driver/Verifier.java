@@ -61,7 +61,7 @@ public class Verifier
   public boolean checkUserInput(String userInput)   
   {
     userInput = userInput.replaceAll(" +", " ");
-    String[] input = userInput.split(" ", 100);
+    String[] input = userInput.split(" ");
     int numOfArg = input.length;
     String command=input[0];
 
@@ -121,6 +121,15 @@ public class Verifier
       System.out.println("bash: man: too many arguments");
       return false;
     }   
+    else if(command.equals("echo"))
+    {
+      if(numOfArg==1 || numOfArg == 3)
+      {
+        System.out.println("bash: echo: invalid entry");
+        return false;
+      }
+      return true;
+    }
     else
     {
       return true;
