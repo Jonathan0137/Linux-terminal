@@ -22,24 +22,8 @@ public class EchoToFile extends Command {
 			String[] extractString = path.split("\"");
 			String[] optionalInput = extractString[2].split(" ");
 			String[] outfileFullPath = optionalInput[2].split("/");
-			String fullPath = "";
-			if (optionalInput[2].charAt(0) == '/') {
-				fullPath = fullPath.concat("/");
-			}
-			for (int i=0; i<outfileFullPath.length-1; i++) {
-				if (!outfileFullPath[i].equals("")) {
-					fullPath = path.concat(outfileFullPath[i]);
-					fullPath = path.concat("/");
-				}
-			}
-			if (path.charAt(0) == '/') {
-				path = Cd.getAbsolutePath(path, 
-						shell.getDirectoryTree().getRootDirectory());
-			}
-			if (path.charAt(0) != '/') {	
-			path = Cd.getAbsolutePath(path, 
-					shell.getCurrentDirectory());
-			}
+			String fullPath = findFullPath(shell, optionalInput, 
+					outfileFullPath);
 			if (inputCase == 1) {
 				File txtFile = EchoToFile.findFileByName
 						(Command.findDirectory(shell.getDirectoryTree(), fullPath),
@@ -56,7 +40,6 @@ public class EchoToFile extends Command {
 				EchoToFile.findFileByName(shell.getCurrentDirectory(), 
 						optionalInput[2]).setContents(extractString[1]);
 			}
-			
 			else if (inputCase == 4) {
 				File txtFile = new File(optionalInput[2], extractString[1]);
 				EchoToFile.addFile(shell.getCurrentDirectory(), txtFile);
@@ -97,123 +80,73 @@ public class EchoToFile extends Command {
 	 * @return The input case for which execute must account for
 	 */
 	public static int echoToFileCheck(JShell shell, String input) {
-
 		if (input.split(" ").length < 4) {
 			System.out.println("echo: missing outfile or string arguments"
 					+ " or lack of spaces between arguments");
 			return -1;
 		}
-		
 		else {
 			if (input.split("\"").length != 3) {
 				System.out.println("echo: incorrect number of input strings");
 				return -1;
 			}
-			
 			String[] extractString = input.split("\"");
 			String[] echoInput = extractString[0].split(" ");
 			String[] optionalInput = extractString[2].split(" ");
-			
 			if (echoInput.length != 1) {
 				System.out.println("echo: wrong order of arguments");
 				return -1;
 			}
-			
 			if (optionalInput.length != 3) {
 				System.out.println("echo: wrong number of "
 						+ "arguments for outfile");
 				return -1;
 			}
-			
 			if (optionalInput[1].equals(">")) { 
 				if (optionalInput[2].split("/").length > 2 || 
 						optionalInput[2].startsWith("/")) {
 					String[] outfileFullPath = optionalInput[2].split("/");
-					String path = "";
-					if (optionalInput[2].charAt(0) == '/') {
-						path = path.concat("/");
-					}
-					for (int i=0; i<outfileFullPath.length-1; i++) {
-						if (!outfileFullPath[i].equals("")) {
-							path = path.concat(outfileFullPath[i]);
-							path = path.concat("/");
-						}
-					}
-					if (path.charAt(0) == '/') {
-						path = Command.getAbsolutePath(path, 
-								shell.getDirectoryTree().getRootDirectory());
-					}
-					if (path.charAt(0) != '/') {	
-					path = Command.getAbsolutePath(path, 
-							shell.getCurrentDirectory());
-					}
+					String path = findFullPath(shell, optionalInput, 
+							outfileFullPath);
 					if (Command.findDirectory(shell.getDirectoryTree(), path) != null) {
 						if (EchoToFile.findFileByName(
 						    Command.findDirectory(shell.getDirectoryTree(), path), 
 								outfileFullPath[outfileFullPath.length-1]) != null) {
 							return 1;
 						}
-						else return 2; //i.e file dne
+						return 2; //i.e file dne
 					}
-					else { 
-						System.out.println("echo: input path does not exist");
-						return -1;
-					}
+					System.out.println("echo: input path does not exist");
+					return -1;
 				}
 				else if (EchoToFile.findFileByName(shell.getCurrentDirectory(), 
 						optionalInput[2]) != null) {
 					return 3; //i.e file exists
 				}
-				
-				else {
-					return 4; //i.e file dne
-				}
+				return 4; //i.e file dne
 			}
-			
-			//NOW FOR ">>"
 			if (optionalInput[1].equals(">>")) {
 				if (optionalInput[2].split("/").length > 2 || 
 						optionalInput[2].startsWith("/")) {
 					String[] outfileFullPath = optionalInput[2].split("/");
-					String path = "";
-					if (optionalInput[2].charAt(0) == '/') {
-						path = path.concat("/");
-					}
-					for (int i=0; i<outfileFullPath.length-1; i++) {
-						if (!outfileFullPath[i].equals("")) {
-							path = path.concat(outfileFullPath[i] + "/");
-						}
-					}
-					if (path.charAt(0) == '/') {
-						path = Command.getAbsolutePath(path, 
-								shell.getDirectoryTree().getRootDirectory());
-					}
-					if (path.charAt(0) != '/') {	
-					path = Command.getAbsolutePath(path, 
-							shell.getCurrentDirectory());
-					}
+					String path = findFullPath(shell, optionalInput, 
+							outfileFullPath);
 					if (Command.findDirectory(shell.getDirectoryTree(), path) != null) {
 						if (EchoToFile.findFileByName(
 						    Command.findDirectory(shell.getDirectoryTree(), path), 
 								outfileFullPath[outfileFullPath.length-1]) != null) {
 							return 5;
 						}
-						else return 2; //i.e file dne
-					}
-					else { 
-						System.out.println("echo: input path does not exist");
-						return -1;
-					}
+						return 2; //i.e file dne
+					} 
+					System.out.println("echo: input path does not exist");
+					return -1;
 				}
-				
 				else if (EchoToFile.findFileByName(shell.getCurrentDirectory(), 
 						optionalInput[2]) != null) {
 					return 6; //i.e file exists
 				}
-				
-				else {
-					return 4; //i.e file dne
-				}
+				return 4; //i.e file dne
 			}
 		}
 		return -1;
@@ -222,10 +155,10 @@ public class EchoToFile extends Command {
 	/**
 	 * Adds a new file into a specified directory
 	 * @param target The target directory in which we want to add a new file
-	 * @param newFile The new file that is to be added into the target directory
+	 * @param newFile The new file that will be added into the target directory
 	 */
 	public static void addFile(Directory target, File newFile) {
-		if (EchoToFile.fileCheck(newFile.getName(), target)) { //REMEBER TO CHECK THAT FILE NAME IS VALID AND THEN DO IT FOR >> CASE
+		if (EchoToFile.fileCheck(newFile.getName(), target)) {  
 			target.getListOfFiles().add(newFile);
 			newFile.setParentDirectory(target);
 		}
@@ -238,7 +171,7 @@ public class EchoToFile extends Command {
 	 * Finds a file by name in a specific directory
 	 * @param location The target directory
 	 * @param fileName The name of the sought out file
-	 * @return fileList.get(i) The file with same name as fileName
+	 * @return The file with same name as fileName
 	 */
 	public static File findFileByName(Directory location, String fileName) {
 		ArrayList<File> fileList = location.getListOfFiles();
@@ -272,5 +205,29 @@ public class EchoToFile extends Command {
 			}
 		}
 		return true;
+	}
+	public static String findFullPath(JShell shell, String[] optionalInput, 
+			String[] outfileFullPath) {
+		String fullPath = "";
+		if (optionalInput[2].charAt(0) == '/') {
+			fullPath = fullPath.concat("/");
+		}
+		for (int i=0; i<outfileFullPath.length-1; i++) {
+			if (!outfileFullPath[i].equals("")) {
+				fullPath = fullPath.concat(outfileFullPath[i]);
+				fullPath = fullPath.concat("/");
+			}
+		}
+		if (fullPath.length()>0) {
+			if (fullPath.charAt(0) == '/') {
+				fullPath = Cd.getAbsolutePath(fullPath, 
+						shell.getDirectoryTree().getRootDirectory());
+			}
+			if (fullPath.charAt(0) != '/') {	
+			fullPath = Cd.getAbsolutePath(fullPath, 
+					shell.getCurrentDirectory());
+			}
+		}
+		return fullPath;
 	}
 }
