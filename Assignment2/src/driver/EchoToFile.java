@@ -46,6 +46,7 @@ public class EchoToFile extends Command {
 				 
 			}
 			else if (inputCase == 5) {
+		
 				File txtFile = EchoToFile.findFileByName
 						(Command.findDirectory(shell.getDirectoryTree(), fullPath), 
 								outfileFullPath[outfileFullPath.length-1]);
@@ -79,7 +80,7 @@ public class EchoToFile extends Command {
 	 * @param input A string representation of a user input
 	 * @return The input case for which execute must account for
 	 */
-	public static int echoToFileCheck(JShell shell, String input) {
+	private static int echoToFileCheck(JShell shell, String input) {
 		if (input.split(" ").length < 4) {
 			System.out.println("echo: missing outfile or string arguments"
 					+ " or lack of spaces between arguments");
@@ -103,27 +104,7 @@ public class EchoToFile extends Command {
 				return -1;
 			}
 			if (optionalInput[1].equals(">")) { 
-				if (optionalInput[2].split("/").length > 2 || 
-						optionalInput[2].startsWith("/")) {
-					String[] outfileFullPath = optionalInput[2].split("/");
-					String path = findFullPath(shell, optionalInput, 
-							outfileFullPath);
-					if (Command.findDirectory(shell.getDirectoryTree(), path) != null) {
-						if (EchoToFile.findFileByName(
-						    Command.findDirectory(shell.getDirectoryTree(), path), 
-								outfileFullPath[outfileFullPath.length-1]) != null) {
-							return 1;
-						}
-						return 2; //i.e file dne
-					}
-					System.out.println("echo: input path does not exist");
-					return -1;
-				}
-				else if (EchoToFile.findFileByName(shell.getCurrentDirectory(), 
-						optionalInput[2]) != null) {
-					return 3; //i.e file exists
-				}
-				return 4; //i.e file dne
+				return EchoToFile.checkOverwriteCase(shell, optionalInput); 
 			}
 			if (optionalInput[1].equals(">>")) {
 				if (optionalInput[2].split("/").length > 2 || 
@@ -157,7 +138,7 @@ public class EchoToFile extends Command {
 	 * @param target The target directory in which we want to add a new file
 	 * @param newFile The new file that will be added into the target directory
 	 */
-	public static void addFile(Directory target, File newFile) {
+	private static void addFile(Directory target, File newFile) {
 		if (EchoToFile.fileCheck(newFile.getName(), target)) {  
 			target.getListOfFiles().add(newFile);
 			newFile.setParentDirectory(target);
@@ -173,7 +154,7 @@ public class EchoToFile extends Command {
 	 * @param fileName The name of the sought out file
 	 * @return The file with same name as fileName
 	 */
-	public static File findFileByName(Directory location, String fileName) {
+	private static File findFileByName(Directory location, String fileName) {
 		ArrayList<File> fileList = location.getListOfFiles();
 		for (int i=0; i<fileList.size();i++) {
 			if (fileList.get(i).getName().equals(fileName)) {
@@ -190,7 +171,7 @@ public class EchoToFile extends Command {
 	 * @param fileName A file name a user is attempting to create
 	 * @return True if file passes all conditions to be created
 	 */
-	public static boolean fileCheck(String fileName, Directory target) {
+	private static boolean fileCheck(String fileName, Directory target) {
 		ArrayList<Directory> subDirectories = target.getListOfSubdirectories();
 		//potentially need to do target.getName.equals(fileName) to check if file has same name as current directory
 		for (int i=0; i<subDirectories.size(); i++) {
@@ -206,7 +187,15 @@ public class EchoToFile extends Command {
 		}
 		return true;
 	}
-	public static String findFullPath(JShell shell, String[] optionalInput, 
+	/**
+	 * Dissects the users input in echo command in order to extract and return
+	 * the full requested path 
+	 * @param shell The instance of the JShell
+	 * @param optionalInput the portion of user input that are not mandatory
+	 * @param outfileFullPath the portion of user input that refers to a path
+	 * @return The string version of the full requested path
+	 */
+	private static String findFullPath(JShell shell, String[] optionalInput, 
 			String[] outfileFullPath) {
 		String fullPath = "";
 		if (optionalInput[2].charAt(0) == '/') {
@@ -229,5 +218,29 @@ public class EchoToFile extends Command {
 			}
 		}
 		return fullPath;
+	}
+	private static int checkOverwriteCase(JShell shell, 
+			String[] optionalInput) {
+		if (optionalInput[2].split("/").length > 2 || 
+				optionalInput[2].startsWith("/")) {
+			String[] outfileFullPath = optionalInput[2].split("/");
+			String path = findFullPath(shell, optionalInput, 
+					outfileFullPath);
+			if (Command.findDirectory(shell.getDirectoryTree(), path) != null) {
+				if (EchoToFile.findFileByName(
+				    Command.findDirectory(shell.getDirectoryTree(), path), 
+						outfileFullPath[outfileFullPath.length-1]) != null) {
+					return 1;
+				}
+				return 2; //i.e file dne
+			}
+			System.out.println("echo: input path does not exist");
+			return -1;
+		}
+		else if (EchoToFile.findFileByName(shell.getCurrentDirectory(), 
+				optionalInput[2]) != null) {
+			return 3; //i.e file exists
+		}
+		return 4; //i.e file dne
 	}
 }
