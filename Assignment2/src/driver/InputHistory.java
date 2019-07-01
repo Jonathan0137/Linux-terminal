@@ -22,7 +22,8 @@ public class InputHistory {
 	}
 	
 	/**
-	 * Returns the list of all user inputs stored within the InputHistory object
+	 * Returns the list of all user inputs stored within 
+	 * the InputHistory object
 	 * @return this.inputList the ArrayList<String> instance variable
 	 */
 	public ArrayList<String> getInputList(){
