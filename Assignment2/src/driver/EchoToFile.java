@@ -24,19 +24,13 @@ public class EchoToFile extends Command {
 			String[] outfileFullPath = optionalInput[2].split("/");
 			String fullPath = findFullPath(shell, optionalInput, 
 					outfileFullPath);
-			if (inputCase == 1) {
-				File txtFile = EchoToFile.findFileByName
-						(Command.findDirectory(shell.getDirectoryTree(), fullPath),
-								outfileFullPath[outfileFullPath.length-1]);
-				txtFile.setContents(extractString[1]);
+			if (inputCase == 1 || inputCase == 3) {
+				EchoToFile.overwriteFile(shell, fullPath, optionalInput, 
+						outfileFullPath, extractString, inputCase); 
 			}
 			else if (inputCase == 2 || inputCase == 4) {
 				EchoToFile.createNewFile(shell, fullPath, optionalInput, 
-						outfileFullPath,extractString, inputCase);
-			}
-			else if (inputCase == 3) {
-				EchoToFile.findFileByName(shell.getCurrentDirectory(), 
-						optionalInput[2]).setContents(extractString[1]);
+						outfileFullPath, extractString, inputCase);
 			}
 			else if (inputCase == 5 || inputCase == 6) {
 				EchoToFile.concatFile(shell, fullPath, optionalInput, 
@@ -278,7 +272,8 @@ public class EchoToFile extends Command {
 			optionalInput, String[] outfileFullPath, String[] extractString, 
 			int inputCase) {
 		if (inputCase == 2) {
-			Directory destination = Command.findDirectory(shell.getDirectoryTree(), fullPath);
+			Directory destination = Command.findDirectory(
+					shell.getDirectoryTree(), fullPath);
 			File txtFile = new File(outfileFullPath
 					[outfileFullPath.length-1], extractString[1]);
 			EchoToFile.addFile(destination, txtFile);
@@ -286,6 +281,30 @@ public class EchoToFile extends Command {
 		else if (inputCase == 4) {
 			File txtFile = new File(optionalInput[2], extractString[1]);
 			EchoToFile.addFile(shell.getCurrentDirectory(), txtFile);
+		}
+	}
+	
+	/**
+	 * Overwrites files with users input string
+	 * @param shell an instance of JShell
+	 * @param fullPath the target directory containing the called file
+	 * @param optionalInput the section of user input containing file name
+	 * @param outfileFullPath optional input containing called directory
+	 * @param extractString the string user wants to add to file
+	 * @param inputCase whether there is a path given or not
+	 */
+	private static void overwriteFile(JShell shell, String fullPath, String[] 
+			optionalInput, String[] outfileFullPath, String[] extractString, 
+			int inputCase) {
+		if (inputCase == 1) {
+			File txtFile = EchoToFile.findFileByName
+					(Command.findDirectory(shell.getDirectoryTree(), fullPath),
+							outfileFullPath[outfileFullPath.length-1]);
+			txtFile.setContents(extractString[1]);
+		}
+		else if (inputCase == 3) {
+			EchoToFile.findFileByName(shell.getCurrentDirectory(), 
+					optionalInput[2]).setContents(extractString[1]);
 		}
 	}
 }
