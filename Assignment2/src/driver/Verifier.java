@@ -123,12 +123,45 @@ public class Verifier
     }   
     else if(command.equals("echo"))
     {
-      if(numOfArg==1 || numOfArg == 3 || numOfArg > 4)
+      if(userInput.split("\"").length==2)
       {
-        System.out.println("bash: echo: invalid entry");
+        return true;
+      }
+      if(userInput.split("\"").length!=3)
+      {
+        System.out.println("bash: echo: invalid input");
         return false;
       }
+      if(userInput.split("\"").length==3)
+      {
+        String input2 = userInput.split("\"")[2];
+        if(input2.contains(">")==false && input2.contains(">>")== false)
+        {
+          System.out.println("bash: echo: invalid input");
+          return false;
+        }
+        else
+        {
+         if(input2.contains(">>"))
+         {
+           if(input2.split(">>").length==1)
+           {
+             System.out.println("bash: echo: invalid input");
+             return false;
+           }
+         }
+         else if(input2.contains(">"))
+         {
+           if(input2.split(">").length==1)
+           {
+             System.out.println("bash: echo: invalid input");
+             return false;
+           }
+         }
+        }
+      }
       return true;
+        
     }
     else
     {
