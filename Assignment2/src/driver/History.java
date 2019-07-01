@@ -51,7 +51,7 @@ public class History extends Command {
 	 * @param list The list of all user inputs
 	 * @return True if argument valid, False otherwise
 	 */
-	public static boolean historyCheck(String argument,
+	private static boolean historyCheck(String argument,
 			ArrayList<String> list) {
 		try {
 			int cap = Integer.parseInt(argument);
