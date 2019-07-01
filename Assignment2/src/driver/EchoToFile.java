@@ -43,22 +43,10 @@ public class EchoToFile extends Command {
 			else if (inputCase == 4) {
 				File txtFile = new File(optionalInput[2], extractString[1]);
 				EchoToFile.addFile(shell.getCurrentDirectory(), txtFile);
-				 
 			}
-			else if (inputCase == 5) {
-		
-				File txtFile = EchoToFile.findFileByName
-						(Command.findDirectory(shell.getDirectoryTree(), fullPath), 
-								outfileFullPath[outfileFullPath.length-1]);
-				txtFile.setContents(txtFile.getContents()
-						.concat("\n" + extractString[1])); 
-			}
-			else if (inputCase == 6) {
-				EchoToFile.findFileByName(shell.getCurrentDirectory(), 
-						optionalInput[2]).setContents(EchoToFile.
-								findFileByName(shell.getCurrentDirectory(), 
-						optionalInput[2]).getContents()
-								.concat("\n" + extractString[1]));
+			else if (inputCase == 5 || inputCase == 6) {
+				EchoToFile.concatFile(shell, fullPath, optionalInput, 
+						outfileFullPath, extractString, inputCase);
 			}
 		}
 	}
@@ -89,12 +77,7 @@ public class EchoToFile extends Command {
 		String[] echoInput = extractString[0].split(" ");
 		String[] optionalInput = extractString[2].split(" ");
 		if (echoInput.length != 1) {
-			System.out.println("echo: wrong order of arguments");
-			return -1;
-		}
-		if (optionalInput.length != 3) {
-			System.out.println("echo: wrong number of "
-					+ "arguments for outfile");
+			System.out.println("bash: echo: wrong order of arguments");
 			return -1;
 		}
 		if (optionalInput[1].equals(">")) { 
@@ -102,7 +85,8 @@ public class EchoToFile extends Command {
 		}
 		if (optionalInput[1].equals(">>")) {
 			return EchoToFile.checkAppendingCase(shell, optionalInput);
-		}	
+		}
+		System.out.println("bash: echo: wrong order of arguments");
 		return -1;
 	}
 
@@ -205,7 +189,8 @@ public class EchoToFile extends Command {
 			String[] outfileFullPath = optionalInput[2].split("/");
 			String path = findFullPath(shell, optionalInput, 
 					outfileFullPath);
-			if (Command.findDirectory(shell.getDirectoryTree(), path) != null) {
+			if (Command.findDirectory(shell.getDirectoryTree(), path)
+					!= null) {
 				if (EchoToFile.findFileByName(
 				    Command.findDirectory(shell.getDirectoryTree(), path), 
 						outfileFullPath[outfileFullPath.length-1]) != null) {
@@ -237,7 +222,8 @@ public class EchoToFile extends Command {
 			String[] outfileFullPath = optionalInput[2].split("/");
 			String path = findFullPath(shell, optionalInput, 
 					outfileFullPath);
-			if (Command.findDirectory(shell.getDirectoryTree(), path) != null) {
+			if (Command.findDirectory(shell.getDirectoryTree(), path)
+					!= null) {
 				if (EchoToFile.findFileByName(
 				    Command.findDirectory(shell.getDirectoryTree(), path), 
 						outfileFullPath[outfileFullPath.length-1]) != null) {
@@ -253,5 +239,34 @@ public class EchoToFile extends Command {
 			return 6; //i.e file exists
 		}
 		return 4; //i.e file dne
+	}
+	
+	/**
+	 * Concatenates a string to the end of any existing file by request of
+	 * user
+	 * @param shell an instance of JShell
+	 * @param fullPath the target directory containing the called file
+	 * @param optionalInput the section of user input containing file name
+	 * @param outfileFullPath optional input containing called directory
+	 * @param extractString the string user wants to add to file
+	 * @param inputCase whether there is a path given or not
+	 */
+	private static void concatFile(JShell shell, String fullPath, String[] 
+			optionalInput, String[] outfileFullPath, String[] extractString, 
+			int inputCase) {
+		if (inputCase == 5) {
+			File txtFile = EchoToFile.findFileByName
+					(Command.findDirectory(shell.getDirectoryTree(), fullPath), 
+							outfileFullPath[outfileFullPath.length-1]);
+			txtFile.setContents(txtFile.getContents()
+					.concat("\n" + extractString[1])); 
+		}
+		else if (inputCase == 6) {
+			EchoToFile.findFileByName(shell.getCurrentDirectory(), 
+					optionalInput[2]).setContents(EchoToFile.
+							findFileByName(shell.getCurrentDirectory(), 
+					optionalInput[2]).getContents()
+							.concat("\n" + extractString[1]));
+		}
 	}
 }
