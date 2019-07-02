@@ -176,7 +176,7 @@ public class EchoToFile extends Command {
 	private static int checkOverwriteCase(JShell shell, 
 			String[] optionalInput) {
 		if (optionalInput[2].split("/").length > 2 || 
-				optionalInput[2].startsWith("/")) {
+				optionalInput[2].contains("/")) {
 			String[] outfileFullPath = optionalInput[2].split("/");
 			String path = findFullPath(shell, optionalInput, 
 					outfileFullPath);
@@ -209,7 +209,7 @@ public class EchoToFile extends Command {
 	private static int checkAppendingCase(JShell shell, 
 			String[] optionalInput) {
 		if (optionalInput[2].split("/").length > 2 || 
-				optionalInput[2].startsWith("/")) {
+				optionalInput[2].contains("/")) {
 			String[] outfileFullPath = optionalInput[2].split("/");
 			String path = findFullPath(shell, optionalInput, 
 					outfileFullPath);
