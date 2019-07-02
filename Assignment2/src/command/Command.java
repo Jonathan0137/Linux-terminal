@@ -6,22 +6,18 @@ import fileSystem.FileSystem;
 import driver.JShell;
 
 public abstract class Command 
-//public interface Command
-// change all other class to implement 
 {
-
-  protected String doc;
   /**
    * An Abstract class that will be used for children classes to implement
    * 
-   * @param shell            an instance of the JShell that is interacting with the user
-   * @param input            User input.
+   * @param shell an instance of the JShell that is interacting with the user
+   * @param input User input.
    */
   public abstract void execute(JShell shell, String input);
   
   /**
    * An Abstract class that will be used for children classes to implement
-   * to print each command's docementation.
+   * to print each command's documentation.
    * 
    * @return the documentation of each command.
    */
@@ -31,11 +27,12 @@ public abstract class Command
    * Returns the directory in the file system with the given absolute path name
    * if it exists, otherwise returns null.
    * 
-   * @param fs                  the file system in which the directory is being searched for
-   * @param absolutePathName    the absolute path name of a directory in the file system
-   * @return                    the directory with the given absolute path name
+   * @param fs the file system in which the directory is being searched for
+   * @param absolutePathName the absolute path name of a directory
+   * @return the directory with the given absolute path name
    */
-  protected static Directory findDirectory(FileSystem fs, String absolutePathName) {
+  protected static Directory findDirectory(FileSystem fs, 
+      String absolutePathName) {
     Directory traversalDirectory = fs.getRootDirectory();
     String[] nameList = absolutePathName.split("/");
     
@@ -52,14 +49,17 @@ public abstract class Command
   }
   
   /**
-   * Returns the subdirectory with the given name if it exists, otherwise returns null.
+   * Returns the subdirectory with the given name if it exists, 
+   * otherwise returns null.
    * 
-   * @param parentDir  the parent directory in which the subdirectory is being searched for
+   * @param parentDir  the directory to look in for the subdirectory
    * @param subDirName the name of the wanted subdirectory
    * @return the subdirectory in parentDir with the name of subDirName
    */
-  private static Directory findSubdirectory(Directory parentDir, String subDirName) {
-    ArrayList<Directory> listOfSubdirectories = parentDir.getListOfSubdirectories();
+  private static Directory findSubdirectory(Directory parentDir, 
+      String subDirName) {
+    ArrayList<Directory> listOfSubdirectories = parentDir.
+        getListOfSubdirectories();
     for (int i=0; i<listOfSubdirectories.size(); i++) {
       if (subDirName.equals(listOfSubdirectories.get(i).getName())) {
         return listOfSubdirectories.get(i);
@@ -97,8 +97,9 @@ public abstract class Command
   }
   
   /**
-   * Returns a string that is the given pathName with the last directory removed.
-   * In other words, returns the path name of the parent directory specified by pathName.
+   * Returns a string that is the given pathName with the last 
+   * directory removed. In other words, returns the path name of the 
+   * parent directory specified by pathName.
    * If the pathName is the root directory's path, then returns pathName.
    * 
    * @param pathName a relative or absolute path name
