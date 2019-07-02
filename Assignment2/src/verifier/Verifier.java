@@ -1,6 +1,6 @@
 package verifier;
 
-//import java.util.Arrays;
+import command.*;
 
 public class Verifier 
 {

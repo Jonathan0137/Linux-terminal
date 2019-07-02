@@ -1,5 +1,7 @@
 package command;
 
+import driver.JShell;
+
 public class EchoToOutput extends Command {
   /**
    * Returns a String containing the documentation 
