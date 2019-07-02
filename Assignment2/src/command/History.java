@@ -4,12 +4,6 @@ import java.util.ArrayList;
 import driver.JShell;
 
 public class History extends Command {
-	
-	public History() { 
-		doc = "Displays user inputs, or given an extra integer parameter n,"
-				+ " will display the last n inputs";
-	}
-	
 	/**
 	 * Executes the users input by printing out users total history or
 	 * optionally prints the last nth user inputs where n is an integer
@@ -56,19 +50,26 @@ public class History extends Command {
 			ArrayList<String> list) {
 		try {
 			int cap = Integer.parseInt(argument);
-			if (cap>list.size()) {
-				return true;
+			if (cap<0) {
+				System.out.println("bash: history: The second parameter; '" +
+						cap + "' is negative");
+				return false;
 			}
 			return true;
 		}
 		catch(Exception e) {
-			System.out.println("The second parameter; '"+ argument+
-					"' is not an integer");
+			System.out.println("bash: history: The second parameter; '"+ 
+					argument + "' is not an integer");
 			return false;
 		}
 	}
 	
 	public String getDoc() {
-		return this.doc;
+		String doc = "history: history [NUMBER]" + "\n\t" + "If no NUMBER" +
+				" is given, print out all user inputs since" + "\n\t\t" + 
+				"activating JShell, ordered from least recent input to most" +
+				"\n\t\t" + "recent input." + "\n\t" + "Otherwise;" + "\n\t\t" +
+				"print out the last n user inputs where n is NUMBER >= 0";
+		return doc;
 	}
 }
