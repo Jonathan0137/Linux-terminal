@@ -82,7 +82,7 @@ public class Verifier
     }
     else if(command.equals("cd") && numOfArg == 1)
     {
-      System.out.println("bash cd: not enought arguments");
+      System.out.println("bash cd: not enough arguments");
       return false;
     }
     else if(command.equals("pwd") && numOfArg > 1)
