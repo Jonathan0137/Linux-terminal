@@ -32,56 +32,51 @@ public class Man extends Command
   {
     String[] userInput = input.split(" ", 2);
     String commandName = userInput[1];
+    
     switch(commandName)
     {
-      case "cd":
-        Cd cd = new Cd();
-        System.out.println(cd.getDoc());
+      case "exit":
+        System.out.println(new Exit().getDoc());
         break;
       case "mkdir":
-        Mkdir mkdir = new Mkdir();
-        System.out.println(mkdir.getDoc());
+        System.out.println(new Mkdir().getDoc());
         break;
-      case "pwd":
-        Pwd pwd = new Pwd();
-        System.out.println(pwd.getDoc());
-        break;
-      case "pushd":
-        Pushd pushd = new Pushd();
-        System.out.println(pushd.getDoc());
-        break;
-      case "history":
-        History history = new History();
-        System.out.println(history.getDoc());
+      case "cd":
+        System.out.println(new Cd().getDoc());
         break;
       case "ls":
-        Ls ls = new Ls();
-        System.out.println(ls.getDoc());
+        System.out.println(new Ls().getDoc());
         break;
-      case "exit":
-        Exit exit = new Exit();
-        System.out.println(exit.getDoc());
+      case "pwd":
+        System.out.println(new Pwd().getDoc());
+        break;
+      case "pushd":
+        System.out.println(new Pushd().getDoc());
         break;
       case "popd":
-        Popd popd = new Popd();
-        System.out.println(popd.getDoc());
+        System.out.println(new Popd().getDoc());
+        break;
+      case "history":
+        System.out.println(new History().getDoc());
         break;
       case "cat":
-        Cat cat = new Cat();
-        System.out.println(cat.getDoc());
+        System.out.println(new Cat().getDoc());
         break;
       case "echo":
-          EchoToOutput echo2 = new EchoToOutput();
-          System.out.println(echo2.getDoc());
+          System.out.println(new EchoToOutput().getDoc());
         break;
       case "man":
-        Man man = new Man();
-        System.out.println(man.getDoc());
+        System.out.println(new Man().getDoc());
         break;
       default:
         System.out.println("No such CMD exist, check man man for more information");
         break;
     }
+    
+  }
+  public void printDirDocs(String commandName)
+  {
+    
   }
 
 }
