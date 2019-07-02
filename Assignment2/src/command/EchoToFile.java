@@ -6,15 +6,6 @@ import fileSystem.Directory;
 import fileSystem.File;
 
 public class EchoToFile extends Command {
-	
-	/**
-	 * The constructor
-	 */
-	public EchoToFile() {
-		doc = "Allows user to print onto shell, overwrite, add onto and create"
-				+ " new text files using an inputed string";
-	}
-	
 	/**
 	 * Creates or modifies text files that will contain the user input string
 	 */
@@ -47,8 +38,17 @@ public class EchoToFile extends Command {
 	 * @return this.doc The documentation for the Echo
 	 */
 	protected String getDoc() {
-		// TODO Auto-generated method stub
-		return this.doc;
+		String doc = "echo: echo STRING [(>or>>) OUTFILE]\n\tIf no optional"
+				+ " arguments are given, print STRING onto shell.\n\t" +
+				"Otherwise;" + "\n\t\t" + "If OUTFILE file does not exist," + 
+				" create a new file in" + "\n\t\t\t" + "OUTFILE path with" + 
+				" STRING as its contents." + "\n\t\t" + "If OUTFILE file "
+				+ "and path exists, and user inputs" + "\n\t\t\t" + 
+				"argument \">\", then overwrite OUTFILE file" + "\n\t\t\t" + 
+				"with STRING." + "\n\t\t" + "If OUTFILE file and path exists," 
+				+ " and user inputs" + "\n\t\t\t" + "argument \">>\", then " + 
+				"append STRING onto" + "\n\t\t\t" + "the end of OUTFILE file.";
+		return doc;
 	}
 	
 	/**
