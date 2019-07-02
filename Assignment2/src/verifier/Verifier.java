@@ -33,7 +33,35 @@ public class Verifier {
       return null;
     }
   }
+  /**
+   * Check if user input has the correct number of arguments. 
+   * if not return false, else return true.
+   * 
+   * @param userInput      a string that contains what user has typed
+   * @return               return true if user enters correct, else false
+   */
+  public boolean checkUserInput(String userInput) {
+    userInput = userInput.replaceAll(" +", " ");
+    String[] input = userInput.split(" ");
+    int numOfArg = input.length;
+    String command = input[0];
+    if (command.equals("cd") || command.equals("mkdir") || 
+        command.equals("pwd")
+        || command.equals("ls")) {
+      return checkDirCommands(command, numOfArg);
+    } else if (command.equals("pushd") || command.equals("popd")) {
+      return checkDirStackCommands(command, numOfArg);
+    } else if (command.equals("cat") || command.equals("echo")) {
+      return checkFilesCommands(command, numOfArg, userInput);
+    } else if (command.equals("history") || command.equals("exit") || 
+        command.equals("man")) {
+      return checkOtherCommands(command, numOfArg);
+    } else {
+      System.out.println("Command not found, please try again");
+      return false;
+    }
 
+  }
   /**
    * Helper method that check if user's command exist or not, 
    * if exist then return a instance of that command, if not,return null. 
@@ -128,37 +156,8 @@ public class Verifier {
   }
 
   /**
-   * Check if user input has the correct number of arguments. 
-   * if not return false, else return true.
-   * 
-   * @param userInput      a string that contains what user has typed
-   * @return               return true if user enters correct, else false
-   */
-  public boolean checkUserInput(String userInput) {
-    userInput = userInput.replaceAll(" +", " ");
-    String[] input = userInput.split(" ");
-    int numOfArg = input.length;
-    String command = input[0];
-    if (command.equals("cd") || command.equals("mkdir") || 
-        command.equals("pwd")
-        || command.equals("ls")) {
-      return checkDirCommands(command, numOfArg);
-    } else if (command.equals("pushd") || command.equals("popd")) {
-      return checkDirStackCommands(command, numOfArg);
-    } else if (command.equals("cat") || command.equals("echo")) {
-      return checkFilesCommands(command, numOfArg, userInput);
-    } else if (command.equals("history") || command.equals("exit") || 
-        command.equals("man")) {
-      return checkOtherCommands(command, numOfArg);
-    } else {
-      System.out.println("Command not found, please try again");
-      return false;
-    }
-
-  }
-  /**
-   * Check if user input has the correct number of arguments.
-   * if not return false, else return true. 
+   * Helper method that check if user input has the correct number of 
+   * arguments. if not return false, else return true. 
    * Only for Dir commands such as cd, pwd, mkdir, and ls
    * 
    * @param command    A string that represents the command user want to check
@@ -183,8 +182,8 @@ public class Verifier {
     }
   }
   /**
-   * Check if user input has the correct number of arguments.
-   * if not return false, else return true. 
+   * Helper method that check if user input has the correct number of 
+   * arguments. if not return false, else return true. 
    * Only for Dir Stack commands such as pushd and popd
    * 
    * @param command    A string that represents the command user want to check
@@ -206,8 +205,8 @@ public class Verifier {
     }
   }
   /**
-   * Check if user input has the correct number of arguments.
-   * if not return false, else return true. 
+   * Helper method that check if user input has the correct number of 
+   * arguments. if not return false, else return true. 
    * Only for Files commands such cat and echo.
    * 
    * @param command    A string that represents the command user want to check
@@ -241,16 +240,12 @@ public class Verifier {
             if (input2.split(">").length == 1) {
               System.out.println("bash: echo: invalid input");
               return false;
-            }
-          }
-        }
-      }
-    } 
+            }}}}} 
     return true;
   }
   /**
-   * Check if user input has the correct number of arguments.
-   * if not return false, else return true. 
+   * Helper method that check if user input has the correct number of 
+   * arguments. if not return false, else return true. 
    * Only for other commands such as exit, history and man.
    * 
    * @param command    A string that represents the command user want to check
