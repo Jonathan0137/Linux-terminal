@@ -85,7 +85,6 @@ public class Verifier
       System.out.println("bash cd: not enought arguments");
       return false;
     }
-    // ls can have anynumer
     else if(command.equals("pwd") && numOfArg > 1)
     {
       System.out.println("bash pwd: too many arguments");
@@ -96,6 +95,11 @@ public class Verifier
       System.out.println("bash pushd: too many arguments");
       return false;
     } 
+    else if(command.equals("popd") && numOfArg!=1)
+    {
+      System.out.println("bash: popd: too many arguments");
+      return false;
+    }
     else if(command.equals("pushd") && numOfArg == 1)
     {
       System.out.println("bash: pushd: no other directory");
