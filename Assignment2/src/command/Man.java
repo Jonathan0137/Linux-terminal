@@ -1,5 +1,7 @@
 package command;
 
+import driver.JShell;
+
 public class Man extends Command
 {
   /**

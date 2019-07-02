@@ -1,6 +1,9 @@
 package command;
 
 import java.util.ArrayList;
+import fileSystem.Directory;
+import fileSystem.FileSystem;
+import driver.JShell;
 
 public abstract class Command 
 //public interface Command

@@ -30,6 +30,10 @@
 package driver;
 
 import java.util.Scanner;
+import fileSystem.*;
+import inputHistory.InputHistory;
+import command.Command;
+import verifier.Verifier;
 
 public class JShell 
 {

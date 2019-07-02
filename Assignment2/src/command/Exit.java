@@ -1,5 +1,7 @@
 package command;
 
+import driver.JShell;
+
 public class Exit extends Command {
 	/**
 	 * The constructor

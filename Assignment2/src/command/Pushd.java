@@ -1,5 +1,9 @@
 package command;
 
+import driver.JShell;
+import fileSystem.Directory;
+import fileSystem.DirectoryStack;
+
 public class Pushd extends Command {
   /**
    * Returns a String containing the documentation for the 

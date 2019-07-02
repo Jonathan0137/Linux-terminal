@@ -1,6 +1,11 @@
 package command;
 
 import java.util.ArrayList;
+import driver.JShell;
+import fileSystem.FileSystem;
+import fileSystem.Directory;
+import fileSystem.File;
+
 
 public class Mkdir extends Command{
 	//NOTE: code assumes "mkdir" is part of the string newDirectories

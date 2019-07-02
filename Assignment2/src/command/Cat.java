@@ -1,6 +1,9 @@
 package command;
 
 import java.util.ArrayList;
+import driver.JShell;
+import fileSystem.Directory;
+import fileSystem.File;
 
 public class Cat extends Command {
 	
