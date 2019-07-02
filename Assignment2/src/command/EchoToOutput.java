@@ -1,4 +1,4 @@
-package driver;
+package command;
 
 public class EchoToOutput extends Command {
   /**
