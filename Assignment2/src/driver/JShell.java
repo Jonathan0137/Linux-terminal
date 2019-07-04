@@ -35,6 +35,14 @@ import inputHistory.InputHistory;
 import command.Command;
 import verifier.Verifier;
 
+/**
+ * The JShell object allows any user to manipulate or create files, 
+ * directories and access user input history and directory stacks as well as
+ * terminating itself through user inputs into the console.
+ * 
+ * @author Tom Daudelin
+ *
+ */
 public class JShell 
 {
 	/**
