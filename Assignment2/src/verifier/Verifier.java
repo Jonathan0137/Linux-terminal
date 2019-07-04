@@ -209,15 +209,16 @@ public class Verifier {
       return true;
     }
   }
+
   /**
    * Helper method that check if user input has the correct number of 
    * arguments. if not return false, else return true. 
    * Only for Files commands such cat and echo.
    * 
-   * @param command    A string that represents the command user want to check
-   * @param numOfArg   A integer that represents the number of arguments
-   * @param userInput  A string that represents user input
-   * @return           return true if user enters correct, else false
+   * @param command A string that represents the command user want to check
+   * @param numOfArg A integer that represents the number of arguments
+   * @param userInput A string that represents user input
+   * @return return true if user enters correct, else false
    */
   private static boolean checkFilesCommands(String command, int numOfArg, 
       String userInput) {
@@ -225,8 +226,8 @@ public class Verifier {
       System.out.println("bash: cat: not enought arguments");
       return false;
     } else if (command.equals("echo")) {
-      if (userInput.split("\"").length != 3 && userInput.split("\"").length 
-          != 2) {
+      if (userInput.split("\"").length != 3 && 
+          userInput.split("\"").length != 2){
         System.out.println("bash: echo: invalid input");
         return false;
       }
@@ -245,7 +246,11 @@ public class Verifier {
             if (input2.split(">").length == 1) {
               System.out.println("bash: echo: invalid input");
               return false;
-            }}}}} 
+            }
+          }
+        }
+      }
+    }
     return true;
   }
   /**
