@@ -3,6 +3,9 @@ package inputHistory;
 import java.util.ArrayList; 
 
 public class InputHistory {
+	/**
+	 * A list of all user inputs
+	 */
 	private ArrayList<String> inputList;
 	
 	/**
