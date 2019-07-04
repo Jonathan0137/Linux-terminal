@@ -37,12 +37,34 @@ import verifier.Verifier;
 
 public class JShell 
 {
+	/**
+	 * The directory tree stored into JShell
+	 */
 	private FileSystem directoryTree;
+	
+	/**
+	 * A directory stack for JShell to keep track of
+	 */
 	private DirectoryStack directoryHistory;
+	
+	/**
+	 * A list of all user inputs into JShell
+	 */
 	private InputHistory userInputHistory;
+	
+	/**
+	 * A lever that dictates when JShell must terminate
+	 */
 	private boolean exitStatus;
+	
+	/**
+	 * The users current working directory
+	 */
 	private Directory currentDirectory;
 	
+	/**
+	 * The constructor of JShell
+	 */
 	public JShell() {
 		directoryTree = new FileSystem();
 		directoryHistory = new DirectoryStack();
