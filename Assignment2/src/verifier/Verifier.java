@@ -237,16 +237,12 @@ public class Verifier {
           System.out.println("bash: echo: invalid input");
           return false;
         } else {
-          if (input2.contains(">>")) {
-            if (input2.split(">>").length == 1) {
+          if (input2.contains(">>") && input2.split(">> ").length == 1) {
               System.out.println("bash: echo: invalid input");
               return false;
-            }
-          } else if (input2.contains(">")) {
-            if (input2.split(">").length == 1) {
+          } else if (input2.contains(">") && input2.split("> ").length == 1) {
               System.out.println("bash: echo: invalid input");
               return false;
-            }
           }
         }
       }
