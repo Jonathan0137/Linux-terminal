@@ -64,6 +64,9 @@ public class History extends Command {
 		}
 	}
 	
+	/**
+	 * Returns the history commands documentation
+	 */
 	public String getDoc() {
 		String doc = "history: history [NUMBER]" + "\n\t" + "If no NUMBER" +
 				" is given, print out all user inputs since" + "\n\t\t" + 
