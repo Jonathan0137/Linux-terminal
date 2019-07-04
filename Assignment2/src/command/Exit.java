@@ -3,12 +3,6 @@ package command;
 import driver.JShell;
 
 public class Exit extends Command {
-	/**
-	 * The constructor
-	 */
-	public Exit() {
-		doc = "Terminates JShell and deletes all directories and files";
-	}
 	
 	/**
 	 * Terminates the JShell
@@ -22,6 +16,9 @@ public class Exit extends Command {
 	 * @return the documentation of the exit command
 	 */
 	public String getDoc() {
-		return this.doc;
+		String doc = "exit: exit" + "\n\t" + "Terminates shell and deletes" +
+				" all memory of directory" + "\n\t\t" + "tree, user input" +
+				", directory stack and files.";
+		return doc;
 	}
 }
