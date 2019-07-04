@@ -5,7 +5,10 @@ import fileSystem.Directory;
 import fileSystem.DirectoryStack;
 
 /**
- * Provides functionality for the 'popd' command.
+ * Provides functionality for the 'popd' command,
+ * allowing the user to remove a directory from
+ * the directory stack and changing the working directory
+ * to this directory.
  * 
  * @author Gary Xie
  */
