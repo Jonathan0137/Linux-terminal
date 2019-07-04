@@ -1,13 +1,27 @@
 package fileSystem;
 
+/**
+ * Contains information about a file
+ * and its contents.
+ * 
+ * @author Gary Xie
+ */
 public class File { 
-  // Absolute path name of the File
+  /**
+   * Absolute path name of the File
+   */
   private String absolutePath;
-  // Name of the File
+  /**
+   * Name of the File
+   */
   private String name;
-  // Text contents of the File
+  /**
+   * Text contents of the File
+   */
   private String contents;
-  // Parent directory of the File
+  /**
+   * Parent directory of the File
+   */
   private Directory parentDirectory;
   
   /**

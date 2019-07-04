@@ -1,7 +1,16 @@
 package fileSystem;
 
+/**
+ * Contains information about a file system
+ * and its root directory.
+ * 
+ * @author Gary Xie
+ */
 public class FileSystem {
-  // Tracks information about the entire file system via the root Directory
+  /**
+   * The file system's root directory, which is used 
+   * to track information about the entire file system.
+   */
   private Directory root;
   
   /**

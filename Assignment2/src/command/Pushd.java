@@ -4,6 +4,11 @@ import driver.JShell;
 import fileSystem.Directory;
 import fileSystem.DirectoryStack;
 
+/**
+ * Provides functionality for the 'pushd' command.
+ * 
+ * @author Gary Xie
+ */
 public class Pushd extends Command {
   /**
    * Returns a String containing the documentation for the 

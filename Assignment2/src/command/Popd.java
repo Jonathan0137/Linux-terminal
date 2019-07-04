@@ -4,6 +4,11 @@ import driver.JShell;
 import fileSystem.Directory;
 import fileSystem.DirectoryStack;
 
+/**
+ * Provides functionality for the 'popd' command.
+ * 
+ * @author Gary Xie
+ */
 public class Popd extends Command {
   /**
    * Returns a String containing the documentation 

@@ -2,6 +2,11 @@ package fileSystem;
 
 import java.util.LinkedList;
 
+/**
+ * Stores a stack of absolute directory paths.
+ * 
+ * @author Gary Xie
+ */
 public class DirectoryStack {
   private LinkedList<Directory> directoryStack;
   
