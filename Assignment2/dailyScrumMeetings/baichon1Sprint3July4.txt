@@ -1,0 +1,13 @@
+What did I work on in the last three days?
+    - added Javadoc for classes
+    - added Javadoc for methods
+    - checked Naming conventions
+    - checked grammar for my comment
+    - tested and debugged my code
+
+What do I plan to work in the next three days?
+    - None
+
+Am I blocked on anything?
+    - None
+
