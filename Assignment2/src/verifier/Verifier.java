@@ -1,7 +1,12 @@
 package verifier;
 
 import command.*;
-
+/**
+ * Verifier is a class that checks if user inputs follow the given style
+ * and their command exists. If not, it will not process user's command.
+ * 
+ * @author Chongmin Bai
+ */
 public class Verifier {
   /**
    * Check if user's command exist or not, if exist then return 
