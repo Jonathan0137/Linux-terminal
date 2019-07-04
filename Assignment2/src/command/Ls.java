@@ -35,7 +35,7 @@ public class Ls extends Command {
   }
 
   /**
-   * print all the folders and files under current working folder
+   * Print all the folders and files under the current working folder
    * 
    * @param shell an instance of the JShell that is interacting with the user
    * @param input a relative or absolute path name
@@ -70,7 +70,7 @@ public class Ls extends Command {
    * A helper function that takes in an instance of an Direcotry and print 
    * any files and folders under it.
    * 
-   * @param workingDir Current working direcotry
+   * @param workingDir         Current working direcotry
    */
   private void printFilesAndDirectories(Directory workingDir) {
     for (File file : workingDir.getListOfFiles()) {
@@ -82,7 +82,7 @@ public class Ls extends Command {
   }
 
   /**
-   * A helper function that takes in the file name and find that file in 
+   * A helper function that takes in the file name and finds that file in 
    * current working folder and return it.
    * 
    * @param fileName            The name of the file that you want to find
@@ -103,8 +103,8 @@ public class Ls extends Command {
   }
 
   /**
-   * A helper function that takes in the directory name and find 
-   * that directory in current working folder and return it.
+   * A helper function that takes in the directory name and finds 
+   * that directory in the current working folder and return it.
    * 
    * @param directoryName      The name of the directory that you want to find
    * @param currentWorkingDir  A directory class variable that represents 
