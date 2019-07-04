@@ -1,7 +1,12 @@
 package command;
 
 import driver.JShell;
-
+/**
+ * Man is a Command where it can print the previously stored docementation
+ * for each command base on which command user wants to see.
+ * 
+ * @author Chongmin Bai
+ */
 public class Man extends Command
 {
   /**

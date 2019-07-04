@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import driver.JShell;
 import fileSystem.Directory;
 import fileSystem.File;
-
+  /**
+   * Ls is a Command where it can print all the folders and files under
+   * current working directory.
+   * 
+   * @author Chongmin Bai
+   */
 public class Ls extends Command {
   /**
    * Returns a String containing the documentation for the functionalities 

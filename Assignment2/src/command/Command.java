@@ -4,7 +4,13 @@ import java.util.ArrayList;
 import fileSystem.Directory;
 import fileSystem.FileSystem;
 import driver.JShell;
-
+/**
+ * Command is an abstract parent class that represents each executabe 
+ * commands. Such as: exit, mkdir, cd, ls, pwd, pushd, popd, history,
+ * cat, echo and man.
+ * 
+ * @author Chongmin Bai
+ */
 public abstract class Command 
 {
   /**
