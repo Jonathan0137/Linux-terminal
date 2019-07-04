@@ -3,17 +3,17 @@ package verifier;
 import command.*;
 /**
  * Verifier is a class that checks if user inputs follow the given style
- * and their command exists. If not, it will not process user's command.
+ * and their command exists. If not, it will not process the user's command.
  * 
  * @author Chongmin Bai
  */
 public class Verifier {
   /**
-   * Check if user's command exist or not, if exist then return 
-   * an instance of that command, if not,return null.
+   * Check if user's command exists or not, if exist then return 
+   * an instance of that command, if not, return null.
    * 
-   * @param userInput a string that contains what user has typed
-   * @return a instance of command of user's selected commands
+   * @param userInput     a string that contains what user has typed
+   * @return              an instance of command of user's selected commands
    */
 
   public static Command checkUserInputCommand(String userInput) {
@@ -68,8 +68,8 @@ public class Verifier {
 
   }
   /**
-   * Helper method that check if user's command exist or not, 
-   * if exist then return a instance of that command, if not,return null. 
+   * Helper method that checks if user's command exist or not, 
+   * if exists then return an instance of that command, if not, return null. 
    * Only for Other commands that are left such as history, exit
    * and man.
    * 
@@ -91,9 +91,9 @@ public class Verifier {
   }
 
   /**
-   * Helper method that check if user's command exist or not, if exist 
+   * Helper method that checks if user's command exists or not, if exist 
    * then return a instance of that command, 
-   * if not,return null. Only for Directory Stack Commands 
+   * if not, return null. Only for Directory Stack Commands 
    * such as pushd and popd
    * 
    * @param command A String that represents the command to be created
@@ -116,8 +116,8 @@ public class Verifier {
   }
 
   /**
-   * Helper method that check if user's command exist or not, if exist 
-   * then return a instance of that command, if not,
+   * Helper method that check if user's command exists or not, if exist 
+   * then return an instance of that command, if not,
    * return null. Only for Directory Stack Commands such as pushd and popd
    * 
    * @param command A String that represents the command to be created
@@ -136,8 +136,8 @@ public class Verifier {
   }
 
   /**
-   * Helper method that check if user's command exist or not, if exist 
-   * then return a instance of that command, if not,
+   * Helper method that check if user's command exists or not, if exist 
+   * then return an instance of that command, if not,
    * return null. Only for DirCommands such as cd, mkdir, pwd and ls
    * 
    * @param command A String that represents the command to be created
@@ -161,13 +161,13 @@ public class Verifier {
   }
 
   /**
-   * Helper method that check if user input has the correct number of 
+   * Helper method that checks if user input has the correct number of 
    * arguments. if not return false, else return true. 
    * Only for Dir commands such as cd, pwd, mkdir, and ls
    * 
    * @param command    A string that represents the command user want to check
    * @param numOfArg   A integer that represents the number of arguments
-   * @return           return true if user enters correct, else false
+   * @return           returns true if the user entery are correct, else false
    */
   private static boolean checkDirCommands(String command, int numOfArg) {
     if (command.equals("cd") && numOfArg > 2) {
