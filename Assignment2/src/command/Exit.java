@@ -2,6 +2,11 @@ package command;
 
 import driver.JShell;
 
+/**
+ * Exit class is in charge of terminating JShell 
+ * @author Tom Daudelin
+ *
+ */
 public class Exit extends Command {
 	
 	/**

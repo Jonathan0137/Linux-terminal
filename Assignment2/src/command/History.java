@@ -3,6 +3,11 @@ package command;
 import java.util.ArrayList;
 import driver.JShell;
 
+/**
+ * History class allows user access to JShells memory of all user inputs. 
+ * @author Tom Daudelin
+ *
+ */
 public class History extends Command {
 	/**
 	 * Executes the users input by printing out users total history or
