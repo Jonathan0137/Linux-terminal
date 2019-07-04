@@ -2,6 +2,11 @@ package inputHistory;
 
 import java.util.ArrayList; 
 
+/**
+ * InputHistory class is in charge of remembering all user inputs.
+ * @author Tom Daudelin
+ *
+ */
 public class InputHistory {
 	/**
 	 * A list of all user inputs
