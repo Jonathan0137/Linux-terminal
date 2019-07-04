@@ -10,7 +10,7 @@ public class Cat extends Command {
 	/**
 	  * Prints out the contents of any files the user inputs
 	  * 
-	  * @param shell   an instance of the JShell that is interacting with the user
+	  * @param shell   an instance of the JShell that interacts with user
 	  * @param fileNames   a list of the file names
 	  */
 	@Override
@@ -33,7 +33,8 @@ public class Cat extends Command {
 			}
 			else 
 			{
-				System.out.println("The file '" + arguments[i] + "' does not exist in " + currentDirectory.getFullPathName());
+				System.out.println("The file '" + arguments[i] + "' does not"
+						+ " exist in " + currentDirectory.getFullPathName());
 			}
 		}
 	}
@@ -66,10 +67,11 @@ public class Cat extends Command {
 	  */
 	@Override
 	protected String getDoc() {
-		String documentation = "cat: cat FILE1 [FILE2...]\n"
-	 				 		 + "\tPrint out the contents of the files inputted\n"
-	 				 		 + "\tFILE1 [FILE2...] must be the names of a file.\n\n"
-	 				 		 + "\t3 line breaks seperate the contents if more than 1 file name is inputted.\n\n";
-		return documentation; 
+		String doc = "cat: cat FILE1 [FILE2...]\n"
+	 			   + "\tPrint out contents of the files inputted\n"
+	 	   		   + "\tFILE1 [FILE2...] must be the names of a file.\n\n"
+	 			   + "\t3 line breaks seperate the contents if more than"
+	 			   + " 1 file name is inputted.\n\n";
+		return doc; 
 	}
 }

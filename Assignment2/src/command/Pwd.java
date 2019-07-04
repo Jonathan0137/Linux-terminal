@@ -9,7 +9,7 @@ public class Pwd extends Command{
 	/**
 	  * Prints the absolute path of the current working directory
 	  * 
-	  * @param shell   an instance of the JShell that is interacting with the user
+	  * @param shell   an instance of the JShell that interacts with user
 	  * @param input	Unused
 	  */
 	@Override
@@ -29,7 +29,8 @@ public class Pwd extends Command{
 	@Override
 	protected String getDoc() {
 		String documentation = "pwd: pwd\n"
-                			 + "\tprint the absolute path of the current working directory\n";
+                			 + "\tprint the absolute path of the current "
+                			 + "working directory\n";
 		return documentation; 
 	}
 
