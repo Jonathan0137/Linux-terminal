@@ -4,7 +4,11 @@ import driver.JShell;
 import fileSystem.FileSystem;
 import fileSystem.Directory;
 
-
+/**
+ * Provides functionality for the 'cd' command.
+ * 
+ * @author Gary Xie
+ */
 public class Cd extends Command {
   /**
    * Returns a String containing the documentation for 

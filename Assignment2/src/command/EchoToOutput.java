@@ -2,6 +2,12 @@ package command;
 
 import driver.JShell;
 
+/**
+ * Provides functionality for the 'echo' command
+ * in the case where output is displayed to the shell.
+ * 
+ * @author Gary Xie
+ */
 public class EchoToOutput extends Command {
   /**
    * Returns a String containing the documentation 
