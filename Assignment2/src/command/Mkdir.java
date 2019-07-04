@@ -25,15 +25,25 @@ public class Mkdir extends Command{
 		createDirectory(currentDirectory, fs, newDirectories);
 	}
 	
+	
+	/**
+	  * Creates a new directory in either the current directory if a path
+	  * is not given, or creates the directory in the path if it is given
+	  * 
+	  * @param currentDirectory	The current working directory
+	  * @param fs   The file system that the directory will be created in
+	  * @param newDirectories   a user inputed list of absolute path names
+	  * 						or directory names
+	  */
 	public void createDirectory(Directory currentDirectory, FileSystem fs,
-													String newDirectories) 
-	{
+													String newDirectories) {
 		//split newDirectory, and get length of the array
 		String[] arguments = newDirectories.split(" ");
-			
+		//loop through array names, make and add directory if valid name
 		for (int i = 1; i < arguments.length; i++) {
 			if (directoryCheck(arguments[i])){
 				Directory newDirectory;
+				//check if creating in current directory or given path
 				if (arguments[i].indexOf("/") >= 0) {
 					String splitArg[] = arguments[i].split("/");
 					String pathNewDir = splitArg[splitArg.length - 1];
