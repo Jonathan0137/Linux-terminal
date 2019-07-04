@@ -5,7 +5,8 @@ import fileSystem.FileSystem;
 import fileSystem.Directory;
 
 /**
- * Provides functionality for the 'cd' command.
+ * Provides functionality for the 'cd' command,
+ * allowing the user to change their current working directory.
  * 
  * @author Gary Xie
  */

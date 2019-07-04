@@ -5,7 +5,9 @@ import fileSystem.Directory;
 import fileSystem.DirectoryStack;
 
 /**
- * Provides functionality for the 'pushd' command.
+ * Provides functionality for the 'pushd' command,
+ * allowing the user to add the current working directory
+ * to the directory stack, and changing to a new working directory.
  * 
  * @author Gary Xie
  */
