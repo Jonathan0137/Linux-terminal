@@ -10,8 +10,7 @@ import fileSystem.File;
 public class Mkdir extends Command{
 	
 	/**
-	  * Creates a new directory in either the current directory if a path
-	  * is not given, or creates the directory in the path if it is given
+	  * Creates a new directory
 	  * 
 	  * @param shell   an instance of the JShell that interacts with user
 	  * @param newDirectories   a user inputed list of absolute path names
@@ -74,7 +73,7 @@ public class Mkdir extends Command{
 	  * @param subDirectory   the directory that is being added by the user
 	  */
 	public void addSubdirectory(Directory parent, 
-									Directory subDirectory) {
+						Directory subDirectory) {
 		ArrayList<Directory> listOfSubdir = parent.getListOfSubdirectories();
 		ArrayList<File> listOfFiles = parent.getListOfFiles();
 		if (containsDirectory(listOfSubdir, subDirectory)||
@@ -134,7 +133,7 @@ public class Mkdir extends Command{
 	 * @return boolean that is true if directory name is valid
 	 */
 	public static boolean directoryCheck(String directoryName) {
-		if (directoryName.contains(".") || directoryName.contains("@") 
+		if (/*directoryName.contains(".") ||*/ directoryName.contains("@") 
 				|| directoryName.contains("!") || directoryName.contains("#@")
 				|| directoryName.contains("$") || directoryName.contains("%")
 				|| directoryName.contains("^") || directoryName.contains("&")
