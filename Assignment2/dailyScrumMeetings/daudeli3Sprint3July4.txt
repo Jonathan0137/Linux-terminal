@@ -1,0 +1,8 @@
+What did I work on in the last three days?
+	-I  have completed all my tasks, I have added all required javadoc, I have tested JShell, Exit, History and EchoToFile classes and fixed any found bugs.
+
+What do I plan to work in the next three days?
+	-I plan on working on my linear algebra 2 homework and working on a video mock interview for my coop course.
+
+Am I blocked on anything?
+	-I am not blocked on anything.
