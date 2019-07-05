@@ -44,6 +44,12 @@ public class EchoToOutput extends Command {
                         + "inside of the start and end double quotes.");
       return;
     }
+    // Input must be surrounded by double quotes
+    if (input.charAt(0)!= '"' || input.charAt(input.length()-1)!= '"') {
+      System.out.println("The input string must be surrounded "
+                        + "by double quotes.");
+      return;
+    }
     // Don't output the double quotes
     input = input.replaceAll("\"", "");
     System.out.println(input);
