@@ -1,0 +1,10 @@
+What did I work on in the last three days?
+	-added all required javadoc and documentation
+	-fixed style of code for pwd, mkdir and cat
+	-tested pwd, cat, mkdir and fixed bugs.
+
+What do I plan to work in the next three days?
+	-Work on assignments/projects for other courses
+
+Am I blocked on anything?
+	-N/A
