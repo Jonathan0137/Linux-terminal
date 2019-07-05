@@ -1,0 +1,9 @@
+What did I work on in the last three days?
+	- I tested the program to fix bugs and find edge cases in the program logic
+	- I added JavaDocs for Classes and instance variables
+What do I plan to work in the next three days?
+    - N/A (since this is the last scrum meeting for 2A)
+Am I blocked on anything?
+    - Nothing
+
+
