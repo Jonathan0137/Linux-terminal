@@ -10,6 +10,9 @@ User Stories from Product Backlog that we will address in this sprint:
 - f) As a user, I can redirect any outputs into a specific file.
 - g) As a user, I can print out the contents of more than one file at a time, even if one of the files is invalid.
 - h) As a user, I can move a file/directory from one directory to another.
+- i) As a user, I can save the current working directory so that I can have easy access to the directory. (user story from 2A)
+- j) As a user, I can move into the saved directories and remove them. (user story from 2A)
+
 Specific tasks to be accomplished:
 a-1: (Ls) Change Ls since there was a change in Jshell and FileSystem
 a-2: (Ls) Add new features in Ls that will recursively list all subdirectories.
@@ -28,12 +31,23 @@ g-1: (Cat) Add error case to cat
 h-1: (Mv) Create class mv
 h-2: (Mv) Write code so that user can move a file from one directory to another
 h-3: (Mv) Write code so that user can move a subdirectory from one directory to another
+i-1: (DirectoryStack) Refactor the design of DirectoryStack to follow Singleton design pattern
+i-2: (Pushd) Add DirectoryStack as an instance variable of Pushd, to follow Singleton design pattern of DirectoryStack 
+j-1: (Popd) Add DirectoryStack as an instance variable of Popd, to follow Singleton design pattern of DirectoryStack
 
+// The following tasks are not really connected to user stories, but rather refactoring previous code to improve design
+
+k-1: (FileSystem) Refactor the design of FileSystem to follow Singleton design pattern
+k-2: (FileSystem) Add current working directory as an instance variable of FileSystem, rather than a variable of JShell
+k-3: (Command) Add FileSystem as an instance variable of Command to follow the Singleton Design pattern
+k-4: (FileSystemNode) Add a new parent class for File and Directory called FileSystemNode, that contains common methods/variables between File and Directory
+k-5: (Directory) Refactor Directory so that it uses a HashMap for its contents rather than an ArrayList
+k-6: (Directory) Refactor Directory so that it only contains a single HashMap of its children, which are of type FileSystemNode
 
 These tasks are assignment as follows:
 
 User: Gary Xie
-Tasks:
+Tasks: i-1, i-2, j-1, k-1, k-2, k-3, k-4, k-5, k-6
 
 User: Tom Daudelin
 Tasks: 
