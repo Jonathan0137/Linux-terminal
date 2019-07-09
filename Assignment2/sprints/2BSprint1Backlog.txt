@@ -1,0 +1,24 @@
+// 2B Sprint 1 Backlog
+July 11 to July 17
+
+User Stories from Product Backlog that we will address in this sprint:
+- 
+
+Specific tasks to be accomplished:
+
+
+These tasks are assignment as follows:
+
+User: Gary Xie
+Tasks: a-1, a-2, a-3
+
+User: Tom Daudelin
+Tasks: c-1, c-2, c-3, c-4, c-5, c-6
+
+User: Chongmin Bai
+Tasks: b-1, b-2
+
+User: Adil Shah
+Tasks: d-1, d-2, d-3
+
+
