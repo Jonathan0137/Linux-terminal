@@ -2,23 +2,30 @@
 July 11 to July 17
 
 User Stories from Product Backlog that we will address in this sprint:
-- 
+- a) As a user, I can print the content of a directory and all of its subdirectories
+- b) As a user, I can print the documentation of all commands by calling the man command so that I can understand how to properly interact with the shell.
+- c) As a user, I can be notified that i've enteried a invalid command so that i can fix my mistake.
+- d) As a user, I want to make sure that all my commands do the things that I want them to do,this is the parent class for other child classes.
 
 Specific tasks to be accomplished:
-
+a-1: (Ls) Change Ls since there was a change in Jshell and FileSystem
+a-2: (Ls) Add new features in Ls that will recursively list all subdirectories.
+b-1: (Verifier) Pretty much changed design and redo Verifier from 2a.
+c-1: (Command) Change command since there was a change in Jshell and FileSystem
+d-1: (Man) Apply hasttable method to Man.
 
 These tasks are assignment as follows:
 
 User: Gary Xie
-Tasks: a-1, a-2, a-3
+Tasks:
 
 User: Tom Daudelin
-Tasks: c-1, c-2, c-3, c-4, c-5, c-6
+Tasks: 
 
 User: Chongmin Bai
-Tasks: b-1, b-2
+Tasks: a-1, a-2, b-1, c-1, d-1
 
 User: Adil Shah
-Tasks: d-1, d-2, d-3
+Tasks: 
 
 
