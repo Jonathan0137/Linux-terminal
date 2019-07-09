@@ -24,3 +24,5 @@ from where I previously left off.
 9. As a user, I can find a specific file/directory in the file system and output its path.			* 3 Hours
 
 10. As a user, I can print out the entire file system as a tree.									* 5 Hours
+
+11. As a user, I can redirect any outputs into a specific file.                                     * 2 days
