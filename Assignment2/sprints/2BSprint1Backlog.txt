@@ -8,6 +8,8 @@ User Stories from Product Backlog that we will address in this sprint:
 - d) As a user, I want to make sure that all my commands do the things that I want them to do,this is the parent class for other child classes.
 - e) As a user, I can download a file from a URL and save it to the current directory. 
 - f) As a user, I can redirect any outputs into a specific file.
+- g) As a user, I can print out the contents of more than one file at a time, even if one of the files is invalid.
+- h) As a user, I can move a file/directory from one directory to another.
 Specific tasks to be accomplished:
 a-1: (Ls) Change Ls since there was a change in Jshell and FileSystem
 a-2: (Ls) Add new features in Ls that will recursively list all subdirectories.
@@ -19,7 +21,14 @@ f-1: (Redirect) Create a redirection class in charge of executing any > and >> c
 f-2: (JShell) Modify design of JShell class.
 f-3: (Echo) Replace EchoToOutput and EchoToFile class by an Echo class.
 f-4: (InputHistory) Potentially modify design of InputHistory.
-f-5: (History) Potentially modify design of History class. 
+f-5: (History) Potentially modify design of History class.
+f-6: (Pwd) Potentially modify design of pwd
+f-7: (Cat) Potentially modify design of cat
+g-1: (Cat) Add error case to cat
+h-1: (Mv) Create class mv
+h-2: (Mv) Write code so that user can move a file from one directory to another
+h-3: (Mv) Write code so that user can move a subdirectory from one directory to another
+
 
 These tasks are assignment as follows:
 
@@ -33,6 +42,6 @@ User: Chongmin Bai
 Tasks: a-1, a-2, b-1, c-1, d-1
 
 User: Adil Shah
-Tasks: 
+Tasks: f-6, f-7, g-1, h-1, h-2, h-3
 
 
