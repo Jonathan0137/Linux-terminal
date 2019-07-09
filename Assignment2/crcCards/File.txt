@@ -1,8 +1,8 @@
 Class Name: File
-Parent Class: None
+Parent Class: FileSystemNode
 Subclasses: None
 
 Responsibilities:
-* Stores information about a file's contents
+* Stores information about a file, its contents, and its parent Directory
 Collaborators:
-* None
+* Inherited from Parent Class
