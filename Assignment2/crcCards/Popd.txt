@@ -9,4 +9,5 @@ Responsibilities:
 Collaborators:
 * Inherited from Parent Class
 * DirectoryStack
+* Directory
 * Cd

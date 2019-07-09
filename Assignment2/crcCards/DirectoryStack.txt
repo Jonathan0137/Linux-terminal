@@ -5,4 +5,4 @@ Subclasses: None
 Responsibilities:
 * Stores directory paths in a stack
 Collaborators:
-* None
+* Directory
