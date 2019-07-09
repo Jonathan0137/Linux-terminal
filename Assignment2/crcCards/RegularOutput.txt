@@ -1,0 +1,8 @@
+Class Name: RegularOutput
+Parent Class: Output
+Subclasses: None
+
+Responsibilities:
+* Prints the output of a command execution to the user, if there is no error
+Collaborators:
+* None
