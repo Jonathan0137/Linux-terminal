@@ -1,0 +1,8 @@
+Class Name: FileSystemNode
+Parent Class: None
+Subclasses: Directory, File
+
+Responsibilities:
+* Stores information about a node in the file system (can be files or directories), its contents, and its parent Directory
+Collaborators:
+* Directory

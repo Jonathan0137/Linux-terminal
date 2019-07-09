@@ -3,7 +3,7 @@ Parent Class: None
 Subclasses: None
 
 Responsibilities:
-* Stores information about directories and files in the file system
+* Stores information about nodes (i.e. directories and files) in the file system via the root directory
+* Stores information about the current working directory
 Collaborators:
 * Directory
-* File
