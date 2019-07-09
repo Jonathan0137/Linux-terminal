@@ -1,0 +1,26 @@
+Product Backlog for Assignment 2B:
+
+Col 1: User Stories																					Col 2: Time Estimate
+
+1. As a user, I can print the contents of a directory and all of its subdirectories.				* 3 Hours
+
+2. As a user, I can move a file/directory from one directory to another.							* 4 Hours
+
+3. As a user, I can copy a file/directory from one directory to another.							* 2 Hours
+
+4. As a user, I can print out the contents of more than one file at a time, 						* 1 Hour
+even if one of the files is invalid.
+
+5. As a user, I can download a file from a URL and save it to the current directory.				* 3 Days
+
+6. As a user, I can save the current state of the program to my computer as a file.					* 2 Days
+
+7. As a user, if the file name I used to save my current state already exists in 					* 2 Hours
+the directory, I can overwrite the file.
+
+8. As a user, I can load a previously saved state of a shell and resume activity 					* 2 Days
+from where I previously left off.
+
+9. As a user, I can find a specific file/directory in the file system and output its path.			* 3 Hours
+
+10. As a user, I can print out the entire file system as a tree.									* 5 Hours
