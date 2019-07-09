@@ -1,9 +1,10 @@
 Class Name: Command
 Parent Class: None
-Subclasses: Exit, Mkdir, Cd, Pushd, Popd, EchoToFile, Cat, Ls, Pwd, History, Cat, EchoToOutput, Man
+Subclasses: Exit, Mkdir, Cd, Pushd, Popd, Echo, Cat, Ls, Pwd, History, Man, Mv, Cp, Get, Save, Load, Find, Tree
 
 Responsibilities:
 * Executes the command
-* Outputs an error message to user if the command execution has an error
 Collaborators:
-* JShell
+* FileSystem
+* Output
+* Redirection

@@ -1,0 +1,8 @@
+Class Name: Output
+Parent Class: None
+Subclasses: RegularOutput, ErrorOutput
+
+Responsibilities:
+* Outputs information to the user
+Collaborators:
+* None

@@ -1,0 +1,8 @@
+Class Name: ErrorOutput
+Parent Class: Output
+Subclasses: None
+
+Responsibilities:
+* Prints error messages that are caused by a command execution to the user
+Collaborators:
+* None
