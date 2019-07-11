@@ -1,5 +1,6 @@
 package command;
 
+import java.util.Hashtable;
 import driver.JShell;
 /**
  * Man is a Command where it can print the previously stored documentation
@@ -37,16 +38,11 @@ public class Man extends Command
   {
     String[] userInput = input.split(" ", 2);
     String command = userInput[1];
-    if (command.equals("cd") || command.equals("mkdir") || 
-        command.equals("pwd")|| command.equals("ls")) {
-      printDirDocs(command);
-    } else if (command.equals("pushd") || command.equals("popd")) {
-      printDirStackDocs(command);
-    } else if (command.equals("cat") || command.equals("echo")) {
-      printFilesDocs(command);
-    } else if (command.equals("history") || command.equals("exit") || 
-        command.equals("man")) {
-      printOtherDocs(command);
+    Hashtable<String, String> hashtable = new Hashtable<String, String> (); 
+    initializeHashTableWithGetDoc(hashtable);
+    if(hashtable.containsKey(command))
+    {
+      System.out.println(hashtable.get(command));
     }
     else
     {
@@ -54,85 +50,27 @@ public class Man extends Command
           + "more information");
     }    
   }
-  /**
-   * Helper Method
-   * Print documentation for Dir commands such as cd, mkdir, pwd, and ls
-   * 
-   * @param commandName   an String that represents the name of the command
-   */
-  private static void printDirDocs(String commandName)
+
+  private static void initializeHashTableWithGetDoc(Hashtable<String, String> hashtable)
   {
-    switch(commandName)
-    {
-      case "cd":
-        System.out.println(new Cd().getDoc());
-        break;
-      case "mkdir":
-        System.out.println(new Mkdir().getDoc());
-        break;
-      case "pwd":
-        System.out.println(new Pwd().getDoc());
-        break;
-      case "ls":
-        System.out.println(new Ls().getDoc());
-        break;
-    }
+      hashtable.put("cd", new Cd().getDoc());
+      hashtable.put("exit", new Exit().getDoc());
+      hashtable.put("mkdir", new Mkdir().getDoc());
+      hashtable.put("ls", new Ls().getDoc());
+      hashtable.put("pwd", new Pwd().getDoc());
+      //hashtable.put("mv", new Mv().getDoc());
+      //hashtable.put("cp", new Cp().getDoc());
+      hashtable.put("cat", new Cat().getDoc());
+      //hashtable.put("get", new Get().getDoc());
+      //hashtable.put("echo", new Echo().getDoc());
+      hashtable.put("man", new Man().getDoc());
+      hashtable.put("pushd", new Pushd().getDoc());
+      hashtable.put("popd", new Popd().getDoc());
+      hashtable.put("history", new History().getDoc());
+//      hashtable.put("load", new Load().getDoc());
+//      hashtable.put("find", new Find().getDoc());
+//      hashtable.put("tree", new Tree().getDoc());    
+    
   }
-  /**
-   * Helper Method
-   * Print documentation for Dir Stack commands such as pushd and popd
-   * 
-   * @param commandName   an String that represents the name of the command
-   */
-  private static void printDirStackDocs(String commandName)
-  {
-    switch(commandName)
-    {
-      case "pushd":
-        System.out.println(new Pushd().getDoc());
-        break;
-      case "popd":
-        System.out.println(new Popd().getDoc());
-        break;
-    }
-  }
-  /**
-   * Helper Method
-   * Print documentation for file commands such as cat and echo
-   * 
-   * @param commandName   an String that represents the name of the command
-   */
-  private static void printFilesDocs(String commandName)
-  {
-    switch(commandName)
-    {
-      case "cat":
-        System.out.println(new Cat().getDoc());
-        break;
-      case "echo":
-          System.out.println(new EchoToOutput().getDoc());
-        break;
-    }
-  }
-  /**
-   * Helper Method
-   * Print documentation for other commands such as exit, history and man
-   * 
-   * @param commandName   an String that represents the name of the command
-   */
-  private static void printOtherDocs(String commandName)
-  {
-    switch(commandName)
-    {
-      case "exit":
-        System.out.println(new Exit().getDoc());
-        break;
-      case "history":
-        System.out.println(new History().getDoc());
-        break;
-      case "man":
-        System.out.println(new Man().getDoc());
-        break;
-    }
-  }
+ 
 }

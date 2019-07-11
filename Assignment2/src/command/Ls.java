@@ -41,29 +41,48 @@ public class Ls extends Command {
    * @param input a relative or absolute path name
    */
   @Override
-  public void execute(JShell shell, String input) {
+  public void execute(JShell shell, String input){
     input = input.replaceAll(" +", " ");
-    String[] userInput = input.split(" ", 2);
+    String[] userInput = input.split(" ");
     int numOfArg = userInput.length;
     Directory workingDir = shell.getCurrentDirectory();
     if (numOfArg == 1)
       printFilesAndDirectories(workingDir);
-    else if (numOfArg == 2) {
-      if (userInput[1].isEmpty() == true)
+    else if (numOfArg == 2) 
+    {
+      printFileAndDir(workingDir, userInput[1]);
+    }
+    else
+    {
+      //add a helper here. for recursive
+      //ex: ls -R /Desktop/
+      //path = path + "/" + directory name
+    }
+  }
+  private void printFileAndDir(Directory workingDir, String path)
+  {
+    else
+    {
+      if (path.isEmpty() == true)
         printFilesAndDirectories(workingDir);
-      else {
-        if (Ls.findDirectory(userInput[1], workingDir) != null) {
-          System.out.println(userInput[1] + " : ");
-          Directory nextDir = Ls.findDirectory(userInput[1], workingDir);
+      else 
+      {
+        if (Ls.findDirectory(path, workingDir) != null) 
+        {
+          System.out.println(path + " : ");
+          Directory nextDir = Ls.findDirectory(path, workingDir);
           printFilesAndDirectories(nextDir);
           System.out.println();
-        } else if (Ls.findFile(userInput[1], workingDir) != null) {
-          System.out.println(userInput[1]);
-        } else {
+        } 
+        else if (Ls.findFile(path, workingDir) != null) 
+        {
+          System.out.println(path);
+        } 
+        else 
+        {
           System.out.println("No such file or directory");
         }
       }
-    }
   }
 
   /**
