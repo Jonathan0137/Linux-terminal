@@ -6,8 +6,8 @@ public class Get extends Command {
 
 	@Override
 	public void execute(JShell shell, String input) {
-		String userParam = Get.cleanInput(input);
 		if (Get.getChecker(input)) {
+			String userParam = Get.cleanInput(input);
 			try {
 				
 			}
@@ -41,5 +41,14 @@ public class Get extends Command {
 			return true;
 		}
 		return true;
+	}
+	
+	private static String cleanInput(String input) {
+		String[] components = input.split(" ");
+		String cleanInput = "";
+		for (int i=1 ; i<components.length; i++) {
+			cleanInput = cleanInput.concat(components[i]);
+		}
+		return cleanInput;
 	}
 }
