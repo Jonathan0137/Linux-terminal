@@ -35,13 +35,12 @@ public class Pushd extends Command {
    * to the directory specified by the user input, if this specified
    * directory exists.
    * 
-   * @param shell an instance of the JShell that is interacting with the user
-   * @param input a relative or absolute path name
+   * @param dirStack an instance of the Directory Stack
+   * @param input    a relative or absolute path name
    */
   @Override
-  public void execute(String input) {
+  public void execute(DirectoryStack dirStack, String input) {
     Directory currentDir = fs.getCurrentDirectory();
-    DirectoryStack directoryStack = DirectoryStack.getDirectoryStack();
     String[] inputSplit = input.split(" ", 2);
     String path = inputSplit[1].trim();
     if (path.length() == 0) {
@@ -57,14 +56,14 @@ public class Pushd extends Command {
     // Adds the current directory to the stack, in the case that the given
     // new working directory path is the same as the current working directory.
     if (Command.findDirectory(fs, absolutePath) == currentDir) {
-      directoryStack.getStack().add(currentDir);
+      dirStack.getStack().add(currentDir);
       return;
     }
     Command changeDir = new Cd();
     changeDir.execute(input);
     // pushes the currentDir to stack if Cd is successful
     if (currentDir != fs.getCurrentDirectory()) {
-      directoryStack.getStack().add(currentDir);
+      dirStack.getStack().add(currentDir);
     } else {
       System.out.println("Pushd command failed due to invalid path.");
     }
