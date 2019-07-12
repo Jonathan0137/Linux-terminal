@@ -34,14 +34,13 @@ public class Popd extends Command {
    * 
    * If the directory stack is empty, outputs an error message to the user.
    * 
-   * @param shell an instance of the JShell that is interacting with the user
+   * @param dirStack an instance of the Directory Stack
    * @param input (unused, only here to override Command execute())
    */
   @Override
-  public void execute(String input) {
+  public void execute(DirectoryStack dirStack, String input) {
 
     Cd changeDir = new Cd();
-    DirectoryStack dirStack = DirectoryStack.getDirectoryStack();
 
     // The directory stack is empty, so outputs an error message
     if (dirStack.getStack().size() == 0) {
