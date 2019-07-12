@@ -3,6 +3,7 @@ package command;
 import driver.JShell;
 import fileSystem.Directory;
 import fileSystem.DirectoryStack;
+import fileSystem.FileSystem;
 
 /**
  * Provides functionality for the 'pushd' command,
@@ -38,32 +39,31 @@ public class Pushd extends Command {
    * @param input a relative or absolute path name
    */
   @Override
-  public void execute(JShell shell, String input) {
-    Directory currentDir = shell.getCurrentDirectory();
-    DirectoryStack directoryStack = shell.getDirectoryStack();
+  public void execute(String input) {
+    Directory currentDir = fs.getCurrentDirectory();
+    DirectoryStack directoryStack = DirectoryStack.getDirectoryStack();
     String[] inputSplit = input.split(" ", 2);
     String path = inputSplit[1].trim();
     if (path.length() == 0) {
       System.out.println("Pushd command is missing a path name.");
       return;
     }
-    Directory workingDir;
+    Directory startDir;
     if (path.charAt(0) == '/') {
-      workingDir = shell.getDirectoryTree().getRootDirectory();
+      startDir = fs.getRootDirectory();
     } 
-    else { workingDir = shell.getCurrentDirectory(); }
-    String absolutePath = Command.getAbsolutePath(path, workingDir);
+    else { startDir = currentDir; }
+    String absolutePath = Command.getAbsolutePath(path, startDir);
     // Adds the current directory to the stack, in the case that the given
     // new working directory path is the same as the current working directory.
-    if (Command.findDirectory(shell.getDirectoryTree(), 
-        absolutePath) == currentDir) {
+    if (Command.findDirectory(fs, absolutePath) == currentDir) {
       directoryStack.getStack().add(currentDir);
       return;
     }
     Command changeDir = new Cd();
-    changeDir.execute(shell, input);
+    changeDir.execute(input);
     // pushes the currentDir to stack if Cd is successful
-    if (currentDir != shell.getCurrentDirectory()) {
+    if (currentDir != fs.getCurrentDirectory()) {
       directoryStack.getStack().add(currentDir);
     } else {
       System.out.println("Pushd command failed due to invalid path.");

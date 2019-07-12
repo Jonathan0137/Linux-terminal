@@ -38,19 +38,19 @@ public class Popd extends Command {
    * @param input (unused, only here to override Command execute())
    */
   @Override
-  public void execute(JShell shell, String input) {
+  public void execute(String input) {
 
     Cd changeDir = new Cd();
-    DirectoryStack directoryStack = shell.getDirectoryStack();
+    DirectoryStack dirStack = DirectoryStack.getDirectoryStack();
 
     // The directory stack is empty, so outputs an error message
-    if (directoryStack.getStack().size() == 0) {
+    if (dirStack.getStack().size() == 0) {
       System.out.println("Popd unsuccessful: directory stack is empty.");
     } else {
       // Remove the last entry in the directory stack
-      Directory newWorkingDirectory = directoryStack.getStack().pollLast();
+      Directory newWorkingDirectory = dirStack.getStack().pollLast();
       // Change the working directory using Cd
-      changeDir.execute(shell, "cd " + newWorkingDirectory.getFullPathName());
+      changeDir.execute("cd " + newWorkingDirectory.getFullPathName());
     }
   }
 }
