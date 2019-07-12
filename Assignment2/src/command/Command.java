@@ -5,7 +5,7 @@ import fileSystem.Directory;
 import fileSystem.FileSystem;
 import driver.JShell;
 /**
- * Command is an abstract parent class that represents each executabe 
+ * Command is an abstract parent class that represents each executable 
  * commands. Such as: exit, mkdir, cd, ls, pwd, pushd, popd, history,
  * cat, echo and man.
  * 
@@ -13,6 +13,11 @@ import driver.JShell;
  */
 public abstract class Command 
 {
+  /**
+   * The instance of the file system.
+   */
+  protected final FileSystem fs=FileSystem.getFileSystem();
+  
   /**
    * An Abstract class that will be used for children classes to implement
    * 
