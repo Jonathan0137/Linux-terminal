@@ -8,19 +8,7 @@ import java.util.ArrayList;
  * 
  * @author Gary Xie
  */
-public class Directory {
-  /**
-   * Absolute path name of the Directory
-   */
-  private String absolutePath;
-  /**
-   * Name of the Directory
-   */
-  private String name;
-  /**
-   * The Directory's parent directory
-   */
-  private Directory parentDirectory;
+public class Directory extends FileSystemNode {
   /**
    * List of subdirectories in the Directory
    */
@@ -33,62 +21,23 @@ public class Directory {
   /**
    * Constructor for Directory.
    * 
-   * @param name    the name of the directory
+   * @param name the name of the directory
    */
   public Directory(String name) {
-    this.name = name;
-    this.absolutePath = name + "/";
-    this.parentDirectory = null;
+    super(name);
     listOfSubdirectories = new ArrayList<Directory>();
     listOfFiles = new ArrayList<File>();
   }
   
   /**
-   * Sets the name of the directory.
+   * Sets the absolute path of the directory to pathName,
+   * with an additional '/' character at the end.
    * 
-   * @param name the directory's new name
+   * @param pathName the absolute path of the directory
    */
-  public void setName(String name) {
-    this.name = name;
-  }
-  
-  /**
-   * Returns the directory's name.
-   * 
-   * @return the name of the directory
-   */
-  public String getName() {
-    return name;
-  }
-  
-  /**
-   * Returns the absolute path name of the directory.
-   * 
-   * @return the directory's absolute path
-   */
-  public String getFullPathName() {
-    return absolutePath;
-  }
-  
-  /**
-   * Sets the directory's parent directory, and updates
-   * its absolute path name based on the parent directory.
-   * 
-   * @param parentDirectory the directory's parent directory
-   */
-  public void setParentDirectory(Directory parentDirectory) {
-    this.parentDirectory = parentDirectory;
-    // Update the directory's absolute path name using its parent directory
-    this.absolutePath = parentDirectory.getFullPathName() + name + "/";
-  }
-  
-  /**
-   * Returns the directory's parent directory.
-   * 
-   * @return the parent directory of the directory
-   */
-  public Directory getParentDirectory() {
-    return parentDirectory;
+  @Override
+  protected void setAbsolutePath(String pathName) {
+    this.absolutePath = pathName + "/";
   }
   
   /**
@@ -109,5 +58,5 @@ public class Directory {
    */
   public ArrayList<File> getListOfFiles() {
     return listOfFiles;
-  }  
+  }
 }
