@@ -48,6 +48,5 @@ public class DirectoryStack {
       dirStack = new DirectoryStack();
     }
     return dirStack;
-    
   }
 }
