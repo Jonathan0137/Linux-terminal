@@ -31,9 +31,8 @@ g-1: (Cat) Add error case to cat
 h-1: (Mv) Create class mv
 h-2: (Mv) Write code so that user can move a file from one directory to another
 h-3: (Mv) Write code so that user can move a subdirectory from one directory to another
-i-1: (DirectoryStack) Refactor the design of DirectoryStack to follow Singleton design pattern
-i-2: (Pushd) Add DirectoryStack as an instance variable of Pushd, to follow Singleton design pattern of DirectoryStack 
-j-1: (Popd) Add DirectoryStack as an instance variable of Popd, to follow Singleton design pattern of DirectoryStack
+i-1: (Pushd) Add FileSystem as an instance variable of Pushd, to follow Singleton design pattern of FileSystem 
+j-1: (Popd) Add FileSystem as an instance variable of Popd, to follow Singleton design pattern of FileSystem
 
 // The following tasks are not really connected to user stories, but rather refactoring previous code to improve design
 
@@ -47,7 +46,7 @@ k-6: (Directory) Refactor Directory so that it only contains a single HashMap of
 These tasks are assignment as follows:
 
 User: Gary Xie
-Tasks: i-1, i-2, j-1, k-1, k-2, k-3, k-4, k-5, k-6
+Tasks: i-1, j-1, k-1, k-2, k-3, k-4, k-5, k-6
 
 User: Tom Daudelin
 Tasks: e-1, f-1, f-2, f-3, f-4, f-5
