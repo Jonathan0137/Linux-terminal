@@ -74,27 +74,37 @@ public class Verifier {
     String command = input[0];
     Hashtable<String, String> hashtable = new Hashtable<String, String> (); 
     initializeHashTableWithInputLimit(hashtable);
-//    if(numOfArg!=1)
-//    {
-      return userInput.matches(hashtable.get(command));
-//    }
-//    else// num of Arg == 1
-//    {
-//      if(command.equals("pwd")||command.equals("exit")||command.equals("history")||command.equals("cd"))
-//        return true;
-//      else
-//      {
-//        System.out.println("bash: "+ command + ": not enought arguments");
-//        return false;
-//      }
-//     
-//    }
+
+    boolean tOrF = userInput.matches(hashtable.get(command));
+    if(tOrF==false)
+    {
+      System.out.println("Verifier: "+ command + ": invalid inputs");
+    }
+    return tOrF;
+
 
   }
   private static void initializeHashTableWithInputLimit(Hashtable<String, String> hashtable)
   { 
-    hashtable.put("cd", "^(\\c)(\\d)({2}\\s)"); // true
-    hashtable.put("ls", ""); // ls can be ls or ls Path or ls -R path
+    hashtable.put("exit", "exit"); //dont have redirect
+    hashtable.put("mkdir", "mkdir(\\s(\\/\\w+)+)+");  //mkdir Dir...// dont have redirect
+    hashtable.put("cd", "cd(\\s(\\w||\\W)+){0,1}");  //cd Dir  // didnot add redirect
+    hashtable.put("ls", "ls(\\s\\-R){0,1}(\\s(\\/\\w+)+){0,1}");  //ls[-R][PATH..] 
+    hashtable.put("pwd", "pwd"); 
+//    hashtable.put("mv", "mv\\s(\\/\\w+)+\\s(\\/\\w+)+"); //mv OLDPATH NEWPATH //OLD AND NEW PATH CAN BE DIR OR FILE
+//    hashtable.put("cp", "cp\\s(\\/\\w+)+\\s(\\/\\w+)+"); //cp OLDPATH NEWPATH
+    hashtable.put("cat", "cat(\\s(\\w||\\/)+\\.\\w+)+"); //cat File...
+//    hashtable.put("get", "get http://"); //get URL
+    hashtable.put("echo", "echo\\s[\\w\\W]+"); //echo String
+    hashtable.put("man", "man\\\\s(man||ls||cd||exit||mkdir||||pwd||mv||cp"
+        + "||cat||get||echo||pushd||popd||history||save||load||find||tree)");  // man CMD
+    hashtable.put("pushd", "pushd\\s(\\/\\w+)+");  // pushd Dir
+    hashtable.put("popd", "popd");
+    hashtable.put("history", "history(\\s\\d+){0,1}"); //history [number]
+    hashtable.put("save", "save\\s(\\w||\\/)+\\.\\w+"); //save FileName
+    hashtable.put("load", "load\\s(\\w||\\/)+\\.\\w+"); //load FileName
+    hashtable.put("find", ""); //idk
+    hashtable.put("tree", "tree"); 
   } 
 }
 
