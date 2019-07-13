@@ -1,0 +1,13 @@
+What did I work on in the last three days?
+	- I refactored FileSystem so that it follows Singleton design pattern
+	- I updated Popd and Pushd to reflect the changes made on FileSystem
+	- I added FileSystem as a variable in Command so that all child classes can access it
+	- I created a new Class called FileSystemNode that is the parent class of both 
+	  Directory and File and combined the common methods and instance variables
+What do I plan to work in the next three days?
+	- Refactor Directory class to use Hashmaps rather than ArrayLists, and combine the list of Subdirectories and list of Files into one, as a list of FileSystemNodes
+	- Update the methods that manipulate Directory contents to match with the changes to Directory
+Am I blocked on anything?
+    - Nothing at the moment
+
+
