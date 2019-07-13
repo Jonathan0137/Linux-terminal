@@ -1,0 +1,15 @@
+What did I work on in the last three days?
+	- Upgraded Class Man by replacing if statments with hashtable
+ 	- Learned to use regex to verifiy userinput
+	- implemented regex to Class verifier
+	- Upgraded Class Verfier by replacing if statments with hashtable
+What do I plan to work in the next three days?
+	- Finish up Verifier and it's regex
+	- try to solve and implement LS's new recursive features
+        - write some unit test for Verifier
+	- take a look at save and load
+Am I blocked on anything?
+    	- wondering what is input cleaner
+	- worried about the difficulty of save and load
+
+
