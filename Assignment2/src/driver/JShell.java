@@ -74,11 +74,10 @@ public class JShell
 	 * The constructor of JShell
 	 */
 	public JShell() {
-		directoryTree = new FileSystem();
-		//directoryHistory = new DirectoryStack();
+		directoryTree = FileSystem.getFileSystem();
+		directoryHistory = new DirectoryStack();
 		userInputHistory = new InputHistory();
 		exitStatus = false;
-		currentDirectory = directoryTree.getRootDirectory();
 	}
 	
 	/**
@@ -90,7 +89,8 @@ public class JShell
 		JShell newJShell = new JShell();
 		Scanner input = new Scanner(System.in);
 		while (!newJShell.exitStatus) {
-			System.out.print(newJShell.currentDirectory.getFullPathName()+"# ");
+			System.out.print(newJShell.directoryTree.getCurrentDirectory()
+					.getFullPathName()+"# ");
 			String userInput = input.nextLine();
 			newJShell.userInputHistory.addToHistory(userInput);
 			Verifier correct = new Verifier();
