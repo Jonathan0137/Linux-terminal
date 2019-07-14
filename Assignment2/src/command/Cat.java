@@ -5,6 +5,14 @@ import driver.JShell;
 import fileSystem.Directory;
 import fileSystem.File;
 
+
+/**
+ * Cat allows any user to display the contents of one or more files, given 
+ * file names that are relative to the current directory. 
+ * 
+ * @author Adil Shah
+ *
+ */
 public class Cat extends Command {
 	
 	/**
@@ -23,12 +31,14 @@ public class Cat extends Command {
 		{
 			if(findFileByName(currentDirectory, arguments[i]) != null) 
 			{
-				File file = findFileByName(currentDirectory, arguments[i]);
-				String contents = file.getContents();
-				System.out.println(contents);
-				if (num_arguments > 2 && i < num_arguments - 1) 
-				{
-					System.out.print("\n\n\n");
+				if (arguments[i] != "") {
+					File file = findFileByName(currentDirectory, arguments[i]);
+					String contents = file.getContents();
+					System.out.println(contents);
+					if (num_arguments > 2 && i < num_arguments - 1) 
+					{
+						System.out.print("\n\n\n");
+					}
 				}
 			}
 			else 
