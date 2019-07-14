@@ -31,22 +31,27 @@ public class Redirect {
 			}
 		}
 		if (situation == 1) {
-			String potentialCall = splitInput[splitInput.length-1]
-					.concat(" " + splitInput[splitInput.length-2]);
+			String potentialCall = Redirect.getRedirectCall(input);
 			if (potentialCall.split(" ")[0].contentEquals(">") ||
 					potentialCall.split(" ")[0].contentEquals(">>")) {
 				return true;
 			}
 			//RAISE ERROR AND APPEND ERROR MESSAGE TO OUTPUT CLASS
+			throw Exception; //UNFINISHED DONT KNOW HOW TO FULLY CALL
+			
 		}
 		return false;
 	}
 	
-	public static File getRedirection(FileSystem fileSystem, 
-			String potentialCall) {
-		File returnTo = null;
-		return returnTo;
+	public static void redirect(FileSystem fileSystem, 
+			String userInput, String text) {
+		
 	}
 		
-	
+	public static String getRedirectCall(String userInput) {
+		String[] splitInput = userInput.split(" ");
+		String call = splitInput[splitInput.length-1]
+				.concat(" "+splitInput[splitInput.length-2]);
+		return call;
+	}
 }
