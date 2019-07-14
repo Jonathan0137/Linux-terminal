@@ -5,4 +5,4 @@ What do I plan to work in the next three days?
 	-I plan on completing all the classes from Sprint 1 as well as modify all my previous classes to accommodate the new changes to the way JShell outputs.
 
 Am I blocked on anything?
-	-I need help understanding how the output classes work and how people excpect my redirect code to work
+	-I need help understanding how the output classes work and how people expect my redirect code to work
