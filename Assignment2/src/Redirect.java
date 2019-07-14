@@ -20,10 +20,24 @@ public class Redirect {
 		Redirect.outputTo = null;
 	}
 	
-	public static boolean checkRedirection(String redirectCall) {
-		if (redirectCall.split(" ")[0].contentEquals(">") ||
-				redirectCall.split(" ")[0].contentEquals(">>")) {
-			return true;
+	public static boolean checkRedirection(String input) {
+		int situation = 0;
+		String[] splitInput = input.split(" ");
+		for (int i=0; i<splitInput.length; i++) {
+			if (splitInput[i].contentEquals(">") || 
+					splitInput[i].contentEquals(">>")) {
+				situation = 1;
+				break;
+			}
+		}
+		if (situation == 1) {
+			String potentialCall = splitInput[splitInput.length-1]
+					.concat(" " + splitInput[splitInput.length-2]);
+			if (potentialCall.split(" ")[0].contentEquals(">") ||
+					potentialCall.split(" ")[0].contentEquals(">>")) {
+				return true;
+			}
+			//RAISE ERROR AND APPEND ERROR MESSAGE TO OUTPUT CLASS
 		}
 		return false;
 	}
