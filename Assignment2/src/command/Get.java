@@ -1,6 +1,8 @@
 package command;
 
 import driver.JShell;
+import java.net.*;
+import java.io.*;
 
 public class Get extends Command {
 
@@ -9,10 +11,11 @@ public class Get extends Command {
 		if (Get.getChecker(input)) {
 			String userParam = Get.cleanInput(input);
 			try {
-				
+				//REDIRECT CALL
 			}
 			catch (Exception e) {
-				
+				//case where its called as get URL
+				Get.printURLContents(userParam);
 			}
 		}
 	}
@@ -50,5 +53,23 @@ public class Get extends Command {
 			cleanInput = cleanInput.concat(components[i]);
 		}
 		return cleanInput;
+	}
+	
+	private static void printURLContents(String url) {
+		String contents = "";
+		String line;
+		try {
+			URL webAddress = new URL(url);
+			BufferedReader in = new BufferedReader(
+			        new InputStreamReader(webAddress.openStream()));
+			while ((line = in.readLine()) != null) {
+				contents = contents.concat(line);
+			}
+			in.close();
+			//MAKE CONTENTS INTO OUTPUT
+		}
+		catch (Exception e) {
+			//ADD ERROR STATEMENT TO OUTPUT CLASS //WEBSITE DOES NOT EXIST
+		}
 	}
 }
