@@ -75,7 +75,7 @@ public class JShell
 	 */
 	public JShell() {
 		directoryTree = new FileSystem();
-		directoryHistory = new DirectoryStack();
+		//directoryHistory = new DirectoryStack();
 		userInputHistory = new InputHistory();
 		exitStatus = false;
 		currentDirectory = directoryTree.getRootDirectory();
@@ -97,9 +97,14 @@ public class JShell
 			Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
 			if (toBeExecuted != null) {
 				if(correct.checkUserInput(userInput)==true) {
+					// userInput = CLEAN the userInput
 					toBeExecuted.execute(newJShell,userInput);
 					}
 			}
+			//OR CALL THE CORRECT OUTPUT METHOD CALL
+			//PRINT OUTPUT CONTAINED IN OUTPUT CLASS (PROBABLY USING
+			//System.out.print() not println() in case the output is empty)
+			//After the print, reset OUTPUT CLASS value to "".
 		}
 		input.close();
 	}
