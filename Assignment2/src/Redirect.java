@@ -37,11 +37,7 @@ public class Redirect {
 			String fullPath = "";
 			String fileName = "";
 			if (potentialCall.contains("/")) {
-				//USE FIND FULL PATH METHOD FROM ECHOTOFILE 
-				/*if (fullPath == null) {
-					//WRITE ERROR IN OUTPUT : PATH DOES NOT EXIST
-					return;
-				}*/
+				//USE FIND FULL PATH METHOD FROM ECHOTOFILE
 			}
 			else {
 				fileName = potentialCall.split(" ")[1];
@@ -83,7 +79,7 @@ public class Redirect {
 			String situation, String fileName, String fullPath, String text) {
 		File target = Redirect.findFileByName(fileSystem, fullPath, fileName);
 		if (target == null) {
-			Redirect.createAndAddFile(fileSystem, fullPath, fileName);
+			Redirect.createAndAddFile(fileSystem, fullPath, fileName, text);
 		}
 		else {
 			if (situation.contentEquals(">")) {
@@ -96,7 +92,21 @@ public class Redirect {
 	}
 	
 	private static void createAndAddFile(FileSystem fileSystem,
-			String fullPath, String fileName) {
-		
+			String fullPath, String fileName, String text) {
+		if (Redirect.fileNameCheck(fileName)) {
+			File toAdd = new File(fileName, text);
+			Directory location = Command.findDirectory(fileSystem, fullPath);
+			location.getListOfFiles().add(toAdd);
+		}
+	}
+	
+	private static boolean fileNameCheck(String fileName) {
+		String badChars = "/.@!#$%^&*() {}|<>?~";
+		for (int i=0; i<badChars.length();i++) {
+			if (fileName.contains(Character.toString(badChars.charAt(i)))) {
+				return false;
+			}
+		}
+		return true;
 	}
 }
