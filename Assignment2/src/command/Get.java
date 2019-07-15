@@ -4,18 +4,19 @@ import driver.JShell;
 import java.net.*;
 import java.io.*;
 
+
 public class Get extends Command {
 
 	@Override
 	public void execute(JShell shell, String input) {
 		if (Get.getChecker(input)) {
 			String userParam = Get.cleanInput(input);
-			try {
-				//REDIRECT CALL
+			try { 
+				String contents = Get.getURLContents(userParam); //MIGHT NEED TO CHANGE userParam variable
+				Redirect.redirection();
 			}
 			catch (Exception e) {
-				//case where its called as get URL
-				Get.printURLContents(userParam);
+				//APPEND ERROR STRING URL DNE TO OUTPUT
 			}
 		}
 	}
@@ -47,29 +48,26 @@ public class Get extends Command {
 	}
 	
 	private static String cleanInput(String input) {
-		String[] components = input.split(" ");
+		/*String[] components = input.split(" ");
 		String cleanInput = "";
 		for (int i=1 ; i<components.length; i++) {
 			cleanInput = cleanInput.concat(components[i]);
 		}
-		return cleanInput;
+		return cleanInput;*/
+		String cleanedInput = input.split(" ")[1];
+		return cleanedInput;
 	}
 	
-	private static void printURLContents(String url) {
+	private static String getURLContents(String url) {
 		String contents = "";
 		String line;
-		try {
-			URL webAddress = new URL(url);
-			BufferedReader in = new BufferedReader(
-			        new InputStreamReader(webAddress.openStream()));
-			while ((line = in.readLine()) != null) {
-				contents = contents.concat(line);
-			}
-			in.close();
-			//MAKE CONTENTS INTO OUTPUT
+		URL webAddress = new URL(url);
+		BufferedReader in = new BufferedReader(
+		        new InputStreamReader(webAddress.openStream()));
+		while ((line = in.readLine()) != null) {
+			contents = contents.concat(line);
 		}
-		catch (Exception e) {
-			//ADD ERROR STATEMENT TO OUTPUT CLASS //WEBSITE DOES NOT EXIST
-		}
+		in.close();
+		return contents;
 	}
 }
