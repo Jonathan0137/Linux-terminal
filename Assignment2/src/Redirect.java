@@ -30,7 +30,7 @@ public class Redirect {
 		return false;
 	}
 	
-	public static void redirectionSetUp(FileSystem fileSystem, 
+	public static void redirection(FileSystem fileSystem, 
 			String userInput, String text) {
 		if (Redirect.checkRedirection(userInput)) {
 			String potentialCall = Redirect.getRedirectCall(userInput);
@@ -50,12 +50,8 @@ public class Redirect {
 			//PUT TEXT INTO OUTPUT CLASS
 		}
 	}
-	
-	public static void redirectToFile(FileSystem fileSystem, 
-			String fileName, String text) {
-	}
 		
-	public static String getRedirectCall(String userInput) {
+	private static String getRedirectCall(String userInput) {
 		String[] splitInput = userInput.split(" ");
 		String call = splitInput[splitInput.length-1]
 				.concat(" "+splitInput[splitInput.length-2]);
@@ -86,7 +82,7 @@ public class Redirect {
 				target.setContents(text);
 			}
 			else {
-				target.setContents(target.getContents().concat(text));
+				target.setContents(target.getContents().concat("\n" + text));
 			}
 		}
 	}
@@ -96,10 +92,15 @@ public class Redirect {
 		if (Redirect.fileNameCheck(fileName)) {
 			File toAdd = new File(fileName, text);
 			Directory location = Command.findDirectory(fileSystem, fullPath);
+			toAdd.setParentDirectory(location); //ASK IF THAT IS THE CORRECT PARENT DIRECTORY
 			location.getListOfFiles().add(toAdd);
+		}
+		else {
+			//ADD ERROR MESSAGE TO OUTPUT THAT SAYS FILE NAME IS INVALID
 		}
 	}
 	
+	//ADD CHECK TO MAKE SURE NO SUBDIRECTORY = FILE NAME
 	private static boolean fileNameCheck(String fileName) {
 		String badChars = "/.@!#$%^&*() {}|<>?~";
 		for (int i=0; i<badChars.length();i++) {
