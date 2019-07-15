@@ -67,32 +67,32 @@ public class Verifier {
    */
   public boolean checkUserInput(String userInput)
   {
-
-    userInput = userInput.replaceAll(" +", " ");
-    String[] input = userInput.split(" ", 2);
-   // int numOfArg = input.length;    
-    String command = input[0];
-    Hashtable<String, String> hashtable = new Hashtable<String, String> (); 
-    initializeHashTableWithInputLimit(hashtable);
-
-    boolean tOrF = userInput.matches(hashtable.get(command));
-    if(tOrF==false)
+    if(Verifier.checkUserInputCommand(userInput)!=null)
     {
-      System.out.println("Verifier: "+ command + ": invalid inputs");
+      userInput = userInput.replaceAll(" +", " ");
+      String[] input = userInput.split(" ", 2); 
+      String command = input[0];
+      Hashtable<String, String> hashtable = new Hashtable<String, String> (); 
+      initializeHashTableWithInputLimit(hashtable);
+
+      boolean tOrF = userInput.matches(hashtable.get(command));
+      if(tOrF==false)
+      {
+        System.out.println("Verifier: "+ command + ": invalid inputs");
+      }
+      return tOrF;
     }
-    return tOrF;
-
-
+    return false;
   }
   private static void initializeHashTableWithInputLimit(Hashtable<String, String> hashtable)
   { 
     hashtable.put("exit", "exit"); //dont have redirect
-    hashtable.put("mkdir", "mkdir(\\s(\\/\\w+)+)+");  //mkdir Dir...// dont have redirect
+    hashtable.put("mkdir", "mkdir(\\s(\\w+(\\/)*)+)+");  //mkdir Dir...// dont have redirect
     hashtable.put("cd", "cd(\\s(\\w||\\W)+){0,1}");  //cd Dir  // didnot add redirect
     hashtable.put("ls", "ls(\\s\\-R){0,1}(\\s(\\/\\w+)+){0,1}");  //ls[-R][PATH..] 
     hashtable.put("pwd", "pwd"); 
-//    hashtable.put("mv", "mv\\s(\\/\\w+)+\\s(\\/\\w+)+"); //mv OLDPATH NEWPATH //OLD AND NEW PATH CAN BE DIR OR FILE
-//    hashtable.put("cp", "cp\\s(\\/\\w+)+\\s(\\/\\w+)+"); //cp OLDPATH NEWPATH
+    hashtable.put("mv", "mv\\s(\\/\\w+)*(.[\\w]+){0,1}\\s(\\/\\w+)*(.[\\w]+){0,1}"); //mv OLDPATH NEWPATH //OLD AND NEW PATH CAN BE DIR OR FILE
+    hashtable.put("cp", "cp\\s(\\/\\w+)*(.[\\w]+){0,1}\\s(\\/\\w+)*(.[\\w]+){0,1}"); //cp OLDPATH NEWPATH
     hashtable.put("cat", "cat(\\s(\\w||\\/)+\\.\\w+)+"); //cat File...
 //    hashtable.put("get", "get http://"); //get URL
     hashtable.put("echo", "echo\\s[\\w\\W]+"); //echo String
