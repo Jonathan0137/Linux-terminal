@@ -1,24 +1,12 @@
+import java.util.ArrayList;
+import java.util.Hashtable;
+
 import fileSystem.Directory;
 import fileSystem.File;
 import fileSystem.FileSystem;
+import command.Command;
 
 public class Redirect {
-	private static File outputTo = null;
-	
-	/*private Redirect(String fileName, Directory location) {
-		outputTo = new File(fileName);
-		outputTo.setParentDirectory(location);
-	}
-	
-	public static File createRedirection() {
-		if (Redirect.outputTo == null) {
-			Redirect(fileName, location);
-		}
-	}*/
-	
-	public static void resetRedirection() {
-		Redirect.outputTo = null;
-	}
 	
 	public static boolean checkRedirection(String input) {
 		int situation = 0;
@@ -37,15 +25,38 @@ public class Redirect {
 				return true;
 			}
 			//RAISE ERROR AND APPEND ERROR MESSAGE TO OUTPUT CLASS
-			throw Exception; //UNFINISHED DONT KNOW HOW TO FULLY CALL
-			
+			//throw Exception; //UNFINISHED DONT KNOW HOW TO FULLY CALL
 		}
 		return false;
 	}
 	
-	public static void redirect(FileSystem fileSystem, 
+	public static void redirectionSetUp(FileSystem fileSystem, 
 			String userInput, String text) {
-		
+		if (Redirect.checkRedirection(userInput)) {
+			String potentialCall = Redirect.getRedirectCall(userInput);
+			String fullPath = "";
+			String fileName = "";
+			if (potentialCall.contains("/")) {
+				//USE FIND FULL PATH METHOD FROM ECHOTOFILE 
+				/*if (fullPath == null) {
+					//WRITE ERROR IN OUTPUT : PATH DOES NOT EXIST
+					return;
+				}*/
+			}
+			else {
+				fileName = potentialCall.split(" ")[1];
+				fullPath = fileSystem.getCurrentDirectory().getFullPathName();
+			}
+			Redirect.performRedirection(fileSystem, 
+					potentialCall.split(" ")[0], fileName, fullPath, text);
+		}
+		else {
+			//PUT TEXT INTO OUTPUT CLASS
+		}
+	}
+	
+	public static void redirectToFile(FileSystem fileSystem, 
+			String fileName, String text) {
 	}
 		
 	public static String getRedirectCall(String userInput) {
@@ -53,5 +64,39 @@ public class Redirect {
 		String call = splitInput[splitInput.length-1]
 				.concat(" "+splitInput[splitInput.length-2]);
 		return call;
+	}
+	
+	private static File findFileByName(FileSystem fileSystem, 
+			String fullPath, String fileName) {
+		//FIND A SPECIFIC DIRECTORY GIVEN A PATH
+		Directory location = Command.findDirectory(fileSystem, fullPath);
+		ArrayList<File> fileList = location.getListOfFiles();
+		for (int i=0; i<fileList.size();i++) {
+			if (fileList.get(i).getName().equals(fileName)) {
+				return fileList.get(i);
+			}
+		}
+		return null;
+	}
+	
+	private static void performRedirection(FileSystem fileSystem, 
+			String situation, String fileName, String fullPath, String text) {
+		File target = Redirect.findFileByName(fileSystem, fullPath, fileName);
+		if (target == null) {
+			Redirect.createAndAddFile(fileSystem, fullPath, fileName);
+		}
+		else {
+			if (situation.contentEquals(">")) {
+				target.setContents(text);
+			}
+			else {
+				target.setContents(target.getContents().concat(text));
+			}
+		}
+	}
+	
+	private static void createAndAddFile(FileSystem fileSystem,
+			String fullPath, String fileName) {
+		
 	}
 }
