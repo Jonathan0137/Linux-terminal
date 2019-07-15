@@ -1,0 +1,11 @@
+Class Name: Load
+Parent Class: Command
+Subclasses: None
+
+Responsibilities:
+* Loads a FileSystem, InputHistory, and DirectoryStack state from a file in the user's computer file system to the current shell
+* Prevents command execution if Load is not the first command called in a newly opened console
+Collaborators:
+* Inherited from Parent Class
+* DirectoryStack
+* InputHistory
