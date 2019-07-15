@@ -1,0 +1,10 @@
+Class Name: Save
+Parent Class: Command
+Subclasses: None
+
+Responsibilities:
+* Saves the current shell's FileSystem, InputHistory, and DirectoryStack state to a file in the user's actual computer file system
+Collaborators:
+* Inherited from Parent Class
+* DirectoryStack
+* InputHistory
