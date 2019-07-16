@@ -14,12 +14,23 @@ public class InputHistory {
 	private ArrayList<String> inputList;
 	
 	/**
+	 * A static instance of the InputHistory
+	 */
+	private static InputHistory history = null;
+	
+	/**
 	 * The constructor
 	 */
-	public InputHistory() {
+	private InputHistory() {
 		inputList = new ArrayList<String>();
 	}
 	
+	public static InputHistory getInputHistory() {
+		if (history == null) {
+			history = new InputHistory();
+		}
+		return history;
+	}
 	/**
 	 * Adds the string representation of a user's input at the end of the
 	 * list
