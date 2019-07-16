@@ -6,5 +6,5 @@ Responsibilities:
 * Executes the command
 Collaborators:
 * FileSystem
+* FileSystemManipulation
 * Output
-* Redirection

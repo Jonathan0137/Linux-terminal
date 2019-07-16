@@ -1,8 +1,8 @@
-Class Name: ErrorOutput
+Class Name: UserOutput
 Parent Class: OutputInterface
 Subclasses: None
 
 Responsibilities:
-* Stores an error output message
+* Stores an non-error output message from a command
 Collaborators:
 * None
