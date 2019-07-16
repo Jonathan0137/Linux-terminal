@@ -1,7 +1,6 @@
 package fileSystem;
 
 import java.util.HashMap;
-import java.util.Map;
 
 // TODO: UPDATE Javadocs (for all my classes)
 
@@ -66,8 +65,7 @@ public final class FileSystemManipulation {
       if (name == nodeName) {
         return listOfFileSystemNodes.get(name);
       }
-    }
-    
+    }   
     return null;
   }
   
