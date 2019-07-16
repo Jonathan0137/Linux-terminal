@@ -1,9 +1,9 @@
 package command;
 
 import java.util.ArrayList;
-import driver.JShell;
 import fileSystem.Directory;
 import fileSystem.File;
+import fileSystem.FileSystem;
 
 
 /**
@@ -22,27 +22,32 @@ public class Cat extends Command {
 	  * @param fileNames   a list of the file names
 	  */
 	@Override
-	public void execute(JShell shell, String fileNames) 
+	public void execute(ArrayList<Object> param) 
 	{
+		String fileNames = (String) param.get(0);
 		String[] arguments = fileNames.split(" ");
 		int num_arguments = arguments.length;
-		Directory currentDirectory = shell.getCurrentDirectory();
+		Directory currentDirectory = FileSystem.getFileSystem().
+														getCurrentDirectory();
 		for (int i = 1; i < num_arguments; i++)
 		{
 			if(findFileByName(currentDirectory, arguments[i]) != null) 
 			{
 				if (arguments[i] != "") {
-					File file = findFileByName(currentDirectory, arguments[i]);
-					String contents = file.getContents();
+					File f = findFileByName(currentDirectory, arguments[i]);
+					String contents = f.getContents();
+					//put contents into output if not redirected
 					System.out.println(contents);
 					if (num_arguments > 2 && i < num_arguments - 1) 
 					{
+						//add line breaks to output
 						System.out.print("\n\n\n");
 					}
 				}
 			}
 			else 
 			{
+				//put into error output
 				System.out.println("The file '" + arguments[i] + "' does not"
 						+ " exist in " + currentDirectory.getFullPathName());
 			}
