@@ -1,0 +1,9 @@
+What did I work on in the last three days?
+	-added error case into cat
+	-created class mv
+
+What do I plan to work in the next three days?
+	-completed mv class
+	-modify pwd and cat to add redirection
+Am I blocked on anything?
+	-N/A
