@@ -1,5 +1,7 @@
 package command;
 
+import java.util.ArrayList;
+
 import driver.JShell;
 
 /**
@@ -12,7 +14,8 @@ public class Exit extends Command {
 	/**
 	 * Terminates the JShell
 	 */
-	public void execute(JShell shell, String input) {
+	public void execute(ArrayList<Object> param) {
+		JShell shell = (JShell) param.get(0);
 		shell.exitShell();
 	}
 	
