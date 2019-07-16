@@ -87,9 +87,26 @@ public class Verifier {
   private static void initializeHashTableWithInputLimit(Hashtable<String, String> hashtable)
   { 
     hashtable.put("exit", "exit"); //dont have redirect
-    hashtable.put("mkdir", "mkdir(\\s(\\w+(\\/)*)+)+");  //mkdir Dir...// dont have redirect
-    hashtable.put("cd", "cd(\\s(\\w||\\W)+){0,1}");  //cd Dir  // didnot add redirect
-    hashtable.put("ls", "ls(\\s\\-R){0,1}(\\s(\\/\\w+)+){0,1}");  //ls[-R][PATH..] 
+    hashtable.put("mkdir", "mkdir(\\s((\\/){0,1}(\\w+|\\.{0,2})(\\/){0,1})+)+");  //mkdir Dir...// 
+    hashtable.put("cd", "cd(\\s((\\/){0,1}(\\w+|\\.{0,2})(\\/){0,1})+){0,1}");  //cd Dir  // didnot add redirect
+   
+    
+    
+    
+    
+    
+    hashtable.put("ls", "ls(\\s\\-R){0,1}(\\s((\\/){0,1}(\\w+||\\.{0,2})(\\/){0,1})+){0,1}");  //ls[-R][PATH..] 
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     hashtable.put("pwd", "pwd"); 
     hashtable.put("mv", "mv\\s(\\/\\w+)*(.[\\w]+){0,1}\\s(\\/\\w+)*(.[\\w]+){0,1}"); //mv OLDPATH NEWPATH //OLD AND NEW PATH CAN BE DIR OR FILE
     hashtable.put("cp", "cp\\s(\\/\\w+)*(.[\\w]+){0,1}\\s(\\/\\w+)*(.[\\w]+){0,1}"); //cp OLDPATH NEWPATH
