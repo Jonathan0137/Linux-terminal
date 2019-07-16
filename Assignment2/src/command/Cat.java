@@ -6,7 +6,6 @@ import fileSystem.File;
 import fileSystem.FileSystem;
 import fileSystem.FileSystemManipulation;
 
-
 /**
  * Cat allows any user to display the contents of one or more files, given 
  * file names that are relative to the current directory. 
