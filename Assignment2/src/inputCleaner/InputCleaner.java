@@ -1,6 +1,6 @@
 package inputCleaner;
 
-public class InputCleaner 
+public final class InputCleaner 
 {
   public static String cleanInput(String userInput)
   {
