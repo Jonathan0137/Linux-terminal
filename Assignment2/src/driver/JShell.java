@@ -29,8 +29,10 @@
 // *********************************************************
 package driver;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import fileSystem.*;
+import inputCleaner.InputCleaner;
 import inputHistory.InputHistory;
 import command.Command;
 import verifier.Verifier;
@@ -93,19 +95,18 @@ public class JShell
 					.getFullPathName()+"# ");
 			String userInput = input.nextLine();
 			newJShell.userInputHistory.addToHistory(userInput);
+			userInput = InputCleaner.cleanInput(userInput);
 			Verifier correct = new Verifier();
 			Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
 			if (toBeExecuted != null) {
 				if(correct.checkUserInput(userInput)==true) {
-					// userInput = CLEAN the userInput
-					toBeExecuted.execute(newJShell,userInput);
+					CommandParameter param = new CommandParameter(toBeExecuted,
+							newJShell.directoryHistory, userInput);
+					toBeExecuted.execute(param.getParameters);
 					}
 			}
-			
-			//OR CALL THE CORRECT OUTPUT METHOD CALL
-			//PRINT OUTPUT CONTAINED IN OUTPUT CLASS (PROBABLY USING
-			//System.out.print() not println() in case the output is empty)
-			//After the print, reset OUTPUT CLASS value to "".
+			Output.printOutput();
+			Output.resetOutput();
 		}
 		input.close();
 	}
