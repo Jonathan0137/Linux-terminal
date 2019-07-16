@@ -1,8 +1,8 @@
 package command;
 
-import driver.JShell;
-import fileSystem.FileSystem;
+import java.util.ArrayList;
 import fileSystem.Directory;
+import fileSystem.FileSystemManipulation;
 
 /**
  * Provides functionality for the 'cd' command,
@@ -39,7 +39,8 @@ public class Cd extends Command {
    * @param input a relative or absolute path name
    */
   @Override
-  public void execute(JShell shell, String input) {
+  public void execute(ArrayList<Object> param) {
+    String input = (String) param.get(0);
     String[] inputSplit = input.split(" ", 2);
     // Ignore the 'cd' part of the input
     input = inputSplit[1].trim();
@@ -47,24 +48,23 @@ public class Cd extends Command {
       System.out.println("Cd command is missing a path name.");
       return;
     }
-    Directory workingDirectory = shell.getCurrentDirectory();
-    FileSystem fs = shell.getDirectoryTree();
+    Directory workingDirectory = fs.getCurrentDirectory();
     Directory root = fs.getRootDirectory();
     Directory newWorkingDirectory = null;
     String absolutePathName;
     // Input is an absolute path
     if (input.charAt(0) == '/') {
       // Convert '..' and '.' to absolute path
-      absolutePathName = Command.getAbsolutePath(input, root);
+      absolutePathName = FileSystemManipulation.getAbsolutePath(input, root);
     }
     // Input is a relative path
     else {
-      absolutePathName = Command.getAbsolutePath(input, workingDirectory);
+      absolutePathName = FileSystemManipulation.getAbsolutePath(input, workingDirectory);
     }
-    newWorkingDirectory = Command.findDirectory(fs, absolutePathName);
+    newWorkingDirectory = (Directory) FileSystemManipulation.findFileSystemNode(absolutePathName);
 
     if (newWorkingDirectory != null) {
-      shell.setCurrentDirectory(newWorkingDirectory);
+      fs.setCurrentDirectory(newWorkingDirectory);
     } else {
       System.out.println("Specified path not found.");
     }
