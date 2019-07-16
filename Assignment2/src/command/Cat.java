@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import fileSystem.Directory;
 import fileSystem.File;
 import fileSystem.FileSystem;
+import fileSystem.FileSystemManipulation;
 
 
 /**
@@ -22,26 +23,25 @@ public class Cat extends Command {
 	  * @param fileNames   a list of the file names
 	  */
 	@Override
-	public void execute(ArrayList<Object> param) 
+	public void execute(ArrayList<Object> param)
 	{
 		String fileNames = (String) param.get(0);
 		String[] arguments = fileNames.split(" ");
 		int num_arguments = arguments.length;
-		Directory currentDirectory = FileSystem.getFileSystem().
-														getCurrentDirectory();
+		Directory currentDirectory = FileSystem.getFileSystem().getCurrentDirectory();
 		for (int i = 1; i < num_arguments; i++)
 		{
-			if(findFileByName(currentDirectory, arguments[i]) != null) 
+			if(FileSystemManipulation.findSubNode(currentDirectory, arguments[i]) instanceof File) 
 			{
 				if (arguments[i] != "") {
-					File f = findFileByName(currentDirectory, arguments[i]);
+					File f = 
+					    (File) FileSystemManipulation.findSubNode(currentDirectory, arguments[i]);
 					String contents = f.getContents();
 					//put contents into output if not redirected
 					System.out.println(contents);
-					if (num_arguments > 2 && i < num_arguments - 1) 
-					{
-						//add line breaks to output
-						System.out.print("\n\n\n");
+					if (num_arguments > 2 && i < num_arguments - 1) {
+					  //add line breaks to output
+					  System.out.print("\n\n\n"); 
 					}
 				}
 			}
@@ -53,26 +53,6 @@ public class Cat extends Command {
 			}
 		}
 	}
-
-	
-	/**
-	 * Finds a file by name in a specific directory
-	 * @param directory The target directory
-	 * @param fileName The name of the sought out file
-	 * @return fileList.get(i) The file with same name as fileName
-	 */
-	public static File findFileByName(Directory directory, String fileName) 
-	{
-		ArrayList<File> fileList = directory.getListOfFiles();
-		for (int i = 0; i < fileList.size(); i++) 
-		{
-			if (fileList.get(i).getName().equals(fileName)) 
-			{
-				return fileList.get(i);
-			}
-		}
-		return null;
-	}	
 		
 	/**
 	  * Returns a String containing the documentation 
