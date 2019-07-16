@@ -1,8 +1,17 @@
 package command;
 
-import driver.JShell;
-import fileSystem.Directory;
+import java.util.ArrayList;
 
+import fileSystem.Directory;
+import fileSystem.FileSystem;
+import redirection.Redirection;
+
+/**
+ * Pwd allows any user to display the current working direectory 
+ * 
+ * @author Adil Shah
+ *
+ */
 public class Pwd extends Command{
 	
 	
@@ -13,10 +22,17 @@ public class Pwd extends Command{
 	  * @param input	Unused
 	  */
 	@Override
-	public void execute(JShell shell, String input)
+	public void execute(ArrayList<Object> param)
 	{
-		Directory currentDirectory = shell.getCurrentDirectory();
-		System.out.println(currentDirectory.getFullPathName());
+		String input = (String) param.get(0);
+		Directory currentDirectory = FileSystem.getFileSystem().
+										getCurrentDirectory();
+		String text = currentDirectory.getFullPathName();
+		
+		Redirection.redirection(FileSystem.getFileSystem(), input, text);
+		
+		//Add to output
+		
 	}
 	
 	
