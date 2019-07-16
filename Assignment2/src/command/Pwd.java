@@ -18,8 +18,7 @@ public class Pwd extends Command{
 	/**
 	  * Prints the absolute path of the current working directory
 	  * 
-	  * @param shell   an instance of the JShell that interacts with user
-	  * @param input	Unused
+	  * @param param	ArrayList containing all parameters required by pwd
 	  */
 	@Override
 	public void execute(ArrayList<Object> param)
@@ -31,7 +30,7 @@ public class Pwd extends Command{
 		
 		Redirection.redirection(FileSystem.getFileSystem(), input, text);
 		
-		//Add to output
+		//Add to output class if not redirected
 		
 	}
 	

@@ -19,8 +19,7 @@ public class Cat extends Command {
 	/**
 	  * Prints out the contents of any files the user inputs
 	  * 
-	  * @param shell   an instance of the JShell that interacts with user
-	  * @param fileNames   a list of the file names
+	  * @param param	ArrayList containing all parameters required by cat
 	  */
 	@Override
 	public void execute(ArrayList<Object> param)
@@ -37,7 +36,7 @@ public class Cat extends Command {
 					File f = 
 					    (File) FileSystemManipulation.findSubNode(currentDirectory, arguments[i]);
 					String contents = f.getContents();
-					//put contents into output if not redirected
+					//put contents into output
 					System.out.println(contents);
 					if (num_arguments > 2 && i < num_arguments - 1) {
 					  //add line breaks to output
