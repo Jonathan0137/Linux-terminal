@@ -39,25 +39,24 @@ import commandParameter.CommandParameter;
 import verifier.Verifier;
 
 /**
- * The JShell object allows any user to manipulate or create files, 
- * directories and access user input history and directory stacks as well as
- * terminating itself through user inputs into the console.
+ * The JShell object allows any user to manipulate or create files, directories
+ * and access user input history and directory stacks as well as terminating
+ * itself through user inputs into the console.
  * 
  * @author Tom Daudelin
  *
  */
-public class JShell 
-{
+public class JShell {
 	/**
 	 * A directory stack for JShell to keep track of
 	 */
 	private DirectoryStack directoryHistory;
-	
+
 	/**
 	 * A lever that dictates when JShell must terminate
 	 */
 	private boolean exitStatus;
-	
+
 	/**
 	 * The constructor of JShell
 	 */
@@ -65,10 +64,11 @@ public class JShell
 		directoryHistory = new DirectoryStack();
 		exitStatus = false;
 	}
-	
+
 	/**
-	 * Main method creates object JShell and continuously accepts and executes 
-	 * user inputs until user inputs "exit"
+	 * Main method creates object JShell and continuously accepts and executes user
+	 * inputs until user inputs "exit"
+	 * 
 	 * @param args Unused
 	 */
 	public static void main(String[] args) {
@@ -76,33 +76,34 @@ public class JShell
 		Scanner input = new Scanner(System.in);
 		while (!newJShell.exitStatus) {
 			System.out.print(FileSystem.getFileSystem().getCurrentDirectory()
-					.getFullPathName()+"# ");
+					.getFullPathName() + "# ");
 			String userInput = input.nextLine();
 			InputHistory.getInputHistory().addToHistory(userInput);
 			userInput = InputCleaner.cleanInput(userInput);
 			Verifier correct = new Verifier();
 			Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
 			if (toBeExecuted != null) {
-				if(correct.checkUserInput(userInput)==true) {
-					CommandParameter param = new CommandParameter(toBeExecuted,
-							newJShell, userInput);
+				if (correct.checkUserInput(userInput) == true) {
+					CommandParameter param = 
+							new CommandParameter(toBeExecuted, newJShell, userInput);
 					toBeExecuted.execute(param.getParameters());
-					}
+				}
 			}
-			Output.printOutput();
-			Output.resetOutput();
+			// Output.printOutput();
+			// Output.resetOutput();
 		}
 		input.close();
 	}
-	
+
 	/**
 	 * Accesses and returns a JShell object's directory stack
+	 * 
 	 * @return this.directoryHistory DirectoryStack instance variable in JShell
 	 */
 	public DirectoryStack getDirectoryStack() {
 		return this.directoryHistory;
 	}
-	
+
 	/**
 	 * Sets the JShell's exit status to true in order to terminate JShell
 	 */
