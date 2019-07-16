@@ -1,6 +1,6 @@
 package fileSystem;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Contains information about a directory
@@ -10,14 +10,12 @@ import java.util.ArrayList;
  */
 public class Directory extends FileSystemNode {
   /**
-   * List of subdirectories in the Directory
+   * HashMap of subdirectories and files in the Directory.
+   * Key: name of the subdirectory or file
+   * Value: the actual File or Directory
    */
-  private ArrayList<Directory> listOfSubdirectories;
-  /**
-   * List of files in the Directory
-   */
-  private ArrayList<File> listOfFiles;
-  
+  private HashMap<String, FileSystemNode> listOfFileSystemNodes;
+
   /**
    * Constructor for Directory.
    * 
@@ -25,8 +23,7 @@ public class Directory extends FileSystemNode {
    */
   public Directory(String name) {
     super(name);
-    listOfSubdirectories = new ArrayList<Directory>();
-    listOfFiles = new ArrayList<File>();
+    listOfFileSystemNodes = new HashMap<String, FileSystemNode>();
   }
   
   /**
@@ -41,22 +38,12 @@ public class Directory extends FileSystemNode {
   }
   
   /**
-   * Returns a list containing the 
-   * subdirectories in the directory.
+   * Returns a HashMap containing the 
+   * subdirectories and files in the directory.
    * 
    * @return a list of the directory's subdirectories
    */
-  public ArrayList<Directory> getListOfSubdirectories() {
-    return listOfSubdirectories;
-  }
-  
-  /**
-   * Returns a list containing the files 
-   * in the directory.
-   * 
-   * @return a list of the directory's files
-   */
-  public ArrayList<File> getListOfFiles() {
-    return listOfFiles;
+  public HashMap<String, FileSystemNode> getListOfFileSystemNodes() {
+    return listOfFileSystemNodes;
   }
 }
