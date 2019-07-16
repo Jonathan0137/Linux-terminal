@@ -105,6 +105,7 @@ public class Ls extends Command {
     }
   }
 
+  // TODO: Remove commented code
   /**
    * A helper function that takes in the file name and finds that file in 
    * current working folder and return it.

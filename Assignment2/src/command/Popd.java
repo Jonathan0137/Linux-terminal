@@ -1,6 +1,6 @@
 package command;
 
-import driver.JShell;
+import java.util.ArrayList;
 import fileSystem.Directory;
 import fileSystem.DirectoryStack;
 
@@ -38,8 +38,9 @@ public class Popd extends Command {
    * @param input (unused, only here to override Command execute())
    */
   @Override
-  public void execute(DirectoryStack dirStack, String input) {
-
+  public void execute(ArrayList<Object> param) {
+    
+    DirectoryStack dirStack = (DirectoryStack) param.get(0);
     Cd changeDir = new Cd();
 
     // The directory stack is empty, so outputs an error message
@@ -49,7 +50,9 @@ public class Popd extends Command {
       // Remove the last entry in the directory stack
       Directory newWorkingDirectory = dirStack.getStack().pollLast();
       // Change the working directory using Cd
-      changeDir.execute("cd " + newWorkingDirectory.getFullPathName());
+      ArrayList<Object> parameters = new ArrayList<Object>();
+      parameters.add("cd " + newWorkingDirectory.getFullPathName());
+      changeDir.execute(parameters);
     }
   }
 }
