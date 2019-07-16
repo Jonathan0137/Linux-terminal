@@ -1,8 +1,11 @@
 package command;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import driver.JShell;
 import fileSystem.FileSystem;
+import fileSystem.FileSystemManipulation;
+import fileSystem.FileSystemNode;
 import fileSystem.Directory;
 import fileSystem.File;
 
@@ -50,8 +53,8 @@ public class Mkdir extends Command{
 					String pathParentDir = arguments[i].replace("/" + 
 															pathNewDir, "");
 						
-					Directory parentDirectory = Command.findDirectory(fs,
-															pathParentDir);
+					Directory parentDirectory = (Directory) 
+					    FileSystemManipulation.findFileSystemNode(pathParentDir);
 					addSubdirectory(parentDirectory, newDirectory);
 				}
 				else {
@@ -73,20 +76,19 @@ public class Mkdir extends Command{
 	  * @param subDirectory   the directory that is being added by the user
 	  */
 	public void addSubdirectory(Directory parent, 
-						Directory subDirectory) {
-		ArrayList<Directory> listOfSubdir = parent.getListOfSubdirectories();
-		ArrayList<File> listOfFiles = parent.getListOfFiles();
-		if (containsDirectory(listOfSubdir, subDirectory)||
-		    containsFile(listOfFiles, subDirectory)) {
+						Directory subDirectory) {	
+		HashMap<String, FileSystemNode> listOfNodes = parent.getListOfFileSystemNodes();
+		
+		if (listOfNodes.containsKey(subDirectory.getName())) {
 			System.out.println("The name '" + subDirectory.getName()
 								+ "' already exists in this directory.");
 			return;
 		}
 		subDirectory.setParentDirectory(parent);
-		listOfSubdir.add(subDirectory);
+		listOfNodes.put(subDirectory.getName(), subDirectory);
 	}
 	 
-	
+	// TODO: Remove commented code
 	/**
 	  * Checks if the name of the directory the user is attempting to create
 	  * is already a directory name in the parent Directory.
@@ -95,16 +97,16 @@ public class Mkdir extends Command{
 	  * 						   in the parent
 	  * @param subDirectory   the directory that the user is attempting to add
 	  */
-	private static boolean containsDirectory(ArrayList<Directory> listOfDir,
-													Directory subDirectory) {   
-		String subDirName = subDirectory.getName();
-		for (int i=0; i<listOfDir.size(); i++) {
-			if (listOfDir.get(i).getName().equals(subDirName)) {
-				return true;
-			}
-		}
-		return false;
-	}
+//	private static boolean containsDirectory(ArrayList<Directory> listOfDir,
+//													Directory subDirectory) {   
+//		String subDirName = subDirectory.getName();
+//		for (int i=0; i<listOfDir.size(); i++) {
+//			if (listOfDir.get(i).getName().equals(subDirName)) {
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
 	
 	/**
      * Checks if the name of the  directory the user is attempting to create is 
@@ -113,16 +115,16 @@ public class Mkdir extends Command{
      * @param listOfFiles   the list of files that already exist in the parent
      * @param subDirectory   the directory that the user is attempting to add
      */
-   private static boolean containsFile(ArrayList<File> listOfFiles, 
-		   									Directory subDirectory) {   
-       String subDirName = subDirectory.getName();
-       for (int i=0; i<listOfFiles.size(); i++) {
-           if (listOfFiles.get(i).getName().equals(subDirName)) {
-               return true;
-           }
-       }
-       return false;
-   }
+//   private static boolean containsFile(ArrayList<File> listOfFiles, 
+//		   									Directory subDirectory) {   
+//       String subDirName = subDirectory.getName();
+//       for (int i=0; i<listOfFiles.size(); i++) {
+//           if (listOfFiles.get(i).getName().equals(subDirName)) {
+//               return true;
+//           }
+//       }
+//       return false;
+//   }
 	
 	/**
 	 * Returns true if the directory a user is attempting to create has
