@@ -1,0 +1,8 @@
+Class Name: AbstractOutput
+Parent Class: None
+Subclasses: UserOutput, ErrorOutput
+
+Responsibilities:
+* Stores an output message
+Collaborators:
+* None
