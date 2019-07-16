@@ -1,6 +1,8 @@
 package command;
 
 import driver.JShell;
+import redirection.Redirect;
+
 import java.net.*;
 import java.io.*;
 
@@ -13,7 +15,8 @@ public class Get extends Command {
 			String userParam = Get.cleanInput(input);
 			try { 
 				String contents = Get.getURLContents(userParam); //MIGHT NEED TO CHANGE userParam variable
-				Redirect.redirection();
+				Redirect.redirection(shell.getDirectoryTree(), 
+						input, contents);
 			}
 			catch (Exception e) {
 				//APPEND ERROR STRING URL DNE TO OUTPUT
@@ -61,13 +64,20 @@ public class Get extends Command {
 	private static String getURLContents(String url) {
 		String contents = "";
 		String line;
-		URL webAddress = new URL(url);
-		BufferedReader in = new BufferedReader(
-		        new InputStreamReader(webAddress.openStream()));
-		while ((line = in.readLine()) != null) {
-			contents = contents.concat(line);
+		try {
+			URL webAddress = new URL(url);
+			BufferedReader in = new BufferedReader(
+			        new InputStreamReader(webAddress.openStream()));
+			while ((line = in.readLine()) != null) {
+				contents = contents.concat(line);
+			}
+			in.close();
+			return contents;
 		}
-		in.close();
-		return contents;
+		catch (Exception e) {
+			//RETURN ERROR MOST DEFINETLY NEED TO CHANGE IN THE FUTURE
+			int i= 1/0;
+			return "";
+		}
 	}
 }
