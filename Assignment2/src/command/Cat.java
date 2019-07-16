@@ -27,14 +27,16 @@ public class Cat extends Command {
 		String fileNames = (String) param.get(0);
 		String[] arguments = fileNames.split(" ");
 		int num_arguments = arguments.length;
-		Directory currentDirectory = FileSystem.getFileSystem().getCurrentDirectory();
+		Directory currentDir = FileSystem.getFileSystem().getCurrentDirectory();
 		for (int i = 1; i < num_arguments; i++)
 		{
-			if(FileSystemManipulation.findSubNode(currentDirectory, arguments[i]) instanceof File) 
+			if(FileSystemManipulation.findSubNode(currentDir, arguments[i])
+															instanceof File)
 			{
 				if (arguments[i] != "") {
 					File f = 
-					    (File) FileSystemManipulation.findSubNode(currentDirectory, arguments[i]);
+					    (File) FileSystemManipulation.findSubNode(currentDir,
+					    										arguments[i]);
 					String contents = f.getContents();
 					//put contents into output
 					System.out.println(contents);
@@ -48,7 +50,7 @@ public class Cat extends Command {
 			{
 				//put into error output
 				System.out.println("The file '" + arguments[i] + "' does not"
-						+ " exist in " + currentDirectory.getFullPathName());
+						+ " exist in " + currentDir.getFullPathName());
 			}
 		}
 	}
