@@ -24,8 +24,7 @@ public final class FileSystemManipulation {
    * @param absolutePathName the absolute path name of a directory
    * @return the directory with the given absolute path name
    */
-  public static FileSystemNode findFileSystemNode(String absolutePathName,
-                                                  String nodeType) {
+  public static FileSystemNode findFileSystemNode(String absolutePathName) {
     Directory traversalDirectory = fs.getRootDirectory();
     String[] nameList = absolutePathName.split("/");
     
@@ -34,7 +33,7 @@ public final class FileSystemManipulation {
         continue;
       }
       FileSystemNode node = findSubNode(traversalDirectory, nameList[i]);
-      if ((node == null) || (! (node instanceof Directory))) {
+      if (! (node instanceof Directory)) {
         return null;
       }
       traversalDirectory = (Directory) node;
@@ -42,10 +41,7 @@ public final class FileSystemManipulation {
     
     FileSystemNode targetNode = findSubNode(traversalDirectory,
         nameList[nameList.length-1]);
-    if (targetNode.getClass().getSimpleName() == nodeType) {
-      return targetNode;
-    }
-    return null;
+    return targetNode;
   }
   
   /**
@@ -77,7 +73,7 @@ public final class FileSystemManipulation {
    * @param workingDir  the current working directory
    * @return            the absolute path version of the given input path name
    */
-  protected static String getAbsolutePath(String input, Directory workingDir) {
+  public static String getAbsolutePath(String input, Directory workingDir) {
       String[] pathList = input.split("/");
       
       String fullPathName = workingDir.getFullPathName();

@@ -1,9 +1,12 @@
 package command;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import driver.JShell;
 import fileSystem.Directory;
 import fileSystem.File;
+import fileSystem.FileSystemManipulation;
+import fileSystem.FileSystemNode;
   /**
    * Ls is a Command where it can print all the folders and files under
    * current working directory.
@@ -67,14 +70,15 @@ public class Ls extends Command {
         printFilesAndDirectories(workingDir);
       else 
       {
-        if (Ls.findDirectory(path, workingDir) != null) 
+        FileSystemNode subNode = FileSystemManipulation.findSubNode(workingDir, path);
+        if (subNode instanceof Directory) 
         {
           System.out.println(path + " : ");
-          Directory nextDir = Ls.findDirectory(path, workingDir);
+          Directory nextDir = (Directory) subNode;
           printFilesAndDirectories(nextDir);
           System.out.println();
         } 
-        else if (Ls.findFile(path, workingDir) != null) 
+        else if (subNode instanceof File) 
         {
           System.out.println(path);
         } 
@@ -86,17 +90,18 @@ public class Ls extends Command {
   }
 
   /**
-   * A helper function that takes in an instance of an Direcotry and print 
-   * any files and folders under it.
+   * A helper function that takes in an instance of an Directory and print 
+   * any files and directories in it, in sorted order.
    * 
-   * @param workingDir         Current working direcotry
+   * @param workingDir         Current working directory
    */
   private void printFilesAndDirectories(Directory workingDir) {
-    for (File file : workingDir.getListOfFiles()) {
-      System.out.println(file.getName());
-    }
-    for (Directory dir : workingDir.getListOfSubdirectories()) {
-      System.out.println(dir.getName());
+    ArrayList<String> sortedList = new 
+        ArrayList<String>(workingDir.getListOfFileSystemNodes().keySet());
+    Collections.sort(sortedList);
+    
+    for (String name : sortedList) {
+      System.out.println(name);
     }
   }
 
@@ -110,16 +115,16 @@ public class Ls extends Command {
    * @return                    A instance of File that is under the current 
    *                            directory, if not found then return null
    */
-  private static File findFile(String fileName, Directory currentWorkingDir) {
-    ArrayList<File> listOfFiles = currentWorkingDir.getListOfFiles();
-
-    for (int i = 0; i < listOfFiles.size(); i++) {
-      if (fileName.equals(listOfFiles.get(i).getName())) {
-        return listOfFiles.get(i);
-      }
-    }
-    return null;
-  }
+  //private static File findFile(String fileName, Directory currentWorkingDir) {
+//    ArrayList<File> listOfFiles = currentWorkingDir.getListOfFiles();
+//
+//    for (int i = 0; i < listOfFiles.size(); i++) {
+//      if (fileName.equals(listOfFiles.get(i).getName())) {
+//        return listOfFiles.get(i);
+//      }
+//    }
+//    return null;
+//  }
 
   /**
    * A helper function that takes in the directory name and finds 
@@ -131,18 +136,16 @@ public class Ls extends Command {
    * @return                   A instance of Directory that is under the 
    *                           current directory, if not found then return null
    */
-  private static Directory findDirectory(String directoryName, 
-      Directory currentWorkingDir) {
-
-    ArrayList<Directory> listOfSubdirectories = 
-        currentWorkingDir.getListOfSubdirectories();
-    for (int i = 0; i < listOfSubdirectories.size(); i++) {
-      if (directoryName.equals(listOfSubdirectories.get(i).getName())) {
-        return listOfSubdirectories.get(i);
-      }
-    }
-    return null;
-  }
-
-
+//  private static Directory findDirectory(String directoryName, 
+//      Directory currentWorkingDir) {
+//
+//    ArrayList<Directory> listOfSubdirectories = 
+//        currentWorkingDir.getListOfSubdirectories();
+//    for (int i = 0; i < listOfSubdirectories.size(); i++) {
+//      if (directoryName.equals(listOfSubdirectories.get(i).getName())) {
+//        return listOfSubdirectories.get(i);
+//      }
+//    }
+//    return null;
+//  }
 }
