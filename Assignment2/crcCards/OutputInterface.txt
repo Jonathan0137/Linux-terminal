@@ -1,8 +1,0 @@
-Class Name: OutputInterface
-Parent Class: None
-Subclasses: UserOutput, ErrorOutput
-
-Responsibilities:
-* Stores an output message
-Collaborators:
-* None
