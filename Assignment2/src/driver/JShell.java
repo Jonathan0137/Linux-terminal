@@ -35,6 +35,7 @@ import fileSystem.*;
 import inputCleaner.InputCleaner;
 import inputHistory.InputHistory;
 import command.Command;
+import commandParameter.CommandParameter;
 import verifier.Verifier;
 
 /**
@@ -48,19 +49,9 @@ import verifier.Verifier;
 public class JShell 
 {
 	/**
-	 * The directory tree stored into JShell
-	 */
-	private FileSystem directoryTree;
-	
-	/**
 	 * A directory stack for JShell to keep track of
 	 */
 	private DirectoryStack directoryHistory;
-	
-	/**
-	 * A list of all user inputs into JShell
-	 */
-	private InputHistory userInputHistory;
 	
 	/**
 	 * A lever that dictates when JShell must terminate
@@ -68,17 +59,10 @@ public class JShell
 	private boolean exitStatus;
 	
 	/**
-	 * The users current working directory
-	 */
-	private Directory currentDirectory;
-	
-	/**
 	 * The constructor of JShell
 	 */
 	public JShell() {
-		directoryTree = FileSystem.getFileSystem();
 		directoryHistory = new DirectoryStack();
-		userInputHistory = new InputHistory();
 		exitStatus = false;
 	}
 	
@@ -91,18 +75,18 @@ public class JShell
 		JShell newJShell = new JShell();
 		Scanner input = new Scanner(System.in);
 		while (!newJShell.exitStatus) {
-			System.out.print(newJShell.directoryTree.getCurrentDirectory()
+			System.out.print(FileSystem.getFileSystem().getCurrentDirectory()
 					.getFullPathName()+"# ");
 			String userInput = input.nextLine();
-			newJShell.userInputHistory.addToHistory(userInput);
+			InputHistory.getInputHistory().addToHistory(userInput);
 			userInput = InputCleaner.cleanInput(userInput);
 			Verifier correct = new Verifier();
 			Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
 			if (toBeExecuted != null) {
 				if(correct.checkUserInput(userInput)==true) {
 					CommandParameter param = new CommandParameter(toBeExecuted,
-							newJShell.directoryHistory, userInput);
-					toBeExecuted.execute(param.getParameters);
+							newJShell, userInput);
+					toBeExecuted.execute(param.getParameters());
 					}
 			}
 			Output.printOutput();
@@ -112,43 +96,11 @@ public class JShell
 	}
 	
 	/**
-	 * Accesses and returns a JShell object's directory tree
-	 * @return this.directoryTree The FileSystem instance variable in JShell
-	 */
-	public FileSystem getDirectoryTree() {
-		return this.directoryTree;
-	}
-	
-	/**
 	 * Accesses and returns a JShell object's directory stack
 	 * @return this.directoryHistory DirectoryStack instance variable in JShell
 	 */
 	public DirectoryStack getDirectoryStack() {
 		return this.directoryHistory;
-	}
-	
-	/**
-	 * Accesses and returns a JShell object's input history
-	 * @return this.userInputHistory InputHistory instance variable in JShell
-	 */
-	public InputHistory getInputHistory() {
-		return this.userInputHistory;
-	}
-	
-	/**
-	 * Accesses and returns a JShell object's current directory
-	 * @return this.currentDirectory The Directory instance variable in JShell
-	 */
-	public Directory getCurrentDirectory() {
-		return this.currentDirectory;
-	}
-	
-	/**
-	 * Sets the JShell object's current directory to newCurrent
-	 * @param newCurrent The new current directory of the JShell
-	 */
-	public void setCurrentDirectory(Directory newCurrent) {
-		this.currentDirectory = newCurrent;
 	}
 	
 	/**
