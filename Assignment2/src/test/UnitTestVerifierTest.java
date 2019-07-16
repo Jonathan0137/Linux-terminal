@@ -218,6 +218,14 @@ public class UnitTestVerifierTest
     assertEquals(true, correct.checkUserInput(userInput));
   }
   @Test
+  public void testcheckUserInputMkdirWithFiles()
+  {
+    userInput = "mkdir hello.txt";
+    assertEquals(false, correct.checkUserInput(userInput));
+  }
+  
+  
+  @Test
   public void testcheckUserInputMkdirWithInvalidChar1()
   {
     userInput = "mkdir Hello/!directory Hello/./bruh";
@@ -247,7 +255,12 @@ public class UnitTestVerifierTest
     userInput = "mkdir ...";
     assertEquals(true, correct.checkUserInput(userInput));
   }
-  
+  @Test
+  public void testcheckUserInputMKDIRCheckRredirect()
+  {
+    userInput = "mkdir path > hehe.txt";
+    assertEquals(false, correct.checkUserInput(userInput));
+  }
   /*******************************test cd*******************/
   @Test
   public void testcheckUserInputCD()
@@ -279,6 +292,13 @@ public class UnitTestVerifierTest
     userInput = "cd path/path";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+  @Test
+  public void testcheckUserInputCdWithFiles()
+  {
+    userInput = "cd hello.txt";
+    assertEquals(true, correct.checkUserInput(userInput));
+  }
+  
   @Test
   public void testcheckUserInputCDWithSlash()
   {

@@ -24,7 +24,7 @@ public abstract class Command
    * @param shell an instance of the JShell that is interacting with the user
    * @param input User input.
    */
-  public abstract void execute(JShell shell, String input);
+  public abstract void execute(ArrayList<Object> param);
   
   /**
    * An Abstract class that will be used for children classes to implement
