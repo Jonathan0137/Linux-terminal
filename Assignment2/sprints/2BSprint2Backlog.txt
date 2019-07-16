@@ -1,0 +1,65 @@
+// 2B Sprint 1 Backlog
+July 11 to July 17
+
+User Stories from Product Backlog that we will address in this sprint:
+- a) As a user, I can print the content of a directory and all of its subdirectories
+- b) As a user, I can print the documentation of all commands by calling the man command so that I can understand how to properly interact with the shell.
+- c) As a user, I can be notified that i've enteried a invalid command so that i can fix my mistake.
+- d) As a user, I want to make sure that all my commands do the things that I want them to do,this is the parent class for other child classes.
+- e) As a user, I can download a file from a URL and save it to the current directory. 
+- f) As a user, I can redirect any outputs into a specific file.
+- g) As a user, I can print out the contents of more than one file at a time, even if one of the files is invalid.
+- h) As a user, I can move a file/directory from one directory to another.
+- i) As a user, I can save the current working directory so that I can have easy access to the directory. (user story from 2A)
+- j) As a user, I can move into the saved directories and remove them. (user story from 2A)
+- l) As a user, I can see all the file/folder in the system in a tree.
+
+
+Specific tasks to be accomplished:
+a-1: (Ls) Change Ls since there was a change in Jshell and FileSystem
+a-2: (Ls) Add new features in Ls that will recursively list all subdirectories.
+b-1: (Verifier) Pretty much changed design and redo Verifier from 2a.
+c-1: (Command) Change command since there was a change in Jshell and FileSystem
+d-1: (Man) Apply hasttable method to Man.
+d-2: (Man) Apply redirect to man.
+e-1: (Get) Create Get class and complete execute() method. 
+f-1: (Redirect) Create a redirection class in charge of executing any > and >> command calls within a command call.
+f-2: (JShell) Modify design of JShell class.
+f-3: (Echo) Replace EchoToOutput and EchoToFile class by an Echo class.
+f-4: (InputHistory) Potentially modify design of InputHistory.
+f-5: (History) Potentially modify design of History class.
+f-6: (Pwd) Potentially modify design of pwd
+f-7: (Cat) Potentially modify design of cat
+g-1: (Cat) Add error case to cat
+h-1: (Mv) Create class mv
+h-2: (Mv) Write code so that user can move a file from one directory to another
+h-3: (Mv) Write code so that user can move a subdirectory from one directory to another
+i-1: (Pushd) Add FileSystem as an instance variable of Pushd, to follow Singleton design pattern of FileSystem 
+j-1: (Popd) Add FileSystem as an instance variable of Popd, to follow Singleton design pattern of FileSystem
+
+// The following tasks are not really connected to user stories, but rather refactoring previous code to improve design
+
+k-1: (FileSystem) Refactor the design of FileSystem to follow Singleton design pattern
+k-2: (FileSystem) Add current working directory as an instance variable of FileSystem, rather than a variable of JShell
+k-3: (Command) Add FileSystem as an instance variable of Command to follow the Singleton Design pattern
+k-4: (FileSystemNode) Add a new parent class for File and Directory called FileSystemNode, that contains common methods/variables between File and Directory
+k-5: (Directory) Refactor Directory so that it uses a HashMap for its contents rather than an ArrayList
+k-6: (Directory) Refactor Directory so that it only contains a single HashMap of its children, which are of type FileSystemNode
+l-1: (tree) Create tree class that prints all the file/folder in the system to the console
+l-2: (tree) Create tree class that prints all the file/folder in the system to the outputfile
+
+These tasks are assignment as follows:
+
+User: Gary Xie
+Tasks: i-1, j-1, k-1, k-2, k-3, k-4, k-5, k-6
+
+User: Tom Daudelin
+Tasks: e-1, f-1, f-2, f-3, f-4, f-5
+
+User: Chongmin Bai
+Tasks: a-1, a-2, b-1, c-1, d-1, l-2, l-1
+
+User: Adil Shah
+Tasks: f-6, f-7, g-1, h-1, h-2, h-3
+
+
