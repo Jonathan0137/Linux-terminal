@@ -1,0 +1,9 @@
+Class Name: FileSystemManipulation
+Parent Class: None
+Subclasses: None
+
+Responsibilities:
+* Manipulates the FileSystem and the FileSystemNodes in it
+Collaborators:
+* FileSystem
+* FileSystemNode

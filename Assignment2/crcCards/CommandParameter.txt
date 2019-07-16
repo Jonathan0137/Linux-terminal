@@ -1,0 +1,9 @@
+Class Name: CommandParameter
+Parent Class: None
+Subclasses: None
+
+Responsibilities:
+* Determines the parameters required for a given command
+Collaborators:
+* JShell
+* Command

@@ -1,8 +1,10 @@
 Class Name: Output
 Parent Class: None
-Subclasses: RegularOutput, ErrorOutput
+Subclasses: None
 
 Responsibilities:
-* Outputs information to the user
+* Stores a list of UserOutputs and ErrorOutputs
+* Prints the output to user
 Collaborators:
-* None
+* UserOutput
+* ErrorOutput
