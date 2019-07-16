@@ -1,5 +1,5 @@
 Class Name: UserOutput
-Parent Class: OutputInterface
+Parent Class: None
 Subclasses: None
 
 Responsibilities:
