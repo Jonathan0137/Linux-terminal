@@ -101,6 +101,7 @@ public class JShell
 					toBeExecuted.execute(newJShell,userInput);
 					}
 			}
+			
 			//OR CALL THE CORRECT OUTPUT METHOD CALL
 			//PRINT OUTPUT CONTAINED IN OUTPUT CLASS (PROBABLY USING
 			//System.out.print() not println() in case the output is empty)

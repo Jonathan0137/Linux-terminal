@@ -1,4 +1,4 @@
-package redirect;
+package redirection;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
@@ -7,7 +7,11 @@ import fileSystem.File;
 import fileSystem.FileSystem;
 import command.Command;
 
-public class Redirect {
+public final class Redirection {
+	
+	private Redirection() {
+		
+	}
 	
 	public static boolean checkRedirection(String input) {
 		int situation = 0;
@@ -20,7 +24,7 @@ public class Redirect {
 			}
 		}
 		if (situation == 1) {
-			String potentialCall = Redirect.getRedirectCall(input);
+			String potentialCall = Redirection.getRedirectCall(input);
 			if (potentialCall.split(" ")[0].contentEquals(">") ||
 					potentialCall.split(" ")[0].contentEquals(">>")) {
 				return true;
@@ -33,8 +37,8 @@ public class Redirect {
 	
 	public static void redirection(FileSystem fileSystem, 
 			String userInput, String text) {
-		if (Redirect.checkRedirection(userInput)) {
-			String potentialCall = Redirect.getRedirectCall(userInput);
+		if (Redirection.checkRedirection(userInput)) {
+			String potentialCall = Redirection.getRedirectCall(userInput);
 			String fullPath = "";
 			String fileName = "";
 			if (potentialCall.contains("/")) {
@@ -44,7 +48,7 @@ public class Redirect {
 				fileName = potentialCall.split(" ")[1];
 				fullPath = fileSystem.getCurrentDirectory().getFullPathName();
 			}
-			Redirect.performRedirection(fileSystem, 
+			Redirection.performRedirection(fileSystem, 
 					potentialCall.split(" ")[0], fileName, fullPath, text);
 		}
 		else {
@@ -74,9 +78,9 @@ public class Redirect {
 	
 	private static void performRedirection(FileSystem fileSystem, 
 			String situation, String fileName, String fullPath, String text) {
-		File target = Redirect.findFileByName(fileSystem, fullPath, fileName);
+		File target = Redirection.findFileByName(fileSystem, fullPath, fileName);
 		if (target == null) {
-			Redirect.createAndAddFile(fileSystem, fullPath, fileName, text);
+			Redirection.createAndAddFile(fileSystem, fullPath, fileName, text);
 		}
 		else {
 			if (situation.contentEquals(">")) {
