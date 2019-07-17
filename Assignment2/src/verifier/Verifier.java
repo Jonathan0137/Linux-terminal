@@ -67,8 +67,7 @@ public class Verifier {
    */
   public boolean checkUserInput(String userInput)
   {
-    if(Verifier.checkUserInputCommand(userInput)!=null)
-    {
+
       userInput = userInput.replaceAll(" +", " ");
       String[] input = userInput.split(" ", 2); 
       String command = input[0];
@@ -81,47 +80,54 @@ public class Verifier {
         System.out.println("Verifier: "+ command + ": invalid inputs");
       }
       return tOrF;
-    }
-    return false;
+
   }
   private static void initializeHashTableWithInputLimit(Hashtable<String, String> hashtable)
   { 
-    hashtable.put("exit", "exit"); //dont have redirect
-    hashtable.put("mkdir", "mkdir(\\s((\\/){0,1}(\\w+|\\.{0,2})(\\/){0,1})+)+");  //mkdir Dir...// 
-    hashtable.put("cd", "cd(\\s((\\/){0,1}(\\w+|\\.{0,2})(\\/){0,1})+){0,1}");  //cd Dir  // didnot add redirect
-   
-    
-    
-    
-    
-    
-    hashtable.put("ls", "ls(\\s\\-R){0,1}(\\s((\\/){0,1}(\\w+||\\.{0,2})(\\/){0,1})+){0,1}");  //ls[-R][PATH..] 
-   
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    hashtable.put("pwd", "pwd"); 
-    hashtable.put("mv", "mv\\s(\\/\\w+)*(.[\\w]+){0,1}\\s(\\/\\w+)*(.[\\w]+){0,1}"); //mv OLDPATH NEWPATH //OLD AND NEW PATH CAN BE DIR OR FILE
-    hashtable.put("cp", "cp\\s(\\/\\w+)*(.[\\w]+){0,1}\\s(\\/\\w+)*(.[\\w]+){0,1}"); //cp OLDPATH NEWPATH
-    hashtable.put("cat", "cat(\\s(\\w||\\/)+\\.\\w+)+"); //cat File...
-//    hashtable.put("get", "get http://"); //get URL
-    hashtable.put("echo", "echo\\s[\\w\\W]+"); //echo String
-    hashtable.put("man", "man\\\\s(man||ls||cd||exit||mkdir||||pwd||mv||cp"
-        + "||cat||get||echo||pushd||popd||history||save||load||find||tree)");  // man CMD
-    hashtable.put("pushd", "pushd\\s(\\/\\w+)+");  // pushd Dir
+//    ((\s(\>||\>>)\s((\/){0,1}(\w+)*(\.){0,2}(\/){0,1})+)+){0,1}
+    hashtable.put("exit", "exit"); 
+    hashtable.put("mkdir", "mkdir"
+        + "(\\s((\\/){0,1}(\\w+|\\.{0,2})(\\/){0,1})+)+"); 
+    hashtable.put("cd", "cd"
+        + "(\\s((\\/){0,1}(\\w+|\\.{0,2})(\\/){0,1})+){0,1}");  
+    hashtable.put("ls", "ls"
+        + "( -R){0,1}"
+        + "(\\s((\\/){0,1}(\\w+||\\.{0,2})(\\/){0,1})+){0,1}"
+        + "((\\s(\\>||\\>>)\\s((\\/){0,1}(\\w+||\\.){0,2}(\\/){0,1})+)+){0,1}"); 
+    hashtable.put("pwd", "pwd"
+        + "((\\s(\\>||\\>>)\\s((\\/){0,1}(\\w+||\\.){0,2}(\\/){0,1})+)+){0,1}"); 
+    hashtable.put("mv", "mv"
+        + "(\\s((\\/){0,1}(\\w+|\\.{0,2})(\\/){0,1})+){2}"
+        + "((\\s(\\>||\\>>)\\s((\\/){0,1}(\\w+||\\.){0,2}(\\/){0,1})+)+){0,1}"); 
+    hashtable.put("cp", "cp"
+    + "(\\s((\\/){0,1}(\\w+|\\.{0,2})(\\/){0,1})+){2}"
+    + "((\\s(\\>||\\>>)\\s((\\/){0,1}(\\w+||\\.){0,2}(\\/){0,1})+)+){0,1}"); 
+    hashtable.put("cat", "cat"
+        + "(\\s((\\/){0,1}(\\w+|\\.{0,2})(\\/){0,1})+)+"
+        + "((\\s(\\>||\\>>)\\s((\\/){0,1}(\\w+||\\.){0,2}(\\/){0,1})+)+){0,1}"); 
+    hashtable.put("get", "get (http://){0,1}www.(\\w||\\W)+");  
+    hashtable.put("echo", "echo"
+        + "(\\s||\\w||\\W)*"
+        + "((\\s(\\>||\\>>)\\s((\\/){0,1}(\\w+||\\.){0,2}(\\/){0,1})+)+){0,1}");
+    hashtable.put("man", "man\\s(man||ls||cd||exit||mkdir||pwd||mv||cp"
+        + "||cat||get||echo||pushd||popd||history||save||load||find||tree)"
+        + "((\\s(\\>||\\>>)\\s((\\/){0,1}(\\w+||\\.){0,2}(\\/){0,1})+)+){0,1}");
+    hashtable.put("pushd", "pushd"
+        + "(\\s((\\/){0,1}(\\w+|\\.{0,2})(\\/){0,1})+){0,1}");
     hashtable.put("popd", "popd");
-    hashtable.put("history", "history(\\s\\d+){0,1}"); //history [number]
-    hashtable.put("save", "save\\s(\\w||\\/)+\\.\\w+"); //save FileName
-    hashtable.put("load", "load\\s(\\w||\\/)+\\.\\w+"); //load FileName
-    hashtable.put("find", ""); //idk
-    hashtable.put("tree", "tree"); 
+    hashtable.put("history", "history(\\s\\d+){0,1}"
+        + "((\\s(\\>||\\>>)\\s((\\/){0,1}(\\w+||\\.){0,2}(\\/){0,1})+)+){0,1}");
+    hashtable.put("save", "save"
+        + "(\\s((\\/){0,1}(\\w+|\\.{0,2})(\\/){0,1})+){1}"); 
+    hashtable.put("load", "load"
+        + "(\\s((\\/){0,1}(\\w+|\\.{0,2})(\\/){0,1})+){1}"
+        + "((\\s(\\>||\\>>)\\s((\\/){0,1}(\\w+||\\.){0,2}(\\/){0,1})+)+){0,1}"); 
+    hashtable.put("find", "find"
+        + "(\\s((\\/){0,1}(\\w+|\\.{0,2})(\\/){0,1})+)+"
+        + "-type\\s(d||f){1}\\s-name\\s\\\"\\w+\\\""
+        + "((\\s(\\>||\\>>)\\s((\\/){0,1}(\\w+||\\.){0,2}(\\/){0,1})+)+){0,1}"); //idk
+    hashtable.put("tree", "tree"
+        + "((\\s(\\>||\\>>)\\s((\\/){0,1}(\\w+||\\.){0,2}(\\/){0,1})+)+){0,1}"); 
   } 
 }
 
