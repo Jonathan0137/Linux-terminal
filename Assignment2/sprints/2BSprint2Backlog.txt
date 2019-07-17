@@ -1,11 +1,17 @@
-// 2B Sprint 1 Backlog
-July 11 to July 17
+// 2B Sprint 2 Backlog
+July 18 to July 24
 
 User Stories from Product Backlog that we will address in this sprint:
 - a) As a user, I can print the content of a directory and all of its subdirectories
 - b) As a user, I can print the documentation of all commands by calling the man command so that I can understand how to properly interact with the shell.
 - c) As a user, I can be notified that i've enteried a invalid command so that i can fix my mistake.
 - d) As a user, I want to make sure that all my commands do the things that I want them to do,this is the parent class for other child classes.
+- e) As a user, I can save the current state of the program to my computer as a file.
+- f) As a user, if the file name I used to save my current state already exists in the directory, I can overwrite the file.
+- g) As a user, I can load a previously saved state of a shell and resume activity from where I previously left off.
+
+// OLD TASKS FROM SPRINT 1 BACKLOG (DELETE BELOW USER STORIES WHEN YOU ARE DONE UPDATING THEM) 
+
 - e) As a user, I can download a file from a URL and save it to the current directory. 
 - f) As a user, I can redirect any outputs into a specific file.
 - g) As a user, I can print out the contents of more than one file at a time, even if one of the files is invalid.
@@ -22,6 +28,33 @@ b-1: (Verifier) Pretty much changed design and redo Verifier from 2a.
 c-1: (Command) Change command since there was a change in Jshell and FileSystem
 d-1: (Man) Apply hasttable method to Man.
 d-2: (Man) Apply redirect to man.
+e-1: (Save) Create Save class
+e-2: (Save) Implement the ability for Save to save the current state of FileSystem, InputHistory, and DirectoryStack to a file on the user's computer
+f-1: (Save) Implement ability for Save to overwrite existing file in computer file system
+g-1: (Load) Create Load class
+g-2: (Load) Implement the ability for Load to access a file on the user's computer
+g-3: (Load) Implement the ability for Load to read the specificied file to retrieve data about FileSystem, InputHistory, and DirectoryStack
+g-4: (Load) Implement the ability for Load to overwrite the current console's FileSystem, InputHistory, and DirectoryStack state with the state from the file
+g-5: (Load) Add a restriction so that Load can only be called if it is the first command called in a new console
+
+// The following tasks (tasks h-1 to l-3) are not really connected to user stories, but rather refactoring code to improve design
+
+h-1: (CommandParameter) Create CommandParameter class
+h-2: (CommandParameter) Write code so that CommandParameter determines the required parameters for Command execute() based on the type of command
+i-1: (AbstractOutput) Create AbstractOutput class and declare (abstract) methods
+j-1: (UserOutput) Create UserOutput class as a subclass of AbstractOutput
+j-2: (UserOutput) Write code for setOutput() method for UserOutput
+k-1: (ErrorOutput) Create ErrorOutput class as a subclass of AbstractOutput
+k-2: (ErrorOutput) Write code for setOutput() method for ErrorOutput
+l-1: (Output) Create Output class and use Singleton design pattern
+l-2: (Output) Write code so that Output contains a list of UserOutputs and ErrorOutputs as an instance variable
+l-3: (Output) Write methods for Output so that other class can interact with it
+
+// End of tasks not connected to user stories //
+
+
+// OLD TASKS FROM SPRINT 1 BACKLOG (DELETE BELOW TASKS WHEN YOU UPDATE YOUR SPRINT 2 BACKLOG)
+
 e-1: (Get) Create Get class and complete execute() method. 
 f-1: (Redirect) Create a redirection class in charge of executing any > and >> command calls within a command call.
 f-2: (JShell) Modify design of JShell class.
@@ -37,21 +70,10 @@ h-3: (Mv) Write code so that user can move a subdirectory from one directory to 
 i-1: (Pushd) Add FileSystem as an instance variable of Pushd, to follow Singleton design pattern of FileSystem 
 j-1: (Popd) Add FileSystem as an instance variable of Popd, to follow Singleton design pattern of FileSystem
 
-// The following tasks are not really connected to user stories, but rather refactoring previous code to improve design
-
-k-1: (FileSystem) Refactor the design of FileSystem to follow Singleton design pattern
-k-2: (FileSystem) Add current working directory as an instance variable of FileSystem, rather than a variable of JShell
-k-3: (Command) Add FileSystem as an instance variable of Command to follow the Singleton Design pattern
-k-4: (FileSystemNode) Add a new parent class for File and Directory called FileSystemNode, that contains common methods/variables between File and Directory
-k-5: (Directory) Refactor Directory so that it uses a HashMap for its contents rather than an ArrayList
-k-6: (Directory) Refactor Directory so that it only contains a single HashMap of its children, which are of type FileSystemNode
-l-1: (tree) Create tree class that prints all the file/folder in the system to the console
-l-2: (tree) Create tree class that prints all the file/folder in the system to the outputfile
-
 These tasks are assignment as follows:
 
 User: Gary Xie
-Tasks: i-1, j-1, k-1, k-2, k-3, k-4, k-5, k-6
+Tasks: e-1, e-2, f-1, g-1, g-2, g-3, g-4, g-5, h-1, h-2, i-1, j-1, j-2, k-1, k-2, l-1, l-2, l-3
 
 User: Tom Daudelin
 Tasks: e-1, f-1, f-2, f-3, f-4, f-5
