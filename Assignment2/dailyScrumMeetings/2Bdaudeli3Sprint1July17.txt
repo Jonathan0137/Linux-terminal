@@ -1,0 +1,8 @@
+What did I work on in the last three days?
+	-I have modified JShell so that it works with the current design, I have fixed Exit class to work with the new design, I have made InputHistory singleton, I have fixed History class so that it works with current design, I have worked on Redirection class (not complete)
+
+What do I plan to work in the next three days?
+	-I plan on completing the Get class, the Echo class, deleting previous echo classes and completing the Redirection class
+
+Am I blocked on anything?
+	-I need help understanding how the get command works
