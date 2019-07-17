@@ -9,6 +9,8 @@ User Stories from Product Backlog that we will address in this sprint:
 - e) As a user, I can save the current state of the program to my computer as a file.
 - f) As a user, if the file name I used to save my current state already exists in the directory, I can overwrite the file.
 - g) As a user, I can load a previously saved state of a shell and resume activity from where I previously left off.
+- h) As a user, I can copy a file/directory from one directory to another.
+
 
 // OLD TASKS FROM SPRINT 1 BACKLOG (DELETE BELOW USER STORIES WHEN YOU ARE DONE UPDATING THEM) 
 
@@ -49,6 +51,17 @@ k-2: (ErrorOutput) Write code for setOutput() method for ErrorOutput
 l-1: (Output) Create Output class and use Singleton design pattern
 l-2: (Output) Write code so that Output contains a list of UserOutputs and ErrorOutputs as an instance variable
 l-3: (Output) Write methods for Output so that other class can interact with it
+m-1: (Cp) Create class cp
+m-2: (Cp) Write code for cp so that the user can copy a file
+m-3: (Cp) Write code for cp so thay the user can copy a directory
+
+// tasks not related to user stories, but making changes in completed classes to account for change in design 
+
+n-1: (Mkdir) change mkdir so that it uses proper methods
+n-2: (Mkdir) add errors into ErrorOutput
+o-1: (Pwd) add the output into Output
+p-1: (Cat) add the output into Output
+p-2: (Cat) add errors into ErrorOutput
 
 // End of tasks not connected to user stories //
 
@@ -61,12 +74,6 @@ f-2: (JShell) Modify design of JShell class.
 f-3: (Echo) Replace EchoToOutput and EchoToFile class by an Echo class.
 f-4: (InputHistory) Potentially modify design of InputHistory.
 f-5: (History) Potentially modify design of History class.
-f-6: (Pwd) Potentially modify design of pwd
-f-7: (Cat) Potentially modify design of cat
-g-1: (Cat) Add error case to cat
-h-1: (Mv) Create class mv
-h-2: (Mv) Write code so that user can move a file from one directory to another
-h-3: (Mv) Write code so that user can move a subdirectory from one directory to another
 i-1: (Pushd) Add FileSystem as an instance variable of Pushd, to follow Singleton design pattern of FileSystem 
 j-1: (Popd) Add FileSystem as an instance variable of Popd, to follow Singleton design pattern of FileSystem
 
@@ -82,6 +89,6 @@ User: Chongmin Bai
 Tasks: a-1, a-2, b-1, c-1, d-1, l-2, l-1
 
 User: Adil Shah
-Tasks: f-6, f-7, g-1, h-1, h-2, h-3
+Tasks: m1, m2, m3, n-1, n-2, o-1, p-1, p-2
 
 
