@@ -1,0 +1,11 @@
+What did I work on in the last three days?
+	- I finished updated version of Verifier using regex
+	- I added 300 unit test to verifier
+	- I implemented input cleaner
+What do I plan to work in the next three days?
+	- I plan to work on Java docs for verfier,its test cases, commands, man, and input cleaner
+	- I plan to work on updating CRC cards
+	- I plan to work on LS and Tree class
+Am I blocked on anything?
+    - Nothing at the moment
+
