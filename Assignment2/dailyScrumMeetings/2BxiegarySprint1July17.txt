@@ -1,0 +1,12 @@
+What did I work on in the last three days?
+	- I refactored Directory class to use HashMaps rather than ArrayList, and combined the listOfSubdirectories and listOfFiles into one, as a list of FileSystemNodes
+	- I created a new class called FileSystemManipulation after discussing design improvements with the professor, which contains all the static methods that manipulate the file system
+	- I updated all the methods that manipulate Directory to use HashMaps instead of ArrayList, and reflected these changes in all Commands that used them
+What do I plan to work in the next three days?
+	- I plan to implementing a new class called CommandParameter to determine the parameters for Command execute(), depending on which command it is, since commands may need different parameters
+	- I plan on implementing the AbstractOutput, ErrorOutput, UserOutput, and Output classes for ease of manipulating command output
+	- I plan on working on the Save and Load classes
+	- I plan on creating mock class and test cases for my classes from Assignment 2A
+Am I blocked on anything?
+    - Nothing at the moment
+
