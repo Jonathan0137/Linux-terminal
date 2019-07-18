@@ -55,11 +55,11 @@ public class Mkdir extends Command{
 						
 					Directory parentDirectory = (Directory) 
 					    FileSystemManipulation.findFileSystemNode(pathParentDir);
-					FileSystemManipulation.addSubdirectory(parentDirectory, newDirectory);
+					FileSystemManipulation.addFileSystemNode(parentDirectory, newDirectory);
 				}
 				else {
 					newDirectory = new Directory(arguments[i]);
-					FileSystemManipulation.addSubdirectory(currentDirectory, newDirectory);
+					FileSystemManipulation.addFileSystemNode(currentDirectory, newDirectory);
 				}
 			}
 			else {
