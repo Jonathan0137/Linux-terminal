@@ -2,7 +2,6 @@ package command;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import driver.JShell;
 import fileSystem.Directory;
 import fileSystem.File;
 import fileSystem.FileSystemManipulation;
@@ -57,7 +56,14 @@ public class Ls extends Command {
     {
       if(input.contains("-R"))
       {
-        
+        if(numOfArg == 2)
+        {
+          
+        }
+        else if(numOfArg == 3)
+        {
+          
+        }
       }
       else
       {

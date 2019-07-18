@@ -1,10 +1,9 @@
 package command;
 
 import java.util.ArrayList;
-import java.util.Map;
 import fileSystem.Directory;
 import fileSystem.FileSystemManipulation;
-
+import output.Output;
 
 public class Tree extends Command
 {
@@ -20,16 +19,17 @@ public class Tree extends Command
   
   private static void printTree(String space, Directory node)
   {
-      if(node == null)
-      {
-        
-      }
-      System.out.println(space + node.getName());
+    if(node != null)
+    {
+      Output output = Output.getOutputInstance();
+      
+      output.addUserOutput(space + node.getName());
       
       
       for(String key : node.getListOfFileSystemNodes().keySet())
       {
-        printTree("\t", FileSystemManipulation.findSubNode(traversalDirectory, key));
+        printTree("\t", (Directory) FileSystemManipulation.findSubNode(node, key));
       }
+    }
   }
 }
