@@ -51,8 +51,6 @@ o-1: (Pwd) add the output into Output
 p-1: (Cat) add the output into Output
 p-2: (Cat) add errors into ErrorOutput
 
-// End of tasks not connected to user stories //
-
 These tasks are assignment as follows:
 
 User: Gary Xie
