@@ -34,6 +34,7 @@ import java.util.Scanner;
 import fileSystem.*;
 import inputCleaner.InputCleaner;
 import inputHistory.InputHistory;
+import output.Output;
 import command.Command;
 import commandParameter.CommandParameter;
 import verifier.Verifier;
@@ -89,8 +90,8 @@ public class JShell {
 					toBeExecuted.execute(param.getParameters());
 				}
 			}
-			// Output.printOutput();
-			// Output.resetOutput();
+			Output.getOutputInstance().printOutput();
+			Output.getOutputInstance().resetOutput();
 		}
 		input.close();
 	}
