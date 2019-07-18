@@ -1,0 +1,10 @@
+What did I work on in the last three days?
+	-compelted mv class
+	-redirection in pwd and cat
+
+What do I plan to work in the next three days?
+	-create cp class
+	-put output from cat and pwd into Output
+	-put errors from mkdir and cat to ErrorOutput
+Am I blocked on anything?
+	-need Output and ErrorOutput classes to be completed
