@@ -72,7 +72,7 @@ public class Verifier {
    */
   public boolean checkUserInput(String userInput)
   {
-
+      Output output = Output.getOutputInstance();
       userInput = userInput.replaceAll(" +", " ");
       String[] input = userInput.split(" ", 2); 
       String command = input[0];
@@ -82,7 +82,7 @@ public class Verifier {
       boolean tOrF = userInput.matches(hashtable.get(command));
       if(tOrF==false)
       {
-        System.out.println("Verifier: "+ command + ": invalid inputs");
+        output.addErrorOutput("Verifier: "+ command + ": invalid inputs");
       }
       return tOrF;
 
