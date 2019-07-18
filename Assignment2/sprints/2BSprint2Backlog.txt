@@ -9,7 +9,8 @@ User Stories from Product Backlog that we will address in this sprint:
 - e) As a user, I can save the current state of the program to my computer as a file.
 - f) As a user, if the file name I used to save my current state already exists in the directory, I can overwrite the file.
 - g) As a user, I can load a previously saved state of a shell and resume activity from where I previously left off.
-- h) As a user, I can copy a file/directory from one directory to another.
+
+- m) As a user, I can copy a file/directory from one directory to another.
 
 Specific tasks to be accomplished:
 a-1: (Ls) Change Ls since there was a change in Jshell and FileSystem
@@ -39,9 +40,10 @@ k-2: (ErrorOutput) Write code for setOutput() method for ErrorOutput
 l-1: (Output) Create Output class and use Singleton design pattern
 l-2: (Output) Write code so that Output contains a list of UserOutputs and ErrorOutputs as an instance variable
 l-3: (Output) Write methods for Output so that other class can interact with it
+
 m-1: (Cp) Create class cp
 m-2: (Cp) Write code for cp so that the user can copy a file
-m-3: (Cp) Write code for cp so thay the user can copy a directory
+m-3: (Cp) Write code for cp so that the user can copy a directory
 
 // tasks not related to user stories, but making changes in completed classes to account for change in design 
 
