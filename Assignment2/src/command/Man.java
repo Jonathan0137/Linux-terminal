@@ -1,7 +1,8 @@
 package command;
 
+import java.util.ArrayList;
+import output.Output;
 import java.util.Hashtable;
-import driver.JShell;
 /**
  * Man is a Command where it can print the previously stored documentation
  * for each command base on which command user wants to see.
@@ -34,19 +35,21 @@ public class Man extends Command
    * @param input   a relative or absolute path name
    */
   @Override
-  public void execute(JShell shell ,String input)
+  public void execute(ArrayList<Object> param)
   {
+    Output output = Output.getOutputInstance();
+    String input = (String) param.get(0);
     String[] userInput = input.split(" ", 2);
     String command = userInput[1];
     Hashtable<String, String> hashtable = new Hashtable<String, String> (); 
     initializeHashTableWithGetDoc(hashtable);
     if(hashtable.containsKey(command))
     {
-      System.out.println(hashtable.get(command));
+      output.addUserOutput(hashtable.get(command));
     }
     else
     {
-      System.out.println("No such CMD exist, check man man for "
+      output.addErrorOutput("No such CMD exist, check man man for "
           + "more information");
     }    
   }

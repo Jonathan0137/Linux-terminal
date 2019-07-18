@@ -7,6 +7,7 @@ import fileSystem.Directory;
 import fileSystem.File;
 import fileSystem.FileSystemManipulation;
 import fileSystem.FileSystemNode;
+import output.Output;
   /**
    * Ls is a Command where it can print all the folders and files under
    * current working directory.
@@ -40,30 +41,41 @@ public class Ls extends Command {
   /**
    * Print all the folders and files under the current working folder
    * 
-   * @param shell an instance of the JShell that is interacting with the user
-   * @param input a relative or absolute path name
+   * 
    */
   @Override
   public void execute(ArrayList<Object> param){
+    String input = (String) param.get(0);
     String[] userInput = input.split(" ");
     int numOfArg = userInput.length;
-    Directory workingDir = shell.getCurrentDirectory();
-    if (numOfArg == 1)
-      printFilesAndDirectories(workingDir);
-    else if (numOfArg == 2) 
+    Directory workingDir = fs.getCurrentDirectory();
+    if(input.contains("> || >>"))
     {
-      printFileAndDir(workingDir, userInput[1]);
+      //redirect stuff
     }
     else
     {
-      //add a helper here. for recursive
-      //ex: ls -R /Desktop/
-      //path = path + "/" + directory name
+      if(input.contains("-R"))
+      {
+        
+      }
+      else
+      {
+        if (numOfArg == 1)
+          printFilesAndDirectories(workingDir);
+        else if (numOfArg == 2) 
+        {
+          printFileAndDir(workingDir, userInput[1]);
+        }
+      }
     }
+
+
+  
   }
   private void printFileAndDir(Directory workingDir, String path)
   {
-   
+    Output output = Output.getOutputInstance();
     if (path.isEmpty() == true)
       printFilesAndDirectories(workingDir);
     else 
@@ -78,11 +90,11 @@ public class Ls extends Command {
       } 
       else if (subNode instanceof File) 
       {
-        System.out.println(path);
+        output.addUserOutput(path);
       } 
       else 
       {
-        System.out.println("No such file or directory");
+        output.addErrorOutput("No such file or directory");
       }
     }
     
@@ -95,57 +107,14 @@ public class Ls extends Command {
    * @param workingDir         Current working directory
    */
   private void printFilesAndDirectories(Directory workingDir) {
+    Output output = Output.getOutputInstance();
     ArrayList<String> sortedList = new 
         ArrayList<String>(workingDir.getListOfFileSystemNodes().keySet());
     Collections.sort(sortedList);
     
     for (String name : sortedList) {
-      System.out.println(name);
+      output.addUserOutput(name);
     }
   }
 
-  // TODO: Remove commented code
-  /**
-   * A helper function that takes in the file name and finds that file in 
-   * current working folder and return it.
-   * 
-   * @param fileName            The name of the file that you want to find
-   * @param currentWorkingDir   A directory class variable that represents the 
-   *                            current folder
-   * @return                    A instance of File that is under the current 
-   *                            directory, if not found then return null
-   */
-  //private static File findFile(String fileName, Directory currentWorkingDir) {
-//    ArrayList<File> listOfFiles = currentWorkingDir.getListOfFiles();
-//
-//    for (int i = 0; i < listOfFiles.size(); i++) {
-//      if (fileName.equals(listOfFiles.get(i).getName())) {
-//        return listOfFiles.get(i);
-//      }
-//    }
-//    return null;
-//  }
-
-  /**
-   * A helper function that takes in the directory name and finds 
-   * that directory in the current working folder and return it.
-   * 
-   * @param directoryName      The name of the directory that you want to find
-   * @param currentWorkingDir  A directory class variable that represents 
-   *                           the current folder
-   * @return                   A instance of Directory that is under the 
-   *                           current directory, if not found then return null
-   */
-//  private static Directory findDirectory(String directoryName, 
-//      Directory currentWorkingDir) {
-//
-//    ArrayList<Directory> listOfSubdirectories = 
-//        currentWorkingDir.getListOfSubdirectories();
-//    for (int i = 0; i < listOfSubdirectories.size(); i++) {
-//      if (directoryName.equals(listOfSubdirectories.get(i).getName())) {
-//        return listOfSubdirectories.get(i);
-//      }
-//    }
-//    return null;
-//  }
 }

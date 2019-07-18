@@ -2,6 +2,8 @@ package verifier;
 
 import java.util.Hashtable;
 import command.*;
+import output.Output;
+
 /**
  * Verifier is a class that checks if user inputs follow the given style
  * and their command exists. If not, it will not process the user's command.
@@ -22,6 +24,8 @@ public class Verifier {
   {
     if (userInput == "")
       return null;
+    Output output = Output.getOutputInstance();
+    
     userInput = userInput.replaceAll(" +", " ");
     String[] input = userInput.split(" ", 2);
     String command = input[0];
@@ -33,7 +37,8 @@ public class Verifier {
     }
     else
     {
-      System.out.println("Command " + command + " does not exist, Please try again");
+      output.addErrorOutput("Command " + command + " does not exist, Please try again");
+     
       return null;
     }
   }
