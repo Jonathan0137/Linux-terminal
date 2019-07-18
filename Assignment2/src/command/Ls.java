@@ -44,8 +44,7 @@ public class Ls extends Command {
    * @param input a relative or absolute path name
    */
   @Override
-  public void execute(JShell shell, String input){
-    input = input.replaceAll(" +", " ");
+  public void execute(ArrayList<Object> param){
     String[] userInput = input.split(" ");
     int numOfArg = userInput.length;
     Directory workingDir = shell.getCurrentDirectory();
@@ -64,29 +63,29 @@ public class Ls extends Command {
   }
   private void printFileAndDir(Directory workingDir, String path)
   {
-    else
+   
+    if (path.isEmpty() == true)
+      printFilesAndDirectories(workingDir);
+    else 
     {
-      if (path.isEmpty() == true)
-        printFilesAndDirectories(workingDir);
+      FileSystemNode subNode = FileSystemManipulation.findSubNode(workingDir, path);
+      if (subNode instanceof Directory) 
+      {
+        System.out.println(path + " : ");
+        Directory nextDir = (Directory) subNode;
+        printFilesAndDirectories(nextDir);
+        System.out.println();
+      } 
+      else if (subNode instanceof File) 
+      {
+        System.out.println(path);
+      } 
       else 
       {
-        FileSystemNode subNode = FileSystemManipulation.findSubNode(workingDir, path);
-        if (subNode instanceof Directory) 
-        {
-          System.out.println(path + " : ");
-          Directory nextDir = (Directory) subNode;
-          printFilesAndDirectories(nextDir);
-          System.out.println();
-        } 
-        else if (subNode instanceof File) 
-        {
-          System.out.println(path);
-        } 
-        else 
-        {
-          System.out.println("No such file or directory");
-        }
+        System.out.println("No such file or directory");
       }
+    }
+    
   }
 
   /**
