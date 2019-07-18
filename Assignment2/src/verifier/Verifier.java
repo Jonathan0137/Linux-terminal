@@ -84,7 +84,6 @@ public class Verifier {
   }
   private static void initializeHashTableWithInputLimit(Hashtable<String, String> hashtable)
   { 
-//    ((\s(\>||\>>)\s((\/){0,1}(\w+)*(\.){0,2}(\/){0,1})+)+){0,1}
     hashtable.put("exit", "exit"); 
     hashtable.put("mkdir", "mkdir"
         + "(\\s((\\/){0,1}(\\w+|\\.{0,2})(\\/){0,1})+)+"); 
@@ -125,7 +124,7 @@ public class Verifier {
     hashtable.put("find", "find"
         + "(\\s((\\/){0,1}(\\w+|\\.{0,2})(\\/){0,1})+)+"
         + "-type\\s(d||f){1}\\s-name\\s\\\"\\w+\\\""
-        + "((\\s(\\>||\\>>)\\s((\\/){0,1}(\\w+||\\.){0,2}(\\/){0,1})+)+){0,1}"); //idk
+        + "((\\s(\\>||\\>>)\\s((\\/){0,1}(\\w+||\\.){0,2}(\\/){0,1})+)+){0,1}");
     hashtable.put("tree", "tree"
         + "((\\s(\\>||\\>>)\\s((\\/){0,1}(\\w+||\\.){0,2}(\\/){0,1})+)+){0,1}"); 
   } 
