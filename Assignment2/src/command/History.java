@@ -28,7 +28,7 @@ public class History extends Command {
 				output = output.concat(i + 1 + ". " + InputHistory.getInputHistory().getInputList()
 						.get(i) + "\n");
 			}
-			Output.addUserOutput(output);
+			Output.getOutputInstance().addUserOutput(output);
 		} else {
 			try {
 				for (int i = InputHistory.getInputHistory().getInputList().size()
@@ -38,7 +38,7 @@ public class History extends Command {
 					output = output.concat(i + 1 + ". " + InputHistory.getInputHistory()
 					.getInputList().get(i) + "\n");
 				}
-				Output.addUserOutput(output);
+				Output.getOutputInstance().addUserOutput(output);
 			} catch (Exception e) {
 				params.remove(0);
 				params.add("history");
