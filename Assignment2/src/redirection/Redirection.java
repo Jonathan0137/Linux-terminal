@@ -5,15 +5,27 @@ import java.util.Hashtable;
 import fileSystem.Directory;
 import fileSystem.File;
 import fileSystem.FileSystem;
+import fileSystem.FileSystemManipulation;
+import output.AbstractOutput;
+import output.Output;
+import output.UserOutput;
+import command.Cd;
 import command.Command;
+import driver.JShell;
 
 public final class Redirection {
+	
+	private static FileSystem fs = FileSystem.getFileSystem();
+	
+	private static Output outputList = Output.getOutputInstance();
 	
 	private Redirection() {
 		
 	}
 	
-	public static boolean checkRedirection(String input) {
+	//NOTE IF REDIRECTION FAILS YOU MUST CLEAR ALL OUTPUTS IN OUTPUT!
+	
+	private static boolean checkRedirection(String input) {
 		int situation = 0;
 		String[] splitInput = input.split(" ");
 		for (int i=0; i<splitInput.length; i++) {
@@ -29,30 +41,27 @@ public final class Redirection {
 					potentialCall.split(" ")[0].contentEquals(">>")) {
 				return true;
 			}
-			//RAISE ERROR AND APPEND ERROR MESSAGE TO OUTPUT CLASS
+			outputList.addErrorOutput("Redirection failed; wrong order of parameters");
 			//throw Exception; //UNFINISHED DONT KNOW HOW TO FULLY CALL
 		}
 		return false;
 	}
 	
-	public static void redirection(FileSystem fileSystem, 
-			String userInput, String text) {
+	public static void redirection(String userInput) {
 		if (Redirection.checkRedirection(userInput)) {
 			String potentialCall = Redirection.getRedirectCall(userInput);
 			String fullPath = "";
 			String fileName = "";
 			if (potentialCall.contains("/")) {
-				//USE FIND FULL PATH METHOD FROM ECHOTOFILE
+				String path = potentialCall.split(" ")[1];
+				fileName = path.split("/")[path.split("/").length-1];
+				fullPath = Redirection.findFullPath(path);
 			}
 			else {
 				fileName = potentialCall.split(" ")[1];
-				fullPath = fileSystem.getCurrentDirectory().getFullPathName();
+				fullPath = Redirection.fs.getCurrentDirectory().getFullPathName();
 			}
-			Redirection.performRedirection(fileSystem, 
-					potentialCall.split(" ")[0], fileName, fullPath, text);
-		}
-		else {
-			//PUT TEXT INTO OUTPUT CLASS
+			Redirection.performRedirection(potentialCall.split(" ")[0], fileName, fullPath);
 		}
 	}
 		
@@ -63,50 +72,59 @@ public final class Redirection {
 		return call;
 	}
 	
-	private static File findFileByName(FileSystem fileSystem, 
-			String fullPath, String fileName) {
-		//FIND A SPECIFIC DIRECTORY GIVEN A PATH
-		Directory location = Command.findDirectory(fileSystem, fullPath);
-		ArrayList<File> fileList = location.getListOfFiles();
-		for (int i=0; i<fileList.size();i++) {
-			if (fileList.get(i).getName().equals(fileName)) {
-				return fileList.get(i);
+	
+	private static void performRedirection(String situation, String fileName, String fullPath) {
+		File target = null;
+		if (FileSystemManipulation.findFileSystemNode(fullPath) instanceof 
+				Directory) {
+			Directory parent = (Directory) FileSystemManipulation.findFileSystemNode(fullPath);
+			if (FileSystemManipulation.findFileSystemNode(fullPath + "/" +
+				fileName) instanceof File) {
+				target = (File) FileSystemManipulation.findFileSystemNode(fullPath + "/" +
+				fileName);
+				String text = "";
+				for (int i = 0; i<outputList.getOutputList().size(); i++) {
+					if (outputList.getOutputList().get(i) instanceof UserOutput) {
+						String toAdd = (String) outputList.getOutputList().get(i).getOutput();
+						text = text.concat("\n" + toAdd);
+					}
+				}
+				if (situation.contentEquals(">")) {
+					target.setContents(text);
+				}
+				else {
+					target.setContents(target.getContents().concat("\n" + text));
+				}
+			}
+			if (target == null) {
+				Redirection.createAndAddFile(fullPath, fileName, parent);
 			}
 		}
-		return null;
+		//ERROR: DIRECTORY PATH DNE:
+		//RESET ALL OUTPUTS
+		//ADD THE ERROR STATEMENT TO OUTPUT
 	}
 	
-	private static void performRedirection(FileSystem fileSystem, 
-			String situation, String fileName, String fullPath, String text) {
-		File target = Redirection.findFileByName(fileSystem, fullPath, fileName);
-		if (target == null) {
-			Redirection.createAndAddFile(fileSystem, fullPath, fileName, text);
-		}
-		else {
-			if (situation.contentEquals(">")) {
-				target.setContents(text);
+	private static void createAndAddFile(String fullPath, String fileName, Directory parent) {
+		if (Redirection.fileNameCheck(fileName, parent)) {
+			String text = "";
+			for () {
+				text = text.concat
 			}
-			else {
-				target.setContents(target.getContents().concat("\n" + text));
-			}
-		}
-	}
-	
-	private static void createAndAddFile(FileSystem fileSystem,
-			String fullPath, String fileName, String text) {
-		if (Redirect.fileNameCheck(fileName)) {
 			File toAdd = new File(fileName, text);
 			Directory location = Command.findDirectory(fileSystem, fullPath);
 			toAdd.setParentDirectory(location); //ASK IF THAT IS THE CORRECT PARENT DIRECTORY
 			location.getListOfFiles().add(toAdd);
 		}
 		else {
-			//ADD ERROR MESSAGE TO OUTPUT THAT SAYS FILE NAME IS INVALID
+			Ouput.addErrorOutput("Invalid file name for redirection.");
 		}
 	}
 	
-	//ADD CHECK TO MAKE SURE NO SUBDIRECTORY = FILE NAME
-	private static boolean fileNameCheck(String fileName) {
+	private static boolean fileNameCheck(String fileName, Directory target) {
+		if (FileSystemManipulation.findSubNode(target, fileName) != null) {
+			return false;
+		}
 		String badChars = "/.@!#$%^&*() {}|<>?~";
 		for (int i=0; i<badChars.length();i++) {
 			if (fileName.contains(Character.toString(badChars.charAt(i)))) {
@@ -114,5 +132,31 @@ public final class Redirection {
 			}
 		}
 		return true;
+	}
+	
+	private static String findFullPath(String path) {
+		String fullPath = "";
+		if (path.charAt(0) == '/') {
+			fullPath = fullPath.concat("/");
+		}
+		String[] outfileFullPath = path.split("/"); 
+		for (int i=0; i<outfileFullPath.length-1; i++) {
+			if (!outfileFullPath[i].equals("")) {
+				fullPath = fullPath.concat(outfileFullPath[i]);
+				fullPath = fullPath.concat("/");
+			}
+		}
+		//TODO: ADD THE CORRECT METHOD CALL TO RETRIEVE FULL PATH
+		if (fullPath.length()>0) {
+			if (fullPath.charAt(0) == '/') {
+				fullPath = Cd.getAbsolutePath(fullPath, 
+						shell.getDirectoryTree().getRootDirectory());
+			}
+			if (fullPath.charAt(0) != '/') {	
+			fullPath = Cd.getAbsolutePath(fullPath, 
+					shell.getCurrentDirectory());
+			}
+		}
+		return fullPath;
 	}
 }
