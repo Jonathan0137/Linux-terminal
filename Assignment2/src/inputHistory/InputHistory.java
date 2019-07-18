@@ -1,6 +1,7 @@
 package inputHistory;
 
-import java.util.ArrayList;
+import java.io.Serializable;
+import java.util.ArrayList; 
 
 /**
  * InputHistory class is in charge of remembering all user inputs.
@@ -8,8 +9,10 @@ import java.util.ArrayList;
  * @author Tom Daudelin
  *
  */
-public class InputHistory {
-	/**
+public class InputHistory implements Serializable {
+
+  private static final long serialVersionUID = 1L;
+  /**
 	 * A list of all user inputs
 	 */
 	private ArrayList<String> inputList;

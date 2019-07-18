@@ -1,9 +1,9 @@
 package command;
 
-import driver.JShell;
+import java.util.ArrayList;
 import fileSystem.Directory;
 import fileSystem.DirectoryStack;
-import fileSystem.FileSystem;
+import fileSystem.FileSystemManipulation;
 
 /**
  * Provides functionality for the 'pushd' command,
@@ -39,7 +39,9 @@ public class Pushd extends Command {
    * @param input    a relative or absolute path name
    */
   @Override
-  public void execute(DirectoryStack dirStack, String input) {
+  public void execute(ArrayList<Object> param) {
+    String input = (String) param.get(0);
+    DirectoryStack dirStack = (DirectoryStack) param.get(1);
     Directory currentDir = fs.getCurrentDirectory();
     String[] inputSplit = input.split(" ", 2);
     String path = inputSplit[1].trim();
@@ -52,15 +54,15 @@ public class Pushd extends Command {
       startDir = fs.getRootDirectory();
     } 
     else { startDir = currentDir; }
-    String absolutePath = Command.getAbsolutePath(path, startDir);
+    String absolutePath = FileSystemManipulation.getAbsolutePath(path, startDir);
     // Adds the current directory to the stack, in the case that the given
     // new working directory path is the same as the current working directory.
-    if (Command.findDirectory(fs, absolutePath) == currentDir) {
+    if (FileSystemManipulation.findFileSystemNode(absolutePath) == currentDir) {
       dirStack.getStack().add(currentDir);
       return;
     }
     Command changeDir = new Cd();
-    changeDir.execute(input);
+    changeDir.execute(param);
     // pushes the currentDir to stack if Cd is successful
     if (currentDir != fs.getCurrentDirectory()) {
       dirStack.getStack().add(currentDir);

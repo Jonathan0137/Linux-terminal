@@ -55,11 +55,11 @@ public class Mkdir extends Command{
 						
 					Directory parentDirectory = (Directory) 
 					    FileSystemManipulation.findFileSystemNode(pathParentDir);
-					addSubdirectory(parentDirectory, newDirectory);
+					FileSystemManipulation.addSubdirectory(parentDirectory, newDirectory);
 				}
 				else {
 					newDirectory = new Directory(arguments[i]);
-					addSubdirectory(currentDirectory, newDirectory);
+					FileSystemManipulation.addSubdirectory(currentDirectory, newDirectory);
 				}
 			}
 			else {
@@ -69,26 +69,28 @@ public class Mkdir extends Command{
 		}
 	}
 	
+	
+	// TODO: Remove commented code
 	/**
 	  * Adds the subDirectory into the parent directory
 	  * 
 	  * @param parentDirectory   the directory the user is adding into
 	  * @param subDirectory   the directory that is being added by the user
 	  */
-	public void addSubdirectory(Directory parent, 
-						Directory subDirectory) {	
-		HashMap<String, FileSystemNode> listOfNodes = parent.getListOfFileSystemNodes();
-		
-		if (listOfNodes.containsKey(subDirectory.getName())) {
-			System.out.println("The name '" + subDirectory.getName()
-								+ "' already exists in this directory.");
-			return;
-		}
-		subDirectory.setParentDirectory(parent);
-		listOfNodes.put(subDirectory.getName(), subDirectory);
-	}
+//	public void addSubdirectory(Directory parent, 
+//						Directory subDirectory) {	
+//		HashMap<String, FileSystemNode> listOfNodes = parent.getListOfFileSystemNodes();
+//		
+//		if (listOfNodes.containsKey(subDirectory.getName())) {
+//			System.out.println("The name '" + subDirectory.getName()
+//								+ "' already exists in this directory.");
+//			return;
+//		}
+//		subDirectory.setParentDirectory(parent);
+//		listOfNodes.put(subDirectory.getName(), subDirectory);
+//	}
 	 
-	// TODO: Remove commented code
+	
 	/**
 	  * Checks if the name of the directory the user is attempting to create
 	  * is already a directory name in the parent Directory.

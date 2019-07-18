@@ -1,13 +1,17 @@
 package fileSystem;
 
+import java.io.Serializable;
+
 /**
  * Contains information about a file system
  * and its root directory.
  * 
  * @author Gary Xie
  */
-public class FileSystem {
+public class FileSystem implements Serializable {
   
+  private static final long serialVersionUID = 1L;
+
   /**
    * A static instance of the FileSystem, to 
    * follow Singleton design pattern.
@@ -46,6 +50,11 @@ public class FileSystem {
       fs = new FileSystem();
     }
     return fs;
+  }
+  
+  // Used for loading a FileSystem
+  public void setFileSystem(FileSystem newFileSystem) {
+    fs = newFileSystem; 
   }
   
   /**
