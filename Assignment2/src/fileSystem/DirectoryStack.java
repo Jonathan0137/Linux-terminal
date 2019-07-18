@@ -1,5 +1,6 @@
 package fileSystem;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
 /**
@@ -7,7 +8,9 @@ import java.util.LinkedList;
  * 
  * @author Gary Xie
  */
-public class DirectoryStack {  
+public class DirectoryStack implements Serializable {  
+
+  private static final long serialVersionUID = 1L;
   /**
    * A stack of directories, following LIFO order.
    */
@@ -28,5 +31,4 @@ public class DirectoryStack {
   public LinkedList<Directory> getStack() {
     return directoryStack;
   }
-  
 }

@@ -44,7 +44,7 @@ public class Cd extends Command {
     String[] inputSplit = input.split(" ", 2);
     // Ignore the 'cd' part of the input
     input = inputSplit[1].trim();
-    if (input.length() == 0) {
+    if (input.length() == 0) { // Unnecessary due to Verifier
       System.out.println("Cd command is missing a path name.");
       return;
     }

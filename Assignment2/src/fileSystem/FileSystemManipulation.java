@@ -122,4 +122,21 @@ public final class FileSystemManipulation {
     } 
     return newPathName;
   }
+  
+  /**
+   * Adds the subdirectory into the parent directory
+   * 
+   * @param parentDir   the directory the user is adding into
+   * @param subDir   the directory that is being added by the user
+   */
+ public static void addSubdirectory(Directory parentDir, Directory subDir) {   
+     HashMap<String, FileSystemNode> listOfNodes = parentDir.getListOfFileSystemNodes();
+     
+     if (listOfNodes.containsKey(subDir.getName())) {
+         System.out.println("The name '"+subDir.getName()+"' already exists in this directory.");
+         return;
+     }
+     subDir.setParentDirectory(parentDir);
+     listOfNodes.put(subDir.getName(), subDir);
+ }
 }
