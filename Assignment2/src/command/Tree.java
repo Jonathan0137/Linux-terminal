@@ -2,7 +2,9 @@ package command;
 
 import java.util.ArrayList;
 import fileSystem.Directory;
+import fileSystem.File;
 import fileSystem.FileSystemManipulation;
+import fileSystem.FileSystemNode;
 import output.Output;
 
 public class Tree extends Command
@@ -25,18 +27,26 @@ public class Tree extends Command
     printTree("", traversalDirectory);
   }
   
-  private static void printTree(String space, Directory node)
+  private static void printTree(String space, FileSystemNode node)
   {
     if(node != null)
     {
       Output output = Output.getOutputInstance();
-      
-      output.addUserOutput(space + node.getName());
-      
-      for(String key : node.getListOfFileSystemNodes().keySet())
+      if(node instanceof Directory)
       {
-        printTree("\t", (Directory) FileSystemManipulation.findSubNode(node, key));
+       
+        output.addUserOutput(space + node.getName());
+        Directory dir = (Directory) node;
+        for(String key : dir.getListOfFileSystemNodes().keySet())
+        {
+          printTree("\t", (Directory) FileSystemManipulation.findSubNode(dir, key));
+        }
+      }
+      else if(node instanceof File)
+      {
+        output.addUserOutput(space + node.getName());
       }
     }
+    
   }
 }
