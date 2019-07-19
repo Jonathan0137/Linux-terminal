@@ -9,7 +9,15 @@ public class Tree extends Command
 {
   public String getDoc()
   {
-    return "some doc";
+    return "\t\tCommand: Tree"
+        + "\tThe Tree Command start from the root directory \n"
+        + "\tdisplay the entire file system as a tree. \n"
+        + "\tFor every level of the tree, there is an "
+        + "\tindent by a tab character\n\n"
+        + "\tExample: \root\n"
+        + "\t\tdocement\n"
+        + "\t\t\tsome_file.txt\n"
+        + "\t\tDownload\n";
   }
   public void execute (ArrayList<Object> param)
   {
@@ -24,7 +32,6 @@ public class Tree extends Command
       Output output = Output.getOutputInstance();
       
       output.addUserOutput(space + node.getName());
-      
       
       for(String key : node.getListOfFileSystemNodes().keySet())
       {

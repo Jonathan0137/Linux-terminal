@@ -58,11 +58,12 @@ public class Ls extends Command {
       {
         if(numOfArg == 2)
         {
-          
+          printR(fs.getRootDirectory());
         }
         else if(numOfArg == 3)
         {
-          
+          //printRFromPath(workingDir, userInput[2]);
+          printR((Directory) FileSystemManipulation.findFileSystemNode(userInput[2]));
         }
       }
       else
@@ -76,9 +77,25 @@ public class Ls extends Command {
       }
     }
 
-
-  
   }
+  private void printR(Directory root)
+  {
+    if(root!=null)
+    {
+      printFilesAndDirectories(root);
+      for(String key : root.getListOfFileSystemNodes().keySet())
+      {
+        printR((Directory) FileSystemManipulation.findSubNode(root, key));
+      }
+    }
+  }
+//  private void printRFromPath(Directory workingDir, String path)
+//  {
+//    if(workingDir!=null)
+//    {
+//      
+//    }
+//  }
   private void printFileAndDir(Directory workingDir, String path)
   {
     Output output = Output.getOutputInstance();
@@ -89,10 +106,10 @@ public class Ls extends Command {
       FileSystemNode subNode = FileSystemManipulation.findSubNode(workingDir, path);
       if (subNode instanceof Directory) 
       {
-        System.out.println(path + " : ");
+        output.addUserOutput(path + " : ");
         Directory nextDir = (Directory) subNode;
         printFilesAndDirectories(nextDir);
-        System.out.println();
+        output.addUserOutput("");
       } 
       else if (subNode instanceof File) 
       {
