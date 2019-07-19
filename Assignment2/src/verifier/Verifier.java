@@ -49,7 +49,7 @@ public class Verifier {
     hashtable.put("mkdir", new Mkdir());
     hashtable.put("ls", new Ls());
     hashtable.put("pwd", new Pwd());
-    //hashtable.put("mv", new Mv());
+    hashtable.put("mv", new Mv());
     //hashtable.put("cp", new Cp());
     hashtable.put("cat", new Cat());
     //hashtable.put("get", new Get());
@@ -58,9 +58,9 @@ public class Verifier {
     hashtable.put("pushd", new Pushd());
     hashtable.put("popd", new Popd());
     hashtable.put("history", new History());
-//    hashtable.put("load", new Load());
-//    hashtable.put("find", new Find());
-//    hashtable.put("tree", new Tree());    
+    hashtable.put("load", new Load());
+   // hashtable.put("find", new Find());
+    hashtable.put("tree", new Tree());    
   }
   
   /**
