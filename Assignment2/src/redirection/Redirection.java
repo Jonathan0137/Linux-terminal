@@ -13,18 +13,30 @@ import command.Cd;
 import command.Command;
 import driver.JShell;
 
+/**
+ * The Redirection class allows users to redirect a commands outputs onto files by appending or 
+ * overwriting as well as create files in the case that the requested file does not yet exist. 
+ * @author Tom Daudelin
+ *
+ */
 public final class Redirection {
 	
+	/**
+	 * A variable that holds the only instance of FileSystem
+	 */
 	private static FileSystem fs = FileSystem.getFileSystem();
 	
+	/**
+	 * A variable that holds the only instance of to be printed JShell outputs
+	 */
 	private static Output outputList = Output.getOutputInstance();
 	
-	private Redirection() {
-		
-	}
-	
-	//NOTE IF REDIRECTION FAILS YOU MUST CLEAR ALL OUTPUTS IN OUTPUT!
-	
+	/**
+	 * Verifies that a users input requests a redirection, returns true if the command call
+	 * is a valid candidate to be possibly redirected.
+	 * @param input The entire user command input
+	 * @return True if the command respects redirection call structure
+	 */
 	private static boolean checkRedirection(String input) {
 		int situation = 0;
 		String[] splitInput = input.split(" ");
@@ -41,13 +53,19 @@ public final class Redirection {
 					potentialCall.split(" ")[0].contentEquals(">>")) {
 				return true;
 			}
+			outputList.resetOutput();
 			outputList.addErrorOutput("Redirection failed; wrong order of parameters");
-			//throw Exception; //UNFINISHED DONT KNOW HOW TO FULLY CALL
 		}
 		return false;
 	}
 	
-	public static void redirection(String userInput) {
+	/**
+	 * redirectionSetUp is in charge of extracting all the required data in order to redirect
+	 * outputs contained in static variable outputList into a requested directory and file. And
+	 * calls for the redirection of all command outputs within the output list.
+	 * @param userInput The entire user command input
+	 */
+	public static void redirectionSetUp(String userInput) {
 		if (Redirection.checkRedirection(userInput)) {
 			String potentialCall = Redirection.getRedirectCall(userInput);
 			String fullPath = "";
@@ -64,7 +82,12 @@ public final class Redirection {
 			Redirection.performRedirection(potentialCall.split(" ")[0], fileName, fullPath);
 		}
 	}
-		
+	
+	/**
+	 * Extracts the redirection call within a users command input.
+	 * @param userInput The entire user input
+	 * @return The section of userInput that represents a redirection call
+	 */
 	private static String getRedirectCall(String userInput) {
 		String[] splitInput = userInput.split(" ");
 		String call = splitInput[splitInput.length-1]
@@ -72,23 +95,23 @@ public final class Redirection {
 		return call;
 	}
 	
-	
+	/**
+	 * Performs the actual redirection of all command outputs to the requested directory and file
+	 * or deletes all command outputs if requested path is invalid.
+	 * @param situation Overwriting or appending case
+	 * @param fileName	The requested file name from user input
+	 * @param fullPath	The requested full path of redirection (not including fileName)
+	 */
 	private static void performRedirection(String situation, String fileName, String fullPath) {
 		File target = null;
 		if (FileSystemManipulation.findFileSystemNode(fullPath) instanceof 
 				Directory) {
 			Directory parent = (Directory) FileSystemManipulation.findFileSystemNode(fullPath);
+			String text = Redirection.extractOutputsFromList();
 			if (FileSystemManipulation.findFileSystemNode(fullPath + "/" +
 				fileName) instanceof File) {
 				target = (File) FileSystemManipulation.findFileSystemNode(fullPath + "/" +
 				fileName);
-				String text = "";
-				for (int i = 0; i<outputList.getOutputList().size(); i++) {
-					if (outputList.getOutputList().get(i) instanceof UserOutput) {
-						String toAdd = (String) outputList.getOutputList().get(i).getOutput();
-						text = text.concat("\n" + toAdd);
-					}
-				}
 				if (situation.contentEquals(">")) {
 					target.setContents(text);
 				}
@@ -97,30 +120,42 @@ public final class Redirection {
 				}
 			}
 			if (target == null) {
-				Redirection.createAndAddFile(fullPath, fileName, parent);
+				Redirection.createAndAddFile(fullPath, fileName, parent, text);
 			}
-		}
-		//ERROR: DIRECTORY PATH DNE:
-		//RESET ALL OUTPUTS
-		//ADD THE ERROR STATEMENT TO OUTPUT
-	}
-	
-	private static void createAndAddFile(String fullPath, String fileName, Directory parent) {
-		if (Redirection.fileNameCheck(fileName, parent)) {
-			String text = "";
-			for () {
-				text = text.concat
-			}
-			File toAdd = new File(fileName, text);
-			Directory location = Command.findDirectory(fileSystem, fullPath);
-			toAdd.setParentDirectory(location); //ASK IF THAT IS THE CORRECT PARENT DIRECTORY
-			location.getListOfFiles().add(toAdd);
 		}
 		else {
-			Ouput.addErrorOutput("Invalid file name for redirection.");
+			outputList.resetOutput();
+			outputList.addErrorOutput("Given directory does not exist for redirection");
 		}
 	}
 	
+	/**
+	 * Creates a new file with name fileName with parent as its parent directory with at respective
+	 * fullPath containing the contents of all the command outputs.
+	 * @param fullPath The requested full path of redirection (not including fileName)
+	 * @param fileName The requested file name from user input
+	 * @param parent The parent directory of the file
+	 * @param text The String of all command outputs concatenated together seperated by new lines
+	 */
+	private static void createAndAddFile(String fullPath, String fileName, Directory parent, 
+			String text) {
+		if (Redirection.fileNameCheck(fileName, parent)) {
+			File toAdd = new File(fileName, text);
+			toAdd.setParentDirectory(parent);
+			FileSystemManipulation.addFileSystemNode(parent, toAdd);
+		}
+		else {
+			outputList.resetOutput();
+			outputList.addErrorOutput("Invalid file name for redirection.");
+		}
+	}
+	
+	/**
+	 * Verifies that a file to be created has a valid name.
+	 * @param fileName The name of the file to be added
+	 * @param target The parent directory of the file to be added
+	 * @return True id the files name is valid and can be successfully added into target directory
+	 */
 	private static boolean fileNameCheck(String fileName, Directory target) {
 		if (FileSystemManipulation.findSubNode(target, fileName) != null) {
 			return false;
@@ -134,6 +169,11 @@ public final class Redirection {
 		return true;
 	}
 	
+	/**
+	 * Converts any given path into an absolute path.
+	 * @param path A path (relative or absolute)
+	 * @return The absolute path version of path passed in
+	 */
 	private static String findFullPath(String path) {
 		String fullPath = "";
 		if (path.charAt(0) == '/') {
@@ -146,17 +186,32 @@ public final class Redirection {
 				fullPath = fullPath.concat("/");
 			}
 		}
-		//TODO: ADD THE CORRECT METHOD CALL TO RETRIEVE FULL PATH
+		//WHAT HAPPENS IF PATH DNE' WHAT DOES FILESYSTEMMANIPULATION RETURN????????????????????????????????????????????????
 		if (fullPath.length()>0) {
 			if (fullPath.charAt(0) == '/') {
-				fullPath = Cd.getAbsolutePath(fullPath, 
-						shell.getDirectoryTree().getRootDirectory());
+				fullPath = FileSystemManipulation.getAbsolutePath(fullPath, fs.getFileSystem().getRootDirectory());
 			}
 			if (fullPath.charAt(0) != '/') {	
-			fullPath = Cd.getAbsolutePath(fullPath, 
-					shell.getCurrentDirectory());
+			fullPath = FileSystemManipulation.getAbsolutePath(fullPath, fs.getCurrentDirectory());
 			}
 		}
 		return fullPath;
+	}
+	
+	/**
+	 * Extracts all command outputs contained in Output classes output list and appends them all
+	 * together separated by new lines into a single string.
+	 * @return A string rendition of all strings to be printed onto console separated by new lines
+	 */
+	private static String extractOutputsFromList() {
+		String text = "";
+		for (int i = 0; i<outputList.getOutputList().size(); i++) {
+			if (outputList.getOutputList().get(i) instanceof UserOutput) {
+				String toAdd = (String) outputList.getOutputList().get(i).getOutput();
+				text = text.concat("\n" + toAdd);
+				outputList.getOutputList().remove(i);
+			}
+		}
+		return text;
 	}
 }
