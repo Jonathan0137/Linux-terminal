@@ -48,54 +48,52 @@ public class Ls extends Command {
     String[] userInput = input.split(" ");
     int numOfArg = userInput.length;
     Directory workingDir = fs.getCurrentDirectory();
-    if(input.contains("> || >>"))
+
+    if(input.contains("-R"))
     {
-      //redirect stuff
+      if(numOfArg == 2)
+      {
+        printR(fs.getRootDirectory());
+      }
+      else if(numOfArg == 3)
+      {
+        printR((Directory) FileSystemManipulation.findFileSystemNode(userInput[2]));
+      }
     }
     else
     {
-      if(input.contains("-R"))
+      if (numOfArg == 1)
+        printFilesAndDirectories(workingDir);
+      else if (numOfArg == 2) 
       {
-        if(numOfArg == 2)
-        {
-          printR(fs.getRootDirectory());
-        }
-        else if(numOfArg == 3)
-        {
-          //printRFromPath(workingDir, userInput[2]);
-          printR((Directory) FileSystemManipulation.findFileSystemNode(userInput[2]));
-        }
-      }
-      else
-      {
-        if (numOfArg == 1)
-          printFilesAndDirectories(workingDir);
-        else if (numOfArg == 2) 
-        {
-          printFileAndDir(workingDir, userInput[1]);
-        }
+        printFileAndDir(workingDir, userInput[1]);
       }
     }
+    
 
   }
-  private void printR(Directory root)
+  private void printR(FileSystemNode root)
   {
+    Output output = Output.getOutputInstance();
     if(root!=null)
     {
-      printFilesAndDirectories(root);
-      for(String key : root.getListOfFileSystemNodes().keySet())
+      if(root instanceof Directory)
       {
-        printR((Directory) FileSystemManipulation.findSubNode(root, key));
+        output.addUserOutput(root.getName());
+        Directory dir = (Directory) root;
+        for(String key : dir.getListOfFileSystemNodes().keySet())
+        {
+          printR(FileSystemManipulation.findSubNode(dir, key));
+        }
       }
+      else if(root instanceof File)
+      {
+        output.addUserOutput(root.getName());
+      }
+     
     }
   }
-//  private void printRFromPath(Directory workingDir, String path)
-//  {
-//    if(workingDir!=null)
-//    {
-//      
-//    }
-//  }
+
   private void printFileAndDir(Directory workingDir, String path)
   {
     Output output = Output.getOutputInstance();
