@@ -6,6 +6,8 @@ import fileSystem.FileSystem;
 import fileSystem.FileSystemManipulation;
 import fileSystem.FileSystemNode;
 import fileSystem.Directory;
+import output.ErrorOutput;
+import output.Output;
 
 /**
  * Mkdir allows any user to create directories, given either a directory name,
@@ -67,8 +69,9 @@ public class Mkdir extends Command{//need to fix errors in mkdir from 2a
 				}
 			}
 			else {
-				System.out.println(arguments[i] + " is not a valid "
-													+ "directory name");
+				String error = arguments[i] + " is not a valid directory name";
+				Output errorOutput = Output.getOutputInstance();
+				errorOutput.addErrorOutput(error);
 			}
 		}
 	}
