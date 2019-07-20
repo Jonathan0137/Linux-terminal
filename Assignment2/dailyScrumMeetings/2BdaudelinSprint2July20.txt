@@ -1,0 +1,8 @@
+What did I work on in the last three days?
+	- I have essentially completed Redirection (needs testing), I have worked on completion of Echo as well
+
+What do I plan to work in the next three days?
+	-I plan on completing Get and Echo, Deleting EchoToOuptut and EchoToFile then I plan on running tests on all my classes
+
+Am I blocked on anything?
+	-I need team members inputs for a quick validation check in case the way my code works is not as intended
