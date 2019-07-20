@@ -1,0 +1,10 @@
+What did I work on in the last three days?
+	- I implemented the CommandParameter class to determine required Command execute() parameters depending on the called Command
+	- I implemented the AbstractOutput, ErrorOutput, UserOutput, and Output classes, for ease of manipulating command output
+	- I wrote some code for the Save and Load classes, to allow user to save current shell state to a file and load it later
+What do I plan to work in the next three days?
+	- I plan on finishing up Save and Load class functionality
+	- I plan on refactoring the classes I worked on in Assignment 2A to send output to Output class rather than directy printing it to user
+	- I plan on writing mock classes/interfaces and writing test cases for my classes
+Am I blocked on anything?
+    - Nothing at the moment
