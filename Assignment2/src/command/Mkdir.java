@@ -2,28 +2,32 @@ package command;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import driver.JShell;
 import fileSystem.FileSystem;
 import fileSystem.FileSystemManipulation;
 import fileSystem.FileSystemNode;
 import fileSystem.Directory;
-import fileSystem.File;
 
-
-public class Mkdir extends Command{
+/**
+ * Mkdir allows any user to create directories, given either a directory name,
+ * which will create a directory with that name in the current directory, or
+ * given a path, in which case it will create a directory with the path 
+ * 
+ * @author Adil Shah
+ *
+ */
+public class Mkdir extends Command{//need to fix errors in mkdir from 2a
 	
 	/**
 	  * Creates a new directory
 	  * 
-	  * @param shell   an instance of the JShell that interacts with user
-	  * @param newDirectories   a user inputed list of absolute path names
-	  * 						or directory names
+	  * @param param	ArrayList of all parameters required by mkdir
 	  */
 	@Override
-	public void execute(JShell shell, String newDirectories) 
+	public void execute(ArrayList<Object> param) 
 	{
-		Directory currentDirectory = shell.getCurrentDirectory();
-		FileSystem fs = shell.getDirectoryTree();
+		String newDirectories = (String) param.get(0);
+		Directory currentDirectory = FileSystem.getFileSystem().getCurrentDirectory();
+		FileSystem fs = FileSystem.getFileSystem();
 		createDirectory(currentDirectory, fs, newDirectories);
 	}
 	
@@ -51,10 +55,10 @@ public class Mkdir extends Command{
 					String pathNewDir = splitArg[splitArg.length - 1];
 					newDirectory = new Directory(pathNewDir);
 					String pathParentDir = arguments[i].replace("/" + 
-															pathNewDir, "");
-						
+														pathNewDir, "");
+		
 					Directory parentDirectory = (Directory) 
-					    FileSystemManipulation.findFileSystemNode(pathParentDir);
+					FileSystemManipulation.findFileSystemNode(pathParentDir);
 					FileSystemManipulation.addFileSystemNode(parentDirectory, newDirectory);
 				}
 				else {
