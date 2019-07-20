@@ -29,7 +29,6 @@
 // *********************************************************
 package driver;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 import fileSystem.*;
 import inputCleaner.InputCleaner;
@@ -76,8 +75,8 @@ public class JShell {
 		JShell newJShell = new JShell();
 		Scanner input = new Scanner(System.in);
 		while (!newJShell.exitStatus) {
-			System.out.print(FileSystem.getFileSystem().getCurrentDirectory()
-					.getFullPathName() + "# ");
+			System.out.print(FileSystem.getFileSystem().getCurrentDirectory().getFullPathName() 
+					+ "# ");
 			String userInput = input.nextLine();
 			InputHistory.getInputHistory().addToHistory(userInput);
 			userInput = InputCleaner.cleanInput(userInput);
@@ -85,8 +84,8 @@ public class JShell {
 			Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
 			if (toBeExecuted != null) {
 				if (correct.checkUserInput(userInput) == true) {
-					CommandParameter param = 
-							new CommandParameter(toBeExecuted, newJShell, userInput);
+					CommandParameter param = new CommandParameter(toBeExecuted, newJShell, 
+							userInput);
 					toBeExecuted.execute(param.getParameters());
 				}
 			}
