@@ -1,0 +1,9 @@
+What did I work on in the last three days?
+	- I implemented tree class 
+	- I implemented ls class with -R
+What do I plan to work in the next three days?
+	- I plan on testing tree and ls
+	- I plan on writing test class for my commands
+	- I plan on writing java docs for my commands
+Am I blocked on anything?
+    - Having diffculties for mock object
