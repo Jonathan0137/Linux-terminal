@@ -15,10 +15,10 @@ import fileSystem.FileSystem;
 public class Load extends Command {
   
   private InputHistory history;
+  
   @Override
   public void execute(ArrayList<Object> param) {
     history = InputHistory.getInputHistory();
-    
     if (history.getInputList().size() != 1) {
       output.addErrorOutput("Cannot execute load. load must "
           + "the first command called in a new shell to be executed.");
@@ -36,7 +36,8 @@ public class Load extends Command {
       fs.setFileSystem((FileSystem) objIn.readObject());
       shell.setDirectoryStack((DirectoryStack) objIn.readObject());
       history.setInputHistory((InputHistory) objIn.readObject());
-      
+      history = InputHistory.getInputHistory();
+      history.addToHistory(input);
       objIn.close();
       fileIn.close();
     } catch(FileNotFoundException e) {
