@@ -122,7 +122,7 @@ public class Verifier {
         + "((\\s(\\>||\\>>)\\s((\\/){0,1}(\\w+||\\.){0,2}(\\/){0,1})+)+){0,1}"); 
     hashtable.put("get", "get (http://){0,1}www.(\\w||\\W)+");  
     hashtable.put("echo", "echo"
-        + "(\\s||\\w||\\W)*"
+        + "(\\s)(\"(\\w||\\W||\\s)*\")"
         + "((\\s(\\>||\\>>)\\s((\\/){0,1}(\\w+||\\.){0,2}(\\/){0,1})+)+){0,1}");
     hashtable.put("man", "man\\s(man||ls||cd||exit||mkdir||pwd||mv||cp"
         + "||cat||get||echo||pushd||popd||history||save||load||find||tree)"

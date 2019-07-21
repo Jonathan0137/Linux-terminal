@@ -1069,74 +1069,86 @@ public class UnitTestVerifierTest
   public void testCheckUserInputECHO()
   {
     userInput = "echo";
-    assertEquals(true, correct.checkUserInput(userInput));
+    assertEquals(false, correct.checkUserInput(userInput));
   }
   @Test
   public void testCheckUserInputECHO1()
   {
     userInput = "echo String";
-    assertEquals(true, correct.checkUserInput(userInput));
+    assertEquals(false, correct.checkUserInput(userInput));
   }
   @Test
   public void testCheckUserInputECHO2()
   {
-    userInput = "echo string string";
+    userInput = "echo \"string\"";
     assertEquals(true, correct.checkUserInput(userInput));
   }
   @Test
   public void testCheckUserInputECHO3()
   {
-    userInput = "echo string > hello";
+    userInput = "echo \"string\" > hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
   @Test
   public void testCheckUserInputECHO4()
   {
-    userInput = "echo string > hello/hello";
+    userInput = "echo \"string\" > hello/hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
   @Test
   public void testCheckUserInputECHO5()
   {
-    userInput = "echo string > /hello/hello";
+    userInput = "echo \"string\" > /hello/hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
   @Test
   public void testCheckUserInputECHO6()
   {
-    userInput = "echo string >> hello/hello.txt";
+    userInput = "echo \"string\" >> hello/hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
   @Test
   public void testCheckUserInputECHO7()
   {
-    userInput = "echo string >> hello";
+    userInput = "echo \"string\" >> hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
   @Test
   public void testCheckUserInputECHO8()
   {
-    userInput = "echo string >> hello/hello";
+    userInput = "echo \"string\" >> hello/hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
   @Test
   public void testCheckUserInputECHO9()
   {
-    userInput = "echo string >> /hello/hello";
+    userInput = "echo \"string\" >> /hello/hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
   @Test
   public void testCheckUserInputECHO10()
   {
-    userInput = "echo string >> hello/hello.txt";
+    userInput = "echo \"string\" >> hello/hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
   @Test
   public void testCheckUserInputECHO11()
   {
-    userInput = "echo >> folder/../fileName";
+    userInput = "echo \"string\" >> folder/../fileName";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+  @Test
+  public void testCheckUserInputECHO12()
+  {
+    userInput = "echo \"string\" hello";
+    assertEquals(false, correct.checkUserInput(userInput));
+  }
+  public void testCheckUserInputECHO13()
+  {
+    userInput = "echo \"\"";
+    assertEquals(true, correct.checkUserInput(userInput));
+  }
+  
   /***************************************TEST MAN************************/
   @Test
   public void testCheckUserInputMAN()
