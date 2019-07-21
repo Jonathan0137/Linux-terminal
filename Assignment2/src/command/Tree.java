@@ -45,6 +45,8 @@ public class Tree extends Command
   public void execute (ArrayList<Object> param)
   {
     Directory traversalDirectory = fs.getRootDirectory();
+    Output output = Output.getOutputInstance();
+    output.addUserOutput("\\");
     printTree("", traversalDirectory);
   }
   /**
@@ -59,17 +61,21 @@ public class Tree extends Command
    */
   private static void printTree(String space, FileSystemNode node)
   {
+    
     if(node != null)
     {
       Output output = Output.getOutputInstance();
       if(node instanceof Directory)
-      {
-       
-        output.addUserOutput(space + node.getName());
+      { 
+        if(node.getName().equals("")==false)
+        {
+          output.addUserOutput(space + node.getName());
+        } 
         Directory dir = (Directory) node;
         for(String key : dir.getListOfFileSystemNodes().keySet())
         {
-          printTree("\t", (Directory) FileSystemManipulation.findSubNode(dir, key));
+         
+          printTree(space + "  ", (Directory) FileSystemManipulation.findSubNode(dir, key));
         }
       }
       else if(node instanceof File)
