@@ -1,13 +1,19 @@
 package fileSystem;
 
+import java.io.Serializable;
+
 /**
  * Contains information about a file
  * and its contents.
  * 
  * @author Gary Xie
  */
-public class File extends FileSystemNode { 
+public class File extends FileSystemNode implements Serializable { 
 
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
   /**
    * Text contents of the File
    */
