@@ -2,7 +2,9 @@ package command;
 
 import java.util.ArrayList;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectOutputStream;
 import inputHistory.InputHistory;
 import fileSystem.DirectoryStack;
@@ -28,13 +30,14 @@ public class Save extends Command {
       objOut.writeObject(history);
       
       objOut.close();
-      fileOut.close();
-      
-    } catch(Exception e) { //Specify type of exception
-      // Update the error message
-      System.out.println("There was an error.");
-      System.out.println(e);
-    }
+      fileOut.close();    
+    } catch(FileNotFoundException e) {
+        output.addErrorOutput("Invalid file path or name.");
+    } catch(IOException e) {
+        output.addErrorOutput("Cannot save data to specified file.");
+    } catch(Exception e) {
+        output.addErrorOutput("Save failed to execute.");
+    }  
     
     
     
