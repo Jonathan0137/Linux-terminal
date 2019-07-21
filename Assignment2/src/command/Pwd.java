@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import fileSystem.Directory;
 import fileSystem.FileSystem;
 import output.Output;
-import redirection.Redirection;
 
 /**
  * Pwd allows any user to display the current working direectory 
