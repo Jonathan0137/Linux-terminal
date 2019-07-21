@@ -18,7 +18,7 @@ public final class InputCleaner
    */
   public static String cleanInput(String userInput)
   {
-    userInput = userInput.replaceAll(" +", " ");
+    userInput = userInput.replaceAll(" +", " ").trim();
     return userInput;
   }
 }

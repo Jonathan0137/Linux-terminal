@@ -61,27 +61,26 @@ public class Man extends Command
    * @param hashtable  An instance of hashtable with a string as key and 
    *                   String as value
    */
-  private static void initializeHashTableWithGetDoc
-  (Hashtable<String, String> hashtable)
+  private static void initializeHashTableWithGetDoc(Hashtable<String, String> hashtable)
   {
-      hashtable.put("cd", new Cd().getDoc());
-      hashtable.put("exit", new Exit().getDoc());
-      hashtable.put("mkdir", new Mkdir().getDoc());
-      hashtable.put("ls", new Ls().getDoc());
-      hashtable.put("pwd", new Pwd().getDoc());
-      hashtable.put("mv", new Mv().getDoc());
-      hashtable.put("cp", new Cp().getDoc());
-      hashtable.put("cat", new Cat().getDoc());
-      hashtable.put("get", new Get().getDoc());
-      hashtable.put("echo", new Echo().getDoc());
-      hashtable.put("man", new Man().getDoc());
-      hashtable.put("pushd", new Pushd().getDoc());
-      hashtable.put("popd", new Popd().getDoc());
-      hashtable.put("history", new History().getDoc());
-      hashtable.put("save", new Save().getDoc());
-      hashtable.put("load", new Load().getDoc());
-      //hashtable.put("find", new Find().getDoc());
-      hashtable.put("tree", new Tree().getDoc());    
+      hashtable.put("cd", (new Cd()).getDoc());
+      hashtable.put("exit", (new Exit()).getDoc());
+      hashtable.put("mkdir", (new Mkdir()).getDoc());
+      hashtable.put("ls", (new Ls()).getDoc());
+      hashtable.put("pwd", (new Pwd()).getDoc());
+      hashtable.put("mv", (new Mv()).getDoc());
+      hashtable.put("cp", (new Cp()).getDoc());
+      hashtable.put("cat", (new Cat()).getDoc());
+      hashtable.put("get", (new Get()).getDoc());
+      hashtable.put("echo", (new Echo()).getDoc());
+      hashtable.put("man", (new Man()).getDoc());
+      hashtable.put("pushd", (new Pushd()).getDoc());
+      hashtable.put("popd", (new Popd()).getDoc());
+      hashtable.put("history", (new History()).getDoc());
+      hashtable.put("save", (new Save()).getDoc());
+      hashtable.put("load", (new Load()).getDoc());
+      //hashtable.put("find", (new Find()).getDoc());
+      hashtable.put("tree", (new Tree()).getDoc());    
     
   }
  
