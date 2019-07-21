@@ -85,8 +85,8 @@ public final class Redirection {
 	 */
 	private static String getRedirectCall(String userInput) {
 		String[] splitInput = userInput.split(" ");
-		String call = splitInput[splitInput.length-1]
-				.concat(" "+splitInput[splitInput.length-2]);
+		String call = splitInput[splitInput.length-2]
+				.concat(" "+splitInput[splitInput.length-1]);
 		return call;
 	}
 	
