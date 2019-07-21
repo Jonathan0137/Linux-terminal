@@ -16,8 +16,7 @@ public class Echo extends Command {
 	 * The execute method extracts a string the user wants to either print onto
 	 * shell or into a file.
 	 * 
-	 * @param params The list of required parameters to successfully execute command
-	 *               requested command.
+	 * @param params The list of required parameters to successfully execute echo.
 	 */
 	@Override
 	public void execute(ArrayList<Object> params) {
