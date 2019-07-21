@@ -1,0 +1,11 @@
+What did I work on in the last three days?
+	-added output from pwd and cat into the output class
+	-added the errors from cat and mkdir into the ErrorOutput class
+	-created cp class
+
+What do I plan to work in the next three days?
+	-complete cp class
+	-fix bugs in mkdir
+	
+Am I blocked on anything?
+	-N/A
