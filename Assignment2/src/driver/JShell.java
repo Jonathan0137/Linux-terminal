@@ -34,6 +34,7 @@ import fileSystem.*;
 import inputCleaner.InputCleaner;
 import inputHistory.InputHistory;
 import output.Output;
+import redirection.Redirection;
 import command.Command;
 import commandParameter.CommandParameter;
 import verifier.Verifier;
@@ -89,6 +90,7 @@ public class JShell {
 					toBeExecuted.execute(param.getParameters());
 				}
 			}
+			Redirection.redirectionSetUp(userInput);
 			Output.getOutputInstance().printOutput();
 			Output.getOutputInstance().resetOutput();
 		}
