@@ -1,80 +1,80 @@
 package command;
 
-import driver.JShell;
 import output.Output;
-import redirection.Redirection;
 
 import java.net.*;
 import java.util.ArrayList;
 import java.io.*;
 
-
+/**
+ * Get command extracts all the contents of a website given a URL and adds the contents to a file
+ * inside the FileSystem
+ * @author Tom Daudelin
+ *
+ */
 public class Get extends Command {
-
+	
+	/**
+	 * Extracts all the contents of a website with URL given by the user and add them to a File 
+	 * within the current directory or send the to Output list for future redirection depending
+	 * on users get call input.
+	 * @param params The list of required parameters to successfully execute the get command.
+	 */
 	@Override
 	public void execute(ArrayList<Object> params) {
 		String input = (String) params.get(0);
-		if (Get.getChecker(input)) {
-			String userParam = Get.cleanInput(input);
-			try { 
-				String contents = Get.getURLContents(userParam);
-				Output.getOutputInstance().addUserOutput(contents);
-				Redirection.redirectionSetUp(input);
-			}
-			catch (Exception e) {
-				Output.getOutputInstance().addErrorOutput("Get: URL does not exist");
-			}
+		String userParam = Get.cleanInput(input);
+		boolean success = Get.getURLContents(userParam);
+		if (success && input.split(" ").length == 2) {
+			String fileName = userParam.split("/")[userParam.split("/").length-1];
+			
 		}
-	}
-
-	@Override
-	protected String getDoc() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private static boolean getChecker(String input) {
-		int inputSize = input.split(" ").length;
-		if (inputSize != 2 && inputSize != 4) {
-			//MAKE OUTPUT CLASS HOLD ERROR STRING!
-			return false;
-		}
-		try {
-			String specialChar = input.split(" ")[2];
-			if (!specialChar.contentEquals(">") || 
-					!specialChar.contentEquals(">>")) {
-				//MAKE OUTPUTCLASS HOLD ERROR STRING
-				return false;
-			}
-		}
-		catch (Exception e) {
-			return true;
-		}
-		return true;
 	}
 	
+	/**
+	 * Returns the pre-written documentation for the get command.
+	 * @return The string representation of the documentation for the get command
+	 */
+	@Override
+	protected String getDoc() {
+		String doc = "get: get URL [(>or>>) OUTFILE]" + "\n\t" + "If URL is valid, extract "
+				+ "all contents on the associated web page and store it onto a File"
+				+ " with the same name as the URLs file name. Otherwise utilizing redirection,"
+				+ " add the contents to a new or pre-existing file in the FileSystem.";
+		// TODO Auto-generated method stub
+		return doc;
+	}
+	
+	/**
+	 * Extracts a string representation of a URL from input. 
+	 * @param input the complete user command input when calling get command
+	 * @return a string representation of a URL
+	 */
 	private static String cleanInput(String input) {
 		String cleanedInput = input.split(" ")[1];
 		return cleanedInput;
 	}
 	
-	private static String getURLContents(String url) {
-		String contents = "";
+	/**
+	 * Tries to extract all contents of website with URL url and adds each line as a UserOutput 
+	 * into the Output list, returns true if the attempt has been a success and false otherwise.
+	 * @param url A url pointing to a website (can be real or fake)
+	 * @return True if the url given is valid
+	 */
+	private static boolean getURLContents(String url) {
 		String line;
 		try {
 			URL webAddress = new URL(url);
 			BufferedReader in = new BufferedReader(
 			        new InputStreamReader(webAddress.openStream()));
 			while ((line = in.readLine()) != null) {
-				contents = contents.concat(line);
+				Output.getOutputInstance().addUserOutput(line);
 			}
 			in.close();
-			return contents;
+			return true;
 		}
 		catch (Exception e) {
-			//RETURN ERROR MOST DEFINETLY NEED TO CHANGE IN THE FUTURE
-			int i= 1/0;
-			return "i";
+			return false;
 		}
 	}
 }
