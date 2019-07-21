@@ -40,7 +40,8 @@ public class Ls extends Command {
   /**
    * Print all the folders and files under the current working folder
    * 
-   * 
+   * @param param   An instance of ArraryList with its type being unknown.
+   *                It could be any type base on what Jshell gives.
    */
   @Override
   public void execute(ArrayList<Object> param){
@@ -69,9 +70,17 @@ public class Ls extends Command {
         printFileAndDir(workingDir, userInput[1]);
       }
     }
-    
-
   }
+  
+  /**
+   * An private helper method that is used for recursion to print the name 
+   * of each of the file and directory in fileSystem. If the node is an 
+   * directory then the method would go deeper into that Directory and do the
+   * same.
+   * 
+   * @param root    an instance of FileSystemNode that keeps track of current
+   *                position in the FileSystem
+   */  
   private void printR(FileSystemNode root)
   {
     Output output = Output.getOutputInstance();
@@ -93,7 +102,16 @@ public class Ls extends Command {
      
     }
   }
-
+  /**
+   * A helper function that takes in an instance of an Directory and print 
+   * any files and directories in it, given an full path.
+   * 
+   * @param workingDir         An instance of Directory that represents 
+   *                           Current working directory
+   * @param path               An instance of String that represents the 
+   *                           full path that user enters
+   */
+  
   private void printFileAndDir(Directory workingDir, String path)
   {
     Output output = Output.getOutputInstance();
@@ -125,7 +143,8 @@ public class Ls extends Command {
    * A helper function that takes in an instance of an Directory and print 
    * any files and directories in it, in sorted order.
    * 
-   * @param workingDir         Current working directory
+   * @param workingDir         An instance of Directory that represents 
+   *                           Current working directory
    */
   private void printFilesAndDirectories(Directory workingDir) {
     Output output = Output.getOutputInstance();
