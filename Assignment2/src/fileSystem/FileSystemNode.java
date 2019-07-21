@@ -1,12 +1,19 @@
 package fileSystem;
 
+import java.io.Serializable;
+
 /**
  * Contains information about a node 
  * in the file system.
  *
  * @author Gary Xie
  */
-public class FileSystemNode {
+public class FileSystemNode implements Serializable {
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
+
   /**
    * Absolute path name of the FileSystemNode
    */

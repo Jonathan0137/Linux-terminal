@@ -21,7 +21,7 @@ public class CommandParameter {
       case "Ls": 
       case "Man":
       case "Mkdir": 
-      case "Mv": 
+      case "Mv":
         parameters.add(input);
         break;
       case "Save":  // Parameters: Input and DirectoryStack

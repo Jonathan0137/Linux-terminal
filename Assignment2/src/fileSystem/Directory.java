@@ -1,6 +1,7 @@
 package fileSystem;
 
 import java.util.HashMap;
+import java.io.Serializable;
 
 /**
  * Contains information about a directory
@@ -8,7 +9,11 @@ import java.util.HashMap;
  * 
  * @author Gary Xie
  */
-public class Directory extends FileSystemNode {
+public class Directory extends FileSystemNode implements Serializable {
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
   /**
    * HashMap of subdirectories and files in the Directory.
    * Key: name of the subdirectory or file

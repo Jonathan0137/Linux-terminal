@@ -15,7 +15,7 @@ public class Load extends Command {
   private InputHistory history;
   @Override
   public void execute(ArrayList<Object> param) {
-    history = InputHistory.getInputHistory(); // Need InputHistory to be Singleton
+    history = InputHistory.getInputHistory();
     
     if (history.getInputList().size() != 1) {
       // Print an error message saying that the user cannot call load since it is not the first
@@ -34,15 +34,17 @@ public class Load extends Command {
       fs.setFileSystem((FileSystem) objIn.readObject());
       shell.setDirectoryStack((DirectoryStack) objIn.readObject()); // Need a setDirectoryStack
       history.setInputHistory((InputHistory) objIn.readObject()); // Need a setInputHistory method
-      history.addToHistory(input);
       
       objIn.close();
       fileIn.close();
       
+      
     } catch(Exception e) { //Specify type of exception
       // Send Error Message
+      System.out.println("Error:  " + e);
     }
     
+    history.addToHistory(input);
     
     
   }
