@@ -78,6 +78,7 @@ public class Man extends Command
       hashtable.put("pushd", new Pushd().getDoc());
       hashtable.put("popd", new Popd().getDoc());
       hashtable.put("history", new History().getDoc());
+      hashtable.put("save", new Save().getDoc());
       hashtable.put("load", new Load().getDoc());
       //hashtable.put("find", new Find().getDoc());
       hashtable.put("tree", new Tree().getDoc());    
