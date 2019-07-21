@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import fileSystem.Directory;
 import fileSystem.FileSystem;
+import output.Output;
 import redirection.Redirection;
 
 /**
@@ -28,9 +29,8 @@ public class Pwd extends Command{
 										getCurrentDirectory();
 		String text = currentDirectory.getFullPathName();
 		
-		Redirection.redirection(FileSystem.getFileSystem(), input, text);
-		
-		//Add to output class if not redirected
+		Output out = Output.getOutputInstance();
+		out.addUserOutput(text);
 		
 	}
 	
