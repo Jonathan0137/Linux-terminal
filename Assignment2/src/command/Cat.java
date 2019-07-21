@@ -5,6 +5,7 @@ import fileSystem.Directory;
 import fileSystem.File;
 import fileSystem.FileSystem;
 import fileSystem.FileSystemManipulation;
+import output.Output;
 
 /**
  * Cat allows any user to display the contents of one or more files, given 
@@ -27,6 +28,7 @@ public class Cat extends Command {
 		String[] arguments = fileNames.split(" ");
 		int num_arguments = arguments.length;
 		Directory currentDir = FileSystem.getFileSystem().getCurrentDirectory();
+		Output out = Output.getOutputInstance();
 		for (int i = 1; i < num_arguments; i++)
 		{
 			if(FileSystemManipulation.findSubNode(currentDir, arguments[i])
@@ -38,18 +40,19 @@ public class Cat extends Command {
 					    										arguments[i]);
 					String contents = f.getContents();
 					//put contents into output
-					System.out.println(contents);
+					out.addUserOutput(contents);
 					if (num_arguments > 2 && i < num_arguments - 1) {
 					  //add line breaks to output
-					  System.out.print("\n\n\n"); 
+					  out.addUserOutput("\n\n\n"); 
 					}
 				}
 			}
 			else 
 			{
 				//put into error output
-				System.out.println("The file '" + arguments[i] + "' does not"
-						+ " exist in " + currentDir.getFullPathName());
+				String error = "The file '" + arguments[i] + "' does not exist"
+								+ " in " + currentDir.getFullPathName();
+				out.addErrorOutput(error);
 			}
 		}
 	}
