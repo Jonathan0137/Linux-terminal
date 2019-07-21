@@ -58,7 +58,14 @@ public class Ls extends Command {
       }
       else if(numOfArg == 3)
       {
-        printR((Directory) FileSystemManipulation.findFileSystemNode(userInput[2]));
+        if(FileSystemManipulation.findFileSystemNode(userInput[2])!=null)
+        {
+          printR((Directory) FileSystemManipulation.findFileSystemNode(userInput[2]));
+        }
+        else
+        {
+          output.addErrorOutput("No such file or directory");
+        }
       }
     }
     else
@@ -88,7 +95,11 @@ public class Ls extends Command {
     {
       if(root instanceof Directory)
       {
-        output.addUserOutput(root.getName());
+        if(root.getName().equals("")==false)
+        {
+          output.addUserOutput("");
+          output.addUserOutput(root.getFullPathName() + ":");
+        }      
         Directory dir = (Directory) root;
         for(String key : dir.getListOfFileSystemNodes().keySet())
         {
@@ -99,8 +110,8 @@ public class Ls extends Command {
       {
         output.addUserOutput(root.getName());
       }
-     
     }
+    
   }
   /**
    * A helper function that takes in an instance of an Directory and print 

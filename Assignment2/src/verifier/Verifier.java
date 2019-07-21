@@ -57,7 +57,7 @@ public class Verifier {
     //hashtable.put("cp", new Cp());
     hashtable.put("cat", new Cat());
     //hashtable.put("get", new Get());
-    //hashtable.put("echo", new Echo());
+    hashtable.put("echo", new Echo());
     hashtable.put("man", new Man());
     hashtable.put("pushd", new Pushd());
     hashtable.put("popd", new Popd());

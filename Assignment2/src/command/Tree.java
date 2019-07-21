@@ -75,13 +75,14 @@ public class Tree extends Command
         for(String key : dir.getListOfFileSystemNodes().keySet())
         {
          
-          printTree(space + "  ", (Directory) FileSystemManipulation.findSubNode(dir, key));
+          printTree(space + "  ", FileSystemManipulation.findSubNode(dir, key));
         }
       }
       else if(node instanceof File)
       {
         output.addUserOutput(space + node.getName());
       }
+      
     }
     
   }
