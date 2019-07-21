@@ -49,7 +49,9 @@ public class Tree extends Command
   }
   /**
    * An private helper method that is used for recursion to print the name 
-   * of each of the file and directory in fileSystem.
+   * of each of the file and directory in fileSystem. If the node is an 
+   * directory then the method would go deeper into that Directory and do the
+   * same.
    * 
    * @param space   an instance of String that is used for printing to output
    * @param node    an instance of FileSystemNode that keeps track of current
