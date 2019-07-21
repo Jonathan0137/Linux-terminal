@@ -33,6 +33,15 @@ public final class Redirection {
 	 * @return True if the command respects redirection call structure
 	 */
 	private static boolean checkRedirection(String input) {
+		int numOfOutputs = 0;
+		for (int i=0; i<Output.getOutputInstance().getOutputList().size(); i++) {
+			if (Output.getOutputInstance().getOutputList().get(i) instanceof UserOutput) {
+				numOfOutputs++;
+			}
+		}
+		if (numOfOutputs == 0) {
+			return false;
+		}
 		int situation = 0;
 		String[] splitInput = input.split(" ");
 		for (int i=0; i<splitInput.length; i++) {
@@ -202,7 +211,10 @@ public final class Redirection {
 		for (int i = 0; i<outputList.getOutputList().size(); i++) {
 			if (outputList.getOutputList().get(i) instanceof UserOutput) {
 				String toAdd = (String) outputList.getOutputList().get(i).getOutput();
-				text = text.concat("\n" + toAdd);
+				text = text.concat(toAdd);
+				if (i != outputList.getOutputList().size()-1) {
+					text = text.concat("\n");
+				}
 				outputList.getOutputList().remove(i);
 			}
 		}
