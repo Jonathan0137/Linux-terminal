@@ -1,0 +1,9 @@
+Class Name: Echo
+Parent Class: Command
+Subclasses: None
+
+Responsibilities:
+* Extract the string a user wants printed onto shell or into a file
+* Pass the extracted string to the Output class
+Collaborators:
+* Output

@@ -1,0 +1,8 @@
+Class Name: Get
+Parent Class: Command
+Subclasses: None
+
+Responsibilities:
+* Extract the contents held on a website given by a URL
+Collaborators:
+* Output
