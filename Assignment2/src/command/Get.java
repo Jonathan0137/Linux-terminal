@@ -1,25 +1,28 @@
 package command;
 
 import driver.JShell;
-import redirection.Redirect;
+import output.Output;
+import redirection.Redirection;
 
 import java.net.*;
+import java.util.ArrayList;
 import java.io.*;
 
 
 public class Get extends Command {
 
 	@Override
-	public void execute(JShell shell, String input) {
+	public void execute(ArrayList<Object> params) {
+		String input = (String) params.get(0);
 		if (Get.getChecker(input)) {
 			String userParam = Get.cleanInput(input);
 			try { 
-				String contents = Get.getURLContents(userParam); //MIGHT NEED TO CHANGE userParam variable
-				Redirect.redirection(shell.getDirectoryTree(), 
-						input, contents);
+				String contents = Get.getURLContents(userParam);
+				Output.getOutputInstance().addUserOutput(contents);
+				Redirection.redirectionSetUp(input);
 			}
 			catch (Exception e) {
-				//APPEND ERROR STRING URL DNE TO OUTPUT
+				Output.getOutputInstance().addErrorOutput("Get: URL does not exist");
 			}
 		}
 	}
@@ -51,12 +54,6 @@ public class Get extends Command {
 	}
 	
 	private static String cleanInput(String input) {
-		/*String[] components = input.split(" ");
-		String cleanInput = "";
-		for (int i=1 ; i<components.length; i++) {
-			cleanInput = cleanInput.concat(components[i]);
-		}
-		return cleanInput;*/
 		String cleanedInput = input.split(" ")[1];
 		return cleanedInput;
 	}
@@ -77,7 +74,7 @@ public class Get extends Command {
 		catch (Exception e) {
 			//RETURN ERROR MOST DEFINETLY NEED TO CHANGE IN THE FUTURE
 			int i= 1/0;
-			return "";
+			return "i";
 		}
 	}
 }
