@@ -44,10 +44,6 @@ public class Cd extends Command {
     String[] inputSplit = input.split(" ", 2);
     // Ignore the 'cd' part of the input
     input = inputSplit[1].trim();
-    if (input.length() == 0) { // Unnecessary due to Verifier
-      System.out.println("Cd command is missing a path name.");
-      return;
-    }
     Directory workingDirectory = fs.getCurrentDirectory();
     Directory root = fs.getRootDirectory();
     Directory newWorkingDirectory = null;
@@ -66,7 +62,7 @@ public class Cd extends Command {
     if (newWorkingDirectory != null) {
       fs.setCurrentDirectory(newWorkingDirectory);
     } else {
-      System.out.println("Specified path not found.");
+      output.addErrorOutput("Specified path not found.");
     }
   }
 }

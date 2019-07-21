@@ -1,6 +1,7 @@
 package fileSystem;
 
 import java.util.HashMap;
+import output.Output;
 
 // TODO: UPDATE Javadocs (for all my classes)
 
@@ -25,9 +26,11 @@ public final class FileSystemManipulation {
    * @return the directory with the given absolute path name
    */
   public static FileSystemNode findFileSystemNode(String absolutePathName) {
-    Directory traversalDirectory = fs.getRootDirectory();
+    Directory traversalDirectory = fs.getRootDirectory();    
     String[] nameList = absolutePathName.split("/");
-    
+    if (nameList.length == 0) {
+      return traversalDirectory;
+    }
     for (int i=0; i<nameList.length - 1; i++) {
       if (nameList[i].equals("")) {
         continue;
@@ -55,10 +58,9 @@ public final class FileSystemManipulation {
   public static FileSystemNode findSubNode(Directory parentDir, 
       String nodeName) {
     HashMap<String, FileSystemNode> listOfFileSystemNodes = parentDir.
-        getListOfFileSystemNodes();
-    
+        getListOfFileSystemNodes();    
     for (String name : listOfFileSystemNodes.keySet()) {
-      if (name == nodeName) {
+      if (name.equals(nodeName)) {
         return listOfFileSystemNodes.get(name);
       }
     }   
@@ -130,10 +132,12 @@ public final class FileSystemManipulation {
    * @param subDir   the directory that is being added by the user
    */
  public static void addFileSystemNode(Directory parentDir, FileSystemNode subNode) {   
+     Output output = Output.getOutputInstance();
      HashMap<String, FileSystemNode> listOfNodes = parentDir.getListOfFileSystemNodes();
      
      if (listOfNodes.containsKey(subNode.getName())) {
-         System.out.println("The name '"+subNode.getName()+"' already exists in this directory.");
+         output.addErrorOutput("The name '"+subNode.getName()
+                               +"' already exists in this directory.");
          return;
      }
      subNode.setParentDirectory(parentDir);

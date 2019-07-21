@@ -1,7 +1,8 @@
 package inputHistory;
 
 import java.io.Serializable;
-import java.util.ArrayList; 
+import java.util.ArrayList;
+import fileSystem.FileSystem; 
 
 /**
  * InputHistory class is in charge of remembering all user inputs.
@@ -52,5 +53,10 @@ public class InputHistory implements Serializable {
 	 */
 	public ArrayList<String> getInputList() {
 		return this.inputList;
+	}
+	
+	// Used for loading a InputHistory
+	public void setInputHistory(InputHistory newInputHistory) {
+	    history = newInputHistory;
 	}
 }

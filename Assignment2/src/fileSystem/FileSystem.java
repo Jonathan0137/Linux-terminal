@@ -1,6 +1,8 @@
 package fileSystem;
 
 import java.io.Serializable;
+import test.interfaces.FileSystemInterface;
+
 
 /**
  * Contains information about a file system
