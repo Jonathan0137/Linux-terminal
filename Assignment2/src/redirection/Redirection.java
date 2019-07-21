@@ -1,17 +1,12 @@
 package redirection;
-import java.util.ArrayList;
-import java.util.Hashtable;
 
 import fileSystem.Directory;
 import fileSystem.File;
 import fileSystem.FileSystem;
 import fileSystem.FileSystemManipulation;
-import output.AbstractOutput;
 import output.Output;
 import output.UserOutput;
-import command.Cd;
-import command.Command;
-import driver.JShell;
+
 
 /**
  * The Redirection class allows users to redirect a commands outputs onto files by appending or 
@@ -186,10 +181,9 @@ public final class Redirection {
 				fullPath = fullPath.concat("/");
 			}
 		}
-		//WHAT HAPPENS IF PATH DNE' WHAT DOES FILESYSTEMMANIPULATION RETURN????????????????????????????????????????????????
 		if (fullPath.length()>0) {
 			if (fullPath.charAt(0) == '/') {
-				fullPath = FileSystemManipulation.getAbsolutePath(fullPath, fs.getFileSystem().getRootDirectory());
+				fullPath = FileSystemManipulation.getAbsolutePath(fullPath, fs.getRootDirectory());
 			}
 			if (fullPath.charAt(0) != '/') {	
 			fullPath = FileSystemManipulation.getAbsolutePath(fullPath, fs.getCurrentDirectory());
