@@ -4,7 +4,8 @@ Subclasses: Exit, Mkdir, Cd, Pushd, Popd, Echo, Cat, Ls, Pwd, History, Man, Mv, 
 
 Responsibilities:
 * Executes the command
+* output the documentations for each command
+* output the name of each class
 Collaborators:
 * FileSystem
-* FileSystemManipulation
 * Output
