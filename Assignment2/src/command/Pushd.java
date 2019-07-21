@@ -45,10 +45,6 @@ public class Pushd extends Command {
     Directory currentDir = fs.getCurrentDirectory();
     String[] inputSplit = input.split(" ", 2);
     String path = inputSplit[1].trim();
-    if (path.length() == 0) {
-      System.out.println("Pushd command is missing a path name.");
-      return;
-    }
     Directory startDir;
     if (path.charAt(0) == '/') {
       startDir = fs.getRootDirectory();
@@ -67,7 +63,7 @@ public class Pushd extends Command {
     if (currentDir != fs.getCurrentDirectory()) {
       dirStack.getStack().add(currentDir);
     } else {
-      System.out.println("Pushd command failed due to invalid path.");
+      output.addErrorOutput("Pushd command failed due to invalid path.");
     }
   }
 }

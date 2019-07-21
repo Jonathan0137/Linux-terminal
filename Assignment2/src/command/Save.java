@@ -13,7 +13,7 @@ public class Save extends Command {
   
   @Override
   public void execute(ArrayList<Object> param) {
-    history = InputHistory.getInputHistory(); // Need InputHistory to be Singleton
+    history = InputHistory.getInputHistory();
     String input = (String) param.get(0);
     String[] inputSplit = input.split(" ", 2);
     String fileName = inputSplit[1].trim();
@@ -31,7 +31,9 @@ public class Save extends Command {
       fileOut.close();
       
     } catch(Exception e) { //Specify type of exception
-      // Send Error Message
+      // Update the error message
+      System.out.println("There was an error.");
+      System.out.println(e);
     }
     
     

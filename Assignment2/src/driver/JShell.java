@@ -112,4 +112,9 @@ public class JShell {
 	public void exitShell() {
 		this.exitStatus = true;
 	}
+	
+	// Used for loading a DirectoryStack
+	public void setDirectoryStack(DirectoryStack newDirStack) {
+	  directoryHistory = newDirStack;
+	}
 }

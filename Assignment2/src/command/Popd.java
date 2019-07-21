@@ -45,7 +45,7 @@ public class Popd extends Command {
 
     // The directory stack is empty, so outputs an error message
     if (dirStack.getStack().size() == 0) {
-      System.out.println("Popd unsuccessful: directory stack is empty.");
+      output.addErrorOutput("Popd unsuccessful: directory stack is empty.");
     } else {
       // Remove the last entry in the directory stack
       Directory newWorkingDirectory = dirStack.getStack().pollLast();
