@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import output.Output;
 
 /**
- * Echo class extracts a string within a user input and prints it onto shell or onto a file.
+ * Echo class extracts a string within a user input and prints it onto shell or
+ * onto a file.
  * 
  * @author Tom Daudelin
  *
@@ -24,7 +25,12 @@ public class Echo extends Command {
 		String textContents = userInput.split("\"")[1];
 		Output.getOutputInstance().addUserOutput(textContents);
 	}
-	
+
+	/**
+	 * Returns the pre-written documentation for the Echo command.
+	 * 
+	 * @return The string representation of the documentation for Echo command
+	 */
 	@Override
 	protected String getDoc() {
 		String doc = "echo: echo STRING [(>or>>) OUTFILE]\n\tIf no optional"
