@@ -6,3 +6,6 @@ Responsibilities:
 * Extract the contents held on a website given by a URL
 Collaborators:
 * Output
+* FileSystem
+* Directory
+* Redirection
