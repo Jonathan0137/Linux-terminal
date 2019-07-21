@@ -2,7 +2,6 @@ package inputHistory;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import fileSystem.FileSystem; 
 
 /**
  * InputHistory class is in charge of remembering all user inputs.
