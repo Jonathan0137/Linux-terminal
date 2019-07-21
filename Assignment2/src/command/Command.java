@@ -26,8 +26,8 @@ public abstract class Command
   /**
    * An Abstract class that will be used for children classes to implement
    * 
-   * @param param   An instance of ArraryList with its type being unknown.
-   *                It could be any type base on what Jshell gives.
+   * @param param       The list of required parameters to successfully 
+   *                    execute command requested command.
    */
   public abstract void execute(ArrayList<Object> param);
   

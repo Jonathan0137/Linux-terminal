@@ -38,8 +38,8 @@ public class Tree extends Command
    * Displays every file and directory in the file 
    * system to the user as a tree
    * 
-   * @param param   An instance of ArraryList with its type being unknown.
-   *                It could be any type base on what Jshell gives.
+   * @param param       The list of required parameters to successfully 
+   *                    execute command requested command.
    */
   @Override
   public void execute (ArrayList<Object> param)

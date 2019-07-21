@@ -40,8 +40,8 @@ public class Ls extends Command {
   /**
    * Print all the folders and files under the current working folder
    * 
-   * @param param   An instance of ArraryList with its type being unknown.
-   *                It could be any type base on what Jshell gives.
+   * @param param       The list of required parameters to successfully 
+   *                    execute command requested command.
    */
   @Override
   public void execute(ArrayList<Object> param){
