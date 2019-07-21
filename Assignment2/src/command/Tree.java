@@ -7,8 +7,21 @@ import fileSystem.FileSystemManipulation;
 import fileSystem.FileSystemNode;
 import output.Output;
 
+/**
+ * Tree is an Command that displays every file and directory in the file 
+ * system to the user as a tree
+ * 
+ * @author Chongmin Bai
+ */
 public class Tree extends Command
 {
+  /**
+   * Returns a String containing the documentation for the functionalities 
+   * of the 'ls' command.
+   * 
+   * @return the documentation of the 'ls' command
+   */
+  @Override
   public String getDoc()
   {
     return "\t\tCommand: Tree"
@@ -21,12 +34,27 @@ public class Tree extends Command
         + "\t\t\tsome_file.txt\n"
         + "\t\tDownload\n";
   }
+  /**
+   * Displays every file and directory in the file 
+   * system to the user as a tree
+   * 
+   * @param param   An instance of ArraryList with its type being unknown.
+   *                It could be any type base on what Jshell gives.
+   */
+  @Override
   public void execute (ArrayList<Object> param)
   {
     Directory traversalDirectory = fs.getRootDirectory();
     printTree("", traversalDirectory);
   }
-  
+  /**
+   * An private helper method that is used for recursion to print the name 
+   * of each of the file and directory in fileSystem.
+   * 
+   * @param space   an instance of String that is used for printing to output
+   * @param node    an instance of FileSystemNode that keeps track of current
+   *                position in the FileSystem
+   */
   private static void printTree(String space, FileSystemNode node)
   {
     if(node != null)
