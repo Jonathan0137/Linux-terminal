@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import inputHistory.InputHistory;
 import fileSystem.DirectoryStack;
@@ -18,8 +20,8 @@ public class Load extends Command {
     history = InputHistory.getInputHistory();
     
     if (history.getInputList().size() != 1) {
-      // Print an error message saying that the user cannot call load since it is not the first
-      // command called in a new console
+      output.addErrorOutput("Cannot execute load. load must "
+          + "the first command called in a new shell to be executed.");
       return;
     }
     String input = (String) param.get(0);
@@ -32,16 +34,17 @@ public class Load extends Command {
       ObjectInputStream objIn = new ObjectInputStream(fileIn);
       
       fs.setFileSystem((FileSystem) objIn.readObject());
-      shell.setDirectoryStack((DirectoryStack) objIn.readObject()); // Need a setDirectoryStack
-      history.setInputHistory((InputHistory) objIn.readObject()); // Need a setInputHistory method
+      shell.setDirectoryStack((DirectoryStack) objIn.readObject());
+      history.setInputHistory((InputHistory) objIn.readObject());
       
       objIn.close();
       fileIn.close();
-      
-      
-    } catch(Exception e) { //Specify type of exception
-      // Send Error Message
-      output.addErrorOutput("Load exit due to error.");
+    } catch(FileNotFoundException e) {
+        output.addErrorOutput("File not found.");
+    } catch(IOException e) {
+        output.addErrorOutput("Cannot load data from specified file.");
+    } catch(Exception e) {
+        output.addErrorOutput("Load failed to execute.");
     }  
   }
 
