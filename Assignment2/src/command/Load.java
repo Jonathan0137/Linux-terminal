@@ -1,7 +1,6 @@
 package command;
 
 import java.util.ArrayList;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -12,10 +11,45 @@ import fileSystem.DirectoryStack;
 import driver.JShell;
 import fileSystem.FileSystem;
 
+/**
+ * Provides functionality for the 'load' command,
+ * allowing the user to load the FileSystem, DirectoryStack,
+ * and InputHistory state from a previously saved file.
+ * 
+ * @author Gary Xie
+ */
 public class Load extends Command {
   
+  /**
+   * The instance of the user's input history.
+   */
   private InputHistory history;
   
+  /**
+   * Returns a String containing the documentation for 
+   * the functionalities of the 'load' command.
+   * 
+   * @return the documentation of the 'load' command
+   */
+  @Override
+  protected String getDoc() {
+    String documentation = "load: load FILE\n\tLoad the contents "
+        + "of FILE and update the current shell's state to the state "
+        + "saved in FILE, if FILE exists and stores information "
+        + "about console state. Load must be the first command "
+        + "called in a new console.\nIf FILE's path is not given, "
+        + "the default location to search for FILE is the folder Assignmnent2.";
+    return documentation;
+  }
+  
+  
+  /**
+   * Load the contents of a file containing a previously saved console state,
+   * and update the FileSystem, DirectoryStack, and InputHistory to this state.
+   * Load can only be run if it is the first command called in a new console.
+   * 
+   * @param param the list of required parameters to successfully execute Load
+   */
   @Override
   public void execute(ArrayList<Object> param) {
     history = InputHistory.getInputHistory();
@@ -48,12 +82,4 @@ public class Load extends Command {
         output.addErrorOutput("Load failed to execute.");
     }  
   }
-
-  @Override
-  protected String getDoc() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-  
-
 }
