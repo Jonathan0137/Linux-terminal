@@ -41,12 +41,8 @@ public class Load extends Command {
       
     } catch(Exception e) { //Specify type of exception
       // Send Error Message
-      System.out.println("Error:  " + e);
-    }
-    
-    history.addToHistory(input);
-    
-    
+      output.addErrorOutput("Load exit due to error.");
+    }  
   }
 
   @Override
