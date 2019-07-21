@@ -45,8 +45,8 @@ public class Save extends Command {
 
   @Override
   protected String getDoc() {
-    // TODO Auto-generated method stub
-    return null;
+    String documentation = "";
+    return documentation;
   }
   
 

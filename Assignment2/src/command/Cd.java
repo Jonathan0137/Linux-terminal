@@ -3,6 +3,7 @@ package command;
 import java.util.ArrayList;
 import fileSystem.Directory;
 import fileSystem.FileSystemManipulation;
+import fileSystem.FileSystemNode;
 
 /**
  * Provides functionality for the 'cd' command,
@@ -35,8 +36,7 @@ public class Cd extends Command {
    * Changes the working directory to the directory 
    * specified by the user's input, if it exists.
    * 
-   * @param shell an instance of the JShell that is interacting with the user
-   * @param input a relative or absolute path name
+   * @param param the list of required parameters to successfully execute Cd
    */
   @Override
   public void execute(ArrayList<Object> param) {
@@ -46,7 +46,6 @@ public class Cd extends Command {
     input = inputSplit[1].trim();
     Directory workingDirectory = fs.getCurrentDirectory();
     Directory root = fs.getRootDirectory();
-    Directory newWorkingDirectory = null;
     String absolutePathName;
     // Input is an absolute path
     if (input.charAt(0) == '/') {
@@ -57,12 +56,12 @@ public class Cd extends Command {
     else {
       absolutePathName = FileSystemManipulation.getAbsolutePath(input, workingDirectory);
     }
-    newWorkingDirectory = (Directory) FileSystemManipulation.findFileSystemNode(absolutePathName);
-
-    if (newWorkingDirectory != null) {
-      fs.setCurrentDirectory(newWorkingDirectory);
-    } else {
+    FileSystemNode node = FileSystemManipulation.findFileSystemNode(absolutePathName); 
+    if (node instanceof Directory)
+      fs.setCurrentDirectory((Directory) node);
+    else if (node == null) 
       output.addErrorOutput("Specified path not found.");
-    }
+    else
+      output.addErrorOutput(node.getName() + " is not a directory.");
   }
 }
