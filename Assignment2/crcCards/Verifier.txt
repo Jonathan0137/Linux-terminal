@@ -5,4 +5,4 @@ Subclasses: None
 Responsibilities:
 * Verifies that information is valid
 Collaborators:
-* None
+* Output

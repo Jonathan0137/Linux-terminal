@@ -3,6 +3,10 @@ Parent Class: Command
 Subclasses: None
 
 Responsibilities:
-* Displays the entire file system to the user as a tree
+* Displays every file and directory in the file system to the user as a tree
 Collaborators:
 * Inherited from Parent Class
+* FileSystem
+* FileSystemNode
+* FileSystemManipulation
+* Output

@@ -6,4 +6,4 @@ Responsibilities:
 * Prints documentation for the given command to user
 Collaborators:
 * Inherited from Parent Class
-* Command
+* Output

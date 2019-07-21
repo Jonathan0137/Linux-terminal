@@ -1,0 +1,8 @@
+Class Name: InputCleaner
+Parent Class: None
+Subclasses: None
+
+Responsibilities:
+* replace all more than 1 number of continuous space character into one.
+Collaborators:
+* None
