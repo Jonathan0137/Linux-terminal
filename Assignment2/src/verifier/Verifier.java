@@ -18,15 +18,11 @@ public class Verifier {
    * @param userInput     a string that contains what user has typed
    * @return              an instance of command of user's selected commands
    */
-
-
   public static Command checkUserInputCommand(String userInput)  
   {
     if (userInput == "")
       return null;
     Output output = Output.getOutputInstance();
-    
-    userInput = userInput.replaceAll(" +", " ");
     String[] input = userInput.split(" ", 2);
     String command = input[0];
     Hashtable<String, Command> hashtable = new Hashtable<String, Command> (); 
@@ -42,6 +38,14 @@ public class Verifier {
       return null;
     }
   }
+  /**
+   * An private helper method that stores an hashtable with name of the 
+   * commands as keys and a new instance of that command type variable 
+   * as the value. 
+   * 
+   * @param hashtable  An instance of hashtable with a String as key and 
+   *                   Command type as value
+   */
   private static void initializeHashTableWithUserInput(Hashtable<String, Command> hashtable)
   {
     hashtable.put("cd", new Cd());
@@ -73,7 +77,6 @@ public class Verifier {
   public boolean checkUserInput(String userInput)
   {
       Output output = Output.getOutputInstance();
-      userInput = userInput.replaceAll(" +", " ");
       String[] input = userInput.split(" ", 2); 
       String command = input[0];
       Hashtable<String, String> hashtable = new Hashtable<String, String> (); 
@@ -85,8 +88,15 @@ public class Verifier {
         output.addErrorOutput("Verifier: "+ command + ": invalid inputs");
       }
       return tOrF;
-
   }
+  /**
+   * An private helper method that stores an hashtable with name of the 
+   * commands as keys and the userInput regex restriction for each command
+   * as the value
+   * 
+   * @param hashtable  An instance of hashtable with a String as key and 
+   *                   String(regex) type as value
+   */
   private static void initializeHashTableWithInputLimit(Hashtable<String, String> hashtable)
   { 
     hashtable.put("exit", "exit"); 
