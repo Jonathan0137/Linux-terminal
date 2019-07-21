@@ -19,7 +19,7 @@ public class Tree extends Command
    * Returns a String containing the documentation for the functionalities 
    * of the 'ls' command.
    * 
-   * @return the documentation of the 'ls' command
+   * @return the documentation of the 'Tree' command
    */
   @Override
   public String getDoc()
