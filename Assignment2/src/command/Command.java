@@ -1,7 +1,6 @@
 package command;
 
 import java.util.ArrayList;
-import fileSystem.Directory;
 import fileSystem.FileSystem;
 
 /**
@@ -21,8 +20,8 @@ public abstract class Command
   /**
    * An Abstract class that will be used for children classes to implement
    * 
-   * @param shell an instance of the JShell that is interacting with the user
-   * @param input User input.
+   * @param param   An instance of ArraryList with its type being unknown.
+   *                It could be any type base on what Jshell gives.
    */
   public abstract void execute(ArrayList<Object> param);
   
@@ -34,6 +33,12 @@ public abstract class Command
    */
   protected abstract String getDoc();
 
+  /**
+   * An toString method that tells the name of each command under command
+   * class
+   * 
+   * @return the name representation of each command.
+   */
   @Override
   public String toString() {
     return this.getClass().getSimpleName();
