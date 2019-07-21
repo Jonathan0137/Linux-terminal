@@ -1,0 +1,14 @@
+Class Name: Redirection
+Parent Class: None
+Subclasses: None
+
+Responsibilities:
+* Verifies that an output needs to be redirected
+* Redirects Strings inside the Output class list into files (files that redirect can create)
+Collaborators:
+* FileSystem
+* File
+* Directory
+* FileSystemManipulation
+* Output
+* UserOutput
