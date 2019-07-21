@@ -55,20 +55,20 @@ public class UnitTestVerifierTest
     expected = "Pwd";
     assertEquals(expected, Verifier.checkUserInputCommand(userInput).toString());
   }
-//  @Test
-//  public void testCheckUserInputCommandMv() 
-//  {
-//    userInput = "mv path path";
-//    expected = "Mv";
-//    assertEquals(expected, Verifier.checkUserInputCommand(userInput).toString());
-//  }
-//  @Test
-//  public void testCheckUserInputCommandCp() 
-//  {
-//    userInput = "cp path path";
-//    expected = "Cp";
-//    assertEquals(expected, Verifier.checkUserInputCommand(userInput).toString());
-//  }
+  @Test
+  public void testCheckUserInputCommandMv() 
+  {
+    userInput = "mv path path";
+    expected = "Mv";
+    assertEquals(expected, Verifier.checkUserInputCommand(userInput).toString());
+  }
+  @Test
+  public void testCheckUserInputCommandCp() 
+  {
+    userInput = "cp path path";
+    expected = "Cp";
+    assertEquals(expected, Verifier.checkUserInputCommand(userInput).toString());
+  }
   @Test
   public void testCheckUserInputCommandCat() 
   {
@@ -76,20 +76,20 @@ public class UnitTestVerifierTest
     expected = "Cat";
     assertEquals(expected, Verifier.checkUserInputCommand(userInput).toString());
   }
-//  @Test
-//  public void testCheckUserInputCommandGet() 
-//  {
-//    userInput = "get";
-//    expected = "Get";
-//    assertEquals(expected, Verifier.checkUserInputCommand(userInput).toString());
-//  }
-//  @Test
-//  public void testCheckUserInputCommandEcho() 
-//  {
-//    userInput = "echo";
-//    expected = "Echo";
-//    assertEquals(expected, Verifier.checkUserInputCommand(userInput).toString());
-//  }
+  @Test
+  public void testCheckUserInputCommandGet() 
+  {
+    userInput = "get";
+    expected = "Get";
+    assertEquals(expected, Verifier.checkUserInputCommand(userInput).toString());
+  }
+  @Test
+  public void testCheckUserInputCommandEcho() 
+  {
+    userInput = "echo";
+    expected = "Echo";
+    assertEquals(expected, Verifier.checkUserInputCommand(userInput).toString());
+  }
   @Test
   public void testCheckUserInputCommandMan() 
   {
@@ -118,13 +118,13 @@ public class UnitTestVerifierTest
     expected = "History";
     assertEquals(expected, Verifier.checkUserInputCommand(userInput).toString());
   }
-//  @Test
-//  public void testCheckUserInputCommandLoad() 
-//  {
-//    userInput = "load";
-//    expected = "Load";
-//    assertEquals(expected, Verifier.checkUserInputCommand(userInput).toString());
-//  }
+  @Test
+  public void testCheckUserInputCommandLoad() 
+  {
+    userInput = "load";
+    expected = "Load";
+    assertEquals(expected, Verifier.checkUserInputCommand(userInput).toString());
+  }
 //  @Test
 //  public void testCheckUserInputCommandFind() 
 //  {
@@ -132,13 +132,13 @@ public class UnitTestVerifierTest
 //    expected = "Find";
 //    assertEquals(expected, Verifier.checkUserInputCommand(userInput).toString());
 //  }
-//  @Test
-//  public void testCheckUserInputCommandTree() 
-//  {
-//    userInput = "tree";
-//    expected = "Tree";
-//    assertEquals(expected, Verifier.checkUserInputCommand(userInput).toString());
-//  }
+  @Test
+  public void testCheckUserInputCommandTree() 
+  {
+    userInput = "tree";
+    expected = "Tree";
+    assertEquals(expected, Verifier.checkUserInputCommand(userInput).toString());
+  }
   @Test
   public void testCheckUserInputCommandInvalidCommand() 
   {
@@ -1061,6 +1061,60 @@ public class UnitTestVerifierTest
   public void testCheckUserInputGET6()
   {
     userInput = "get www.google.ca/";
+    assertEquals(true, correct.checkUserInput(userInput));
+  }
+  @Test
+  public void testCheckUserInputGET7()
+  {
+    userInput = "get www.google.ca/ > hello";
+    assertEquals(true, correct.checkUserInput(userInput));
+  }
+  @Test
+  public void testCheckUserInputGET8()
+  {
+    userInput = "get www.google.ca/ > hello.txt";
+    assertEquals(true, correct.checkUserInput(userInput));
+  }
+  @Test
+  public void testCheckUserInputGET9()
+  {
+    userInput = "get www.google.ca/ > /root/hello.txt";
+    assertEquals(true, correct.checkUserInput(userInput));
+  }
+  @Test
+  public void testCheckUserInputGET10()
+  {
+    userInput = "get www.google.ca/ > root/hello.txt";
+    assertEquals(true, correct.checkUserInput(userInput));
+  }
+  @Test
+  public void testCheckUserInputGET11()
+  {
+    userInput = "get www.google.ca/ >> hello";
+    assertEquals(true, correct.checkUserInput(userInput));
+  }
+  @Test
+  public void testCheckUserInputGET12()
+  {
+    userInput = "get www.google.ca/ >> hello.txt";
+    assertEquals(true, correct.checkUserInput(userInput));
+  }
+  @Test
+  public void testCheckUserInputGET13()
+  {
+    userInput = "get www.google.ca/ >> /root/hello.txt";
+    assertEquals(true, correct.checkUserInput(userInput));
+  }
+  @Test
+  public void testCheckUserInputGET14()
+  {
+    userInput = "get www.google.ca/ >> root/hello.txt";
+    assertEquals(true, correct.checkUserInput(userInput));
+  }
+  @Test
+  public void testCheckUserInputGET15()
+  {
+    userInput = "get www.google.ca/ >> root/../hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
   
