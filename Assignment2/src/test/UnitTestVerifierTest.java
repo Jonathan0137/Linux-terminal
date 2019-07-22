@@ -1117,6 +1117,12 @@ public class UnitTestVerifierTest
     userInput = "get www.google.ca/ >> root/../hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+  @Test
+  public void testCheckUserInputGET16()
+  {
+    userInput = "get www.google.ca/hey/bru.txt";
+    assertEquals(true, correct.checkUserInput(userInput));
+  }
   
   /*****************************TEST echo***************************/
   @Test
