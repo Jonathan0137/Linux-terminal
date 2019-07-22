@@ -69,7 +69,7 @@ public class Man extends Command
       hashtable.put("ls", (new Ls()).getDoc());
       hashtable.put("pwd", (new Pwd()).getDoc());
       hashtable.put("mv", (new Mv()).getDoc());
-      hashtable.put("cp", (new Cp()).getDoc());
+      //hashtable.put("cp", (new Cp()).getDoc());
       hashtable.put("cat", (new Cat()).getDoc());
       hashtable.put("get", (new Get()).getDoc());
       hashtable.put("echo", (new Echo()).getDoc());
