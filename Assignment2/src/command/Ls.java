@@ -49,33 +49,22 @@ public class Ls extends Command {
     String[] userInput = input.split(" ");
     int numOfArg = userInput.length;
     Directory workingDir = fs.getCurrentDirectory();
-
-    if(input.contains("-R"))
-    {
-      if(numOfArg == 2)
-      {
+    if(input.contains("-R")){
+      if(numOfArg == 2){
         printR(fs.getRootDirectory());
       }
-      else if(numOfArg == 3)
-      {
+      else if(numOfArg == 3){
         if(FileSystemManipulation.findFileSystemNode(userInput[2])!=null)
-        {
           printR((Directory) FileSystemManipulation.findFileSystemNode(userInput[2]));
-        }
         else
-        {
           output.addErrorOutput("No such file or directory");
-        }
       }
     }
-    else
-    {
+    else{
       if (numOfArg == 1)
         printFilesAndDirectories(workingDir);
       else if (numOfArg == 2) 
-      {
         printFileAndDir(workingDir, userInput[1]);
-      }
     }
   }
   

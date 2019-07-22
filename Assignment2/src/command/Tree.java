@@ -61,29 +61,20 @@ public class Tree extends Command
    */
   private static void printTree(String space, FileSystemNode node)
   {
-    
-    if(node != null)
-    {
+    if(node != null){
       Output output = Output.getOutputInstance();
-      if(node instanceof Directory)
-      { 
-        if(node.getName().equals("")==false)
-        {
+      if(node instanceof Directory){ 
+        if(node.getName().equals("")==false){
           output.addUserOutput(space + node.getName());
         } 
         Directory dir = (Directory) node;
-        for(String key : dir.getListOfFileSystemNodes().keySet())
-        {
-         
+        for(String key : dir.getListOfFileSystemNodes().keySet()){       
           printTree(space + "  ", FileSystemManipulation.findSubNode(dir, key));
         }
       }
-      else if(node instanceof File)
-      {
+      else if(node instanceof File){
         output.addUserOutput(space + node.getName());
       }
-      
     }
-    
   }
 }
