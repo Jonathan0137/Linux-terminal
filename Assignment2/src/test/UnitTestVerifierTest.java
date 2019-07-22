@@ -1034,29 +1034,11 @@ public class UnitTestVerifierTest
     assertEquals(true, correct.checkUserInput(userInput));
   }
   @Test
-  public void testCheckUserInputGET2()
-  {
-    userInput = "get //www.google.ca/";
-    assertEquals(false, correct.checkUserInput(userInput));
-  }
-  @Test
   public void testCheckUserInputGET3()
   {
     userInput = "get http://www.google.ca/hello/apple.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
-  @Test
-  public void testCheckUserInputGET4()
-  {
-    userInput = "get google.ca/";
-    assertEquals(false, correct.checkUserInput(userInput));
-  }
-  @Test
-  public void testCheckUserInputGET5()
-  {
-    userInput = "get hey lol";
-    assertEquals(false, correct.checkUserInput(userInput));
-  }  
   @Test
   public void testCheckUserInputGET6()
   {
