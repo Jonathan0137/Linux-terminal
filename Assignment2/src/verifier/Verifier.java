@@ -81,7 +81,8 @@ public class Verifier {
       String[] input = userInput.split(" ", 2); 
       String command = input[0];
       Hashtable<String, String> hashtable = new Hashtable<String, String> (); 
-      initializeHashTableWithInputLimit(hashtable);
+      initializeHashTableWithInputLimitPart1(hashtable);
+      initializeHashTableWithInputLimitPart2(hashtable);
 
       boolean tOrF = userInput.matches(hashtable.get(command));
       if(tOrF==false)
@@ -93,34 +94,51 @@ public class Verifier {
   /**
    * An private helper method that stores an hashtable with name of the 
    * commands as keys and the userInput regex restriction for each command
-   * as the value
+   * as the value. Part 1 because the 30 line per method restriction
    * 
    * @param hashtable  An instance of hashtable with a String as key and 
    *                   String(regex) type as value
    */
-  private static void initializeHashTableWithInputLimit(Hashtable<String, String> hashtable)
-  { 
+  private static void initializeHashTableWithInputLimitPart1(Hashtable<String, String> hashtable)
+  {
     hashtable.put("exit", "exit"); 
     hashtable.put("mkdir", "mkdir"
         + "(\\s((\\/){0,1}(\\w+|\\.{0,2})(\\/){0,1})+)+"); 
-    hashtable.put("cd", "cd"
-        + "(\\s((\\/){0,1}(\\w+|\\.{0,2})(\\/){0,1})+){0,1}");  
     hashtable.put("ls", "ls"
         + "( -R){0,1}"
         + "(\\s((\\/){0,1}(\\w+||\\.{0,2})(\\/){0,1})+){0,1}"
         + "((\\s(\\>||\\>>)\\s((\\/){0,1}(\\w+||\\.){0,2}(\\/){0,1})+)+){0,1}"); 
     hashtable.put("pwd", "pwd"
         + "((\\s(\\>||\\>>)\\s((\\/){0,1}(\\w+||\\.){0,2}(\\/){0,1})+)+){0,1}"); 
+    hashtable.put("cd", "cd"
+        + "(\\s((\\/){0,1}(\\w+|\\.{0,2})(\\/){0,1})+){0,1}");  
+    hashtable.put("pushd", "pushd"
+        + "(\\s((\\/){0,1}(\\w+|\\.{0,2})(\\/){0,1})+){0,1}");
+    hashtable.put("popd", "popd");
+    hashtable.put("save", "save"
+        + "(\\s((\\/){0,1}(\\w+|\\.{0,2})(\\/){0,1})+){1}"); 
     hashtable.put("mv", "mv"
         + "(\\s((\\/){0,1}(\\w+|\\.{0,2})(\\/){0,1})+){2}"
         + "((\\s(\\>||\\>>)\\s((\\/){0,1}(\\w+||\\.){0,2}(\\/){0,1})+)+){0,1}"); 
     hashtable.put("cp", "cp"
-    + "(\\s((\\/){0,1}(\\w+|\\.{0,2})(\\/){0,1})+){2}"
-    + "((\\s(\\>||\\>>)\\s((\\/){0,1}(\\w+||\\.){0,2}(\\/){0,1})+)+){0,1}"); 
+        + "(\\s((\\/){0,1}(\\w+|\\.{0,2})(\\/){0,1})+){2}"
+        + "((\\s(\\>||\\>>)\\s((\\/){0,1}(\\w+||\\.){0,2}(\\/){0,1})+)+){0,1}"); 
+  }
+  /**
+   * An private helper method that stores an hashtable with name of the 
+   * commands as keys and the userInput regex restriction for each command
+   * as the value. Part 2 because the 30 line per method restriction
+   * 
+   * @param hashtable  An instance of hashtable with a String as key and 
+   *                   String(regex) type as value
+   */
+  private static void initializeHashTableWithInputLimitPart2(Hashtable<String, String> hashtable)
+  { 
+
     hashtable.put("cat", "cat"
         + "(\\s((\\/){0,1}(\\w+|\\.{0,2})(\\/){0,1})+)+"
         + "((\\s(\\>||\\>>)\\s((\\/){0,1}(\\w+||\\.){0,2}(\\/){0,1})+)+){0,1}"); 
-    hashtable.put("get", "get (\\w||\\W)+"
+    hashtable.put("get", "get\\s(\\w||[^a-zA-Z0-9\\s])+"
         + "((\\s(\\>||\\>>)\\s((\\/){0,1}(\\w+||\\.){0,2}(\\/){0,1})+)+){0,1}");   
     hashtable.put("echo", "echo"
         + "(\\s)(\"(\\w||\\W||\\s)*\")"
@@ -128,13 +146,8 @@ public class Verifier {
     hashtable.put("man", "man\\s(man||ls||cd||exit||mkdir||pwd||mv||cp"
         + "||cat||get||echo||pushd||popd||history||save||load||find||tree)"
         + "((\\s(\\>||\\>>)\\s((\\/){0,1}(\\w+||\\.){0,2}(\\/){0,1})+)+){0,1}");
-    hashtable.put("pushd", "pushd"
-        + "(\\s((\\/){0,1}(\\w+|\\.{0,2})(\\/){0,1})+){0,1}");
-    hashtable.put("popd", "popd");
     hashtable.put("history", "history(\\s\\d+){0,1}"
         + "((\\s(\\>||\\>>)\\s((\\/){0,1}(\\w+||\\.){0,2}(\\/){0,1})+)+){0,1}");
-    hashtable.put("save", "save"
-        + "(\\s((\\/){0,1}(\\w+|\\.{0,2})(\\/){0,1})+){1}"); 
     hashtable.put("load", "load"
         + "(\\s((\\/){0,1}(\\w+|\\.{0,2})(\\/){0,1})+){1}"
         + "((\\s(\\>||\\>>)\\s((\\/){0,1}(\\w+||\\.){0,2}(\\/){0,1})+)+){0,1}"); 
