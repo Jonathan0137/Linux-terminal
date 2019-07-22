@@ -1034,6 +1034,12 @@ public class UnitTestVerifierTest
     assertEquals(true, correct.checkUserInput(userInput));
   }
   @Test
+  public void testCheckUserInputGET2()
+  {
+    userInput = "get qwewqe qeweqw";
+    assertEquals(false, correct.checkUserInput(userInput));
+  }
+  @Test
   public void testCheckUserInputGET3()
   {
     userInput = "get http://www.google.ca/hello/apple.txt";
