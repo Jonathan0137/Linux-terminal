@@ -280,9 +280,21 @@ public class UnitTestVerifierTest
     assertEquals(false, correct.checkUserInput(userInput));
   }
   @Test
-  public void testCheckUserInputMkdir17WithDoubleRedirectWithNoExtension()
+  public void testCheckUserInputMkdirWithDoubleRedirectWithNoExtension()
   {
     userInput = "mkdir path >> folder";
+    assertEquals(false, correct.checkUserInput(userInput));
+  }
+  @Test
+  public void testCheckUserInputMkdirWithValidNoneAlphanumeric()
+  {
+    userInput = "mkdir , hello- qwe_";
+    assertEquals(true, correct.checkUserInput(userInput));
+  }
+  @Test
+  public void testCheckUserInputMkdirWithInvalidFileName()
+  {
+    userInput = "mkdir hello! burh@";
     assertEquals(false, correct.checkUserInput(userInput));
   }
   @Test
@@ -570,6 +582,30 @@ public class UnitTestVerifierTest
     assertEquals(true, correct.checkUserInput(userInput));
   }
   @Test
+  public void testCheckUserInputLSTestInvalidFileName()
+  {
+    userInput = "ls hey!";
+    assertEquals(false, correct.checkUserInput(userInput));
+  }
+  @Test
+  public void testCheckUserInputLSForValidNoneAlphanumeric()
+  {
+    userInput = "ls hey_";
+    assertEquals(true, correct.checkUserInput(userInput));
+  }
+  @Test
+  public void testCheckUserInputLSForValidNoneAlphanumericForRedirect()
+  {
+    userInput = "ls hey > hello_";
+    assertEquals(true, correct.checkUserInput(userInput));
+  }
+  @Test
+  public void testCheckUserInputLSTestInvalidFileNameForRedirect()
+  {
+    userInput = "ls hey > hello!";
+    assertEquals(false, correct.checkUserInput(userInput));
+  }
+  @Test
   public void testCheckUserInputPWDNoParam()
   {
     userInput = "pwd";
@@ -624,16 +660,22 @@ public class UnitTestVerifierTest
     assertEquals(true, correct.checkUserInput(userInput));
   }
   @Test
-  public void testCheckUserInputPWDWithDoubleRedirectWithMutiParam()
-  {
-    userInput = "pwd >> /Path/hello lol";
-    assertEquals(false, correct.checkUserInput(userInput));
-  }
-  @Test
   public void testCheckUserInputPWDWithDoubleRedirectWithDotsWithFullPath()
   {
     userInput = "pwd >> folder/../fileName";
     assertEquals(true, correct.checkUserInput(userInput));
+  }
+  @Test
+  public void testCheckUserInputPWDForValidNoneAlphanumericForRedirect()
+  {
+    userInput = "pwd > hello_";
+    assertEquals(true, correct.checkUserInput(userInput));
+  }
+  @Test
+  public void testCheckUserInputPWDTestInvalidFileNameForRedirect()
+  {
+    userInput = "pwd > hello!";
+    assertEquals(false, correct.checkUserInput(userInput));
   }
   @Test
   public void testCheckUserInputMVwithNoParam()
@@ -714,6 +756,18 @@ public class UnitTestVerifierTest
     assertEquals(true, correct.checkUserInput(userInput));
   }
   @Test
+  public void testCheckUserInputMVForValidNoneAlphanumericForRedirect()
+  {
+    userInput = "mv hey yo > hello_";
+    assertEquals(true, correct.checkUserInput(userInput));
+  }
+  @Test
+  public void testCheckUserInputMVTestInvalidFileNameForRedirect()
+  {
+    userInput = "mv jeu ki > hello!";
+    assertEquals(false, correct.checkUserInput(userInput));
+  }
+  @Test
   public void testCheckUserInputCPwithNoParam()
   {
     userInput = "cp";
@@ -779,6 +833,18 @@ public class UnitTestVerifierTest
     userInput = "cp path/lol /hello/hey >> folder/folder.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+  @Test
+  public void testCheckUserInputCPForValidNoneAlphanumericForRedirect()
+  {
+    userInput = "cp jw we > hello_";
+    assertEquals(true, correct.checkUserInput(userInput));
+  }
+  @Test
+  public void testCheckUserInputCPTestInvalidFileNameForRedirect()
+  {
+    userInput = "cp qwe wqe > hello!";
+    assertEquals(false, correct.checkUserInput(userInput));
+  }  
   @Test
   public void testCheckUserInputCAT()
   {
@@ -864,22 +930,22 @@ public class UnitTestVerifierTest
     assertEquals(true, correct.checkUserInput(userInput));
   }
   @Test
-  public void testCheckUserInputCATWithRedirectMutiParam()
-  {
-    userInput = "cat file > hello/file lol";
-    assertEquals(false, correct.checkUserInput(userInput));
-  }
-  @Test
-  public void testCheckUserInputCATWithDoubleRedirectMutiParam()
-  {
-    userInput = "cat file >> hello/file lol";
-    assertEquals(false, correct.checkUserInput(userInput));
-  }
-  @Test
   public void testCheckUserInputCATWithDoubleRedirectWithDotsInFullPath()
   {
     userInput = "cat file >> folder/../fileName";
     assertEquals(true, correct.checkUserInput(userInput));
+  }
+  @Test
+  public void testCheckUserInputCATForValidNoneAlphanumericForRedirect()
+  {
+    userInput = "cat jw- > hello_";
+    assertEquals(true, correct.checkUserInput(userInput));
+  }
+  @Test
+  public void testCheckUserInputCATTestInvalidFileNameForRedirect()
+  {
+    userInput = "cat qwe@ > hello!";
+    assertEquals(false, correct.checkUserInput(userInput));
   }
   @Test
   public void testCheckUserInputGETNoParam()
@@ -954,6 +1020,24 @@ public class UnitTestVerifierTest
     assertEquals(true, correct.checkUserInput(userInput));
   }
   @Test
+  public void testCheckUserInputGETInvalidFileName()
+  {
+    userInput = "get www.google.ca/????/";
+    assertEquals(false, correct.checkUserInput(userInput));
+  }
+  @Test
+  public void testCheckUserInputGETForValidNoneAlphanumericForRedirect()
+  {
+    userInput = "get www.google.ca/-_/ > hello_";
+    assertEquals(true, correct.checkUserInput(userInput));
+  }
+  @Test
+  public void testCheckUserInputGetTestInvalidFileNameForRedirect()
+  {
+    userInput = "get www.google.ca/-_/ > hello!";
+    assertEquals(false, correct.checkUserInput(userInput));
+  }
+  @Test
   public void testCheckUserInputECHOWithNoParam()
   {
     userInput = "echo";
@@ -1023,6 +1107,18 @@ public class UnitTestVerifierTest
   {
     userInput = "echo \"\"";
     assertEquals(true, correct.checkUserInput(userInput));
+  }
+  @Test
+  public void testCheckUserInputEchoForValidNoneAlphanumericForRedirect()
+  {
+    userInput = "echo \"string\" > hello_";
+    assertEquals(true, correct.checkUserInput(userInput));
+  }
+  @Test
+  public void testCheckUserInputEchoTestInvalidFileNameForRedirect()
+  {
+    userInput = "echo \\\"string\\\" > hello!";
+    assertEquals(false, correct.checkUserInput(userInput));
   }
   @Test
   public void testCheckUserInputMAN()
@@ -1198,6 +1294,31 @@ public class UnitTestVerifierTest
     userInput = "man cd >> folder/../fileName";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+  @Test
+  public void testCheckUserInputManForValidNoneAlphanumericForRedirect()
+  {
+    userInput = "man cd > hello_";
+    assertEquals(true, correct.checkUserInput(userInput));
+  }
+  @Test
+  public void testCheckUserInputManTestInvalidFileNameForRedirect()
+  {
+    userInput = "man cd > hello!";
+    assertEquals(false, correct.checkUserInput(userInput));
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   @Test
   public void testCheckUserInputPUSHDWithNoParam()
   {
@@ -1385,6 +1506,18 @@ public class UnitTestVerifierTest
     assertEquals(true, correct.checkUserInput(userInput));
   }
   @Test
+  public void testCheckUserInputHistoryForValidNoneAlphanumericForRedirect()
+  {
+    userInput = "history 1 > hello_";
+    assertEquals(true, correct.checkUserInput(userInput));
+  }
+  @Test
+  public void testCheckUserInputHistoryTestInvalidFileNameForRedirect()
+  {
+    userInput = "history 1 > hello!";
+    assertEquals(false, correct.checkUserInput(userInput));
+  }
+  @Test
   public void testCheckUserInputSAVEWithNoParam()
   {
     userInput = "save";
@@ -1533,7 +1666,18 @@ public class UnitTestVerifierTest
     userInput = "load hey >> /root/hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
-  /****************************************TEST FIND********************/
+  @Test
+  public void testCheckUserInputLoadForValidNoneAlphanumericForRedirect()
+  {
+    userInput = "load root > hello_";
+    assertEquals(true, correct.checkUserInput(userInput));
+  }
+  @Test
+  public void testCheckUserInputLoadTestInvalidFileNameForRedirect()
+  {
+    userInput = "load root > hello!";
+    assertEquals(false, correct.checkUserInput(userInput));
+  }
   @Test
   public void testCheckUserInputFINDNoParam()
   {
@@ -1672,8 +1816,18 @@ public class UnitTestVerifierTest
     userInput = "find /user/data /user/data2 -type d -name \"Text\" >> /hey/hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
-  /*************************************TEST TREE****************************/
-  
+  @Test
+  public void testCheckUserInputFindForValidNoneAlphanumericForRedirect()
+  {
+    userInput = "find /user/data /user/data2 -type d -name \"Text\" > hello_";
+    assertEquals(true, correct.checkUserInput(userInput));
+  }
+  @Test
+  public void testCheckUserInputFindTestInvalidFileNameForRedirect()
+  {
+    userInput = "find /user/data /user/data2 -type d -name \"Text\" > hello!";
+    assertEquals(false, correct.checkUserInput(userInput));
+  }
   @Test
   public void testCheckUserInputTREE()
   {
@@ -1733,5 +1887,18 @@ public class UnitTestVerifierTest
   {
     userInput = "tree >> root/../hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
+  }
+  
+  @Test
+  public void testCheckUserInputTreeForValidNoneAlphanumericForRedirect()
+  {
+    userInput = "tree > hello_";
+    assertEquals(true, correct.checkUserInput(userInput));
+  }
+  @Test
+  public void testCheckUserInputTreeTestInvalidFileNameForRedirect()
+  {
+    userInput = "tree > hello!";
+    assertEquals(false, correct.checkUserInput(userInput));
   }
 }
