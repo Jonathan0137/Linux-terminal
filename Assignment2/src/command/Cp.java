@@ -3,7 +3,6 @@ package command;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import fileSystem.Directory;
 import fileSystem.*;
 
 public class Cp extends Command{
@@ -15,39 +14,47 @@ public class Cp extends Command{
 	  */
 	@Override
 	public void execute(ArrayList<Object> param) {
+		Directory currDir = FileSystem.getFileSystem().getCurrentDirectory();
 		String input = (String) param.get(0);
 		String[] splitInput = input.split(" ");
 		String oldPath = splitInput[1];
 		String newPath = splitInput[2];
-		copyItem(oldPath, newPath);	
+		//get absolute paths of the old and new path
+		String absOldPath = FileSystemManipulation.getAbsolutePath(oldPath,
+																	currDir);
+		String absNewPath = FileSystemManipulation.getAbsolutePath(newPath,
+																	currDir);
+		copyItem(absOldPath, absNewPath);	
 	}
 	
 	/**
 	 * Copies the item from the provided old path to the given new path
 	 * 
-	 * @param oldPath	the path of the item being copied
-	 * @param newPath	the path where the item is copied to
+	 * @param absOldPath	the absolute path of the item being copied
+	 * @param absNewPath	the absolute path where the item is copied to
 	 */
-	public void copyItem(String oldPath, String newPath) {
-		Directory workingDir = FileSystem.getFileSystem().getCurrentDirectory();
-		//get absolute paths of the old and new path
-		String absOldPath = FileSystemManipulation.getAbsolutePath(oldPath, workingDir);
-		String absNewPath = FileSystemManipulation.getAbsolutePath(newPath, workingDir);
+	public void copyItem(String absOldPath, String absNewPath) {
 		//find the item to be copied in the filesystem
-		FileSystemNode item = FileSystemManipulation.findFileSystemNode(absOldPath);
+		FileSystemNode item = FileSystemManipulation.findFileSystemNode(
+																absOldPath);
 		//find name of item
 		String name = item.getName();
 		//find the path of the new parent directory
-		Directory newParent = (Directory) FileSystemManipulation.findFileSystemNode(absNewPath);
+		Directory newParent = (Directory) 
+					FileSystemManipulation.findFileSystemNode(absNewPath);
 		
 		if(item instanceof File) {
 			File copiedFile = new File(name);
 			FileSystemManipulation.addFileSystemNode(newParent, copiedFile);
 			copiedFile.setContents(((File) item).getContents());
 		}
-		else {
+		else if (item instanceof Directory) {
 			Directory copiedDir = new Directory(name);
 			FileSystemManipulation.addFileSystemNode(newParent, copiedDir);
+			HashMap<String, FileSystemNode> listOfSubNodes = ((Directory)
+											item).getListOfFileSystemNodes();
+			listOfSubNodes.forEach((str, node) -> 
+				FileSystemManipulation.addFileSystemNode(copiedDir, node));
 		}
 	}
 
