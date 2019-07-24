@@ -91,7 +91,7 @@ public class JShell {
 				}
 			}
 			Redirection.redirectionSetUp(userInput);
-			Output.getOutputInstance().printOutput();
+			System.out.print(Output.getOutputInstance().getStringOutput());
 			Output.getOutputInstance().resetOutput();
 		}
 		input.close();
