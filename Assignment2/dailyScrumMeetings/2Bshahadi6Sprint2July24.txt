@@ -1,0 +1,10 @@
+What did I work on in the last three days?
+	- completed cp class
+	- fixed bugs in mkdir
+
+What do I plan to work in the next three days?
+	-complete find class
+	- debug mkdir, cat, pwd, cp, mv and find
+	
+Am I blocked on anything?
+	-N/A
