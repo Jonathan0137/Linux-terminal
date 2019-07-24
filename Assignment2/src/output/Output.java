@@ -21,10 +21,12 @@ public class Output {
     outputList = new ArrayList<AbstractOutput>();
   }
   
-  public void printOutput() {
+  public String getStringOutput() {
+    String result="";
     for (AbstractOutput out : outputList) {
-      System.out.println(out.getOutput());
+      result = result + out.getOutput() + "\n";
     }
+    return result;
   }
   
   public void addUserOutput(String output) {
