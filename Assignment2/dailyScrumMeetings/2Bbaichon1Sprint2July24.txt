@@ -1,0 +1,12 @@
+What did I work on in the last three days?
+	- I formatted tree class 
+	- I formatted ls class with -R
+	- I debugged ls tree and verifier class
+	- I finished all java docs
+	- I updated my crc cards
+	- I formatted my code to meet the 30 line limit
+What do I plan to work in the next three days?
+	- I plan on writing test class for my commands
+
+Am I blocked on anything?
+    - None
