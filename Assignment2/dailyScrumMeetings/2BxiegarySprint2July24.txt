@@ -1,0 +1,10 @@
+What did I work on in the last three days?
+	- I implemented the the functionality for Save and Load, but need to refactor some code after discussing design with Professor Abbas
+	- I refactored code in the classes I worked on previously to send error and normal output to Output class rather than directly printing to user 
+	- I refactored Output to return the string to be printed, rather than directly printing it to the user.
+What do I plan to work in the next three days?
+	- Refactor Save and Load to improve design
+	- Finish JavaDocs for the new classes I wrote
+	- Write test cases for my classes
+Am I blocked on anything?
+    - Nothing at the moment
