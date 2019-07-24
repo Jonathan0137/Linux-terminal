@@ -1,12 +1,9 @@
 package command;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import fileSystem.FileSystem;
 import fileSystem.FileSystemManipulation;
-import fileSystem.FileSystemNode;
 import fileSystem.Directory;
-import output.ErrorOutput;
 import output.Output;
 
 /**
