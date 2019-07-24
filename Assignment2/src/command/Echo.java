@@ -22,7 +22,12 @@ public class Echo extends Command {
 	@Override
 	public void execute(ArrayList<Object> params) {
 		String userInput = (String) params.get(0);
-		String textContents = userInput.split("\"")[1];
+		int first = userInput.indexOf("\"");
+		int end = userInput.lastIndexOf("\"");
+		String textContents = "";
+		for (int i=first+1; i<end ; i++) {
+			textContents = textContents.concat(String.valueOf(userInput.charAt(i)));
+		}
 		Output.getOutputInstance().addUserOutput(textContents);
 	}
 
