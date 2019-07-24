@@ -1,0 +1,8 @@
+What did I work on in the last three days?
+	- I have completed Echo, deleted EchoToFile and EchoToCommand and I have essentially completed get (needs slight tweaking)
+
+What do I plan to work in the next three days?
+	-I plan on testing my classes
+
+Am I blocked on anything?
+	-I am currently not blocked on anything
