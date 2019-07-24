@@ -11,8 +11,8 @@ import java.util.ArrayList;
  */
 public class InputHistory implements Serializable {
 
-  private static final long serialVersionUID = 1L;
-  /**
+	private static final long serialVersionUID = 1L;
+	/**
 	 * A list of all user inputs
 	 */
 	private ArrayList<String> inputList;
@@ -29,6 +29,11 @@ public class InputHistory implements Serializable {
 		inputList = new ArrayList<String>();
 	}
 
+	/**
+	 * The only factory method for InputHistory
+	 * 
+	 * @return The unique instance of the InputHistory
+	 */
 	public static InputHistory getInputHistory() {
 		if (history == null) {
 			history = new InputHistory();
@@ -53,9 +58,9 @@ public class InputHistory implements Serializable {
 	public ArrayList<String> getInputList() {
 		return this.inputList;
 	}
-	
+
 	// Used for loading a InputHistory
 	public void setInputHistory(InputHistory newInputHistory) {
-	    history = newInputHistory;
+		history = newInputHistory;
 	}
 }
