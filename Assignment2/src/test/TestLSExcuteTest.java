@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 import command.Command;
-import output.AbstractOutput;
 import output.Output;
 import commandParameter.CommandParameter;
 import driver.JShell;
@@ -67,7 +66,7 @@ public class TestLSExcuteTest
         toBeExecuted.execute(param.getParameters());
       }
     }
-    System.out.print(Output.getOutputInstance().getStringOutput());
+    //System.out.print(Output.getOutputInstance().getStringOutput());
     assertEquals("\n/Folder2/:\n\n/Folder1/:\n\n/Folder1/Folder3/:\n", Output.getOutputInstance().getStringOutput());
     
     
