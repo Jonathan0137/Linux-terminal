@@ -35,7 +35,6 @@ public class TestLSExcuteTest
     
     for(String userInput : input)
     {
-      System.out.println(userInput);
       Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
       if (toBeExecuted != null) 
       {
@@ -58,7 +57,6 @@ public class TestLSExcuteTest
     input.add("ls -R");
     for(String userInput : input)
     {
-      System.out.println(userInput);
       Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
       if (toBeExecuted != null) 
       {

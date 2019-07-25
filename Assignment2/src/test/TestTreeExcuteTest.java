@@ -33,7 +33,6 @@ public class TestTreeExcuteTest {
     
     for(String userInput : input)
     {
-      System.out.println(userInput);
       Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
       if (toBeExecuted != null) 
       {
