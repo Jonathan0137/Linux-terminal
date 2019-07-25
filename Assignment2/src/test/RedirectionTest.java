@@ -33,7 +33,7 @@ public class RedirectionTest {
 	
 	@After
 	public void reset() {
-		
+		output.resetOutput();
 	}
 	
 	
@@ -75,10 +75,10 @@ public class RedirectionTest {
 	public void testredirectionSetUpNonExistingFileCurrentDirOverwrite() {
 		output.addUserOutput("test");
 		output.addErrorOutput("another output");
-		userInput = "commandx (...) > newFile";
+		userInput = "commandx (...) > newFile1";
 		Redirection.redirectionSetUp(userInput);
 		String actual = ((File) FileSystemManipulation
-				.findSubNode(fs.getCurrentDirectory(), "newFile")).getContents();
+				.findSubNode(fs.getCurrentDirectory(), "newFile1")).getContents();
 		String expected = "test";
 		assertEquals(expected, actual);
 	}
@@ -87,10 +87,10 @@ public class RedirectionTest {
 	public void testredirectionSetUpNonExistingFileCurrentDirAppend() {
 		output.addUserOutput("test");
 		output.addErrorOutput("another output");
-		userInput = "commandx (...) >> newFile";
+		userInput = "commandx (...) >> newFile2";
 		Redirection.redirectionSetUp(userInput);
 		String actual = ((File) FileSystemManipulation
-				.findSubNode(fs.getCurrentDirectory(), "newFile")).getContents();
+				.findSubNode(fs.getCurrentDirectory(), "newFile2")).getContents();
 		String expected = "test";
 		assertEquals(expected, actual);
 	}
@@ -99,12 +99,12 @@ public class RedirectionTest {
 	public void testredirectionSetUpExistingFileCurrentDirOverwrite() {
 		output.addUserOutput("test");
 		output.addErrorOutput("another output");
-		userInput = "commandx (...) > oldFile";
-		File oldFile = new File("oldFile", "Some arbitrary string");
+		userInput = "commandx (...) > oldFile1";
+		File oldFile = new File("oldFile1", "Some arbitrary string");
 		FileSystemManipulation.addFileSystemNode(fs.getCurrentDirectory(), oldFile);
 		Redirection.redirectionSetUp(userInput);
 		String actual = ((File) FileSystemManipulation
-				.findSubNode(fs.getCurrentDirectory(), "oldFile")).getContents();
+				.findSubNode(fs.getCurrentDirectory(), "oldFile1")).getContents();
 		String expected = "test";
 		assertEquals(expected, actual);
 	}
@@ -113,13 +113,73 @@ public class RedirectionTest {
 	public void testredirectionSetUpExistingFileCurrentDirAppend() {
 		output.addUserOutput("test");
 		output.addErrorOutput("another output");
-		userInput = "commandx (...) >> oldFile";
-		File oldFile = new File("oldFile", "Some arbitrary string");
+		userInput = "commandx (...) >> oldFile2";
+		File oldFile = new File("oldFile2", "Some arbitrary string");
 		FileSystemManipulation.addFileSystemNode(fs.getCurrentDirectory(), oldFile);
 		Redirection.redirectionSetUp(userInput);
 		String actual = ((File) FileSystemManipulation
-				.findSubNode(fs.getCurrentDirectory(), "oldFile")).getContents();
+				.findSubNode(fs.getCurrentDirectory(), "oldFile2")).getContents();
 		String expected = "Some arbitrary string\ntest";
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testredirectionSetUpManyOutputsNonExistingFileCurrentDirOverwrite() {
+		output.addUserOutput("test");
+		output.addErrorOutput("another output");
+		output.addUserOutput("another one");
+		output.addUserOutput("again");
+		userInput = "commandx (...) > newFile3";
+		Redirection.redirectionSetUp(userInput);
+		String actual = ((File) FileSystemManipulation
+				.findSubNode(fs.getCurrentDirectory(), "newFile3")).getContents();
+		String expected = "test\nanother one\nagain";
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testredirectionSetUpManyOutputsNonExistingFileCurrentDirAppend() {
+		output.addUserOutput("test");
+		output.addErrorOutput("another output");
+		output.addUserOutput("another one");
+		output.addUserOutput("again");
+		userInput = "commandx (...) >> newFile4";
+		Redirection.redirectionSetUp(userInput);
+		String actual = ((File) FileSystemManipulation
+				.findSubNode(fs.getCurrentDirectory(), "newFile4")).getContents();
+		String expected = "test\nanother one\nagain";
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testredirectionSetUpManyOutputsExistingFileCurrentDirOverwrite() {
+		output.addUserOutput("test");
+		output.addErrorOutput("another output");
+		output.addUserOutput("another one");
+		output.addUserOutput("again");
+		userInput = "commandx (...) > oldFile3";
+		File oldFile = new File("oldFile3", "Some arbitrary string");
+		FileSystemManipulation.addFileSystemNode(fs.getCurrentDirectory(), oldFile);
+		Redirection.redirectionSetUp(userInput);
+		String actual = ((File) FileSystemManipulation
+				.findSubNode(fs.getCurrentDirectory(), "oldFile3")).getContents();
+		String expected = "test\nanother one\nagain";
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testredirectionSetUpManyOutputsExistingFileCurrentDirAppend() {
+		output.addUserOutput("test");
+		output.addErrorOutput("another output");
+		output.addUserOutput("another one");
+		output.addUserOutput("again");
+		userInput = "commandx (...) >> oldFile4";
+		File oldFile = new File("oldFile4", "Some arbitrary string");
+		FileSystemManipulation.addFileSystemNode(fs.getCurrentDirectory(), oldFile);
+		Redirection.redirectionSetUp(userInput);
+		String actual = ((File) FileSystemManipulation
+				.findSubNode(fs.getCurrentDirectory(), "oldFile4")).getContents();
+		String expected = "Some arbitrary string\ntest\nanother one\nagain";
 		assertEquals(expected, actual);
 	}
 }
