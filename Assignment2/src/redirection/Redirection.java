@@ -237,6 +237,7 @@ public final class Redirection {
 					text = text.concat("\n");
 				}
 				outputList.getOutputList().remove(i);
+				i--;
 				numOfOutputs--;
 			}
 		}
