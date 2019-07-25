@@ -23,7 +23,6 @@ public class Pwd extends Command{
 	@Override
 	public void execute(ArrayList<Object> param)
 	{
-		String input = (String) param.get(0);
 		Directory currentDirectory = FileSystem.getFileSystem().
 										getCurrentDirectory();
 		String text = currentDirectory.getFullPathName();

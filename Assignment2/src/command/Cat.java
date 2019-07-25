@@ -25,6 +25,10 @@ public class Cat extends Command {
 	public void execute(ArrayList<Object> param)
 	{
 		String fileNames = (String) param.get(0);
+		if (fileNames.indexOf(">") > 0) 
+		{
+			fileNames = fileNames.substring(0, fileNames.indexOf(">"));
+		}
 		String[] arguments = fileNames.split(" ");
 		int num_arguments = arguments.length;
 		Directory currentDir = FileSystem.getFileSystem().getCurrentDirectory();
@@ -53,6 +57,10 @@ public class Cat extends Command {
 				String error = "The file '" + arguments[i] + "' does not exist"
 								+ " in " + currentDir.getFullPathName();
 				out.addErrorOutput(error);
+				if (num_arguments > 2 && i < num_arguments - 1) {
+					//add line breaks to output
+					out.addUserOutput("\n\n\n"); 
+				}
 			}
 		}
 	}
