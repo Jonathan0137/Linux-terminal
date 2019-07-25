@@ -54,4 +54,14 @@ public class InputHistoryTest {
 		actual = testSubject.getInputList();
 		assertEquals(expected, actual);
 	}
+	
+	@Test
+	public void testSingletonPrincipals() {
+		InputHistory inputCopy = InputHistory.getInputHistory();
+		inputCopy.addToHistory("test");
+		inputCopy.addToHistory("test again");
+		expected = inputCopy.getInputList();
+		actual = testSubject.getInputList();
+		assertEquals(expected, actual);
+	}
 }
