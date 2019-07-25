@@ -16,14 +16,14 @@ import verifier.Verifier;
 
 public class TestLSExcuteTest 
 {
-  ArrayList<String> input;
+  ArrayList<String> input=null;
   JShell newJShell;
-  ArrayList<String> acutal;
+  ArrayList<String> acutal=null;
   @Before
   public void setUp()
   {
-    input.clear();
-    acutal.clear();
+    input=new ArrayList<String>();
+    acutal=new ArrayList<String>();
     newJShell = new JShell();
   }
   @Test
@@ -44,22 +44,34 @@ public class TestLSExcuteTest
         toBeExecuted.execute(param.getParameters());
       }
     }
-    Output.getOutputInstance().printOutput();
+  
     
-    for(int i = 0; i<Output.getOutputInstance().getOutputList().size(); i++)
-    {
-      acutal.add(Output.getOutputInstance().getOutputList().getOutput());
-      
-    }
+    assertEquals("Folder1\nFolder2\n", Output.getOutputInstance().getStringOutput());
     
-    
-    
-    
-    assertEquals("mkdir Folder1", input.get(0));
     
   }
-//  public void testLsWithR() 
-//  {
-//    
-//  }
+  @Test
+  public void testLsWithR() 
+  {
+    input.add("mkdir Folder1");
+    input.add("mkdir Folder2");
+    input.add("mkdir Folder1/Folder3");
+    input.add("ls -R");
+    for(String userInput : input)
+    {
+      System.out.println(userInput);
+      Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
+      if (toBeExecuted != null) 
+      {
+        CommandParameter param = new CommandParameter(toBeExecuted,newJShell,userInput);
+        toBeExecuted.execute(param.getParameters());
+      }
+    }
+    System.out.print(Output.getOutputInstance().getStringOutput());
+    assertEquals("\n/Folder2/:\n\n/Folder1/:\n\n/Folder1/Folder3/:\n", Output.getOutputInstance().getStringOutput());
+    
+    
+    
+    
+  }
 }
