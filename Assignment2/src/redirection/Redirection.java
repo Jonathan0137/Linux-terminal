@@ -77,7 +77,7 @@ public final class Redirection {
 			String potentialCall = Redirection.getRedirectCall(userInput);
 			String fullPath = "";
 			String fileName = "";
-			if (potentialCall.contains("/")) {
+			if (potentialCall.contains("/") && potentialCall.split("/").length > 1) {
 				String path = potentialCall.split(" ")[1];
 				fileName = path.split("/")[path.split("/").length - 1];
 				fullPath = Redirection.findFullPath(path);
@@ -223,14 +223,21 @@ public final class Redirection {
 	 */
 	private static String extractOutputsFromList() {
 		String text = "";
+		int numOfOutputs = 0;
+		for (int i = 0; i < outputList.getOutputList().size(); i++) {
+			if (outputList.getOutputList().get(i) instanceof UserOutput) {
+				numOfOutputs++;
+			}
+		}
 		for (int i = 0; i < outputList.getOutputList().size(); i++) {
 			if (outputList.getOutputList().get(i) instanceof UserOutput) {
 				String toAdd = (String) outputList.getOutputList().get(i).getOutput();
 				text = text.concat(toAdd);
-				if (i != outputList.getOutputList().size() - 1) {
+				if (numOfOutputs != 1) {
 					text = text.concat("\n");
 				}
 				outputList.getOutputList().remove(i);
+				numOfOutputs--;
 			}
 		}
 		return text;
