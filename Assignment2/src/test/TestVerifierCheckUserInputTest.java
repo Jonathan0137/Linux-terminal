@@ -5,1765 +5,1756 @@ import org.junit.Before;
 import org.junit.Test;
 import verifier.Verifier;
 
-
-public class TestVerifierCheckUserInputTest 
-{
+/**
+ * Test Case for Class Verifier's CheckUserInput Method
+ * 
+ * @author Chongmin Bai
+ */
+public class TestVerifierCheckUserInputTest {
   String userInput;
   Verifier correct;
-  
+
   @Before
-  public void setUp()
-  {
+  public void setUp() {
     userInput = null;
     correct = new Verifier();
   }
 
   @Test
-  public void testCheckUserInputexitWithNoParam()
-  {
+  public void testCheckUserInputexitWithNoParam() {
     userInput = "exit";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputexitWithParam()
-  {
+  public void testCheckUserInputexitWithParam() {
     userInput = "exit blah";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputexitWithSingleRedirectWithFile()
-  {
+  public void testCheckUserInputexitWithSingleRedirectWithFile() {
     userInput = "exit > lol.txt";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputexitWithSingleRedirectWithFolder()
-  {
+  public void testCheckUserInputexitWithSingleRedirectWithFolder() {
     userInput = "exit > folder";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputexitWithDoubleRedirectWithFile()
-  {
+  public void testCheckUserInputexitWithDoubleRedirectWithFile() {
     userInput = "exit >> lol.txt";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputexitWithDoulbeRedirectWithFolder()
-  {
+  public void testCheckUserInputexitWithDoulbeRedirectWithFolder() {
     userInput = "exit >> folder";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMkdirWithNoParam()
-  {
+  public void testCheckUserInputMkdirWithNoParam() {
     userInput = "mkdir";
     assertEquals(false, correct.checkUserInput(userInput));
   }
-  
+
   @Test
-  public void testCheckUserInputMkdirWithMutiSpace()
-  {
+  public void testCheckUserInputMkdirWithMutiSpace() {
     userInput = "mkdir           directory           directory";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMkdirWithOneParam()
-  {
+  public void testCheckUserInputMkdirWithOneParam() {
     userInput = "mkdir directory";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMkdirWithMutiParam()
-  {
+  public void testCheckUserInputMkdirWithMutiParam() {
     userInput = "mkdir directory directory";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMkdirWithMutiParamWithFullPath()
-  {
+  public void testCheckUserInputMkdirWithMutiParamWithFullPath() {
     userInput = "mkdir /directory/hello /directory";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMkdirWithOneParamWithFullPath()
-  {
+  public void testCheckUserInputMkdirWithOneParamWithFullPath() {
     userInput = "mkdir Hello/directory";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMkdirWithMutiParamWithDots()
-  {
+  public void testCheckUserInputMkdirWithMutiParamWithDots() {
     userInput = "mkdir Hello/../directory Hello/./bruh";
     assertEquals(true, correct.checkUserInput(userInput));
-  } 
+  }
+
   @Test
-  public void testCheckUserInputMkdirWithInvalidFolderName()
-  {
+  public void testCheckUserInputMkdirWithInvalidFolderName() {
     userInput = "mkdir Hello/!directory Hello/./bruh";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMkdirWithInvalidFolderName2()
-  {
+  public void testCheckUserInputMkdirWithInvalidFolderName2() {
     userInput = "mkdir Hello/?directory Hello/./bruh";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMkdirWithDot()
-  {
+  public void testCheckUserInputMkdirWithDot() {
     userInput = "mkdir .";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMkdirWith2Dots()
-  {
+  public void testCheckUserInputMkdirWith2Dots() {
     userInput = "mkdir ..";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMkdirWith3Dots()
-  {
+  public void testCheckUserInputMkdirWith3Dots() {
     userInput = "mkdir ...";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMkdirWithRedirectWithExtension()
-  {
+  public void testCheckUserInputMkdirWithRedirectWithExtension() {
     userInput = "mkdir path > hehe.txt";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMkdirWithRedirectWithoutExtension()
-  {
+  public void testCheckUserInputMkdirWithRedirectWithoutExtension() {
     userInput = "mkdir path > folder";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMkdirWithDoubleRedirectWithExtension()
-  {
+  public void testCheckUserInputMkdirWithDoubleRedirectWithExtension() {
     userInput = "mkdir path >> hehe.txt";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMkdirWithDoubleRedirectWithNoExtension()
-  {
+  public void testCheckUserInputMkdirWithDoubleRedirectWithNoExtension() {
     userInput = "mkdir path >> folder";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMkdirWithValidNoneAlphanumeric()
-  {
+  public void testCheckUserInputMkdirWithValidNoneAlphanumeric() {
     userInput = "mkdir , hello- qwe_";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMkdirWithInvalidFileName()
-  {
+  public void testCheckUserInputMkdirWithInvalidFileName() {
     userInput = "mkdir hello! burh@";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCDWithNoParam()
-  {
+  public void testCheckUserInputCDWithNoParam() {
     userInput = "cd";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCDWith1Param()
-  {
+  public void testCheckUserInputCDWith1Param() {
     userInput = "cd path";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCDWith2Param()
-  {
+  public void testCheckUserInputCDWith2Param() {
     userInput = "cd path path";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCDWithFullPath()
-  {
+  public void testCheckUserInputCDWithFullPath() {
     userInput = "cd /path/path";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCDWithFullPathVersion2()
-  {
+  public void testCheckUserInputCDWithFullPathVersion2() {
     userInput = "cd path/path";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCDWithExtension()
-  {
+  public void testCheckUserInputCDWithExtension() {
     userInput = "cd hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCDWithSlash()
-  {
+  public void testCheckUserInputCDWithSlash() {
     userInput = "cd /";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCDWithDot()
-  {
+  public void testCheckUserInputCDWithDot() {
     userInput = "cd .";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCDWith2Dots()
-  {
+  public void testCheckUserInputCDWith2Dots() {
     userInput = "cd ..";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCDWithDotsInThePath()
-  {
+  public void testCheckUserInputCDWithDotsInThePath() {
     userInput = "cd path/../path";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCDWithDotsInFront()
-  {
+  public void testCheckUserInputCDWithDotsInFront() {
     userInput = "cd ../path/../path";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCDWithRedirectionWithExtension()
-  {
+  public void testCheckUserInputCDWithRedirectionWithExtension() {
     userInput = "cd path > hehe.txt";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCDWithRedirection()
-  {
+  public void testCheckUserInputCDWithRedirection() {
     userInput = "cd path > folder";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCDWithDoubleRedirectionWithExtension()
-  {
+  public void testCheckUserInputCDWithDoubleRedirectionWithExtension() {
     userInput = "cd path >> hehe.txt";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCDWithDoubleRedirection()
-  {
+  public void testCheckUserInputCDWithDoubleRedirection() {
     userInput = "cd path >> folder";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSWithNoParam()
-  {
+  public void testCheckUserInputLSWithNoParam() {
     userInput = "ls";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSWithPath()
-  {
+  public void testCheckUserInputLSWithPath() {
     userInput = "ls /Path";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSWithMorePath()
-  {
+  public void testCheckUserInputLSWithMorePath() {
     userInput = "ls /Path/Folder";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSWithPathWithExtension()
-  {
+  public void testCheckUserInputLSWithPathWithExtension() {
     userInput = "ls /Path/File.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSWithDotsInFrontOfPathWithExtension()
-  {
+  public void testCheckUserInputLSWithDotsInFrontOfPathWithExtension() {
     userInput = "ls ../file.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSWithDotsInFrontOfPath()
-  {
+  public void testCheckUserInputLSWithDotsInFrontOfPath() {
     userInput = "ls ../folder";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSWithDotWithExtension()
-  {
+  public void testCheckUserInputLSWithDotWithExtension() {
     userInput = "ls ./file.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSWithDotWithFolder()
-  {
+  public void testCheckUserInputLSWithDotWithFolder() {
     userInput = "ls ./folder";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSWithR()
-  {
+  public void testCheckUserInputLSWithR() {
     userInput = "ls -R";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSWithRWith2Path()
-  {
+  public void testCheckUserInputLSWithRWith2Path() {
     userInput = "ls -R Path Path";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSWithRWithFullPath()
-  {
+  public void testCheckUserInputLSWithRWithFullPath() {
     userInput = "ls -R Path/folder";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSWithRWithFullPathWithExtension()
-  {
+  public void testCheckUserInputLSWithRWithFullPathWithExtension() {
     userInput = "ls -R Path/file.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSWithRWithFullPathVersion2WithExtension()
-  {
+  public void testCheckUserInputLSWithRWithFullPathVersion2WithExtension() {
     userInput = "ls -R /Path/file.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSWithDotsInFrontOfFullPathWithExtension()
-  {
+  public void testCheckUserInputLSWithDotsInFrontOfFullPathWithExtension() {
     userInput = "ls -R ../file.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSWithDotsInFrontOfFullPath()
-  {
+  public void testCheckUserInputLSWithDotsInFrontOfFullPath() {
     userInput = "ls -R ../folder";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSWithDotInFrontOfFullPathWithExtension()
-  {
+  public void testCheckUserInputLSWithDotInFrontOfFullPathWithExtension() {
     userInput = "ls -R ./file.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSWithDotInFrontOfFullPathWithFolder()
-  {
+  public void testCheckUserInputLSWithDotInFrontOfFullPathWithFolder() {
     userInput = "ls -R ./folder";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSWithDot()
-  {
+  public void testCheckUserInputLSWithDot() {
     userInput = "ls .";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSWithDots()
-  {
+  public void testCheckUserInputLSWithDots() {
     userInput = "ls ..";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSWithRedirection()
-  {
+  public void testCheckUserInputLSWithRedirection() {
     userInput = "ls > fileName";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSWithDoubleRedirection()
-  {
+  public void testCheckUserInputLSWithDoubleRedirection() {
     userInput = "ls >> fileName";
     assertEquals(true, correct.checkUserInput(userInput));
   }
-  
+
   @Test
-  public void testCheckUserInputLSWithInvalidSpacing()
-  {
+  public void testCheckUserInputLSWithInvalidSpacing() {
     userInput = "ls -R> fileName";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSWithRWithRedirection()
-  {
+  public void testCheckUserInputLSWithRWithRedirection() {
     userInput = "ls -R > fileName";
     assertEquals(true, correct.checkUserInput(userInput));
   }
-  
+
   @Test
-  public void testCheckUserInputLSWithRedirectionWithFullPath()
-  {
+  public void testCheckUserInputLSWithRedirectionWithFullPath() {
     userInput = "ls > folder/fileName";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSWithRedirectionWithFullPath2()
-  {
+  public void testCheckUserInputLSWithRedirectionWithFullPath2() {
     userInput = "ls > /folder/fileName";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSWithRedirectionWithMutiParam()
-  {
+  public void testCheckUserInputLSWithRedirectionWithMutiParam() {
     userInput = "ls > folder fileName";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSWithRedirectionWithNoPath()
-  {
+  public void testCheckUserInputLSWithRedirectionWithNoPath() {
     userInput = "ls >";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSWithRWithDoubleRedirection()
-  {
+  public void testCheckUserInputLSWithRWithDoubleRedirection() {
     userInput = "ls -R >> fileName";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSWithDoubleRedirectionWithFullPath()
-  {
+  public void testCheckUserInputLSWithDoubleRedirectionWithFullPath() {
     userInput = "ls >> folder/fileName";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSWithDoubleRedirectionWithFullPath2()
-  {
+  public void testCheckUserInputLSWithDoubleRedirectionWithFullPath2() {
     userInput = "ls >> /folder/fileName";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSWithDoubleRedirectionWith2Param()
-  {
+  public void testCheckUserInputLSWithDoubleRedirectionWith2Param() {
     userInput = "ls >> folder fileName";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSWithDoubleRedirectionWithDotsInFullPath()
-  {
+  public void testCheckUserInputLSWithDoubleRedirectionWithDotsInFullPath() {
     userInput = "ls >> folder/../fileName";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSTestInvalidFileName()
-  {
+  public void testCheckUserInputLSTestInvalidFileName() {
     userInput = "ls hey!";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSForValidNoneAlphanumeric()
-  {
+  public void testCheckUserInputLSForValidNoneAlphanumeric() {
     userInput = "ls hey_";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSForValidNoneAlphanumericForRedirect()
-  {
+  public void testCheckUserInputLSForValidNoneAlphanumericForRedirect() {
     userInput = "ls hey > hello_";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLSTestInvalidFileNameForRedirect()
-  {
+  public void testCheckUserInputLSTestInvalidFileNameForRedirect() {
     userInput = "ls hey > hello!";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputPWDNoParam()
-  {
+  public void testCheckUserInputPWDNoParam() {
     userInput = "pwd";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputPWDWithParam()
-  {
+  public void testCheckUserInputPWDWithParam() {
     userInput = "pwd path";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputPWDWithRedirectWithNoParam()
-  {
+  public void testCheckUserInputPWDWithRedirectWithNoParam() {
     userInput = "pwd >";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputPWDWithRedirect()
-  {
+  public void testCheckUserInputPWDWithRedirect() {
     userInput = "pwd > Path";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputPWDWithRedirectWithSlash()
-  {
+  public void testCheckUserInputPWDWithRedirectWithSlash() {
     userInput = "pwd > /Path";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputPWDWithRedirectWithFullPathWithExtension()
-  {
+  public void testCheckUserInputPWDWithRedirectWithFullPathWithExtension() {
     userInput = "pwd > Path/hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputPWDWithRedirectWithFullPathWithExtensionVersion2()
-  {
+  public void testCheckUserInputPWDWithRedirectWithFullPathWithExtensionVersion2() {
     userInput = "pwd > /Path/hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputPWDWithRedirectWithFullPath()
-  {
+  public void testCheckUserInputPWDWithRedirectWithFullPath() {
     userInput = "pwd > /Path/hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputPWDWithDoubleRedirect()
-  {
+  public void testCheckUserInputPWDWithDoubleRedirect() {
     userInput = "pwd >> /Path/hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputPWDWithDoubleRedirectWithDotsWithFullPath()
-  {
+  public void testCheckUserInputPWDWithDoubleRedirectWithDotsWithFullPath() {
     userInput = "pwd >> folder/../fileName";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputPWDForValidNoneAlphanumericForRedirect()
-  {
+  public void testCheckUserInputPWDForValidNoneAlphanumericForRedirect() {
     userInput = "pwd > hello_";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputPWDTestInvalidFileNameForRedirect()
-  {
+  public void testCheckUserInputPWDTestInvalidFileNameForRedirect() {
     userInput = "pwd > hello!";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMVwithNoParam()
-  {
+  public void testCheckUserInputMVwithNoParam() {
     userInput = "mv";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMVWithOneParam()
-  {
+  public void testCheckUserInputMVWithOneParam() {
     userInput = "mv path";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMVWithExtension()
-  {
+  public void testCheckUserInputMVWithExtension() {
     userInput = "mv hello.txt";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMVWithMutiParam()
-  {
+  public void testCheckUserInputMVWithMutiParam() {
     userInput = "mv path hi.txt lol";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMVWith2Param()
-  {
+  public void testCheckUserInputMVWith2Param() {
     userInput = "mv path hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMVWith2ParamWithFullPath()
-  {
+  public void testCheckUserInputMVWith2ParamWithFullPath() {
     userInput = "mv path/lol /hello/hey";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMVWith2ParamWithFullPathWithExtension()
-  {
+  public void testCheckUserInputMVWith2ParamWithFullPathWithExtension() {
     userInput = "mv path/lol.txt /hello/hey.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMVWith2ParamWithFullPathWithRedirection()
-  {
+  public void testCheckUserInputMVWith2ParamWithFullPathWithRedirection() {
     userInput = "mv path/lol /hello/hey > folder";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMVWith2ParamWithFullPathWithDoubleRedirection()
-  {
+  public void testCheckUserInputMVWith2ParamWithFullPathWithDoubleRedirection() {
     userInput = "mv path/lol /hello/hey >> folder";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMVWith2ParamWithFullPathWithRedirectionWithExtension()
-  {
+  public void testCheckUserInputMVWith2ParamWithFullPathWithRedirectionWithExtension() {
     userInput = "mv path/lol /hello/hey > file.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMVWith2ParamWithFullPathWithDoubleRedirectionWithExtension()
-  {
+  public void testCheckUserInputMVWith2ParamWithFullPathWithDoubleRedirectionWithExtension() {
     userInput = "mv path/lol /hello/hey >> file.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMVWith2ParamWithFullPathWithFullPathRedirection()
-  {
+  public void testCheckUserInputMVWith2ParamWithFullPathWithFullPathRedirection() {
     userInput = "mv path/lol /hello/hey > folder/folder.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMVWith2ParamWithFullPathWithFullPathDoubleRedirection()
-  {
+  public void testCheckUserInputMVWith2ParamWithFullPathWithFullPathDoubleRedirection() {
     userInput = "mv path/lol /hello/hey >> folder/folder.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMVForValidNoneAlphanumericForRedirect()
-  {
+  public void testCheckUserInputMVForValidNoneAlphanumericForRedirect() {
     userInput = "mv hey yo > hello_";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMVTestInvalidFileNameForRedirect()
-  {
+  public void testCheckUserInputMVTestInvalidFileNameForRedirect() {
     userInput = "mv jeu ki > hello!";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCPwithNoParam()
-  {
+  public void testCheckUserInputCPwithNoParam() {
     userInput = "cp";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCPWithOneParam()
-  {
+  public void testCheckUserInputCPWithOneParam() {
     userInput = "cp path";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCPWithOneParamWithExtension()
-  {
+  public void testCheckUserInputCPWithOneParamWithExtension() {
     userInput = "cp hello.txt";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputWithMutiParam()
-  {
+  public void testCheckUserInputWithMutiParam() {
     userInput = "cp path hi.txt lol";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCPWith2Param()
-  {
+  public void testCheckUserInputCPWith2Param() {
     userInput = "cp path hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCPWith2ParamWithFullPath()
-  {
+  public void testCheckUserInputCPWith2ParamWithFullPath() {
     userInput = "cp path/lol /hello/hey";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCPWith2ParamWithFullPathAndExtension()
-  {
+  public void testCheckUserInputCPWith2ParamWithFullPathAndExtension() {
     userInput = "cp path/lol.txt /hello/hey.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCPWith2ParamWithFullPathWithRedirect()
-  {
+  public void testCheckUserInputCPWith2ParamWithFullPathWithRedirect() {
     userInput = "cp path/lol /hello/hey > folder";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCPWith2ParamWithFullPathWithDoubleRedirect()
-  {
+  public void testCheckUserInputCPWith2ParamWithFullPathWithDoubleRedirect() {
     userInput = "cp path/lol /hello/hey >> folder";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCPWith2ParamWithFullPathWithFullPathRedirect()
-  {
+  public void testCheckUserInputCPWith2ParamWithFullPathWithFullPathRedirect() {
     userInput = "cp path/lol /hello/hey > folder/folder.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCPWith2ParamWithFullPathWithFullPathDoubleRedirect()
-  {
+  public void testCheckUserInputCPWith2ParamWithFullPathWithFullPathDoubleRedirect() {
     userInput = "cp path/lol /hello/hey >> folder/folder.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCPForValidNoneAlphanumericForRedirect()
-  {
+  public void testCheckUserInputCPForValidNoneAlphanumericForRedirect() {
     userInput = "cp jw we > hello_";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCPTestInvalidFileNameForRedirect()
-  {
+  public void testCheckUserInputCPTestInvalidFileNameForRedirect() {
     userInput = "cp qwe wqe > hello!";
     assertEquals(false, correct.checkUserInput(userInput));
-  }  
+  }
+
   @Test
-  public void testCheckUserInputCAT()
-  {
+  public void testCheckUserInputCAT() {
     userInput = "cat";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCATWithOneParam()
-  {
+  public void testCheckUserInputCATWithOneParam() {
     userInput = "cat file";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCATWithOneParamWithExtension()
-  {
+  public void testCheckUserInputCATWithOneParamWithExtension() {
     userInput = "cat file.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCATWithOneParamWithFullPath()
-  {
+  public void testCheckUserInputCATWithOneParamWithFullPath() {
     userInput = "cat folder/file";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCATWithOneParamWithExtensionWithFullPath()
-  {
+  public void testCheckUserInputCATWithOneParamWithExtensionWithFullPath() {
     userInput = "cat folder/file.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCATWithDotsInFullPath()
-  {
+  public void testCheckUserInputCATWithDotsInFullPath() {
     userInput = "cat folder/../file";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCATWIth2Param()
-  {
+  public void testCheckUserInputCATWIth2Param() {
     userInput = "cat folder/file file";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCATWithMutiParam()
-  {
+  public void testCheckUserInputCATWithMutiParam() {
     userInput = "cat file file file";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCATWithRedirect()
-  {
+  public void testCheckUserInputCATWithRedirect() {
     userInput = "cat file > hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCATWithDoubleRedirect()
-  {
+  public void testCheckUserInputCATWithDoubleRedirect() {
     userInput = "cat file >> hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCATWithFullPathRedirect()
-  {
+  public void testCheckUserInputCATWithFullPathRedirect() {
     userInput = "cat file > hello/file";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCATWithDoubleFullPathRedirect()
-  {
+  public void testCheckUserInputCATWithDoubleFullPathRedirect() {
     userInput = "cat file >> hello/file";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCATWithFullPathRedirectWithExtension()
-  {
+  public void testCheckUserInputCATWithFullPathRedirectWithExtension() {
     userInput = "cat file > hello/file.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCATWithDoubleFullPathRedirectWithExtension()
-  {
+  public void testCheckUserInputCATWithDoubleFullPathRedirectWithExtension() {
     userInput = "cat file >> hello/file.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCATWithDoubleRedirectWithDotsInFullPath()
-  {
+  public void testCheckUserInputCATWithDoubleRedirectWithDotsInFullPath() {
     userInput = "cat file >> folder/../fileName";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCATForValidNoneAlphanumericForRedirect()
-  {
+  public void testCheckUserInputCATForValidNoneAlphanumericForRedirect() {
     userInput = "cat jw- > hello_";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputCATTestInvalidFileNameForRedirect()
-  {
+  public void testCheckUserInputCATTestInvalidFileNameForRedirect() {
     userInput = "cat qwe@ > hello!";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputGETNoParam()
-  {
+  public void testCheckUserInputGETNoParam() {
     userInput = "get";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputGETWithOneParam()
-  {
+  public void testCheckUserInputGETWithOneParam() {
     userInput = "get http://www.google.ca/";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputGETWithMutiParam()
-  {
+  public void testCheckUserInputGETWithMutiParam() {
     userInput = "get qwewqe qeweqw";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputGETWithWebsiteExtensions()
-  {
+  public void testCheckUserInputGETWithWebsiteExtensions() {
     userInput = "get http://www.google.ca/hello/apple.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputGETWithWebSites()
-  {
+  public void testCheckUserInputGETWithWebSites() {
     userInput = "get www.google.ca/";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputGETWithRedirect()
-  {
+  public void testCheckUserInputGETWithRedirect() {
     userInput = "get www.google.ca/ > hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputGETWithRedirectExtension()
-  {
+  public void testCheckUserInputGETWithRedirectExtension() {
     userInput = "get www.google.ca/ > hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputGETWithRedirectFullPathExtensions()
-  {
+  public void testCheckUserInputGETWithRedirectFullPathExtensions() {
     userInput = "get www.google.ca/ > /root/hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputGETWithDoubleRedirect()
-  {
+  public void testCheckUserInputGETWithDoubleRedirect() {
     userInput = "get www.google.ca/ >> hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputGETWithDoubleRedirectWithExtension()
-  {
+  public void testCheckUserInputGETWithDoubleRedirectWithExtension() {
     userInput = "get www.google.ca/ >> hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputGETWithDoubleRedirectWithFullPath()
-  {
+  public void testCheckUserInputGETWithDoubleRedirectWithFullPath() {
     userInput = "get www.google.ca/ >> /root/hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputGETWithDoubleRedirectWithFullPathWithDots()
-  {
+  public void testCheckUserInputGETWithDoubleRedirectWithFullPathWithDots() {
     userInput = "get www.google.ca/ >> root/../hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputGETInvalidFileName()
-  {
+  public void testCheckUserInputGETInvalidFileName() {
     userInput = "get www.google.ca/????/";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputGETForValidNoneAlphanumericForRedirect()
-  {
+  public void testCheckUserInputGETForValidNoneAlphanumericForRedirect() {
     userInput = "get www.google.ca/-_/ > hello_";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputGetTestInvalidFileNameForRedirect()
-  {
+  public void testCheckUserInputGetTestInvalidFileNameForRedirect() {
     userInput = "get www.google.ca/-_/ > hello!";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputECHOWithNoParam()
-  {
+  public void testCheckUserInputECHOWithNoParam() {
     userInput = "echo";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputECHOWith2ParamWithNoQuotes()
-  {
+  public void testCheckUserInputECHOWith2ParamWithNoQuotes() {
     userInput = "echo String";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputECHOWithString()
-  {
+  public void testCheckUserInputECHOWithString() {
     userInput = "echo \"string\"";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputECHOWithStringWithRedirect()
-  {
+  public void testCheckUserInputECHOWithStringWithRedirect() {
     userInput = "echo \"string\" > hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputECHOWithStringWithFullPathRedirect()
-  {
+  public void testCheckUserInputECHOWithStringWithFullPathRedirect() {
     userInput = "echo \"string\" > hello/hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputECHOWithStringWithFullPathDoubleRedirect()
-  {
+  public void testCheckUserInputECHOWithStringWithFullPathDoubleRedirect() {
     userInput = "echo \"string\" >> hello/hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputECHOWithDoubleRedirect()
-  {
+  public void testCheckUserInputECHOWithDoubleRedirect() {
     userInput = "echo \"string\" >> hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputECHOWithDoubleRedirectWithFullPath()
-  {
+  public void testCheckUserInputECHOWithDoubleRedirectWithFullPath() {
     userInput = "echo \"string\" >> hello/hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputECHO1WithDoubleRedirectWithFullPathWithExtension()
-  {
+  public void testCheckUserInputECHO1WithDoubleRedirectWithFullPathWithExtension() {
     userInput = "echo \"string\" >> hello/hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputECHOWithDoubleRedirectWithFUllPathAndDots()
-  {
+  public void testCheckUserInputECHOWithDoubleRedirectWithFUllPathAndDots() {
     userInput = "echo \"string\" >> folder/../fileName";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputECHOWithInvalidParam()
-  {
+  public void testCheckUserInputECHOWithInvalidParam() {
     userInput = "echo \"string\" hello";
     assertEquals(false, correct.checkUserInput(userInput));
   }
-  public void testCheckUserInputECHOWithEmptyString()
-  {
+
+  public void testCheckUserInputECHOWithEmptyString() {
     userInput = "echo \"\"";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputEchoForValidNoneAlphanumericForRedirect()
-  {
+  public void testCheckUserInputEchoForValidNoneAlphanumericForRedirect() {
     userInput = "echo \"string\" > hello_";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputEchoTestInvalidFileNameForRedirect()
-  {
+  public void testCheckUserInputEchoTestInvalidFileNameForRedirect() {
     userInput = "echo \\\"string\\\" > hello!";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMAN()
-  {
+  public void testCheckUserInputMAN() {
     userInput = "man";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMANCD()
-  {
+  public void testCheckUserInputMANCD() {
     userInput = "man cd";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMANEXIT()
-  {
+  public void testCheckUserInputMANEXIT() {
     userInput = "man exit";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMANMkdir()
-  {
+  public void testCheckUserInputMANMkdir() {
     userInput = "man mkdir";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMANLs()
-  {
+  public void testCheckUserInputMANLs() {
     userInput = "man ls";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMANPwd()
-  {
+  public void testCheckUserInputMANPwd() {
     userInput = "man pwd";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMANMV()
-  {
+  public void testCheckUserInputMANMV() {
     userInput = "man mv";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMANCP()
-  {
+  public void testCheckUserInputMANCP() {
     userInput = "man cp";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMANCat()
-  {
+  public void testCheckUserInputMANCat() {
     userInput = "man cat";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMANGet()
-  {
+  public void testCheckUserInputMANGet() {
     userInput = "man get";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMANEcho()
-  {
+  public void testCheckUserInputMANEcho() {
     userInput = "man echo";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMANMan()
-  {
+  public void testCheckUserInputMANMan() {
     userInput = "man man";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMANPushd()
-  {
+  public void testCheckUserInputMANPushd() {
     userInput = "man pushd";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMANPopd()
-  {
+  public void testCheckUserInputMANPopd() {
     userInput = "man popd";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMANHistory()
-  {
+  public void testCheckUserInputMANHistory() {
     userInput = "man history";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMANLoad()
-  {
+  public void testCheckUserInputMANLoad() {
     userInput = "man load";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMANFind()
-  {
+  public void testCheckUserInputMANFind() {
     userInput = "man find";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMANTree()
-  {
+  public void testCheckUserInputMANTree() {
     userInput = "man tree";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMANNotCMD()
-  {
+  public void testCheckUserInputMANNotCMD() {
     userInput = "man NotCMD";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMANMutiParam()
-  {
+  public void testCheckUserInputMANMutiParam() {
     userInput = "man NotCMD somethingelse";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMANWithRedirect()
-  {
+  public void testCheckUserInputMANWithRedirect() {
     userInput = "man cd > lol";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMANWithRedirectWithExtension()
-  {
+  public void testCheckUserInputMANWithRedirectWithExtension() {
     userInput = "man cd > lol.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMANWithRedirectWithFullPath()
-  {
+  public void testCheckUserInputMANWithRedirectWithFullPath() {
     userInput = "man cd > root/lol";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMANWithRedirectWithFullPathWithExtension()
-  {
+  public void testCheckUserInputMANWithRedirectWithFullPathWithExtension() {
     userInput = "man cd > root/lol.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMANWithDoubleRedirect()
-  {
+  public void testCheckUserInputMANWithDoubleRedirect() {
     userInput = "man cd >> lol";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMANWithDoubleRedirectWithExtension()
-  {
+  public void testCheckUserInputMANWithDoubleRedirectWithExtension() {
     userInput = "man cd >> lol.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMANWithDoubleRedirectWithFullPath()
-  {
+  public void testCheckUserInputMANWithDoubleRedirectWithFullPath() {
     userInput = "man cd >> root/lol";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMANWithDoubleRedirectWithFullPathWithExtension()
-  {
+  public void testCheckUserInputMANWithDoubleRedirectWithFullPathWithExtension() {
     userInput = "man cd >> root/lol.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputMANWithDoubleRedirectWithFullPathWithDots()
-  {
+  public void testCheckUserInputMANWithDoubleRedirectWithFullPathWithDots() {
     userInput = "man cd >> folder/../fileName";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputManForValidNoneAlphanumericForRedirect()
-  {
+  public void testCheckUserInputManForValidNoneAlphanumericForRedirect() {
     userInput = "man cd > hello_";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputManTestInvalidFileNameForRedirect()
-  {
+  public void testCheckUserInputManTestInvalidFileNameForRedirect() {
     userInput = "man cd > hello!";
     assertEquals(false, correct.checkUserInput(userInput));
   }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
   @Test
-  public void testCheckUserInputPUSHDWithNoParam()
-  {
+  public void testCheckUserInputPUSHDWithNoParam() {
     userInput = "pushd";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputPUSHDWithOneParam()
-  {
+  public void testCheckUserInputPUSHDWithOneParam() {
     userInput = "pushd file";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputPUSHDWithOneParamWithExtension()
-  {
+  public void testCheckUserInputPUSHDWithOneParamWithExtension() {
     userInput = "pushd file.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputPUSHDWithSlashWithExtension()
-  {
+  public void testCheckUserInputPUSHDWithSlashWithExtension() {
     userInput = "pushd /file.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputPUSHDWithFullPathWithExtension()
-  {
+  public void testCheckUserInputPUSHDWithFullPathWithExtension() {
     userInput = "pushd /folder/file.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputPUSHDWithFullPath()
-  {
+  public void testCheckUserInputPUSHDWithFullPath() {
     userInput = "pushd folder/file";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputPUSHDWithFullPathWithExtensionVersion2()
-  {
+  public void testCheckUserInputPUSHDWithFullPathWithExtensionVersion2() {
     userInput = "pushd folder/file.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputPUSHDWithFullPathWithDots()
-  {
+  public void testCheckUserInputPUSHDWithFullPathWithDots() {
     userInput = "pushd folder/../file";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputPUSHDWith2Param()
-  {
+  public void testCheckUserInputPUSHDWith2Param() {
     userInput = "pushd folder/file file";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputPUSHDWith3Param()
-  {
+  public void testCheckUserInputPUSHDWith3Param() {
     userInput = "pushd file file file";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputPUSHDWithRedirect()
-  {
+  public void testCheckUserInputPUSHDWithRedirect() {
     userInput = "pushd file > lol";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputPUSHDWithDoubleRedirect()
-  {
+  public void testCheckUserInputPUSHDWithDoubleRedirect() {
     userInput = "pushd file >> lol";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputPUSHDWithDoubleRedirectWithDots()
-  {
+  public void testCheckUserInputPUSHDWithDoubleRedirectWithDots() {
     userInput = "pushd file >> lol/../";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputPUSHDWithDoubleRedirectWithDotsInFront()
-  {
+  public void testCheckUserInputPUSHDWithDoubleRedirectWithDotsInFront() {
     userInput = "pushd file >> ../lol";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputPOPD()
-  {
+  public void testCheckUserInputPOPD() {
     userInput = "popd";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputPOPDMutiParam()
-  {
+  public void testCheckUserInputPOPDMutiParam() {
     userInput = "popd anythingelse";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputPOPDWithRedirect()
-  {
+  public void testCheckUserInputPOPDWithRedirect() {
     userInput = "popd anythingelse > any dir";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputPOPDWithDoubleRedirect()
-  {
+  public void testCheckUserInputPOPDWithDoubleRedirect() {
     userInput = "popd anythingelse >> any dir";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputHISTORYNoParam()
-  {
+  public void testCheckUserInputHISTORYNoParam() {
     userInput = "history";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputHISTORYWithNoHistory()
-  {
+  public void testCheckUserInputHISTORYWithNoHistory() {
     userInput = "history 0";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputHISTORYWithOneHistory()
-  {
+  public void testCheckUserInputHISTORYWithOneHistory() {
     userInput = "history 1";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputHISTORYWithMoreHistoryThanStored()
-  {
+  public void testCheckUserInputHISTORYWithMoreHistoryThanStored() {
     userInput = "history 111111111111111111111";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputHISTORYWithMutiParam()
-  {
+  public void testCheckUserInputHISTORYWithMutiParam() {
     userInput = "history 1111 1111 11111 11111 111";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputHISTORYWith2Param()
-  {
+  public void testCheckUserInputHISTORYWith2Param() {
     userInput = "history 1 1";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputHISTORYWithRedirectWithExtension()
-  {
+  public void testCheckUserInputHISTORYWithRedirectWithExtension() {
     userInput = "history 1 > lol.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputHISTORYWithRedirect()
-  {
+  public void testCheckUserInputHISTORYWithRedirect() {
     userInput = "history 1 > lol";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputHISTORYWithRedirectWithFullPath()
-  {
+  public void testCheckUserInputHISTORYWithRedirectWithFullPath() {
     userInput = "history 1 > hey/lol";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputHISTORYWithRedirectWithFullPathAndExtension()
-  {
+  public void testCheckUserInputHISTORYWithRedirectWithFullPathAndExtension() {
     userInput = "history 1 > /hey/lol.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputHISTORYWithRedirectWithFullPathAndDots()
-  {
+  public void testCheckUserInputHISTORYWithRedirectWithFullPathAndDots() {
     userInput = "history 1 > hello/../lol";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputHISTORYWithRedirectWithDots()
-  {
+  public void testCheckUserInputHISTORYWithRedirectWithDots() {
     userInput = "history 1 > ..";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputHISTORYWithDoubleRedirect()
-  {
+  public void testCheckUserInputHISTORYWithDoubleRedirect() {
     userInput = "history 1 >> ..";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputHistoryForValidNoneAlphanumericForRedirect()
-  {
+  public void testCheckUserInputHistoryForValidNoneAlphanumericForRedirect() {
     userInput = "history 1 > hello_";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputHistoryTestInvalidFileNameForRedirect()
-  {
+  public void testCheckUserInputHistoryTestInvalidFileNameForRedirect() {
     userInput = "history 1 > hello!";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputSAVEWithNoParam()
-  {
+  public void testCheckUserInputSAVEWithNoParam() {
     userInput = "save";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputSAVEWithOneParam()
-  {
+  public void testCheckUserInputSAVEWithOneParam() {
     userInput = "save LOL";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputSAVEWithOneParamWithExtension()
-  {
+  public void testCheckUserInputSAVEWithOneParamWithExtension() {
     userInput = "save LOL.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputSAVEWithFullPath()
-  {
+  public void testCheckUserInputSAVEWithFullPath() {
     userInput = "save root/LOL";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputSAVEWithFullPathVersion2()
-  {
+  public void testCheckUserInputSAVEWithFullPathVersion2() {
     userInput = "save /root/LOL";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputSAVEWithFullPathWithExtension()
-  {
+  public void testCheckUserInputSAVEWithFullPathWithExtension() {
     userInput = "save root/LOL.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputSAVEWithFullPathWithExtensionVersion2()
-  {
+  public void testCheckUserInputSAVEWithFullPathWithExtensionVersion2() {
     userInput = "save /root/LOL.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputSAVEWith2Param()
-  {
+  public void testCheckUserInputSAVEWith2Param() {
     userInput = "save root LOL.txt";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputSAVEWithFullPathWithDots()
-  {
+  public void testCheckUserInputSAVEWithFullPathWithDots() {
     userInput = "save /root/../LOL.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputSAVEWithDots()
-  {
+  public void testCheckUserInputSAVEWithDots() {
     userInput = "save ..";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputSAVEWithDotsWithDoubleRedirect()
-  {
+  public void testCheckUserInputSAVEWithDotsWithDoubleRedirect() {
     userInput = "save .. >> hello";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputSAVEWithDotsWithRedirect()
-  {
+  public void testCheckUserInputSAVEWithDotsWithRedirect() {
     userInput = "save .. > hello";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLOADWithNoParam()
-  {
+  public void testCheckUserInputLOADWithNoParam() {
     userInput = "load";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLOADWithOneParam()
-  {
+  public void testCheckUserInputLOADWithOneParam() {
     userInput = "load folder";
     assertEquals(true, correct.checkUserInput(userInput));
   }
-  
+
   @Test
-  public void testCheckUserInputLOADWith2Param()
-  {
+  public void testCheckUserInputLOADWith2Param() {
     userInput = "load folder folder";
     assertEquals(false, correct.checkUserInput(userInput));
   }
-  
+
   @Test
-  public void testCheckUserInputLOADWithExtension()
-  {
+  public void testCheckUserInputLOADWithExtension() {
     userInput = "load load.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
-  
+
   @Test
-  public void testCheckUserInputLOADWithFullPath()
-  {
+  public void testCheckUserInputLOADWithFullPath() {
     userInput = "load hey/folder";
     assertEquals(true, correct.checkUserInput(userInput));
   }
-  
+
   @Test
-  public void testCheckUserInputLOADWithFullPathVersion2()
-  {
+  public void testCheckUserInputLOADWithFullPathVersion2() {
     userInput = "load /hey/folder";
     assertEquals(true, correct.checkUserInput(userInput));
   }
-  
+
   @Test
-  public void testCheckUserInputLOADWithRedirect()
-  {
+  public void testCheckUserInputLOADWithRedirect() {
     userInput = "load hey > hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLOADWithRedirectWithFullPath()
-  {
+  public void testCheckUserInputLOADWithRedirectWithFullPath() {
     userInput = "load hey > root/hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLOADWithRedirectWithFullPathVersion2()
-  {
+  public void testCheckUserInputLOADWithRedirectWithFullPathVersion2() {
     userInput = "load hey > /root/hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLOADWithDoubleRedirect()
-  {
+  public void testCheckUserInputLOADWithDoubleRedirect() {
     userInput = "load hey >> hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLOADWithDoubleRedirectWithFullPath()
-  {
+  public void testCheckUserInputLOADWithDoubleRedirectWithFullPath() {
     userInput = "load hey >> root/hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLOADWithDoubleRedirectWithFullPathVersion2()
-  {
+  public void testCheckUserInputLOADWithDoubleRedirectWithFullPathVersion2() {
     userInput = "load hey >> /root/hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLoadForValidNoneAlphanumericForRedirect()
-  {
+  public void testCheckUserInputLoadForValidNoneAlphanumericForRedirect() {
     userInput = "load root > hello_";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputLoadTestInvalidFileNameForRedirect()
-  {
+  public void testCheckUserInputLoadTestInvalidFileNameForRedirect() {
     userInput = "load root > hello!";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputFINDNoParam()
-  {
+  public void testCheckUserInputFINDNoParam() {
     userInput = "find";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputFINDWithFullPath()
-  {
+  public void testCheckUserInputFINDWithFullPath() {
     userInput = "find /user/data";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputFINDWithIncompleteSyntax()
-  {
+  public void testCheckUserInputFINDWithIncompleteSyntax() {
     userInput = "find /user/data -type";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputFINDWithIncompleteSyntax2()
-  {
+  public void testCheckUserInputFINDWithIncompleteSyntax2() {
     userInput = "find /user/data -type d";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputFINDWithIncompleteSyntax3()
-  {
+  public void testCheckUserInputFINDWithIncompleteSyntax3() {
     userInput = "find /user/data -type d - name";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputFINDWithOneParamForLocation()
-  {
+  public void testCheckUserInputFINDWithOneParamForLocation() {
     userInput = "find /user/data -type d -name \"Text\"";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputFINDWithTwoParamForLocation()
-  {
+  public void testCheckUserInputFINDWithTwoParamForLocation() {
     userInput = "find /user/data /user/data2 -type d -name \"Text\"";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputFINDWithTwoParamForLocationWithRedirect()
-  {
+  public void testCheckUserInputFINDWithTwoParamForLocationWithRedirect() {
     userInput = "find /user/data /user/data2 -type d -name \"Text\" > hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputFINDWithTwoParamForLocationWithRedirectWithExtension()
-  {
-    userInput = "find /user/data /user/data2 -type d -name \"Text\" > hello.txt";
+  public void testCheckUserInputFINDWithTwoParamForLocationWithRedirectWithExtension() {
+    userInput =
+        "find /user/data /user/data2 -type d -name \"Text\" > hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputFINDWithTwoParamForLocationWithRedirectWithFullPath()
-  {
-    userInput = "find /user/data /user/data2 -type d -name \"Text\" > /hey/hello.txt";
+  public void testCheckUserInputFINDWithTwoParamForLocationWithRedirectWithFullPath() {
+    userInput =
+        "find /user/data /user/data2 -type d -name \"Text\" > /hey/hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputFINDWithTwoParamForLocationWithRedirectWithFullPath2()
-  {
-    userInput = "find /user/data /user/data2 -type d -name \"Text\" > hey/hello.txt";
+  public void testCheckUserInputFINDWithTwoParamForLocationWithRedirectWithFullPath2() {
+    userInput =
+        "find /user/data /user/data2 -type d -name \"Text\" > hey/hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputFINDWithFile()
-  {
+  public void testCheckUserInputFINDWithFile() {
     userInput = "find /user/data -type f -name \"Text\"";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputFINDWithFileWith2Location()
-  {
+  public void testCheckUserInputFINDWithFileWith2Location() {
     userInput = "find /user/data /user/data2 -type f -name \"Text\"";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputFINDWithFileWithRedirect()
-  {
+  public void testCheckUserInputFINDWithFileWithRedirect() {
     userInput = "find /user/data /user/data2 -type f -name \"Text\" > hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputFINDWithFileWithRedirectWithExtension()
-  {
-    userInput = "find /user/data /user/data2 -type f -name \"Text\" > hello.txt";
+  public void testCheckUserInputFINDWithFileWithRedirectWithExtension() {
+    userInput =
+        "find /user/data /user/data2 -type f -name \"Text\" > hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputFINDWithFileWithRedirectWithFullPath()
-  {
-    userInput = "find /user/data /user/data2 -type f -name \"Text\" > /hey/hello.txt";
+  public void testCheckUserInputFINDWithFileWithRedirectWithFullPath() {
+    userInput =
+        "find /user/data /user/data2 -type f -name \"Text\" > /hey/hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputFINDWithFileWithRedirectWithFullPathVerson2()
-  {
-    userInput = "find /user/data /user/data2 -type f -name \"Text\" > hey/hello.txt";
+  public void testCheckUserInputFINDWithFileWithRedirectWithFullPathVerson2() {
+    userInput =
+        "find /user/data /user/data2 -type f -name \"Text\" > hey/hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputFINDWithFileWithDoulbeRedirect()
-  {
+  public void testCheckUserInputFINDWithFileWithDoulbeRedirect() {
     userInput = "find /user/data /user/data2 -type f -name \"Text\" >> hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputFINDWithFileWithDoulbeRedirectWithExtension()
-  {
-    userInput = "find /user/data /user/data2 -type f -name \"Text\" >> hello.txt";
+  public void testCheckUserInputFINDWithFileWithDoulbeRedirectWithExtension() {
+    userInput =
+        "find /user/data /user/data2 -type f -name \"Text\" >> hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputFINDWithFileWithDoulbeRedirectWithFullPath()
-  {
-    userInput = "find /user/data /user/data2 -type f -name \"Text\" >> /hey/hello.txt";
+  public void testCheckUserInputFINDWithFileWithDoulbeRedirectWithFullPath() {
+    userInput =
+        "find /user/data /user/data2 -type f -name \"Text\" >> /hey/hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputFINDWithDirectoryWithDoulbeRedirect()
-  {
+  public void testCheckUserInputFINDWithDirectoryWithDoulbeRedirect() {
     userInput = "find /user/data /user/data2 -type d -name \"Text\" >> hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputFINDWithDirectoryWithDoulbeRedirectWithExtension()
-  {
-    userInput = "find /user/data /user/data2 -type d -name \"Text\" >> hello.txt";
+  public void testCheckUserInputFINDWithDirectoryWithDoulbeRedirectWithExtension() {
+    userInput =
+        "find /user/data /user/data2 -type d -name \"Text\" >> hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputFINDWithDirectoryWithDoulbeRedirectWithFullPath()
-  {
-    userInput = "find /user/data /user/data2 -type d -name \"Text\" >> /hey/hello.txt";
+  public void testCheckUserInputFINDWithDirectoryWithDoulbeRedirectWithFullPath() {
+    userInput =
+        "find /user/data /user/data2 -type d -name \"Text\" >> /hey/hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputFindForValidNoneAlphanumericForRedirect()
-  {
+  public void testCheckUserInputFindForValidNoneAlphanumericForRedirect() {
     userInput = "find /user/data /user/data2 -type d -name \"Text\" > hello_";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputFindTestInvalidFileNameForRedirect()
-  {
+  public void testCheckUserInputFindTestInvalidFileNameForRedirect() {
     userInput = "find /user/data /user/data2 -type d -name \"Text\" > hello!";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputTREE()
-  {
+  public void testCheckUserInputTREE() {
     userInput = "tree";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputTREEWithSpaceChar()
-  {
+  public void testCheckUserInputTREEWithSpaceChar() {
     userInput = "tree ";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputTREEWithMutiParam()
-  {
+  public void testCheckUserInputTREEWithMutiParam() {
     userInput = "tree Anythingelse";
     assertEquals(false, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputTREEWithRedirect()
-  {
+  public void testCheckUserInputTREEWithRedirect() {
     userInput = "tree > hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputTREEWithRedirectWithExtension()
-  {
+  public void testCheckUserInputTREEWithRedirectWithExtension() {
     userInput = "tree > hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputTREEWithRedirectWithFullPath()
-  {
+  public void testCheckUserInputTREEWithRedirectWithFullPath() {
     userInput = "tree > root/hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputTREEWithDoubleRedirect()
-  {
+  public void testCheckUserInputTREEWithDoubleRedirect() {
     userInput = "tree >> hello";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputTREEWithDoubleRedirectWithExtension()
-  {
+  public void testCheckUserInputTREEWithDoubleRedirectWithExtension() {
     userInput = "tree >> hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputTREEWithDoubleRedirectWithFullPath()
-  {
+  public void testCheckUserInputTREEWithDoubleRedirectWithFullPath() {
     userInput = "tree >> root/hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputTREEWithDoubleRedirectWithDotsInFullPath()
-  {
+  public void testCheckUserInputTREEWithDoubleRedirectWithDotsInFullPath() {
     userInput = "tree >> root/../hello.txt";
     assertEquals(true, correct.checkUserInput(userInput));
   }
-  
+
   @Test
-  public void testCheckUserInputTreeForValidNoneAlphanumericForRedirect()
-  {
+  public void testCheckUserInputTreeForValidNoneAlphanumericForRedirect() {
     userInput = "tree > hello_";
     assertEquals(true, correct.checkUserInput(userInput));
   }
+
   @Test
-  public void testCheckUserInputTreeTestInvalidFileNameForRedirect()
-  {
+  public void testCheckUserInputTreeTestInvalidFileNameForRedirect() {
     userInput = "tree > hello!";
     assertEquals(false, correct.checkUserInput(userInput));
   }
