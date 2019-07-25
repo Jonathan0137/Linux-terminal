@@ -10,6 +10,12 @@ import driver.JShell;
 import output.Output;
 import verifier.Verifier;
 
+/**
+ * Test Case for Class Man's excute Method
+ * 
+ * @author Chongmin Bai
+ */
+
 public class TestManTest {
 
   String acutal;
@@ -215,10 +221,11 @@ public class TestManTest {
   @Test
   public void testManExecuteGet() {
     userInput = "man get";
-    expected = "get: get URL [(>or>>) OUTFILE]" + "\n\t" + "If URL is valid, extract "
-        + "all contents on the associated web" + "\n\t\t" + "page and store it onto a File"
-        + " with the same name as" + "\n\t\t" + "the URLs file name. Otherwise utilizing" 
-        + " redirection," + "\n\t\t" + "add the contents to a new or pre-existing file in" 
+    expected = "get: get URL [(>or>>) OUTFILE]" + "\n\t"
+        + "If URL is valid, extract " + "all contents on the associated web"
+        + "\n\t\t" + "page and store it onto a File" + " with the same name as"
+        + "\n\t\t" + "the URLs file name. Otherwise utilizing" + " redirection,"
+        + "\n\t\t" + "add the contents to a new or pre-existing file in"
         + "\n\t\t" + "the FileSystem.\n";
     Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
     if (toBeExecuted != null) {
@@ -235,13 +242,14 @@ public class TestManTest {
   public void testManExecuteEcho() {
     userInput = "man echo";
     expected = "echo: echo STRING [(>or>>) OUTFILE]\n\tIf no optional"
-        + " arguments are given, print STRING onto shell.\n\t" + "Otherwise;" + "\n\t\t"
-        + "If OUTFILE file does not exist," + " create a new file in" + "\n\t\t\t" 
-        + "OUTFILE path with" + " STRING as its contents." + "\n\t\t" + "If OUTFILE file " 
-        + "and path exists, and user inputs" + "\n\t\t\t" + "argument \">\","
-        + " then overwrite" + " OUTFILE file" + "\n\t\t\t" + "with STRING." + "\n\t\t" 
-        + "If OUTFILE file and" + " path exists," + " and user inputs" + "\n\t\t\t" 
-        + "argument \">>\", then " + "append STRING onto" + "\n\t\t\t" 
+        + " arguments are given, print STRING onto shell.\n\t" + "Otherwise;"
+        + "\n\t\t" + "If OUTFILE file does not exist," + " create a new file in"
+        + "\n\t\t\t" + "OUTFILE path with" + " STRING as its contents."
+        + "\n\t\t" + "If OUTFILE file " + "and path exists, and user inputs"
+        + "\n\t\t\t" + "argument \">\"," + " then overwrite" + " OUTFILE file"
+        + "\n\t\t\t" + "with STRING." + "\n\t\t" + "If OUTFILE file and"
+        + " path exists," + " and user inputs" + "\n\t\t\t"
+        + "argument \">>\", then " + "append STRING onto" + "\n\t\t\t"
         + "the end of OUTFILE file.\n";
     Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
     if (toBeExecuted != null) {
@@ -257,12 +265,9 @@ public class TestManTest {
   @Test
   public void testManExecuteMan() {
     userInput = "man man";
-    expected = "\t\tMan: man CMD\n"
-        + "\tPrint Print documentation for CMD.\n"
-        + "\tCMD means commands that we use.\n"
-        + "\tExample: man cat \n"
-        + "\tList of all commands\n\n"
-        + "\texit  mkdir   cd      ls    pwd\n"
+    expected = "\t\tMan: man CMD\n" + "\tPrint Print documentation for CMD.\n"
+        + "\tCMD means commands that we use.\n" + "\tExample: man cat \n"
+        + "\tList of all commands\n\n" + "\texit  mkdir   cd      ls    pwd\n"
         + "\tpushd popd    history cat   echo man \n\n";
     Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
     if (toBeExecuted != null) {
@@ -278,10 +283,11 @@ public class TestManTest {
   @Test
   public void testManExecutePushd() {
     userInput = "man pushd";
-    expected = "pushd: pushd DIR\n" + "\tSaves the current directory by adding it "
-        + "to the end of the\n\tdirectory stack. Then, it changes the "
-        + "current directory to DIR.\n\n"
-        + "\tDIR must be a valid absolute or relative path name.\n";
+    expected =
+        "pushd: pushd DIR\n" + "\tSaves the current directory by adding it "
+            + "to the end of the\n\tdirectory stack. Then, it changes the "
+            + "current directory to DIR.\n\n"
+            + "\tDIR must be a valid absolute or relative path name.\n";
     Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
     if (toBeExecuted != null) {
       CommandParameter param =
@@ -315,10 +321,9 @@ public class TestManTest {
     userInput = "man history";
     expected = "history: history [NUMBER]" + "\n\t" + "If no NUMBER"
         + " is given, print out all user inputs since" + "\n\t\t"
-        + "activating JShell, ordered from least recent input to most" + "\n\t\t" + 
-        "recent input." + "\n\t"
-        + "Otherwise;" + "\n\t\t" + "print out the last n user inputs " + "where n is" + 
-        " NUMBER >= 0\n";
+        + "activating JShell, ordered from least recent input to most"
+        + "\n\t\t" + "recent input." + "\n\t" + "Otherwise;" + "\n\t\t"
+        + "print out the last n user inputs " + "where n is" + " NUMBER >= 0\n";
     Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
     if (toBeExecuted != null) {
       CommandParameter param =
@@ -332,7 +337,7 @@ public class TestManTest {
 
   @Test
   public void testManExecuteSave() {
-    //to be added
+    // to be added
   }
 
   @Test
@@ -344,7 +349,7 @@ public class TestManTest {
         + "about console state. Load must be the first command "
         + "called in a new console.\nIf FILE's path is not given, "
         + "the default location to search for FILE is the folder Assignmnent2.\n";
-   
+
     Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
     if (toBeExecuted != null) {
       CommandParameter param =
@@ -367,11 +372,8 @@ public class TestManTest {
         + "\tThe Tree Command start from the root directory \n"
         + "\tdisplay the entire file system as a tree. \n"
         + "\tFor every level of the tree, there is an "
-        + "\tindent by a tab character\n\n"
-        + "\tExample: \root\n"
-        + "\t\tdocement\n"
-        + "\t\t\tsome_file.txt\n"
-        + "\t\tDownload\n\n";
+        + "\tindent by a tab character\n\n" + "\tExample: \root\n"
+        + "\t\tdocement\n" + "\t\t\tsome_file.txt\n" + "\t\tDownload\n\n";
     Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
     if (toBeExecuted != null) {
       CommandParameter param =
