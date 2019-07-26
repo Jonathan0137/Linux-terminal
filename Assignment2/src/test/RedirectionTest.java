@@ -52,7 +52,8 @@ public class RedirectionTest {
 		Redirection.redirectionSetUp(userInput);
 		ArrayList<AbstractOutput> actual = output.getOutputList();
 		ArrayList<AbstractOutput> expected = mockOutput;
-		assertEquals(expected, actual); //why does test fail? is it because they are 2 diffrent objects?
+		assertEquals(expected.get(0).getOutput(), actual.get(0).getOutput());
+		assertEquals(expected.get(1).getOutput(), actual.get(1).getOutput());
 	}
 	
 	/*@Test //Checks that no file has been created
