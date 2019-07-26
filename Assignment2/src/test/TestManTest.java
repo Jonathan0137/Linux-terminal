@@ -361,10 +361,21 @@ public class TestManTest {
     assertEquals(expected, acutal);
   }
 
-  // @Test
-  // public void testManExecuteFind() {
-  //
-  // }
+  @Test
+  public void testManExecuteFind() {
+    userInput = "man find";
+    expected = "";
+    Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
+    if (toBeExecuted != null) {
+      CommandParameter param =
+          new CommandParameter(toBeExecuted, newJShell, userInput);
+      toBeExecuted.execute(param.getParameters());
+    }
+  
+    acutal = Output.getOutputInstance().getStringOutput();
+    assertEquals(expected, acutal);
+   }
+
   @Test
   public void testManExecuteTree() {
     userInput = "man tree";
