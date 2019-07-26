@@ -25,7 +25,8 @@ public class Mkdir extends Command{//need to fix errors in mkdir from 2a
 	public void execute(ArrayList<Object> param) 
 	{
 		String newDirectories = (String) param.get(0);
-		Directory currentDirectory = FileSystem.getFileSystem().getCurrentDirectory();
+		Directory currentDirectory = FileSystem.getFileSystem().
+													getCurrentDirectory();
 		FileSystem fs = FileSystem.getFileSystem();
 		createDirectory(currentDirectory, fs, newDirectories);
 	}
@@ -58,17 +59,19 @@ public class Mkdir extends Command{//need to fix errors in mkdir from 2a
 		
 					Directory parentDirectory = (Directory) 
 					FileSystemManipulation.findFileSystemNode(pathParentDir);
-					FileSystemManipulation.addFileSystemNode(parentDirectory, newDirectory);
+					FileSystemManipulation.addFileSystemNode(parentDirectory,
+																newDirectory);
 				}
 				else {
 					newDirectory = new Directory(arguments[i]);
-					FileSystemManipulation.addFileSystemNode(currentDirectory, newDirectory);
+					FileSystemManipulation.addFileSystemNode(currentDirectory,
+																newDirectory);
 				}
 			}
 			else {
-				String error = arguments[i] + " is not a valid directory name";
+				String err = arguments[i] + " is not a valid directory name";
 				Output errorOutput = Output.getOutputInstance();
-				errorOutput.addErrorOutput(error);
+				errorOutput.addErrorOutput(err);
 			}
 		}
 	}
