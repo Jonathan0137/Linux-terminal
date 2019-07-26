@@ -22,7 +22,11 @@ import command.Pushd;
 import command.Pwd;
 import command.Save;
 import command.Tree;
-
+/**
+ * Test Case for Class Command's toString Method
+ * 
+ * @author Chongmin Bai
+ */
 
 public class TestCommandTest {
   Command var;
