@@ -8,6 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import fileSystem.Directory;
 import fileSystem.File;
 import fileSystem.FileSystem;
 import fileSystem.FileSystemManipulation;
@@ -179,6 +180,112 @@ public class RedirectionTest {
 		Redirection.redirectionSetUp(userInput);
 		String actual = ((File) FileSystemManipulation
 				.findSubNode(fs.getCurrentDirectory(), "oldFile4")).getContents();
+		String expected = "Some arbitrary string\ntest\nanother one\nagain";
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testredirectionSetUpManyOutputsIllegalFile() {
+		output.addUserOutput("test");
+		output.addErrorOutput("another output");
+		output.addUserOutput("another one");
+		output.addUserOutput("again");
+		userInput = "commandx (...) >> /";
+		Redirection.redirectionSetUp(userInput);
+		String actual = output.getOutputList().get(0).getOutput();
+		String expected = "Error: Invalid file name for redirection.";
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testredirectionSetUpManyOutputsIllegalPath() {
+		output.addUserOutput("test");
+		output.addErrorOutput("another output");
+		output.addUserOutput("another one");
+		output.addUserOutput("again");
+		userInput = "commandx (...) >> /Not/A/Real/path";
+		Redirection.redirectionSetUp(userInput);
+		String actual = output.getOutputList().get(0).getOutput();
+		String expected = "Error: Redirection: Given directory does not exist";
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testredirectionSetUpManyOutputsfullPathOverwriteNonExistingFile() {
+		output.addUserOutput("test");
+		output.addErrorOutput("another output");
+		output.addUserOutput("another one");
+		output.addUserOutput("again");
+		Directory first = new Directory("A");
+		Directory second = new Directory("Real");
+		Directory third = new Directory("Path");
+		FileSystemManipulation.addFileSystemNode(fs.getCurrentDirectory(), first);
+		FileSystemManipulation.addFileSystemNode(first, second);
+		FileSystemManipulation.addFileSystemNode(second, third);
+		userInput = "commandx (...) > /A/Real/Path/newFile1";
+		Redirection.redirectionSetUp(userInput);
+		String actual = ((File) FileSystemManipulation
+				.findFileSystemNode("/A/Real/Path/newFile1")).getContents();
+		String expected = "test\nanother one\nagain";
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testredirectionSetUpManyOutputsfullPathAppendNonExistingFile() {
+		output.addUserOutput("test");
+		output.addErrorOutput("another output");
+		output.addUserOutput("another one");
+		output.addUserOutput("again");
+		userInput = "commandx (...) >> /A/Real/Path/newFile2";
+		Redirection.redirectionSetUp(userInput);
+		String actual = ((File) FileSystemManipulation
+				.findFileSystemNode("/A/Real/Path/newFile2")).getContents();
+		String expected = "test\nanother one\nagain";
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testredirectionSetUpManyOutputsfullPathOverwriteExistingFile() {
+		output.addUserOutput("test");
+		output.addErrorOutput("another output");
+		output.addUserOutput("another one");
+		output.addUserOutput("again");
+		File oldFile = new File("oldFile1", "Some arbitrary string");
+		Directory first = new Directory("A");
+		Directory second = new Directory("Real");
+		Directory third = new Directory("Path");
+		FileSystemManipulation.addFileSystemNode(fs.getCurrentDirectory(), first);
+		FileSystemManipulation.addFileSystemNode(first, second);
+		FileSystemManipulation.addFileSystemNode(second, third);
+		Directory parent = (Directory) FileSystemManipulation.findFileSystemNode("/A/Real/Path");
+		FileSystemManipulation.addFileSystemNode(parent, oldFile);
+		userInput = "commandx (...) > /A/Real/Path/oldFile1";
+		Redirection.redirectionSetUp(userInput);
+		String actual = ((File) FileSystemManipulation
+				.findFileSystemNode("/A/Real/Path/oldFile1")).getContents();
+		String expected = "test\nanother one\nagain";
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testredirectionSetUpManyOutputsfullPathAppendExistingFile() {
+		output.addUserOutput("test");
+		output.addErrorOutput("another output");
+		output.addUserOutput("another one");
+		output.addUserOutput("again");
+		File oldFile = new File("oldFile2", "Some arbitrary string");
+		Directory first = new Directory("A");
+		Directory second = new Directory("Real");
+		Directory third = new Directory("Path");
+		FileSystemManipulation.addFileSystemNode(fs.getCurrentDirectory(), first);
+		FileSystemManipulation.addFileSystemNode(first, second);
+		FileSystemManipulation.addFileSystemNode(second, third);
+		Directory parent = (Directory) FileSystemManipulation.findFileSystemNode("/A/Real/Path");
+		FileSystemManipulation.addFileSystemNode(parent, oldFile);
+		userInput = "commandx (...) >> /A/Real/Path/oldFile2";
+		Redirection.redirectionSetUp(userInput);
+		String actual = ((File) FileSystemManipulation
+				.findFileSystemNode("/A/Real/Path/oldFile2")).getContents();
 		String expected = "Some arbitrary string\ntest\nanother one\nagain";
 		assertEquals(expected, actual);
 	}
