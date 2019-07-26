@@ -8,7 +8,7 @@ import fileSystem.*;
 public class Cp extends Command{
 
 	/**
-	  * Copies an item
+	  * Execute cp command
 	  * 
 	  * @param param	ArrayList containing all parameters required by cp
 	  */
