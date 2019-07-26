@@ -142,13 +142,14 @@ public class TestVerifiercheckUserInputCommandTest {
         Verifier.checkUserInputCommand(userInput).toString());
   }
 
-  // @Test
-  // public void testCheckUserInputCommandFind()
-  // {
-  // userInput = "find";
-  // expected = "Find";
-  // assertEquals(expected, Verifier.checkUserInputCommand(userInput).toString());
-  // }
+  @Test
+  public void testCheckUserInputCommandFind() {
+    userInput = "find";
+    expected = "Find";
+    assertEquals(expected,
+        Verifier.checkUserInputCommand(userInput).toString());
+  }
+
   @Test
   public void testCheckUserInputCommandTree() {
     userInput = "tree";

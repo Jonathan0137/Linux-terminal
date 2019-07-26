@@ -79,7 +79,7 @@ public class Man extends Command
       hashtable.put("history", (new History()).getDoc());
       hashtable.put("save", (new Save()).getDoc());
       hashtable.put("load", (new Load()).getDoc());
-      //hashtable.put("find", (new Find()).getDoc());
+      hashtable.put("find", (new Find()).getDoc());
       hashtable.put("tree", (new Tree()).getDoc());    
     
   }
