@@ -10,7 +10,7 @@ import verifier.Verifier;
  * 
  * @author Chongmin Bai
  */
-public class TestcheckUserInputCommandTest {
+public class TestVerifiercheckUserInputCommandTest {
   String userInput;
   String expected;
   Verifier correct;
