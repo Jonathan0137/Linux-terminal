@@ -16,9 +16,9 @@ import verifier.Verifier;
  * @author Chongmin Bai
  */
 public class TestLSExcuteTest {
-  ArrayList<String> input = null;
+  ArrayList<String> input;
   JShell newJShell;
-  ArrayList<String> acutal = null;
+  ArrayList<String> acutal;
 
   @Before
   public void setUp() {
