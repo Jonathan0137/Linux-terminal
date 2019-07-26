@@ -14,7 +14,7 @@ import fileSystem.*;
 public class Mv extends Command{
 
 	/**
-	  * Moves an item
+	  * Execute mv command
 	  * 
 	  * @param param	ArrayList containing all parameters required by mv
 	  */
