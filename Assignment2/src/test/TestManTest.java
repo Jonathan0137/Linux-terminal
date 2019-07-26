@@ -24,6 +24,18 @@ public class TestManTest {
   Man var;
   JShell newJShell;
 
+  private String execute(String userInput, JShell newJShell)
+  {
+    Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
+    if (toBeExecuted != null) {
+      CommandParameter param =
+          new CommandParameter(toBeExecuted, newJShell, userInput);
+      toBeExecuted.execute(param.getParameters());
+    }
+
+    return Output.getOutputInstance().getStringOutput();
+  }
+  
   @Before
   public void setUp() {
     acutal = null;
@@ -37,14 +49,8 @@ public class TestManTest {
     userInput = "man jsadsadsad";
     expected =
         "Error: No such CMD exist, check man man for " + "more information\n";
-    Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
-    if (toBeExecuted != null) {
-      CommandParameter param =
-          new CommandParameter(toBeExecuted, newJShell, userInput);
-      toBeExecuted.execute(param.getParameters());
-    }
-
-    acutal = Output.getOutputInstance().getStringOutput();
+   
+    acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
   }
 
@@ -62,14 +68,7 @@ public class TestManTest {
         + "\t'.' represents the current directory.\n\n";
 
 
-    Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
-    if (toBeExecuted != null) {
-      CommandParameter param =
-          new CommandParameter(toBeExecuted, newJShell, userInput);
-      toBeExecuted.execute(param.getParameters());
-    }
-
-    acutal = Output.getOutputInstance().getStringOutput();
+    acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
 
   }
@@ -80,14 +79,7 @@ public class TestManTest {
     expected = "exit: exit" + "\n\t" + "Terminates shell and deletes"
         + " all memory of " + "directory" + "\n\t\t" + "tree, user input"
         + ", directory stack and files.\n";
-    Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
-    if (toBeExecuted != null) {
-      CommandParameter param =
-          new CommandParameter(toBeExecuted, newJShell, userInput);
-      toBeExecuted.execute(param.getParameters());
-    }
-
-    acutal = Output.getOutputInstance().getStringOutput();
+    acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
   }
 
@@ -101,15 +93,7 @@ public class TestManTest {
         + "starting from the root directory.\n\tOtherwise, it is "
         + "interpreted as a relative path to the\n\tcurrent "
         + "directory.\n\n\n";
-
-    Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
-    if (toBeExecuted != null) {
-      CommandParameter param =
-          new CommandParameter(toBeExecuted, newJShell, userInput);
-      toBeExecuted.execute(param.getParameters());
-    }
-
-    acutal = Output.getOutputInstance().getStringOutput();
+    acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
   }
 
@@ -126,15 +110,7 @@ public class TestManTest {
         + "\n\t\tIf p specifies a directory, print p, a colon, then the "
         + "contents of that" + "\n\t\t\tdirectory, then an extra new line."
         + "\n\t\tIf p does not exist, print a suitable message.\n";
-
-    Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
-    if (toBeExecuted != null) {
-      CommandParameter param =
-          new CommandParameter(toBeExecuted, newJShell, userInput);
-      toBeExecuted.execute(param.getParameters());
-    }
-
-    acutal = Output.getOutputInstance().getStringOutput();
+    acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
   }
 
@@ -146,14 +122,7 @@ public class TestManTest {
     expected = "pwd: pwd\n" + "\tprint the absolute path of the current "
         + "working directory\n\n";
 
-    Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
-    if (toBeExecuted != null) {
-      CommandParameter param =
-          new CommandParameter(toBeExecuted, newJShell, userInput);
-      toBeExecuted.execute(param.getParameters());
-    }
-
-    acutal = Output.getOutputInstance().getStringOutput();
+    acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
   }
 
@@ -165,17 +134,8 @@ public class TestManTest {
         + "\tMove item OLDPATH to NEWPATH. Both OLDPATH\n"
         + "\tand NEWPATH may be relative to the current\n "
         + "\tdirectory or may be full paths. If NEWPATH is a\n"
-        + "\tdirectory, move the item into the directory \n";
-
-
-    Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
-    if (toBeExecuted != null) {
-      CommandParameter param =
-          new CommandParameter(toBeExecuted, newJShell, userInput);
-      toBeExecuted.execute(param.getParameters());
-    }
-
-    acutal = Output.getOutputInstance().getStringOutput();
+        + "\tdirectory, move the item into the directory\n";
+    acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
   }
 
@@ -188,14 +148,7 @@ public class TestManTest {
         + "\tdirectory or may be full paths. If NEWPATH is a\n"
         + "\tdirectory, copy the item into the directory.\n"
         + "\tDoes not remove item OLDPATH\n";
-    Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
-    if (toBeExecuted != null) {
-      CommandParameter param =
-          new CommandParameter(toBeExecuted, newJShell, userInput);
-      toBeExecuted.execute(param.getParameters());
-    }
-
-    acutal = Output.getOutputInstance().getStringOutput();
+    acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
   }
 
@@ -207,14 +160,7 @@ public class TestManTest {
         + "\tFILE1 [FILE2...] must be the names of a file.\n\n"
         + "\t3 line breaks seperate the contents if more than"
         + " 1 file name is inputted.\n\n\n";
-    Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
-    if (toBeExecuted != null) {
-      CommandParameter param =
-          new CommandParameter(toBeExecuted, newJShell, userInput);
-      toBeExecuted.execute(param.getParameters());
-    }
-
-    acutal = Output.getOutputInstance().getStringOutput();
+    acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
   }
 
@@ -227,14 +173,7 @@ public class TestManTest {
         + "\n\t\t" + "the URLs file name. Otherwise utilizing" + " redirection,"
         + "\n\t\t" + "add the contents to a new or pre-existing file in"
         + "\n\t\t" + "the FileSystem.\n";
-    Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
-    if (toBeExecuted != null) {
-      CommandParameter param =
-          new CommandParameter(toBeExecuted, newJShell, userInput);
-      toBeExecuted.execute(param.getParameters());
-    }
-
-    acutal = Output.getOutputInstance().getStringOutput();
+    acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
   }
 
@@ -251,14 +190,7 @@ public class TestManTest {
         + " path exists," + " and user inputs" + "\n\t\t\t"
         + "argument \">>\", then " + "append STRING onto" + "\n\t\t\t"
         + "the end of OUTFILE file.\n";
-    Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
-    if (toBeExecuted != null) {
-      CommandParameter param =
-          new CommandParameter(toBeExecuted, newJShell, userInput);
-      toBeExecuted.execute(param.getParameters());
-    }
-
-    acutal = Output.getOutputInstance().getStringOutput();
+    acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
   }
 
@@ -269,14 +201,7 @@ public class TestManTest {
         + "\tCMD means commands that we use.\n" + "\tExample: man cat \n"
         + "\tList of all commands\n\n" + "\texit  mkdir   cd      ls    pwd\n"
         + "\tpushd popd    history cat   echo man \n\n";
-    Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
-    if (toBeExecuted != null) {
-      CommandParameter param =
-          new CommandParameter(toBeExecuted, newJShell, userInput);
-      toBeExecuted.execute(param.getParameters());
-    }
-
-    acutal = Output.getOutputInstance().getStringOutput();
+    acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
   }
 
@@ -288,14 +213,7 @@ public class TestManTest {
             + "to the end of the\n\tdirectory stack. Then, it changes the "
             + "current directory to DIR.\n\n"
             + "\tDIR must be a valid absolute or relative path name.\n";
-    Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
-    if (toBeExecuted != null) {
-      CommandParameter param =
-          new CommandParameter(toBeExecuted, newJShell, userInput);
-      toBeExecuted.execute(param.getParameters());
-    }
-
-    acutal = Output.getOutputInstance().getStringOutput();
+    acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
   }
 
@@ -305,14 +223,7 @@ public class TestManTest {
     expected = "popd: popd\n\tRemoves the top directory from the directory "
         + "stack and\n\tchanges the working directory to it.\n\n"
         + "\tReturns an error message if directory stack is empty.\n";
-    Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
-    if (toBeExecuted != null) {
-      CommandParameter param =
-          new CommandParameter(toBeExecuted, newJShell, userInput);
-      toBeExecuted.execute(param.getParameters());
-    }
-
-    acutal = Output.getOutputInstance().getStringOutput();
+    acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
   }
 
@@ -324,21 +235,14 @@ public class TestManTest {
         + "activating JShell, ordered from least recent input to most"
         + "\n\t\t" + "recent input." + "\n\t" + "Otherwise;" + "\n\t\t"
         + "print out the last n user inputs " + "where n is" + " NUMBER >= 0\n";
-    Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
-    if (toBeExecuted != null) {
-      CommandParameter param =
-          new CommandParameter(toBeExecuted, newJShell, userInput);
-      toBeExecuted.execute(param.getParameters());
-    }
-
-    acutal = Output.getOutputInstance().getStringOutput();
+    acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
   }
 
-  @Test
-  public void testManExecuteSave() {
-    // to be added
-  }
+//  @Test
+//  public void testManExecuteSave() {
+//    // to be added
+//  }
 
   @Test
   public void testManExecuteLoad() {
@@ -349,32 +253,24 @@ public class TestManTest {
         + "about console state. Load must be the first command "
         + "called in a new console.\nIf FILE's path is not given, "
         + "the default location to search for FILE is the folder Assignmnent2.\n";
-
-    Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
-    if (toBeExecuted != null) {
-      CommandParameter param =
-          new CommandParameter(toBeExecuted, newJShell, userInput);
-      toBeExecuted.execute(param.getParameters());
-    }
-
-    acutal = Output.getOutputInstance().getStringOutput();
+    acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
   }
 
-  @Test
-  public void testManExecuteFind() {
-    userInput = "man find";
-    expected = "";
-    Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
-    if (toBeExecuted != null) {
-      CommandParameter param =
-          new CommandParameter(toBeExecuted, newJShell, userInput);
-      toBeExecuted.execute(param.getParameters());
-    }
-  
-    acutal = Output.getOutputInstance().getStringOutput();
-    assertEquals(expected, acutal);
-   }
+//  @Test
+//  public void testManExecuteFind() {
+//    userInput = "man find";
+//    expected = "";
+//    Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
+//    if (toBeExecuted != null) {
+//      CommandParameter param =
+//          new CommandParameter(toBeExecuted, newJShell, userInput);
+//      toBeExecuted.execute(param.getParameters());
+//    }
+//  
+//    acutal = Output.getOutputInstance().getStringOutput();
+//    assertEquals(expected, acutal);
+//   }
 
   @Test
   public void testManExecuteTree() {
@@ -385,14 +281,7 @@ public class TestManTest {
         + "\tFor every level of the tree, there is an "
         + "\tindent by a tab character\n\n" + "\tExample: \root\n"
         + "\t\tdocement\n" + "\t\t\tsome_file.txt\n" + "\t\tDownload\n\n";
-    Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
-    if (toBeExecuted != null) {
-      CommandParameter param =
-          new CommandParameter(toBeExecuted, newJShell, userInput);
-      toBeExecuted.execute(param.getParameters());
-    }
-
-    acutal = Output.getOutputInstance().getStringOutput();
+    acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
   }
 
