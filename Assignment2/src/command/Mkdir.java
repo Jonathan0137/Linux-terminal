@@ -17,7 +17,7 @@ import output.Output;
 public class Mkdir extends Command{//need to fix errors in mkdir from 2a
 	
 	/**
-	  * Creates a new directory
+	  * Execute mkdir command
 	  * 
 	  * @param param	ArrayList of all parameters required by mkdir
 	  */
@@ -74,64 +74,6 @@ public class Mkdir extends Command{//need to fix errors in mkdir from 2a
 	}
 	
 	
-	// TODO: Remove commented code
-	/**
-	  * Adds the subDirectory into the parent directory
-	  * 
-	  * @param parentDirectory   the directory the user is adding into
-	  * @param subDirectory   the directory that is being added by the user
-	  */
-//	public void addSubdirectory(Directory parent, 
-//						Directory subDirectory) {	
-//		HashMap<String, FileSystemNode> listOfNodes = parent.getListOfFileSystemNodes();
-//		
-//		if (listOfNodes.containsKey(subDirectory.getName())) {
-//			System.out.println("The name '" + subDirectory.getName()
-//								+ "' already exists in this directory.");
-//			return;
-//		}
-//		subDirectory.setParentDirectory(parent);
-//		listOfNodes.put(subDirectory.getName(), subDirectory);
-//	}
-	 
-	
-	/**
-	  * Checks if the name of the directory the user is attempting to create
-	  * is already a directory name in the parent Directory.
-	  * 
-	  * @param listOfDirectories   the list of subdirectories that exist
-	  * 						   in the parent
-	  * @param subDirectory   the directory that the user is attempting to add
-	  */
-//	private static boolean containsDirectory(ArrayList<Directory> listOfDir,
-//													Directory subDirectory) {   
-//		String subDirName = subDirectory.getName();
-//		for (int i=0; i<listOfDir.size(); i++) {
-//			if (listOfDir.get(i).getName().equals(subDirName)) {
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
-	
-	/**
-     * Checks if the name of the  directory the user is attempting to create is 
-     * already a file name in the parent Directory.
-     * 
-     * @param listOfFiles   the list of files that already exist in the parent
-     * @param subDirectory   the directory that the user is attempting to add
-     */
-//   private static boolean containsFile(ArrayList<File> listOfFiles, 
-//		   									Directory subDirectory) {   
-//       String subDirName = subDirectory.getName();
-//       for (int i=0; i<listOfFiles.size(); i++) {
-//           if (listOfFiles.get(i).getName().equals(subDirName)) {
-//               return true;
-//           }
-//       }
-//       return false;
-//   }
-	
 	/**
 	 * Returns true if the directory a user is attempting to create has
 	 * a valid name and returns false if it contains invalid characters
@@ -141,15 +83,15 @@ public class Mkdir extends Command{//need to fix errors in mkdir from 2a
 	 * @return boolean that is true if directory name is valid
 	 */
 	public static boolean directoryCheck(String directoryName) {
-		if (/*directoryName.contains(".") ||*/ directoryName.contains("@") 
-				|| directoryName.contains("!") || directoryName.contains("#@")
-				|| directoryName.contains("$") || directoryName.contains("%")
-				|| directoryName.contains("^") || directoryName.contains("&")
-				|| directoryName.contains("*") || directoryName.contains("(")
-				|| directoryName.contains(")") || directoryName.contains("{")
-				|| directoryName.contains("}") || directoryName.contains("~")
-				|| directoryName.contains("|") || directoryName.contains("<")
-				|| directoryName.contains(">") || directoryName.contains("?"))
+		if (directoryName.contains("@") || directoryName.contains("!") ||
+			directoryName.contains("#") || directoryName.contains("$") ||
+			directoryName.contains("%") || directoryName.contains("^") ||
+			directoryName.contains("&") || directoryName.contains("*") ||
+			directoryName.contains("(") || directoryName.contains(")") ||
+			directoryName.contains("{") || directoryName.contains("}") ||
+			directoryName.contains("~") || directoryName.contains("|") ||
+			directoryName.contains("<") || directoryName.contains(">") ||
+			directoryName.contains("?"))
 		{
 			return false;
 		}
