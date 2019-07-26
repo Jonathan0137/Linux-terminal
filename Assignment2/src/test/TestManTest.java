@@ -24,8 +24,7 @@ public class TestManTest {
   Man var;
   JShell newJShell;
 
-  private String execute(String userInput, JShell newJShell)
-  {
+  private String execute(String userInput, JShell newJShell) {
     Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
     if (toBeExecuted != null) {
       CommandParameter param =
@@ -35,7 +34,7 @@ public class TestManTest {
 
     return Output.getOutputInstance().getStringOutput();
   }
-  
+
   @Before
   public void setUp() {
     acutal = null;
@@ -49,7 +48,7 @@ public class TestManTest {
     userInput = "man jsadsadsad";
     expected =
         "Error: No such CMD exist, check man man for " + "more information\n";
-   
+
     acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
   }
@@ -239,10 +238,10 @@ public class TestManTest {
     assertEquals(expected, acutal);
   }
 
-//  @Test
-//  public void testManExecuteSave() {
-//    // to be added
-//  }
+  // @Test
+  // public void testManExecuteSave() {
+  // // to be added
+  // }
 
   @Test
   public void testManExecuteLoad() {
@@ -257,20 +256,17 @@ public class TestManTest {
     assertEquals(expected, acutal);
   }
 
-//  @Test
-//  public void testManExecuteFind() {
-//    userInput = "man find";
-//    expected = "";
-//    Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
-//    if (toBeExecuted != null) {
-//      CommandParameter param =
-//          new CommandParameter(toBeExecuted, newJShell, userInput);
-//      toBeExecuted.execute(param.getParameters());
-//    }
-//  
-//    acutal = Output.getOutputInstance().getStringOutput();
-//    assertEquals(expected, acutal);
-//   }
+  @Test
+  public void testManExecuteFind() {
+    userInput = "man find";
+    expected = "find: find path... -type [f|d] -name expression\n"
+        + "\tfind the node named 'expression' in the directories\n"
+        + "\tgiven by path. There can be multiple paths given.\n "
+        + "\tIf the type is 'f' then find a file with name expression,\n"
+        + "\tand if type is 'd' then find a directory with name expression\n";
+    acutal = execute(userInput, newJShell);
+    assertEquals(expected, acutal);
+  }
 
   @Test
   public void testManExecuteTree() {

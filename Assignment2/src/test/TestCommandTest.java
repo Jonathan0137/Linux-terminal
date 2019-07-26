@@ -9,6 +9,7 @@ import command.Command;
 import command.Cp;
 import command.Echo;
 import command.Exit;
+import command.Find;
 import command.Get;
 import command.History;
 import command.Load;
@@ -180,15 +181,15 @@ public class TestCommandTest {
     assertEquals(expected, acutal);
   }
 
-  // @Test
-  // public void testtoStringFind()
-  // {
-  // expected = "Find";
-  // var = new Find();
-  // acutal=var.toString();
-  //
-  // assertEquals(expected, acutal);
-  // }
+   @Test
+   public void testtoStringFind()
+   {
+     expected = "Find";
+     var = new Find();
+     acutal=var.toString();
+    
+     assertEquals(expected, acutal);
+   }
   @Test
   public void testtoStringTree() {
     expected = "Tree";

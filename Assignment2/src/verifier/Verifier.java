@@ -64,7 +64,7 @@ public class Verifier {
     hashtable.put("history", new History());
     hashtable.put("save", new Save());
     hashtable.put("load", new Load());
-    //hashtable.put("find", new Find());
+    hashtable.put("find", new Find());
     hashtable.put("tree", new Tree());    
   }
   
