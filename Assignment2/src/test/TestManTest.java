@@ -37,9 +37,9 @@ public class TestManTest {
 
   @Before
   public void setUp() {
-    acutal = null;
-    expected = null;
-    userInput = null;
+    acutal = new String();
+    expected = new String();
+    userInput = new String();
     newJShell = new JShell();
   }
 

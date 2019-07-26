@@ -17,8 +17,8 @@ public class TestVerifierTest {
 
   @Before
   public void setUp() {
-    userInput = null;
-    expected = null;
+    userInput = new String();
+    expected = new String();
     correct = new Verifier();
   }
 

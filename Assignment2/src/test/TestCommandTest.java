@@ -35,9 +35,8 @@ public class TestCommandTest {
 
   @Before
   public void setUp() {
-    var = null;
-    acutal = null;
-    expected = null;
+    acutal = new String();
+    expected = new String();
   }
 
 
