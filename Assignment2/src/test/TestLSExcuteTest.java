@@ -18,12 +18,12 @@ import verifier.Verifier;
 public class TestLSExcuteTest {
   ArrayList<String> input;
   JShell newJShell;
-  ArrayList<String> acutal;
+  String acutal;
 
   @Before
   public void setUp() {
     input = new ArrayList<String>();
-    acutal = new ArrayList<String>();
+    acutal = new String();
     newJShell = new JShell();
   }
 
@@ -33,42 +33,36 @@ public class TestLSExcuteTest {
     input.add("mkdir Folder2");
     input.add("mkdir Folder1/Folder3");
     input.add("ls");
-
     for (String userInput : input) {
-      Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
-      if (toBeExecuted != null) {
-        CommandParameter param =
-            new CommandParameter(toBeExecuted, newJShell, userInput);
-        toBeExecuted.execute(param.getParameters());
-      }
+      execute(userInput, newJShell);
     }
-
-
     assertEquals("Folder1\nFolder2\n",
         Output.getOutputInstance().getStringOutput());
 
-
+    Output.getOutputInstance().resetOutput();
   }
 
   @Test
   public void testLsWithR() {
-    input.add("mkdir Folder1");
-    input.add("mkdir Folder2");
-    input.add("mkdir Folder1/Folder3");
     input.add("ls -R");
+
     for (String userInput : input) {
-      Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
-      if (toBeExecuted != null) {
-        CommandParameter param =
-            new CommandParameter(toBeExecuted, newJShell, userInput);
-        toBeExecuted.execute(param.getParameters());
-      }
+      execute(userInput, newJShell);
     }
-    // System.out.print(Output.getOutputInstance().getStringOutput());
     assertEquals("\n/Folder2/:\n\n/Folder1/:\n\n/Folder1/Folder3/:\n",
         Output.getOutputInstance().getStringOutput());
 
+    Output.getOutputInstance().resetOutput();
+  }
 
+
+  private void execute(String userInput, JShell newJShell) {
+    Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
+    if (toBeExecuted != null) {
+      CommandParameter param =
+          new CommandParameter(toBeExecuted, newJShell, userInput);
+      toBeExecuted.execute(param.getParameters());
+    }
 
   }
 }

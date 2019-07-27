@@ -45,9 +45,9 @@ public class TestTreeExcuteTest {
       }
     }
 
-    // System.out.print(Output.getOutputInstance().getStringOutput());
     assertEquals("\\\n  Folder2\n    Folder4\n  Folder1\n    Folder3\n",
         Output.getOutputInstance().getStringOutput());
+    Output.getOutputInstance().resetOutput();
   }
 
 }
