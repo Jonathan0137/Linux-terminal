@@ -56,23 +56,6 @@ public class RedirectionTest {
 		assertEquals(expected.get(1).getOutput(), actual.get(1).getOutput());
 	}
 	
-	/*@Test //Checks that no file has been created
-	public void testredirectionSetUpNoRedirectionNeededFileCheck() {
-		output.addUserOutput("test");
-		output.addErrorOutput("another output");
-		UserOutput input1 = new UserOutput();
-		ErrorOutput input2 = new ErrorOutput();
-		input1.setOutput("test");
-		input2.setOutput("another output");
-		mockOutput.add(input1);
-		mockOutput.add(input2);
-		userInput = "commandx (...)";
-		Redirection.redirectionSetUp(userInput);
-		FileSystemNode actual = FileSystemManipulation.;
-		FileSystemNode expected = null;
-		assertEquals(expected, actual);
-	}*/
-	
 	@Test
 	public void testredirectionSetUpNonExistingFileCurrentDirOverwrite() {
 		output.addUserOutput("test");
