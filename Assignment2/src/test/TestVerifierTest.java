@@ -161,12 +161,14 @@ public class TestVerifierTest {
   @Test
   public void testCheckUserInputCommandInvalidCommand() {
     userInput = "hehehehe";
+    expected = null;
     assertEquals(expected, Verifier.checkUserInputCommand(userInput));
   }
 
   @Test
   public void testCheckUserInputCommandEmpty() {
     userInput = "";
+    expected = null;
     assertEquals(expected, Verifier.checkUserInputCommand(userInput));
   }
 
