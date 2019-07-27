@@ -1,6 +1,8 @@
 package command;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import fileSystem.*;
 
 
@@ -34,14 +36,27 @@ public class Mv extends Command{
 	 * @param newPath	the path where the item is moved to
 	 */
 	public void moveItem(String oldPath, String newPath) {
-		Directory workingDir = FileSystem.getFileSystem().getCurrentDirectory();
+		Directory workingDir = FileSystem.getFileSystem().
+													getCurrentDirectory();
 		//get absolute paths of the old and new path
-		String absOldPath = FileSystemManipulation.getAbsolutePath(oldPath, workingDir);
-		String absNewPath = FileSystemManipulation.getAbsolutePath(newPath, workingDir);
+		String absOldPath = FileSystemManipulation.getAbsolutePath(oldPath,
+																workingDir);
+		String absNewPath = FileSystemManipulation.getAbsolutePath(newPath,
+																workingDir);
 		//find the item to be moved in the filesystem
-		FileSystemNode item = FileSystemManipulation.findFileSystemNode(absOldPath);
+		FileSystemNode item = FileSystemManipulation.findFileSystemNode(
+																absOldPath);
+		
+		//remove node from old location
+		Directory oldDir = item.getParentDirectory();
+		String itemName = item.getName(); 
+		HashMap<String, FileSystemNode> oldDirNodes = oldDir.
+												getListOfFileSystemNodes();
+		oldDirNodes.remove(itemName);
+		
 		//find the path of the new parent directory
-		Directory newParent = (Directory) FileSystemManipulation.findFileSystemNode(absNewPath);
+		Directory newParent = (Directory) FileSystemManipulation.
+											findFileSystemNode(absNewPath);
 		
 		//add the node into the parent directory
 		FileSystemManipulation.addFileSystemNode(newParent, item);
