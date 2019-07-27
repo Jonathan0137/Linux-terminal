@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import command.Command;
-import command.Man;
 import commandParameter.CommandParameter;
 import driver.JShell;
 import output.Output;
@@ -18,10 +17,10 @@ import verifier.Verifier;
 
 public class TestManTest {
 
-  String acutal;
-  String expected;
-  String userInput;
-  JShell newJShell;
+  private String acutal;
+  private String expected;
+  private String userInput;
+  private JShell newJShell;
 
 
 
