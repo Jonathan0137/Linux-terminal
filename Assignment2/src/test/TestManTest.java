@@ -21,19 +21,9 @@ public class TestManTest {
   String acutal;
   String expected;
   String userInput;
-  Man var;
   JShell newJShell;
 
-  private String execute(String userInput, JShell newJShell) {
-    Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
-    if (toBeExecuted != null) {
-      CommandParameter param =
-          new CommandParameter(toBeExecuted, newJShell, userInput);
-      toBeExecuted.execute(param.getParameters());
-    }
 
-    return Output.getOutputInstance().getStringOutput();
-  }
 
   @Before
   public void setUp() {
@@ -51,6 +41,7 @@ public class TestManTest {
 
     acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
+    Output.getOutputInstance().resetOutput();
   }
 
   @Test
@@ -69,7 +60,7 @@ public class TestManTest {
 
     acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
-
+    Output.getOutputInstance().resetOutput();
   }
 
   @Test
@@ -80,6 +71,7 @@ public class TestManTest {
         + ", directory stack and files.\n";
     acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
+    Output.getOutputInstance().resetOutput();
   }
 
   @Test
@@ -94,6 +86,7 @@ public class TestManTest {
         + "directory.\n\n\n";
     acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
+    Output.getOutputInstance().resetOutput();
   }
 
   @Test
@@ -111,6 +104,7 @@ public class TestManTest {
         + "\n\t\tIf p does not exist, print a suitable message.\n";
     acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
+    Output.getOutputInstance().resetOutput();
   }
 
   @Test
@@ -123,6 +117,7 @@ public class TestManTest {
 
     acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
+    Output.getOutputInstance().resetOutput();
   }
 
   @Test
@@ -136,6 +131,7 @@ public class TestManTest {
         + "\tdirectory, move the item into the directory\n";
     acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
+    Output.getOutputInstance().resetOutput();
   }
 
   @Test
@@ -149,6 +145,7 @@ public class TestManTest {
         + "\tDoes not remove item OLDPATH\n";
     acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
+    Output.getOutputInstance().resetOutput();
   }
 
   @Test
@@ -161,6 +158,7 @@ public class TestManTest {
         + " 1 file name is inputted.\n\n\n";
     acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
+    Output.getOutputInstance().resetOutput();
   }
 
   @Test
@@ -174,6 +172,7 @@ public class TestManTest {
         + "\n\t\t" + "the FileSystem.\n";
     acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
+    Output.getOutputInstance().resetOutput();
   }
 
   @Test
@@ -191,6 +190,7 @@ public class TestManTest {
         + "the end of OUTFILE file.\n";
     acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
+    Output.getOutputInstance().resetOutput();
   }
 
   @Test
@@ -202,6 +202,7 @@ public class TestManTest {
         + "\tpushd popd    history cat   echo man \n\n";
     acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
+    Output.getOutputInstance().resetOutput();
   }
 
   @Test
@@ -214,6 +215,7 @@ public class TestManTest {
             + "\tDIR must be a valid absolute or relative path name.\n";
     acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
+    Output.getOutputInstance().resetOutput();
   }
 
   @Test
@@ -224,6 +226,7 @@ public class TestManTest {
         + "\tReturns an error message if directory stack is empty.\n";
     acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
+    Output.getOutputInstance().resetOutput();
   }
 
   @Test
@@ -236,6 +239,7 @@ public class TestManTest {
         + "print out the last n user inputs " + "where n is" + " NUMBER >= 0\n";
     acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
+    Output.getOutputInstance().resetOutput();
   }
 
   // @Test
@@ -254,6 +258,7 @@ public class TestManTest {
         + "the default location to search for FILE is the folder Assignmnent2.\n";
     acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
+    Output.getOutputInstance().resetOutput();
   }
 
   @Test
@@ -266,6 +271,7 @@ public class TestManTest {
         + "\tand if type is 'd' then find a directory with name expression\n";
     acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
+    Output.getOutputInstance().resetOutput();
   }
 
   @Test
@@ -279,8 +285,18 @@ public class TestManTest {
         + "\t\tdocement\n" + "\t\t\tsome_file.txt\n" + "\t\tDownload\n\n";
     acutal = execute(userInput, newJShell);
     assertEquals(expected, acutal);
+    Output.getOutputInstance().resetOutput();
   }
+  private String execute(String userInput, JShell newJShell) {
+    Command toBeExecuted = Verifier.checkUserInputCommand(userInput);
+    if (toBeExecuted != null) {
+      CommandParameter param =
+          new CommandParameter(toBeExecuted, newJShell, userInput);
+      toBeExecuted.execute(param.getParameters());
+    }
 
+    return Output.getOutputInstance().getStringOutput();
+  }
 
 
 }
