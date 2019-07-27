@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import fileSystem.*;
+import output.Output;
 
 
 /**
@@ -38,28 +39,30 @@ public class Mv extends Command{
 	public void moveItem(String oldPath, String newPath) {
 		Directory workingDir = FileSystem.getFileSystem().
 													getCurrentDirectory();
-		//get absolute paths of the old and new path
 		String absOldPath = FileSystemManipulation.getAbsolutePath(oldPath,
 																workingDir);
 		String absNewPath = FileSystemManipulation.getAbsolutePath(newPath,
 																workingDir);
-		//find the item to be moved in the filesystem
 		FileSystemNode item = FileSystemManipulation.findFileSystemNode(
 																absOldPath);
-		
-		//remove node from old location
-		Directory oldDir = item.getParentDirectory();
 		String itemName = item.getName(); 
-		HashMap<String, FileSystemNode> oldDirNodes = oldDir.
-												getListOfFileSystemNodes();
-		oldDirNodes.remove(itemName);
 		
-		//find the path of the new parent directory
 		Directory newParent = (Directory) FileSystemManipulation.
 											findFileSystemNode(absNewPath);
-		
-		//add the node into the parent directory
-		FileSystemManipulation.addFileSystemNode(newParent, item);
+		HashMap<String, FileSystemNode> newDirNodes = newParent.
+												getListOfFileSystemNodes();
+		if (newDirNodes.containsKey(itemName)) {
+			Output out = Output.getOutputInstance();
+			out.addErrorOutput("The node '" + itemName + "' already exists"
+													+ " in " + absNewPath);
+		}
+		else {
+			Directory oldDir = item.getParentDirectory();
+			HashMap<String, FileSystemNode> oldDirNodes = oldDir.
+												getListOfFileSystemNodes();
+			oldDirNodes.remove(itemName);
+			FileSystemManipulation.addFileSystemNode(newParent, item);
+		}
 	}
 	
 	/**
