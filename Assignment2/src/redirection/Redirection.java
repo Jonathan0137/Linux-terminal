@@ -117,8 +117,8 @@ public final class Redirection {
 		if (FileSystemManipulation.findFileSystemNode(fullPath) instanceof Directory) {
 			Directory parent = (Directory) FileSystemManipulation.findFileSystemNode(fullPath);
 			String text = Redirection.extractOutputsFromList();
-			if (FileSystemManipulation
-					.findFileSystemNode(fullPath + "/" + fileName) instanceof File) {
+			if (FileSystemManipulation.findFileSystemNode(fullPath + "/" + fileName) 
+					instanceof File) {
 				target = (File) FileSystemManipulation
 						.findFileSystemNode(fullPath + "/" + fileName);
 				if (situation.contentEquals(">")) {
@@ -132,7 +132,7 @@ public final class Redirection {
 			}
 		} else {
 			outputList.resetOutput();
-			outputList.addErrorOutput("Given directory does not exist for redirection");
+			outputList.addErrorOutput("Redirection: Given directory does not exist");
 		}
 	}
 
@@ -148,8 +148,8 @@ public final class Redirection {
 	 * @param text     The String of all command outputs concatenated together
 	 *                 separated by new lines
 	 */
-	private static void createAndAddFile(String fullPath, String fileName, Directory parent, 
-			String text) {
+	private static void createAndAddFile(String fullPath, 
+			String fileName, Directory parent, String text) {
 		if (Redirection.fileNameCheck(fileName, parent)) {
 			File toAdd = new File(fileName, text);
 			toAdd.setParentDirectory(parent);
@@ -204,11 +204,12 @@ public final class Redirection {
 		}
 		if (fullPath.length() > 0) {
 			if (fullPath.charAt(0) == '/') {
-				fullPath = FileSystemManipulation.getAbsolutePath(fullPath, fs.getRootDirectory());
+				fullPath = FileSystemManipulation
+						.getAbsolutePath(fullPath, fs.getRootDirectory());
 			}
 			if (fullPath.charAt(0) != '/') {
-				fullPath = 
-						FileSystemManipulation.getAbsolutePath(fullPath, fs.getCurrentDirectory());
+				fullPath = FileSystemManipulation
+						.getAbsolutePath(fullPath, fs.getCurrentDirectory());
 			}
 		}
 		return fullPath;
