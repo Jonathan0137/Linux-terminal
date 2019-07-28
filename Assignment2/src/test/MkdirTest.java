@@ -1,15 +1,16 @@
 package test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import command.Command;
 import commandParameter.CommandParameter;
 import driver.JShell;
+import fileSystem.Directory;
+import fileSystem.FileSystemManipulation;
 import verifier.Verifier;
-import fileSystem.*;
 
 class MkdirTest {
 
