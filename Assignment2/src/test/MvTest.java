@@ -32,12 +32,14 @@ public class MvTest {
 	
 	@Test
 	public void MvFile() {
-		execute("mkdir d", newJShell);
+		execute("mkdir d d2", newJShell);
 		Directory d = (Directory) FileSystemManipulation.findFileSystemNode("/d");
 		File file1 = new File("File1");
 		file1.setContents("File1 contents");
 		file1.setParentDirectory(d);
-		assertEquals("/d/File1", file1.getFullPathName());
+		FileSystemManipulation.addFileSystemNode(d, file1);
+		execute("mv /d/File1 /d2", newJShell);
+		assertEquals("/d2/File1", file1.getFullPathName());
 	}
 	
 	@Test
