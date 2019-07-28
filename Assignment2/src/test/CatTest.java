@@ -14,7 +14,7 @@ import output.Output;
 import redirection.Redirection;
 import verifier.Verifier;
 
-class CatTest {
+public class CatTest {
 
 	ArrayList<String> input;
 	JShell newJShell;
@@ -26,7 +26,7 @@ class CatTest {
   	}
 	
 	@Test
-	void CatWith1File() {
+	public void CatWith1File() {
 		execute("echo \"File1 contents\" > File1", newJShell);
 		execute("cat File1", newJShell);
 		assertEquals("File1 contents\n", 
@@ -35,7 +35,7 @@ class CatTest {
 	}
 	
 	@Test
-	void CatWithMultipleFiles() {
+	public void CatWithMultipleFiles() {
 		execute("echo \"File1 contents\" > File1", newJShell);
 		execute("echo \"File2 contents\" > File2", newJShell);
 		execute("cat File1 File2", newJShell);
@@ -45,7 +45,7 @@ class CatTest {
 	}
 
 	@Test
-	void CatWith1FileError() {
+	public void CatWith1FileError() {
 		execute("cat File1", newJShell);
 		assertEquals("Error: The file 'File1' does not exist in /\n", 
 				Output.getOutputInstance().getStringOutput());
@@ -63,4 +63,5 @@ class CatTest {
 	    }
 
 	}
+
 }
