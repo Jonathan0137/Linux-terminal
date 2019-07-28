@@ -11,7 +11,8 @@ import driver.JShell;
 import output.Output;
 import verifier.Verifier;
 
-class PwdTest {
+public class PwdTest {
+
 	JShell newJShell;
 
   	@Before
@@ -20,7 +21,7 @@ class PwdTest {
   	}
 	
 	@Test
-	void testPwdExecute() {
+	public void testPwdExecute() {
 		execute("mkdir Folder1", newJShell);
 		execute("cd Folder1", newJShell);
 		execute("pwd", newJShell);
