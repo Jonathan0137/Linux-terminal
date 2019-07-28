@@ -241,10 +241,17 @@ public class TestManTest {
     Output.getOutputInstance().resetOutput();
   }
 
-  // @Test
-  // public void testManExecuteSave() {
-  // // to be added
-  // }
+  @Test
+  public void testManExecuteSave() {
+     userInput = "man save";
+     expected = "save: save FILE\n\tSave the current state of the shell to FILE, "
+         + "on the user's \n\tcomputer file system. This allows the user to close the "
+         + "\n\tshell and reopen it later in the same state.\n\n\tIf FILE's path "
+         + "is not specified, the default location to \n\tsave FILE is the folder Assignment2.\n";
+     acutal = execute(userInput, newJShell);
+     assertEquals(expected, acutal);
+     Output.getOutputInstance().resetOutput();
+  }
 
   @Test
   public void testManExecuteLoad() {
