@@ -43,7 +43,7 @@ public class Cat extends Command {
 					out.addUserOutput(contents);
 					if (num_arguments > 2 && i < num_arguments - 1) {
 					  //add line breaks to output
-					  out.addUserOutput("\n\n\n"); 
+					  out.addUserOutput("\n\n"); 
 					}
 				}
 			}
@@ -55,7 +55,7 @@ public class Cat extends Command {
 				out.addErrorOutput(error);
 				if (num_arguments > 2 && i < num_arguments - 1) {
 					//add line breaks to output
-					out.addUserOutput("\n\n\n"); 
+					out.addUserOutput("\n\n"); 
 				}
 			}
 		}
