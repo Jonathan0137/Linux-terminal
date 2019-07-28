@@ -55,6 +55,17 @@ public class TestLSExcuteTest {
     Output.getOutputInstance().resetOutput();
   }
 
+  @Test
+  public void testLsWithMutiPath() {
+    input.add("ls Folder1 Folder2");
+    for (String userInput : input) {
+      execute(userInput, newJShell);
+    }
+    assertEquals("Folder1 : \nFolder3\n\nFolder2 : \n\n",
+        Output.getOutputInstance().getStringOutput());
+
+    Output.getOutputInstance().resetOutput();
+  }
 
   private void execute(String userInput, JShell newJShell) {
     Command toBeExecuted = Verifier.checkUserInputCommand(userInput);

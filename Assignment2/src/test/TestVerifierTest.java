@@ -463,7 +463,7 @@ public class TestVerifierTest {
   @Test
   public void testCheckUserInputLSWithRWith2Path() {
     userInput = "ls -R Path Path";
-    assertEquals(false, correct.checkUserInput(userInput));
+    assertEquals(true, correct.checkUserInput(userInput));
   }
 
   @Test
