@@ -12,7 +12,7 @@ import fileSystem.Directory;
 import fileSystem.FileSystemManipulation;
 import verifier.Verifier;
 
-class MkdirTest {
+public class MkdirTest {
 
 	JShell newJShell;
 
@@ -22,14 +22,14 @@ class MkdirTest {
   	}
 	
 	@Test
-	void Mkdir1RelativeDirectory() {
+	public void Mkdir1RelativeDirectory() {
 		execute("mkdir a", newJShell);
 		Directory a = (Directory) FileSystemManipulation.findFileSystemNode("/a");
 		assertEquals("/a/", a.getFullPathName());
 	}
 	
 	@Test
-	void Mkdir1AbsoluteDirectory() {
+	public void Mkdir1AbsoluteDirectory() {
 		execute("mkdir a", newJShell);
 		execute("mkdir a/b", newJShell);
 		Directory b = (Directory) FileSystemManipulation.findFileSystemNode("/a/b");
@@ -37,7 +37,7 @@ class MkdirTest {
 	}
 	
 	@Test
-	void MkdirMultipleRelativeDirectories() {
+	public void MkdirMultipleRelativeDirectories() {
 		execute("mkdir a b c", newJShell);
 		Directory a = (Directory) FileSystemManipulation.findFileSystemNode("/a");
 		Directory b = (Directory) FileSystemManipulation.findFileSystemNode("/b");
@@ -48,7 +48,7 @@ class MkdirTest {
 	}
 	
 	@Test
-	void MkdirMultipleAbsoluteDirectory() {
+	public void MkdirMultipleAbsoluteDirectory() {
 		execute("mkdir a", newJShell);
 		execute("mkdir a/b a/c", newJShell);
 		Directory b = (Directory) FileSystemManipulation.findFileSystemNode("/a/b");
