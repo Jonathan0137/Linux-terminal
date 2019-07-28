@@ -25,10 +25,6 @@ public class Cat extends Command {
 	public void execute(ArrayList<Object> param)
 	{
 		String fileNames = (String) param.get(0);
-		if (fileNames.indexOf(">") > 0) 
-		{
-			fileNames = fileNames.substring(0, fileNames.indexOf(">"));
-		}
 		String[] arguments = fileNames.split(" ");
 		int num_arguments = arguments.length;
 		Directory currentDir = FileSystem.getFileSystem().getCurrentDirectory();
