@@ -45,7 +45,10 @@ public class Save extends Command {
 
   @Override
   protected String getDoc() {
-    String documentation = "";
+    String documentation = "save: save FILE\n\tSave the current state of the shell to FILE, "
+        + "on the user's \n\tcomputer file system. This allows the user to close the "
+        + "\n\tshell and reopen it later in the same state.\n\n\tIf FILE's path "
+        + "is not specified, the default location to \n\tsave FILE is the folder Assignment2.";
     return documentation;
   }
   
