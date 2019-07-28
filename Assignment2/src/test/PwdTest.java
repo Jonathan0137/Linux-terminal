@@ -16,11 +16,9 @@ import verifier.Verifier;
 class PwdTest {
 	ArrayList<String> input;
 	JShell newJShell;
-  	String acutal;
 
   	@Before
   	public void setUp() {
-  		input = new ArrayList<String>();
     	newJShell = new JShell();
   	}
 	
