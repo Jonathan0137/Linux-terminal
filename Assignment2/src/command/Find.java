@@ -14,6 +14,11 @@ public class Find extends Command {
 	@Override
 	public void execute(ArrayList<Object> param) {
 		String arguments = (String) param.get(0);
+		String name = "";
+		for (int i = arguments.indexOf("\"") + 1; i < 
+									arguments.lastIndexOf("\""); i++) {
+			name = name.concat(String.valueOf(arguments.charAt(i)));
+		}
 		String[] argList = arguments.split(" ");
 		ArrayList<String> paths = new ArrayList<>();
 		String type = "";
@@ -28,7 +33,6 @@ public class Find extends Command {
 				type = "f";
 			}
 		}
-		String name = argList[argList.length - 1];
 		findNode(name, type, paths);
 	}
 	/**
@@ -39,30 +43,37 @@ public class Find extends Command {
 	 * @param paths	list of the paths to the directories being searched
 	 */
 	public void findNode(String name, String type, ArrayList<String> paths) {
-		Directory workingDir = FileSystem.getFileSystem().getCurrentDirectory();
+		Directory workingDir = FileSystem.getFileSystem().
+													getCurrentDirectory();
 		for (String path: paths) {
-			String absPath = FileSystemManipulation.getAbsolutePath(path, workingDir);
-			Directory searchDir = (Directory) FileSystemManipulation.findFileSystemNode(absPath);
+			String absPath = FileSystemManipulation.getAbsolutePath(path,
+																workingDir);
+			Directory searchDir = (Directory) FileSystemManipulation.
+												findFileSystemNode(absPath);
 			String absolutePath = "";
 			Output out = Output.getOutputInstance();
 			if (type == "d") {
-				Directory foundDir = (Directory) FileSystemManipulation.findSubNode(searchDir, name);
+				Directory foundDir = (Directory) FileSystemManipulation.
+												findSubNode(searchDir, name);
 				if (foundDir != null) {
 					absolutePath = foundDir.getFullPathName();
 					out.addUserOutput(absolutePath);
 				}
 				else {
-					out.addErrorOutput(name + "is not in the directory " + absPath);
+					out.addErrorOutput(name + "is not in the directory " +
+																	absPath);
 				}
 			}
 			else if (type == "f") {
-				File foundFile = (File) FileSystemManipulation.findSubNode(searchDir, name);
+				File foundFile = (File) FileSystemManipulation.findSubNode(
+															searchDir, name);
 				if (foundFile != null) {
 					absolutePath = foundFile.getFullPathName();
 					out.addUserOutput(absolutePath);
 				}
 				else {
-					out.addErrorOutput(name + "is not in the directory " + absPath);
+					out.addErrorOutput(name + "is not in the directory " +
+																	absPath);
 				}
 			}
 		}
