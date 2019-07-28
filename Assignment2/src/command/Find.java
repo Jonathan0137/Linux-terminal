@@ -87,12 +87,13 @@ public class Find extends Command {
 	  */
 	@Override
 	protected String getDoc() {
-		String documentation = "find: find path... -type [f|d] -name expression\n"
+		String doc = "find: find path... -type [f|d] -name expression\n"
 	   			 + "\tfind the node named 'expression' in the directories\n"
 	   			 + "\tgiven by path. There can be multiple paths given.\n "
-	   			 + "\tIf the type is 'f' then find a file with name expression,\n"
-	   			 + "\tand if type is 'd' then find a directory with name expression";
-		return documentation; 
+	   			 + "\tIf the type is 'f' then find a file with name expression"
+	   			 + ",\n\tand if type is 'd' then find a directory with name "
+	   			 + "expression";
+		return doc; 
 	}
 
 }
