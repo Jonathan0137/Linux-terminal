@@ -14,7 +14,7 @@ import output.Output;
  * @author Adil Shah
  *
  */
-public class Mkdir extends Command{//need to fix errors in mkdir from 2a
+public class Mkdir extends Command{
 	
 	/**
 	  * Execute mkdir command
@@ -43,20 +43,16 @@ public class Mkdir extends Command{//need to fix errors in mkdir from 2a
 	  */
 	public void createDirectory(Directory currentDirectory, FileSystem fs,
 													String newDirectories) {
-		//split newDirectory, and get length of the array
 		String[] arguments = newDirectories.split(" ");
-		//loop through array names, make and add directory if valid name
 		for (int i = 1; i < arguments.length; i++) {
 			if (directoryCheck(arguments[i])){
 				Directory newDirectory;
-				//check if creating in current directory or given path
 				if (arguments[i].indexOf("/") >= 0) {
 					String splitArg[] = arguments[i].split("/");
 					String pathNewDir = splitArg[splitArg.length - 1];
 					newDirectory = new Directory(pathNewDir);
 					String pathParentDir = arguments[i].replace("/" + 
 														pathNewDir, "");
-		
 					Directory parentDirectory = (Directory) 
 					FileSystemManipulation.findFileSystemNode(pathParentDir);
 					FileSystemManipulation.addFileSystemNode(parentDirectory,
