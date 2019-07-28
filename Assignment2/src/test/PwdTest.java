@@ -26,9 +26,6 @@ class PwdTest {
 	
 	@Test
 	void testPwdExecute() {
-		//input.add("mkdir Folder1");
-		//input.add("pwd");
-		
 		execute("mkdir Folder1", newJShell);
 		execute("cd Folder1", newJShell);
 		execute("pwd", newJShell);
