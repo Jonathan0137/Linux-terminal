@@ -35,10 +35,10 @@ public class Load extends Command {
   protected String getDoc() {
     String documentation = "load: load FILE\n\tLoad the contents "
         + "of FILE and update the current shell's state to the state "
-        + "saved in FILE, if FILE exists and stores information "
-        + "about console state. Load must be the first command "
-        + "called in a new console.\nIf FILE's path is not given, "
-        + "the default location to search for FILE is the folder Assignmnent2.";
+        + "\n\tsaved in FILE, if FILE exists and stores information "
+        + "about console state. \n\tLoad must be the first command "
+        + "called in a new console.\n\n\tIf FILE's path is not specified, "
+        + "the default location to \n\tsearch for FILE is the folder Assignmnent2.";
     return documentation;
   }
   
@@ -67,7 +67,7 @@ public class Load extends Command {
       FileInputStream fileIn = new FileInputStream(new File(fileName));
       ObjectInputStream objIn = new ObjectInputStream(fileIn);
       
-      fs.setFileSystem((FileSystem) objIn.readObject());
+      fs.setFileSystem((FileSystem) objIn.readObject()); // Reflection to not break Singleton
       shell.setDirectoryStack((DirectoryStack) objIn.readObject());
       history.setInputHistory((InputHistory) objIn.readObject());
       history = InputHistory.getInputHistory();
