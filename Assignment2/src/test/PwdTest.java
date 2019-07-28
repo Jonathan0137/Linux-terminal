@@ -14,7 +14,6 @@ import output.Output;
 import verifier.Verifier;
 
 class PwdTest {
-	ArrayList<String> input;
 	JShell newJShell;
 
   	@Before
