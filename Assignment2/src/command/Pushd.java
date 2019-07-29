@@ -35,8 +35,7 @@ public class Pushd extends Command {
    * to the directory specified by the user input, if this specified
    * directory exists.
    * 
-   * @param dirStack an instance of the Directory Stack
-   * @param input    a relative or absolute path name
+   * @param param the list of required parameters to successfully execute Pushd
    */
   @Override
   public void execute(ArrayList<Object> param) {
@@ -62,8 +61,6 @@ public class Pushd extends Command {
     // pushes the currentDir to stack if Cd is successful
     if (currentDir != fs.getCurrentDirectory()) {
       dirStack.getStack().add(currentDir);
-    } else {
-      output.addErrorOutput("Pushd command failed due to invalid path.");
     }
   }
 }

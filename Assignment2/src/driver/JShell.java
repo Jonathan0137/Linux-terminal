@@ -113,7 +113,11 @@ public class JShell {
 		this.exitStatus = true;
 	}
 	
-	// Used for loading a DirectoryStack
+	/**
+	 * Updates the JShell's directory stack to newDirStack.
+	 * 
+	 * @param newDirStack the new DirectoryStack to be updated to
+	 */
 	public void setDirectoryStack(DirectoryStack newDirStack) {
 	  directoryHistory = newDirStack;
 	}

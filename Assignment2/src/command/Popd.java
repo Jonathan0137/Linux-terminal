@@ -34,8 +34,7 @@ public class Popd extends Command {
    * 
    * If the directory stack is empty, outputs an error message to the user.
    * 
-   * @param dirStack an instance of the Directory Stack
-   * @param input (unused, only here to override Command execute())
+   * @param param the list of required parameters to successfully execute Popd
    */
   @Override
   public void execute(ArrayList<Object> param) {

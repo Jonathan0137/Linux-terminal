@@ -3,8 +3,6 @@ package fileSystem;
 import java.util.HashMap;
 import output.Output;
 
-// TODO: UPDATE Javadocs (for all my classes)
-
 /**
  * A static class containing methods related to manipulating and using 
  * the File System.
@@ -13,17 +11,23 @@ import output.Output;
  */
 public final class FileSystemManipulation {
   
+  /**
+   * The instance of the file system.
+   */
   private static FileSystem fs = FileSystem.getFileSystem();
   
+  /**
+   * Private constructor, since it does not make sense to instantiate
+   * a FileSystemManipulation object.
+   */
   private FileSystemManipulation() {};
   
   /**
-   * Returns the directory in the file system with the given absolute path name
-   * if it exists, otherwise returns null.
+   * Returns the node in the file system with the given absolute path name
+   * if it exits, otherwise returns null.
    * 
-   * @param fs the file system in which the directory is being searched for
-   * @param absolutePathName the absolute path name of a directory
-   * @return the directory with the given absolute path name
+   * @param absolutePathName    the absolute path name of a FileSystemNode
+   * @return                    the node with the given absolute path name
    */
   public static FileSystemNode findFileSystemNode(String absolutePathName) {
     Directory traversalDirectory = fs.getRootDirectory();    
@@ -48,15 +52,14 @@ public final class FileSystemManipulation {
   }
   
   /**
-   * Returns the subdirectory with the given name if it exists, 
+   * Returns the subnode with the given name if it exists, 
    * otherwise returns null.
    * 
-   * @param parentDir  the directory to look in for the subdirectory
-   * @param subDirName the name of the wanted subdirectory
-   * @return the subdirectory in parentDir with the name of subDirName
+   * @param parentDir  the directory to look in for the subnode
+   * @param nodeName the name of the wanted subnode
+   * @return the subnode in parentDir with the name of nodeName
    */
-  public static FileSystemNode findSubNode(Directory parentDir, 
-      String nodeName) {
+  public static FileSystemNode findSubNode(Directory parentDir, String nodeName) {
     HashMap<String, FileSystemNode> listOfFileSystemNodes = parentDir.
         getListOfFileSystemNodes();    
     for (String name : listOfFileSystemNodes.keySet()) {
@@ -104,7 +107,7 @@ public final class FileSystemManipulation {
    * @param pathName a relative or absolute path name
    * @return         the parent directory's path name
    */
-  private static String moveToParentDirectory(String pathName) {
+  public static String moveToParentDirectory(String pathName) {
     
     if (pathName.equals("/")) {
       return pathName;
@@ -126,10 +129,10 @@ public final class FileSystemManipulation {
   }
   
   /**
-   * Adds subNode into the parent directory
+   * Adds a FileSystemNode into the specified directory.
    * 
    * @param parentDir   the directory the user is adding into
-   * @param subDir   the directory that is being added by the user
+   * @param subNode  the node that is being added to parentDir
    */
  public static void addFileSystemNode(Directory parentDir, FileSystemNode subNode) {   
      Output output = Output.getOutputInstance();

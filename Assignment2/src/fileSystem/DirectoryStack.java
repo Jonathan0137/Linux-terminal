@@ -11,6 +11,7 @@ import java.util.LinkedList;
 public class DirectoryStack implements Serializable {  
 
   private static final long serialVersionUID = 1L;
+  
   /**
    * A stack of directories, following LIFO order.
    */
