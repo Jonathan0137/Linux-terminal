@@ -1,7 +1,7 @@
 package test;
 
 import static org.junit.Assert.*;
-
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import org.junit.After;
@@ -26,10 +26,14 @@ public class HistoryTest {
 	}
 	
 	@After
-	public void reset() {
+	public void reset() throws NoSuchFieldException, SecurityException, 
+	  IllegalArgumentException, IllegalAccessException {
 		Output.getOutputInstance().resetOutput();
 		params = null;
-		mockHistory.setInputHistory(null);
+		
+		Field field = (mockHistory.getClass()).getDeclaredField("history");
+        field.setAccessible(true);
+        field.set(null, null);
 	}
 	
 	@Test
