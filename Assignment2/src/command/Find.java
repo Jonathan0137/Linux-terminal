@@ -26,10 +26,10 @@ public class Find extends Command {
 			if (argList[i].contains("/")) {
 				paths.add(argList[i]);
 			}
-			if (argList[i] == "d") {
+			if (argList[i].matches("d")){
 				type = "d";
-			}
-			else if (argList[i] == "f") {
+			} 
+			else if (argList[i].matches("f")) {
 				type = "f";
 			}
 		}
@@ -60,8 +60,8 @@ public class Find extends Command {
 					out.addUserOutput(absolutePath);
 				}
 				else {
-					out.addErrorOutput(name + "is not in the directory " +
-																	absPath);
+					out.addErrorOutput("'" + name + "' is not in the "
+													+ "directory " + absPath);
 				}
 			}
 			else if (type == "f") {
@@ -90,7 +90,7 @@ public class Find extends Command {
 		String doc = "find: find path... -type [f|d] -name expression\n"
 	   			 + "\tfind the node named 'expression' in the directories\n"
 	   			 + "\tgiven by path. There can be multiple paths given.\n "
-	   			 + "\tIf the type is 'f' then find a file with name expression"
+	   			 + "\tIf type is 'f' then find a file with name expression"
 	   			 + ",\n\tand if type is 'd' then find a directory with name "
 	   			 + "expression";
 		return doc; 
