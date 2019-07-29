@@ -9,15 +9,12 @@ import java.io.Serializable;
  * @author Gary Xie
  */
 public class FileSystemNode implements Serializable {
-  /**
-   * 
-   */
+
   private static final long serialVersionUID = 1L;
 
   /**
    * Absolute path name of the FileSystemNode
    */
-  
   protected String absolutePath;
   
   /**
@@ -97,20 +94,5 @@ public class FileSystemNode implements Serializable {
    */
   public Directory getParentDirectory() {
     return parentDirectory;
-  }
-  
-  // FOR TESTING PURPOSES ONLY
-  public static void main(String[] args) {
-    FileSystemNode dir = new Directory("hello");
-    FileSystemNode file = new File("hello");
-    String dirAbsPath = dir.getFullPathName();
-    System.out.println(dirAbsPath);
-    String fileAbsPath = file.getFullPathName();
-    System.out.println(fileAbsPath);
-    
-    Directory parent = new Directory("");
-    System.out.println(parent.getFullPathName());
-    dir.setParentDirectory(parent);
-    System.out.println(dir.getFullPathName());
   }
 }

@@ -10,10 +10,8 @@ import java.io.Serializable;
  */
 public class File extends FileSystemNode implements Serializable { 
 
-  /**
-   * 
-   */
   private static final long serialVersionUID = 1L;
+  
   /**
    * Text contents of the File
    */

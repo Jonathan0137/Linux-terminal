@@ -10,10 +10,9 @@ import java.io.Serializable;
  * @author Gary Xie
  */
 public class Directory extends FileSystemNode implements Serializable {
-  /**
-   * 
-   */
+
   private static final long serialVersionUID = 1L;
+  
   /**
    * HashMap of subdirectories and files in the Directory.
    * Key: name of the subdirectory or file
