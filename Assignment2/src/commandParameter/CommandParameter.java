@@ -16,6 +16,7 @@ public class CommandParameter {
       case "Cd": 
       case "Cp": 
       case "Echo": 
+      case "Find":
       case "Get": 
       case "History":
       case "Ls": 
