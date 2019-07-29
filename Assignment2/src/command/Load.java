@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.lang.reflect.Field;
 import inputHistory.InputHistory;
 import fileSystem.DirectoryStack;
 import driver.JShell;
@@ -42,7 +43,6 @@ public class Load extends Command {
     return documentation;
   }
   
-  
   /**
    * Load the contents of a file containing a previously saved console state,
    * and update the FileSystem, DirectoryStack, and InputHistory to this state.
@@ -62,16 +62,16 @@ public class Load extends Command {
     String[] inputSplit = input.split(" ", 2);
     String fileName = inputSplit[1].trim();
     JShell shell = (JShell) param.get(1);
-    
     try {
       FileInputStream fileIn = new FileInputStream(new File(fileName));
       ObjectInputStream objIn = new ObjectInputStream(fileIn);
+      FileSystem newFileSys = (FileSystem) objIn.readObject();
+      DirectoryStack newDirStack = (DirectoryStack) objIn.readObject();
+      InputHistory newInputHis = (InputHistory) objIn.readObject();
       
-      fs.setFileSystem((FileSystem) objIn.readObject()); // Reflection to not break Singleton
-      shell.setDirectoryStack((DirectoryStack) objIn.readObject());
-      history.setInputHistory((InputHistory) objIn.readObject());
-      history = InputHistory.getInputHistory();
-      history.addToHistory(input);
+      shell.setDirectoryStack(newDirStack);
+      setState(newFileSys, newInputHis);    
+      InputHistory.getInputHistory().addToHistory(input);
       objIn.close();
       fileIn.close();
     } catch(FileNotFoundException e) {
@@ -81,5 +81,26 @@ public class Load extends Command {
     } catch(Exception e) {
         output.addErrorOutput("Load failed to execute.");
     }  
+  }
+  
+  /**
+   * Sets the state of FileSystem and InputHistory using reflection
+   * to not break Singleton design pattern.
+   * 
+   * @param newFileSys the new FileSystem object to be update to
+   * @param newInputHis the new InputHistory object to be updated to
+   */
+  private void setState(FileSystem newFileSys, InputHistory newInputHis) {
+    try {
+      Field fileSysField = (fs.getClass()).getDeclaredField("fs");
+      fileSysField.setAccessible(true);
+      fileSysField.set(null, newFileSys);
+      Field inputHisField = (history.getClass()).getDeclaredField("history");
+      inputHisField.setAccessible(true);
+      inputHisField.set(null,  newInputHis);
+    } catch(Exception e) {
+      output.addErrorOutput("load() failed to load a previously saved "
+          + "shell state from the given file.");
+    }
   }
 }

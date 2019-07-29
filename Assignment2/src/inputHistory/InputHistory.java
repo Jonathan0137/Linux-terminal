@@ -58,9 +58,4 @@ public class InputHistory implements Serializable {
 	public ArrayList<String> getInputList() {
 		return this.inputList;
 	}
-
-	// Used for loading a InputHistory
-	public void setInputHistory(InputHistory newInputHistory) {
-		history = newInputHistory;
-	}
 }
