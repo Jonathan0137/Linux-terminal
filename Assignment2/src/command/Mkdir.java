@@ -65,9 +65,10 @@ public class Mkdir extends Command{
 				}
 			}
 			else {
-				String err = arguments[i] + " is not a valid directory name";
+				String error = arguments[i] + " is not a valid directory "
+																	+ "name";
 				Output errorOutput = Output.getOutputInstance();
-				errorOutput.addErrorOutput(err);
+				errorOutput.addErrorOutput(error);
 			}
 		}
 	}
