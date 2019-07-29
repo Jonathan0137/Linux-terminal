@@ -69,11 +69,12 @@ public class Find extends Command {
 															searchDir, name);
 				if (foundFile != null) {
 					absolutePath = foundFile.getFullPathName();
-					out.addUserOutput(absolutePath);
+					out.addUserOutput("The path to " + name + " is " + 
+																absolutePath);
 				}
 				else {
-					out.addErrorOutput(name + "is not in the directory " +
-																	absPath);
+					out.addErrorOutput("'" + name + "' is not in the "
+												+ "directory " +	absPath);
 				}
 			}
 		}
