@@ -3,7 +3,7 @@ package test;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-
+import java.lang.reflect.Field;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,8 +29,11 @@ public class InputHistoryTest {
 	}
 
 	@After
-	public void reset() {
-		testSubject.setInputHistory(null);
+	public void reset() throws NoSuchFieldException, SecurityException, 
+	  IllegalArgumentException, IllegalAccessException {
+        Field field = (testSubject.getClass()).getDeclaredField("history");
+    	field.setAccessible(true);
+    	field.set(null, null);
 	}
 
 	@Test
