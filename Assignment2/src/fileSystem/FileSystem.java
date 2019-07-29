@@ -4,8 +4,9 @@ import java.io.Serializable;
 
 
 /**
- * Contains information about a file system
- * and its root directory.
+ * Contains information about a file system, 
+ * its root directory, and the current working
+ * directory.
  * 
  * @author Gary Xie
  */
@@ -51,11 +52,6 @@ public class FileSystem implements Serializable {
       fs = new FileSystem();
     }
     return fs;
-  }
-  
-  // Used for loading a FileSystem
-  public void setFileSystem(FileSystem newFileSystem) {
-    fs = newFileSystem; 
   }
   
   /**
