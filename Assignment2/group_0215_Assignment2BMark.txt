@@ -1,0 +1,300 @@
+==== A2 phase I marking ====
+Brian Lam, brianandrew.lam@mail.utoronto.ca (for correctness, Javadocs, testing)
+
+Group number: group_0215
+UTORID usernames of members: baichon1, daudeli3, shahadi6, xiegary
+Total deductions: 7
+Grade: C
+
+Your team's Phase II grade is based on this scale:
+
+    https://transcripts.utoronto.ca/faqs/grade-scale/
+When converting from letter grade to numerical grade, we will use the higher end of the letter grade to convert your mark.
+--For example, the higher end of A+ is 100.
+--For example, the higher end of A is 89.
+.
+.
+.
+In the event that you get a F, your conversion from letter grade to numerical grade will be based on the discretion of the instructor. 
+
+The way we graded is as follows: your team starts with an A+. When errors and
+problems are found, you will lose 0, 1, 2, or 3 letter steps, depending on the
+severity. As an example, if you lost two steps, your team would earn an A-:
+
+     A+ -> A
+     A -> A-
+
+You were asked to follow the Scrum process. A big part of that is to maintain
+a product backlog and a sprint backlog. 
+
+==== Product and Sprint backlogs ==== [up to -6]
+
+Several steps can be lost for these kinds of issues:
+
+  No evidence of Product or Sprint backlog -6
+  No evidence of team assigning tasks to team members -3
+  SB items not taken directly from PB -1
+  SB items not broken down into smaller steps -1
+  PB, SB uses noticeably bad grammar and/or spelling -2
+
+[Total deductions in this section: 0]
+
+==== Java Style ==== [up to -6]
+
+Steps can be lost for these kinds of issues:
+
+    Java naming conventions not followed (camelCase, no_underscores) -1
+    Instance variable names not meaningful (e.g., "Label1" is not a good name) -1
+    Bad indentation -1
+    Lack of consistency in style across files -1
+    Bad use of whitespace: too much or too little -1
+    Class names are frequently not noun phrases -1
+    Method names are frequently not verb phrases -1
+    Not following the 80character column width limit. -1
+
+[Total deductions in this section: 0]
+
+==== Design ==== [up to -6]
+
+Several steps can be lost for these kinds of issues:
+
+    public instance variables instead of setters and getters -1 to -2
+    not a good breakdown of classes and methods (everything static;) -1
+    long methods exist (more than roughly 30 lines from brace to brace) -1
+    hard to add new commands -1
+    no unified path handling mechanism -2
+    redirection doesn't easily incorporate new commands -2
+
+-1 Find findNode over 30 lines
+[Total deductions in this section: 1]
+
+==== Javadoc ==== [up to -3]
+
+Several steps can be lost for these kinds of issues:
+
+    Missing Javadoc on methods -1 for infrequent problems, up to -3 for frequent
+    Missing Javadoc on class -1
+    No Javadoc on instance vars -1
+    Missing use @param and @return tags -1
+    Unclear English: bad grammar, bad spelling up to -2
+
+[Total deductions in this section: 0]
+
+==== Testing ==== [up to -6] 
+Several steps can be lost for these kinds of issues:
+
+    No test cases exist for public methods -6
+    Some testing done for all classes and methods, but not thoroughly up to -3
+    Test quality is inadequate or tests uninformative -1 to -2
+        e.g., testing using lots of print statements instead of assert calls
+    Code not written to be testable -2
+
+[Total deductions in this section: 0]
+
+==== Correctness ==== [up to -6]
+
+    Code doesn't compile without modification (if the fix is simple) -1
+    Code that is complete (from the SB) doesn't work completely: up to -2
+[X] Code crashes: -3
+[X] Every 3 failed test cases -1 [-3]
+
+[Total deductions in this section: 6]
+
+Failed Test Case(9): 
+1) Description: mkdir with simple directory name and redirect output
+
+   Input:
+   /# mkdir A > mkdirOut
+   /# ls
+
+   Expected Output:
+   A
+
+   Actual Output:
+   Error: Verifier: mkdir: invalid inputs
+
+2) Description: mkdir with absolute path and redirect output
+
+   Input:
+   /# mkdir /A > mkdirOut
+   /# ls
+
+   Expected Output:
+   A
+
+   Actual Output:
+   Error: Verifier: mkdir: invalid inputs
+
+3) Description: mkdir with relative path 
+
+   Input:
+   /# mkdir A
+   /# cd A
+   /A# mkdir ./X ../Y > mkdirOut
+   /A# ls
+
+
+   Expected Output:
+   X (mkdirOut is optional, if it exist it must be empty)
+   A
+   Y
+
+   Actual:
+   Error: Verifier: mkdir: invalid inputs
+   (Nothing)
+   A
+
+4) Description: cd with simple argument and redirect output
+
+   Input:
+   /# mkdir A
+   /# cd A > cdOut
+
+   Expected Output:
+   /A# pwd
+   /A
+   /A# ls
+   (No output)
+   /A# cd ..
+   /# ls
+   A (cdOut is optional, if it exist it must be empty)
+
+   Actual Output:
+   /# pwd
+   /
+   /# cd ..
+   /# ls
+   A
+
+5) Description: ls with multiple paths (including file and invalid path) and redirect output
+
+    Input:
+    /# mkdir A
+    /# echo "root" > underRoot
+    /# mkdir A/B
+    /# mkdir A/B/C
+    /# ls A underRoot random > lsOut
+
+    Expected Output:
+    random: invalid path
+    /# cat lsOut
+    A:
+    B
+
+    underRoot
+
+    Actual Output:
+    Error: No such file or directory
+    Error: No such file or directory
+    Error: No such file or directory
+    /# cat lsOut
+    A :
+    B
+
+    underRoot
+
+6) Description: ls -R with multiple paths (including file and invalid path)
+
+   Input:
+   /# mkdir A
+   /# echo "root" > underRoot
+   /# mkdir A/B
+   /# mkdir A/B/C
+   /# ls -R A underRoot random
+
+   Expected Output:
+   A:
+   B
+
+   A/B:
+   C
+
+   A/B/C:
+
+
+   underRoot
+
+   random: invalid path
+
+   Actual Output:
+   Exception in thread "main" java.lang.ClassCastException: fileSystem.File cannot be cast to fileSystem.Directory
+        at command.Ls.execute(Unknown Source)
+        at driver.JShell.main(Unknown Source)
+
+7) Desciption: mv file to new name
+
+   Input:
+   /# echo "test" > original
+   /# mv original new
+
+   Expected Output:
+   /# ls
+   new
+   /# cat new
+   test
+
+   Actual: 
+   Exception in thread "main" java.lang.NullPointerException
+        at command.Mv.moveItem(Unknown Source)
+        at command.Mv.execute(Unknown Source)
+        at driver.JShell.main(Unknown Source)
+
+8) Description: cp file to replace existing file in subdirectory
+
+   Input:
+   /# mkdir target
+   /# cd target
+   /target# echo "old" > file
+   /target# cd ..
+   /# echo "new" > file
+   /# cp file target
+
+   Expected Output:
+   /# ls
+   file target
+   /# cd target
+   /target# cat file
+   new
+
+   Actual Output:
+   /# ls
+   file
+   target
+   /# cd target
+   /target/# cat file
+   old
+
+9) Description: cp directory to an existing directory
+
+   Input:
+   /# mkdir original
+   /# mkdir target
+   /# cd original
+   /original# echo "test" > file
+   /original# cd ..
+   /# cp original target
+
+   Expected Output:
+   /# ls
+   original target
+   /# cd target
+   /target# ls
+   original
+   /target# cd original
+   /target/original# ls
+   file
+   /target/original# cat file
+   test
+
+   Actual Output:
+   /# ls
+   original
+   target
+   /# ls
+   original
+   target
+   /# cd target
+   /target/# ls
+   original
+   /target/# cat file
+   Error: The file 'file' does not exist in /target/
